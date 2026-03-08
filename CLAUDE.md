@@ -32,6 +32,9 @@ All commands use the Gradle wrapper (`./gradlew` on Unix, `gradlew.bat` on Windo
 
 Configuration (window title, resolution, vsync, etc.) is loaded from `core/src/main/resources/config.yml` via [Hoplite](https://github.com/sksamuel/hoplite).
 
+## Documentation
+Complete documentation is in `docs/` directory, written fully in English, and is an Obsidian vault.
+
 ## Architecture
 
 ### Gradle Project Structure

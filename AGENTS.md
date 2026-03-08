@@ -32,6 +32,9 @@ All commands use the Gradle wrapper. On Windows use `gradlew.bat`; on Unix use `
 
 > **Note:** Tests in `lwjgl3/src/test/` are "Preview tests" — they open a live LibGDX window for visual iteration, not headless unit tests. There are no traditional headless unit tests in the game layer at this time.
 
+## Documentation
+Complete documentation is in `docs/` directory, written fully in English, and is an Obsidian vault.
+
 ## Module Structure
 
 ```
