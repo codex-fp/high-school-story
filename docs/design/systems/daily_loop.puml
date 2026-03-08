@@ -1,0 +1,85 @@
+@startuml High School Story — Daily Loop
+
+skinparam backgroundColor #FAFAFA
+skinparam activity {
+    BackgroundColor #EBF8FF
+    BorderColor #2B6CB0
+    FontSize 11
+}
+skinparam activityDiamond {
+    BackgroundColor #FFF5F5
+    BorderColor #C53030
+}
+skinparam note {
+    BackgroundColor #FFFBEB
+    BorderColor #D69E2E
+    FontSize 10
+}
+
+title A Typical School Day (Monday–Friday)
+
+start
+
+:☀️ **06:00** — Wake Up;
+note right : Energy restores from sleep\nStress partially clears
+
+:🧹 Morning Routine (dorm room);
+note right : Manage inventory / backpack\nCheck phone (messages, schedule)\nOptional: quick study session
+
+:🚶 **06:45** — Travel to School;
+note right : Walk from dorm\nNo time cost (adjacent)
+
+:📋 **07:00** — Homeroom;
+note right : Attendance, announcements\nPassive NPC interaction opportunity
+
+repeat
+    :📚 **Class Period** (45 min);
+    note right : Enter Classroom Mechanic\n→ see classroom.puml
+
+    :🚶 **Break** (15 min);
+    note right : Move to any school zone\nQuick NPC interaction\nUse items (consumables)
+repeat while (more classes before lunch?) is (yes)
+
+:🍽️ **12:00–13:00** — Lunch Break;
+note right : Visit cafeteria, lounge, library\nSocialize with NPCs (Rel. gain)\nEat (Energy +, Stress –)\nPhone use OK
+
+repeat
+    :📚 **Afternoon Class Period** (45 min);
+    note right : Same classroom mechanic
+
+    :🚶 **Break** (15 min);
+repeat while (more afternoon classes?) is (yes)
+
+:🔔 **~14:45** — School Day Ends;
+
+fork
+    :🎭 **Club Hour** (if club day);
+    note right : Mon / Wed / Fri\nClub activity → stat gains\nNPC relationship opportunities
+fork again
+    :🏃 **After-School Free Time**;
+    note right : Visit town locations\nPart-time job (if signed up)\nHangout with NPC
+end fork
+
+:🌆 **Afternoon / Evening Free Time**;
+note right : Multiple time slots available\nEach action costs 15–60 min
+
+:🏠 **Return to Dorm by 22:00**;
+note right : Curfew enforced\nLate return: Stress +, potential penalty
+
+:🌙 **Dorm Evening** (22:00–23:00);
+note right : Study / read / phone\nReceive NPC calls or visits\nJournal / reflect
+
+:💤 **23:00 — Sleep** (enforced);
+note right : Energy restores based on sleep time\nStress partially clears\nSome NPC arcs trigger on certain nights
+
+stop
+
+note as N1
+    **Special days:**
+    Saturday/Sunday — no school.
+    Full day of free time + Farmers Market (Saturday).
+    Weekend jobs available.
+    NPC schedules shift on weekends.
+end note
+
+@enduml

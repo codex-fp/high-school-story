@@ -1,0 +1,106 @@
+@startuml Lakeview — Town Map
+
+skinparam packageStyle rectangle
+skinparam backgroundColor #FAFAFA
+skinparam defaultTextAlignment center
+skinparam package {
+    BackgroundColor #F0F4F8
+    BorderColor #4A5568
+    FontSize 13
+    FontStyle bold
+}
+skinparam component {
+    BackgroundColor #FFFFFF
+    BorderColor #718096
+    FontSize 11
+}
+skinparam note {
+    BackgroundColor #FFFBEB
+    BorderColor #D69E2E
+}
+
+title Lakeview — Explorable Town Locations
+
+package "🏫 School District" {
+    [Lakeview High School] as school
+    [Student Dormitory] as dorm
+    note right of dorm : Player's home base\nMust return by 22:00
+}
+
+package "🍜 Food & Cafés" {
+    [Tanaka Noodle House] as tanaka
+    note bottom of tanaka : Energy + Mood\nGift items
+    [Bloom & Brew Café] as bloom
+    note bottom of bloom : Date spot\nMood recovery
+    [Bean There Café] as bean
+    note bottom of bean : Stress –\nStudy meetups
+    [Fry Stop Diner] as fry
+    note bottom of fry : Energy +\nNPC hangout
+}
+
+package "🛍️ Shopping" {
+    [Heartleaf Mall] as mall
+    note right of mall : Consumables & gifts\n(GameCore, GlamZone, PageTurner)
+    [Mystic Mirror] as mystic
+    note bottom of mystic : Mood & mystery items\nGoth / Activist NPC
+    [Mindwise Bookstore] as books
+    note bottom of books : Knowledge +\nGifts for studious NPCs
+    [Sound Station Record Shop] as records
+    note bottom of records : Mood +\nMusic / Theater NPCs
+    [Farmers Market] as market
+    note bottom of market : Saturdays only\nLow-cost gifts
+}
+
+package "🎮 Entertainment" {
+    [Pixel Pulse Arcade] as arcade
+    note bottom of arcade : Mood +\nGamer / Flirt NPCs
+    [Byte & Brew LAN Café] as lan
+    note bottom of lan : Mood +\nGamer NPCs
+    [Sunset Cinema] as cinema
+    note bottom of cinema : Group / date event\nCollectible posters
+    [Club NiteLite] as club
+    note bottom of club : 18+ event access\nEnd-of-year dances
+}
+
+package "🏋️ Activity & Sport" {
+    [Iron Core Gym] as gym
+    note bottom of gym : Fitness +, Stress –\nJock / Golden Boy NPCs
+    [Abandoned Skatepark] as skate
+    note bottom of skate : Rebel / Loner NPC\nSecret: Quote Wall
+}
+
+package "🌿 Nature & Leisure" {
+    [Westvale Park] as park
+    note bottom of park : Mood regen\nSeasonal events
+    [Pawfect Rescue Shelter] as shelter
+    note bottom of shelter : Mood +\nRaven's secret spot
+}
+
+package "🔍 Lore & Hidden" {
+    [Indigo Alley] as alley
+    note bottom of alley : Underground art\nArtsy / Goth NPCs
+    [Old Prep Campus (Abandoned)] as oldcampus
+    note bottom of oldcampus : Story triggers\nGoth / Sci-Fi / Rebel NPCs
+    [Evergreen Public Library] as library
+    note bottom of library : Knowledge +\nQuiet / Loner / Overachiever
+}
+
+' Travel connections (player walks or taxis between zones)
+school      --  dorm       : walking
+school      ..> library    : walking
+school      ..> park       : walking
+dorm        ..> tanaka     : walking
+dorm        ..> bean       : walking
+mall        ..> arcade     : inside
+mall        ..> lan        : nearby
+alley       ..> oldcampus  : hidden route (unlockable)
+shelter     ..> park       : nearby
+
+note as N1
+    All locations reachable on foot or by taxi.
+    Taxi cost: in-game currency via Smartphone Map app.
+    Some locations unlock via story progression
+    or NPC relationship milestones.
+end note
+
+@enduml

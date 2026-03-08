@@ -1,0 +1,127 @@
+@startuml High School Story — Stat System
+
+skinparam backgroundColor #FAFAFA
+skinparam class {
+    BackgroundColor #F0FFF4
+    BorderColor #276749
+    FontSize 11
+}
+skinparam note {
+    BackgroundColor #FFFBEB
+    BorderColor #D69E2E
+    FontSize 10
+}
+
+title Stat System — Overview
+
+class "Core Stats" as CoreStats {
+    Energy    : 0–100
+    Stress    : 0–100
+    Mood      : 0–100
+    --
+    Each decays daily at end of day.
+    Restored by sleep, food, activities.
+}
+
+class "Knowledge Stats" as KnowledgeStats {
+    Math           : 0–100
+    English        : 0–100
+    History        : 0–100
+    Science        : 0–100
+    Art            : 0–100
+    Music          : 0–100
+    PhysicalEd     : 0–100
+    -- Year 2+ electives --
+    Psychology     : 0–100
+    Programming    : 0–100
+    Literature     : 0–100
+    CreativeWriting: 0–100
+    -- Year 3+ electives --
+    Philosophy     : 0–100
+    Drama          : 0–100
+    Journalism     : 0–100
+    CareerPrep     : 0–100
+}
+
+class "Academic Performance" as AcademicPerf {
+    midtermScore  : computed
+    finalScore    : computed
+    yearGrade     : PASS / FAIL
+    --
+    Computed from relevant Knowledge stats
+    weighted by subject schedule hours.
+    Failure = game over (autosave rollback).
+}
+
+class "Relationship Scores" as RelScores {
+    npcId : String
+    score : 0–100
+    stage : 1–6
+    --
+    One entry per NPC.
+    Affects dialogue options,
+    event access, endings.
+}
+
+class "Inventory" as Inv {
+    slots      : limited (backpack capacity)
+    items[]    : Item
+    currency   : Int
+}
+
+class "Item" as ItemClass {
+    name     : String
+    type     : Consumable | Gift | KeyItem
+    effect   : StatModifier?
+    --
+    Consumables: used in dorm or (risky) in class.
+    Gifts: given to NPCs for Rel. gain.
+    Key items: story triggers or passive effects.
+}
+
+' Decay rules
+note top of CoreStats
+    **Daily Decay (end of day):**
+    Energy   –20 per day (restored by sleep: +60)
+    Stress   +5 per school day (–10 on weekends)
+    Mood     –5 per day unless boosted by activity
+
+    **Floor / ceiling effects:**
+    Energy ≤ 20 → classroom action effectiveness –50%
+    Stress ≥ 80 → Mood decay doubles, study efficiency –30%
+    Mood ≤ 20  → NPC interactions give –50% Rel. gain
+end note
+
+' Knowledge gain sources
+note right of KnowledgeStats
+    **Knowledge gain sources:**
+    Study action in class: +2–5 (subject)
+    Participate action: +5–10, Stress +2
+    Homework / Self-Study period: +1–3
+    Study with NPC: +3–6 (that NPC's proficient subjects)
+    Reading off-topic book: +1 (unrelated subject)
+
+    **Knowledge decay:**
+    No automatic decay.
+    Knowledge is permanent once earned.
+end note
+
+note right of AcademicPerf
+    **Exam calculation:**
+    Midterm: avg of relevant Knowledge * 0.4
+    Final:   avg of relevant Knowledge * 0.6
+    Cumulative score determines PASS/FAIL.
+
+    FAIL → game over.
+    Autosave rollback options:
+      1 week before / 1 month / 3 months.
+end note
+
+CoreStats       -->  AcademicPerf   : Energy/Stress affect study efficiency
+KnowledgeStats  -->  AcademicPerf   : feeds exam scores
+Inv             -->  CoreStats      : consumables modify stats
+Inv             -->  RelScores      : gifts modify NPC scores
+RelScores       -->  CoreStats      : NPC proximity mood bonus
+ItemClass       --o  Inv
+
+@enduml

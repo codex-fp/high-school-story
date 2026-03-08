@@ -1,0 +1,109 @@
+@startuml Lakeview High — School Interior
+
+skinparam packageStyle rectangle
+skinparam backgroundColor #FAFAFA
+skinparam package {
+    BackgroundColor #EBF4FF
+    BorderColor #3182CE
+    FontStyle bold
+}
+skinparam component {
+    BackgroundColor #FFFFFF
+    BorderColor #63B3ED
+    FontSize 11
+}
+skinparam note {
+    BackgroundColor #FFFBEB
+    BorderColor #D69E2E
+    FontSize 10
+}
+
+title Lakeview High School — Interior Map
+
+package "🏛️ Main Building — Ground Floor" {
+    [Main Entrance / Lobby] as lobby
+    [Corridors & Lockers] as hallway
+    note right of hallway : Social zone between classes\nNPC encounters, quick chats
+    [Cafeteria] as cafeteria
+    note right of cafeteria : Lunch break social hub\nNPC availability peak time
+    [Nurse's Office] as nurse
+    note right of nurse : Energy / Stress recovery\nStory events (e.g. Ethan, Emily)
+    [Counselor's Office] as counselor
+    note right of counselor : Story events\nAcademic guidance
+}
+
+package "🏛️ Main Building — Upper Floors" {
+    package "Classrooms" {
+        [Math Room] as math
+        [English Room] as english
+        [History Room] as history
+        [Science Room] as science
+        [Science Lab] as lab
+        note right of lab : Used for Science Lab period\nScience Club events
+        [Art Room] as art
+        note right of art : Art Club meetings\nRaven / Leo NPCs
+        [Music Room] as music
+        note right of music : Music Club\nZoe NPC always here
+        [Drama Stage / Theater] as drama
+        note right of drama : Drama Club\nOlivia / Jason / Harper NPCs
+    }
+    [Library] as library
+    note right of library : Study zone, quiet\nNoah / Ava / Sarah / Quiet NPCs
+    [Student Lounge] as lounge
+    note right of lounge : Free time social space\nMadison / Harper NPCs
+}
+
+package "🏃 Gymnasium Wing" {
+    [Gymnasium / Sports Hall] as gym
+    note right of gym : P.E. classes\nSports Club events, Sports Day
+    [Locker Rooms] as lockers
+    note right of lockers : Tyler's poetry notebook found here
+    [Sports Field / Track] as field
+    note right of field : Outdoor P.E.\nJordan / Tyler NPCs
+}
+
+package "🔬 Club Rooms" {
+    [Robotics Lab] as robotics
+    note right of robotics : Ben Walker NPC\nProgramming & Science Clubs
+    [Student Council Room] as council
+    note right of council : Emily Carter NPC\nHonor Society
+    [Club Room (shared)] as clubroom
+    note right of clubroom : Multi-purpose for smaller clubs\nGardening, Wellness, Debate
+}
+
+package "🌤️ Outdoor / Rooftop" {
+    [Rooftop] as rooftop
+    note right of rooftop : Hidden/unlockable hangout\nJordan skips practice here
+    [School Garden] as garden
+    note right of garden : Gardening Club\nGrace (Activist) NPC
+    [Back Fence / Parking Lot] as backfence
+    note right of backfence : Camden (Rebel) NPC\nNon-official hangout
+}
+
+' Navigation flow
+lobby       --> hallway
+hallway     --> cafeteria
+hallway     --> library
+hallway     --> lounge
+hallway     --> math
+hallway     --> english
+hallway     --> history
+hallway     --> science
+hallway     --> art
+hallway     --> music
+hallway     --> drama
+hallway     --> gym      : gym wing
+hallway     --> robotics : club wing
+hallway     --> council  : club wing
+hallway     --> nurse
+hallway     --> counselor
+rooftop     ..> hallway  : accessible via staircase (unlockable)
+backfence   ..> hallway  : unofficial exit
+
+note as N1
+    All interior zones are freely explorable during
+    non-class time (breaks, lunch, club hour, self-study).
+    Classroom zones are locked to their schedule period.
+end note
+
+@enduml

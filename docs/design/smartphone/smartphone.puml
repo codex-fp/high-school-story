@@ -1,0 +1,55 @@
+@startmindmap Lakeview High — Smartphone Apps
+
+skinparam backgroundColor #FAFAFA
+skinparam mindmapNode {
+    BackgroundColor #EBF8FF
+    BorderColor #2B6CB0
+    FontSize 11
+}
+
+title In-Game Smartphone — App Map
+
+* 📱 Smartphone
+
+** 💬 Contacts & Messaging
+*** Text classmates (Rel. gain)
+*** Receive story-driven SMS events
+*** NPC relationship milestones delivered here
+*** Group chats unlock via social events
+
+** 📰 Social Media Feed
+*** See posts from classmates
+*** React / comment (passive Mood & Rel. modifier)
+*** No major story triggers — flavor and hints only
+*** Posts reflect NPC arcs (e.g. Camden's anonymous art account)
+
+** 🗓️ Schedule & Calendar
+*** View class timetable for the week
+*** Upcoming school events and trips
+*** Club meeting reminders
+*** Player-set reminders (optional QoL feature)
+
+** 🗺️ Navigation Map
+*** View town map with all unlocked locations
+*** Fast travel via taxi (costs in-game currency)
+*** See which locations are available now vs. closed
+*** NPC location hints (after certain Rel. stage)
+
+** 🏫 School App
+*** Current grades per subject (Knowledge proxy)
+*** Attendance record
+*** Homework reminders
+*** Upcoming exams and mock exam dates
+
+** 🛒 Online Shop
+*** Buy consumable items (delivered next day or instantly)
+*** Cheaper than some physical shops for common items
+*** Some items exclusive to physical shops
+*** Unlock new items as story progresses
+
+** ⚙️ Settings
+*** Game options (audio, display, controls)
+*** Autosave slot viewer
+*** Accessibility options
+
+@endmindmap
