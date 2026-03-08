@@ -121,5 +121,11 @@ subprojects {
 
     ktlint {
         version.set("1.8.0")
+        filter {
+            exclude { element ->
+                val path = element.file.canonicalPath
+                path.contains(File.separator + "generated" + File.separator)
+            }
+        }
     }
 }
