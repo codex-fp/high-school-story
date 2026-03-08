@@ -10,9 +10,9 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.koin.dsl.module
 import pro.piechowski.highschoolstory.asset.Assets
 import pro.piechowski.highschoolstory.exterior.ExteriorTexture
-import pro.piechowski.highschoolstory.scene.intro.RoadToLakeview
 import pro.piechowski.highschoolstory.sprite.character.player.PlayerCharacterSpriteSheet
 import pro.piechowski.highschoolstory.state.GameState
+import pro.piechowski.highschoolstory.story.intro.RoadToLakeview
 import pro.piechowski.highschoolstory.ui.UserInterface
 import pro.piechowski.kge.Entrypoint
 import pro.piechowski.kge.asset.AssetsLoader
@@ -29,7 +29,6 @@ import kotlin.time.ExperimentalTime
 val highSchoolStoryModule =
     module {
         single<PropertySource> { PropertySource.resource("/config.yml") }
-        single { RoadToLakeview() }
         single<Entrypoint> { GameEntrypoint() }
         single { systemComposer }
         single { UserInterface() }

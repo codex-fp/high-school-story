@@ -4,6 +4,8 @@ import pro.piechowski.highschoolstory.animation.character.player.PlayerCharacter
 import pro.piechowski.highschoolstory.physics.body.character.CharacterBody
 import pro.piechowski.kge.GameObject
 import pro.piechowski.kge.character.player.PlayerCharacterBase
+import pro.piechowski.kge.character.player.PlayerCharacterManager
+import pro.piechowski.kge.di.DependencyInjection.Global.get
 import pro.piechowski.kge.gameobject.Prototype
 import pro.piechowski.kge.gameobject.from
 import pro.piechowski.kge.world
@@ -19,7 +21,9 @@ interface PlayerCharacter : PlayerCharacterBase {
                 world.entity {
                     it.from(prototype(firstName, lastName))
                 },
-            )
+            ).also {
+                get<PlayerCharacterManager>().playerCharacter.value = it
+            }
 
         fun prototype(
             firstName: String,

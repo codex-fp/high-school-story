@@ -36,6 +36,7 @@ dependencies {
 
     implementation("pro.piechowski.kge:core")
     implementation("pro.piechowski.kge:character")
+    implementation("pro.piechowski.kge:story")
 
     implementation("com.badlogicgames.gdx:gdx-tools:$gdxVersion") {
         exclude(group = "com.badlogicgames.gdx", module = "gdx-backend-lwjgl")

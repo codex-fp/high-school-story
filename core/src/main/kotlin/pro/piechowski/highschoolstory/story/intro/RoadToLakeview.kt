@@ -1,5 +1,6 @@
-package pro.piechowski.highschoolstory.scene.intro
+package pro.piechowski.highschoolstory.story.intro
 
+import com.github.quillraven.fleks.EntityComponentContext
 import com.github.quillraven.fleks.World
 import kotlinx.coroutines.delay
 import kotlinx.datetime.LocalDate
@@ -10,6 +11,7 @@ import pro.piechowski.highschoolstory.vehicle.bus.Bus
 import pro.piechowski.highschoolstory.vehicle.bus.BusColor
 import pro.piechowski.kge.camera.CameraManager
 import pro.piechowski.kge.camera.MeterCamera
+import pro.piechowski.kge.camera.following.FollowingCameraStrategy
 import pro.piechowski.kge.character.player.playerCharacter
 import pro.piechowski.kge.character.says
 import pro.piechowski.kge.di.DependencyInjection.Global.inject
@@ -28,7 +30,9 @@ import pro.piechowski.kge.time.calendar.Calendar
 import pro.piechowski.kge.time.clock.Clock
 import kotlin.time.Duration.Companion.seconds
 
-class RoadToLakeview : Story.Beat<GameState> {
+class RoadToLakeview private constructor(
+    val bus: Bus,
+) : Story.Beat<GameState> {
     override val definition: Story.Beat.Definition<GameState, *> = RoadToLakeview
 
     private val meterCamera by inject<MeterCamera>()
@@ -46,16 +50,7 @@ class RoadToLakeview : Story.Beat<GameState> {
             calendar.currentDate = LocalDate(2020, 8, 29)
             clock.currentTime = LocalTime(17, 0, 0)
 
-            mapManager.currentMap = Road()
-
-            val bus =
-                Bus(Direction4.Right, BusColor.YELLOW, 10f.mps)
-                    .apply {
-                        position = Tile.Position(15, 8).toPixel() * px.toMeter()
-                        // aiMovementInput.movementInput = Direction4.Right.vector
-                    }
-
-            // cameraManager.currentStrategy = FollowingCameraStrategy(bus.body)
+            cameraManager.currentStrategy = FollowingCameraStrategy(bus.body)
 
             delay(1000)
 
@@ -74,12 +69,16 @@ class RoadToLakeview : Story.Beat<GameState> {
     companion object : Story.Beat.Definition<GameState, RoadToLakeview> {
         private val mapManager by inject<MapManager<*, *>>()
 
-        override suspend fun invoke(state: GameState): RoadToLakeview {
-            return RoadToLakeview()
-        }
+        context(ecc: EntityComponentContext)
+        override suspend fun invoke(): RoadToLakeview =
+            RoadToLakeview(
+                Bus(Direction4.Right, BusColor.YELLOW, 10f.mps)
+                    .apply {
+                        position = Tile.Position(15, 8).toPixel() * px.toMeter()
+                        // aiMovementInput.movementInput = Direction4.Right.vector
+                    },
+            )
 
-        override fun shouldBeSpawned(state: GameState): Boolean {
-            return mapManager.currentMap is Road
-        }
+        override fun shouldBeSpawned(state: GameState): Boolean = mapManager.currentMap is Road
     }
 }
