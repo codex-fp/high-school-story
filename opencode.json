@@ -1,15 +1,3 @@
 {
-  "$schema": "https://opencode.ai/config.json",
-  "mcp": {
-    "jira": {
-      "type": "local",
-      "command": [
-        "C:\\Users\\fpiec\\AppData\\Roaming\\npm\\jira-server.cmd"
-      ],
-      "enabled": true,
-      "environment": {
-        "JIRA_CONFIG_PATH": "C:\\Users\\fpiec\\IdeaProjects\\high-school-story-gdx\\.jira-config.json"
-      }
-    }
-  }
+  "$schema": "https://opencode.ai/config.json"
 }
