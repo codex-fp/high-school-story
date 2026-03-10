@@ -60,7 +60,7 @@ Current draft:
 - wake up at 06:00 and use limited pre-school time in the dormitory
 - choose activities with explicit time costs, tracked in 15-minute increments
 - let the game validate whether there is still enough time to reach school before lessons begin
-- attend lessons according to the class schedule
+- attend lessons according to the class schedule, with each lesson played as a 3-turn decision system
 - use the post-school period for travel, activities, and social interactions while still needing to return to the dormitory by 21:00
 - spend one final hour in the dormitory before mandatory sleep at 22:00
 - build relationships, grades, skills, and personal outcomes over time through repeated daily choices, travel decisions, and calendar events
@@ -84,6 +84,13 @@ Typical activity categories:
 - working
 - social meetings
 - using city venues such as the cinema
+
+Lesson model:
+- each standard lesson lasts 3 turns, with each turn representing 15 minutes
+- in each turn, the player chooses an action such as attentive listening, talking, reading, browsing, or napping
+- each lesson action must have a different systemic purpose, not just different flavor
+- lesson choices are built around trade-offs between reward, cost, and risk rather than simple punishment avoidance
+- the player's current condition influences both immediate effectiveness and risk during the lesson
 
 ## Differentiators
 
@@ -138,9 +145,11 @@ Open detail: measurable validation criteria still need to be defined.
 - Activity selection must be grounded in world interaction, typically by reaching a place or NPC and confirming the activity in UI.
 - Each known character must have an individual relationship level tracked by the game.
 - Relationship level must be usable as a condition or input for other systems and content.
+- Relationship progress should be presented to the player through descriptive states rather than raw numbers.
 - The game must not include a hard fail state from stress, low energy, or poor academic performance.
 - Stress and exhaustion should reduce player effectiveness rather than causing game over or collapse states.
 - Low effectiveness must reduce outcomes from learning, activities, and rewards rather than blocking play entirely.
+- Low energy, high stress, and poor mood should also create immediate performance and risk consequences during activities, especially during lessons.
 - The academic system must reward lesson engagement and high skill levels with better test and exam outcomes.
 - Each semester must end with an exam.
 - The final semester exam must function as the final exam of the game.
@@ -153,14 +162,14 @@ Open detail: measurable validation criteria still need to be defined.
 - The class schedule must refresh each semester.
 - Paid work must exist as an optional activity rather than a mandatory progression system.
 - The shop must support purchasing items and purchasable activities where relevant.
+- Grades should be tracked per subject rather than as one single school value.
+- The first playable version should expose the core player-facing stats from the beginning of the game: energy, stress, mood, money, and grades.
+- The first playable version should use a small set of broad skills instead of detailed subject-specific skills.
 
 ## Open Questions
 
-- What is the intended gameplay cadence of a normal school day versus weekends, holidays, and special event days?
-- Which of the tracked resources are visible at all times, and which are intentionally hidden or abstracted?
-- How exactly do low energy, high stress, bad mood, and weak skills reduce effectiveness?
-- How are lessons experienced by the player: automatic time blocks, interactive scenes, or mixed presentation?
-- What activities are allowed in the dormitory before school and between 21:00 and 22:00?
-- How exactly does bus travel work from the player's perspective: route choice, wait time, ticket cost, or simple time skip?
+- How exactly are subject-specific lesson variants differentiated while keeping a shared core lesson system?
+- What exact formulas drive immediate and long-term penalties from low energy, high stress, and poor mood?
+- What is the final list of broad skills beyond the currently confirmed MVP set?
 - What is the minimum viable set of city venues beyond the shop for the first release?
 - What are the commercial or release goals for the project?

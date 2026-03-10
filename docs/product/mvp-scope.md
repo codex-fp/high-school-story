@@ -10,7 +10,7 @@ The MVP should demonstrate that High School Story already feels like the intende
 
 Success statement:
 
-If the MVP includes several working story arcs and all core mechanics are in place, it should already feel recognizably like High School Story.
+If the MVP includes one working story arc and all core mechanics are in place, it should already feel recognizably like High School Story.
 
 ## In Scope
 
@@ -22,9 +22,12 @@ The MVP must include:
 - dialogues
 - day-night cycle
 - one playable semester
-- several working story arcs in lightweight form
+- one working story arc in lightweight form
 - a small class roster of 5 classmates
 - 3 core locations
+- weekend gameplay
+- subject-based lessons
+- per-subject grades
 
 ## MVP Locations
 
@@ -36,10 +39,10 @@ The first playable version must include:
 
 ## MVP Content Scale
 
-- Time span: 1 semester
+- Time span: 1 semester lasting 12 in-game weeks
 - Class size in MVP: 5 classmates
-- Story content: several story arcs, but not fully expanded versions
-- Structure: enough content to exercise the daily loop, lessons, travel, interaction, and social progression
+- Story content: 1 story arc with 10 steps
+- Structure: enough content to exercise the daily loop, lessons, travel, interaction, social progression, and weekends
 
 ## Core Systems Required
 
@@ -50,6 +53,12 @@ The first playable version must include:
 - The game enforces the school-day structure and dormitory return rules.
 - The game supports dialogue interactions.
 - The game supports at least a basic relationship and story progression framework.
+- The game supports a lesson system in which a standard lesson lasts 3 turns of 15 minutes each.
+- The game supports a lesson action set with distinct rewards, costs, and risks.
+- The game tracks grades per subject.
+- The game supports broad player skills: learning, social, and physical.
+- The game shows relationships through descriptive stages instead of raw numbers.
+- The game includes weekends with a different activity emphasis from school days.
 
 ## Out of Scope
 
@@ -60,6 +69,9 @@ The MVP does not need:
 - full-semester variety of locations beyond the defined MVP set
 - complete content scale for the final class size
 - polished breadth of events expected from the final game
+- holidays and special event days
+- paid travel costs or bus-route simulation
+- permanent loss of relationship or skill progress from bad states
 
 ## Why This Scope
 
@@ -74,13 +86,19 @@ The MVP does not need:
 - The player can move between the dormitory, school, and district.
 - The player can trigger interactions and dialogues in the world.
 - The player can experience time passing as part of normal decision-making.
-- The player can engage with at least several lightweight story arcs.
+- The player can play through one lightweight story arc containing 10 steps.
 - The MVP contains 5 classmates that can participate in the social loop.
+- The player can play lessons as 3-turn decision sequences with multiple viable action types.
+- The player can see per-subject grades and broad player skills.
+- The player can experience weekends as a different rhythm focused on recovery, development, and story progress.
+- The player can understand relationship progress through descriptive states instead of raw numbers.
+- Bad states reduce current effectiveness and growth speed, but do not erase earned relationship or skill progress.
 - The combined experience is sufficient for the creator to judge that the game's core identity is present.
 
-## Open Questions
+## TODO For Next Session
 
-- What exact lesson representation is required in MVP?
-- Which resources must already be simulated in MVP, and which can be stubbed?
-- How many story arc steps count as "several working story arcs"?
-- What minimum level of exam or grading simulation is needed within one semester?
+- Define exact formulas for lesson risk, catch chance, and action effectiveness.
+- Define how each subject changes the shared lesson system through teacher behavior, action modifiers, or unique risks.
+- Define the exact dormitory activity list for morning and for the 21:00-22:00 window.
+- Define the final structure of the mixed semester exam scene.
+- Define the minimum viable city venues beyond the school, dormitory, shop, and district.
