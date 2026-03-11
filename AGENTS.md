@@ -234,3 +234,10 @@ class PlayerCharacterPreview {
 | Hoplite 2.9.0 | YAML config (`core/src/main/resources/config.yml`) |
 | KSP 2.2.20-2.0.4 | `@GameObject` annotation processing |
 | JUnit 5.13.4 | Test runner (JUnit Platform) |
+
+## Atlassian Rovo MCP
+
+When connected to atlassian-rovo-mcp:
+- **MUST** use Jira project key = HSS
+- **MUST** use cloudId = "https://fpiechowski.atlassian.net" (do NOT call getAccessibleAtlassianResources)
+- **MUST** use `maxResults: 10` or `limit: 10` for ALL Jira JQL and Confluence CQL search operations.
