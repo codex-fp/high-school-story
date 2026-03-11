@@ -151,6 +151,7 @@ nb-configuration.xml
 ## OS-Specific:
 .DS_Store
 Thumbs.db
+nul
 
 ## Miscellaneous:
 *~
