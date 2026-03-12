@@ -31,6 +31,7 @@ It translates product intent into playable rules, loops, tuning levers, and cont
 10. [`dormitory-activity-matrix.md`](dormitory-activity-matrix.md) - concrete morning and evening action matrix for the dormitory loop
 11. [`relationship-opportunity-surfacing.md`](relationship-opportunity-surfacing.md) - how social invitations, hangouts, and milestone beats are surfaced without overload
 12. [`semester-exam-scene-structure.md`](semester-exam-scene-structure.md) - 3-phase exam scene, style choices, result delay, and subject accents
+13. [`subject-and-teacher-variation-framework.md`](subject-and-teacher-variation-framework.md) - how subjects and teachers jointly differentiate the shared lesson system
 
 ## Working Principles
 

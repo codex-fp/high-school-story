@@ -185,6 +185,14 @@ Behavior boundary:
 
 Subjects should differ through modifiers, not fully separate mini-games.
 
+Confirmed direction:
+
+- variation is split roughly `50/50` between `subject` and `teacher`
+- subjects differ mainly through reward bias
+- teachers differ through strictness, tolerance, and teaching style
+- most of this should be learned through play rather than explained explicitly in UI
+- players should usually start sensing a subject's character within `1-2` lessons
+
 Recommended variation layers:
 
 ### Reward profile
@@ -207,16 +215,9 @@ Example teacher axes:
 - discussion-friendly versus lecture-heavy
 - supportive versus intimidating
 
-### Context events
+Teaching style also changes the efficiency profile of some actions, not just punishment sensitivity.
 
-A lesson may include one situational twist, such as:
-
-- surprise question
-- group discussion turn
-- pop quiz
-- seat proximity to a target classmate
-
-These events keep lessons fresh without replacing the shared rules.
+Detailed framework is documented in `docs/design/subject-and-teacher-variation-framework.md`.
 
 ## Outputs To Meta Progression
 
