@@ -115,9 +115,10 @@ The exam should be a capstone scene, not just an automatic calculation.
 
 Recommended exam structure:
 
-- each subject exam is represented as a short playable sequence or decision scene
+- one semester exam period is represented as a shared scene with short subject-specific accents
 - the exam scene references prior preparation and current condition
 - the final exam result combines semester standing with exam-scene performance
+- detailed scene structure is documented in `docs/design/semester-exam-scene-structure.md`
 
 ## Recommended Grade Weighting Model
 
@@ -202,7 +203,7 @@ For the first playable semester:
 
 - keep all subjects present in the schedule and grade display
 - make lesson engagement and targeted study the main sources of subject progress
-- implement one clear exam sequence model that can be reused per subject with modifiers
+- implement one clear exam-period scene structure with light subject accents and reusable decision logic
 - ensure the player can visibly rescue at least one slipping subject before the semester ends
 
 This validates whether academics feel legible and meaningful without requiring full long-term content scale.

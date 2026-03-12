@@ -29,6 +29,8 @@ It translates product intent into playable rules, loops, tuning levers, and cont
 8. [`activity-roster-and-location-purpose.md`](activity-roster-and-location-purpose.md) - purpose of each MVP location, activity categories, and the extra social venue role
 9. [`event-cadence-and-semester-calendar.md`](event-cadence-and-semester-calendar.md) - weekly rhythm, milestone spacing, and semester event pacing
 10. [`dormitory-activity-matrix.md`](dormitory-activity-matrix.md) - concrete morning and evening action matrix for the dormitory loop
+11. [`relationship-opportunity-surfacing.md`](relationship-opportunity-surfacing.md) - how social invitations, hangouts, and milestone beats are surfaced without overload
+12. [`semester-exam-scene-structure.md`](semester-exam-scene-structure.md) - 3-phase exam scene, style choices, result delay, and subject accents
 
 ## Working Principles
 
