@@ -2,174 +2,166 @@
 
 ## One-liner
 
-High School Story is a social simulation game in which the player creates a teenage character starting high school and lives through three years of high school experiences.
+High School Story is a cozy-leaning, lightly demanding social simulation game about living through a teenage school routine where time is limited, school attendance is central, and everyday choices shape a personal semester story.
 
-## Problem / Opportunity
+## Product Intent
 
-The game targets players who nostalgically remember their school years and want to revisit that period in a more systemic, player-driven form. It aims to combine emotional nostalgia, relationship building, and meaningful time management inside a high school setting.
+The product should deliver a readable school-life sim where:
 
-## Player Fantasy
+- everyday routine is the main texture of play
+- school is the backbone of the week, not optional background flavor
+- relationships, academics, and self-maintenance compete for limited time
+- the player builds a personal story through accumulated small decisions rather than one dominant scripted plot
 
-The player should feel:
-- nostalgia for high school years
-- curiosity about new classmates and relationships
-- pressure and satisfaction from managing limited time and resources well
+## Player Promise
 
-The intended fantasy is to relive high school as a teenager whose daily choices, relationships, and priorities shape their personal story across three school years.
+The game promises:
 
-The player is free to prioritize different definitions of success, such as relationships, academics, personal development, stability, or simply getting through school on their own terms.
+- your time matters
+- who you invest in matters
+- how you handle school pressure matters
+- there is no single correct way to live through high school
+
+## Target Experience
+
+The intended feel is:
+
+- nostalgic and grounded
+- cozy-leaning rather than stressful
+- lightly demanding rather than frictionless
+- reflective and strategic rather than twitch-based
+
+Pressure target:
+
+- the player should often feel they cannot do everything they want today
+- the player should rarely feel one bad day or one bad week has ruined the run
+- recovery should matter as part of normal planning
+- planning ahead should feel rewarding, not mandatory for basic success
 
 ## Target Players
 
 ### Primary audience
 
-Older players who remember their own high school years and want to revisit that period through an interactive social simulation.
+Players who nostalgically remember school years and want a systemic, relationship-driven life sim rather than an RPG or pure narrative visual novel.
 
 ### Secondary audience
 
-Assumption: players who enjoy social sims, relationship-driven progression, and calendar or schedule-based gameplay may also find the game appealing.
+Players who enjoy schedule-based social sims, relationship progression, and low-pressure strategic planning.
 
 ### Not for
 
-Players looking primarily for:
-- a full RPG experience
-- a direct clone of The Sims
-- a heavily main-story-driven RPG structure similar to Persona
+The product is not primarily for players seeking:
 
-## Product Goals
+- a full RPG structure
+- a delinquent or truancy fantasy
+- a heavily main-plot-driven school RPG in the Persona mold
+- a full sandbox life sim in the style of The Sims
 
-Current product goals:
-- deliver a high school social sim centered on three in-game school years
-- make time and activity duration meaningful in everyday play
-- create memorable character-specific story arcs tied to classmates
-- support multiple player priorities instead of enforcing one dominant success path
-- deliver an ending that reflects exam outcomes and a simulated glimpse of the character's future
+## Product Pillars
 
-Open detail: commercial goals, release goals, and success targets are not defined yet.
+### 1. Meaningful time pressure
 
-## Core Pillars
+Time is the main scarcity. Activities have explicit durations, travel matters, and the player usually cannot fit every priority into one day.
 
-- Meaningful Time Management - every activity consumes time and affects what the player can still accomplish within the day.
-- Social Discovery - meeting classmates and learning about them is a central motivation loop.
-- Personal School Journey - the player's path across three years is shaped by choices, priorities, and relationships.
-- Character-Driven Story Arcs - classmates have custom story arcs connected to relationship building.
+### 2. School as the central structure
 
-## Core Loop
+Weekday attendance is the default and expected rhythm. Lessons, timetable pressure, and semester pacing form the backbone of play.
 
-Current draft:
-- wake up at 06:00 and use limited pre-school time in the dormitory
-- choose activities with explicit time costs, tracked in 15-minute increments
-- let the game validate whether there is still enough time to reach school before lessons begin
-- attend lessons according to the class schedule, with each lesson played as a 3-turn decision system
-- use the post-school period for travel, activities, and social interactions while still needing to return to the dormitory by 21:00
-- spend one final hour in the dormitory before mandatory sleep at 22:00
-- build relationships, grades, skills, and personal outcomes over time through repeated daily choices, travel decisions, and calendar events
+### 3. Relationships as lived investment
 
-Time model:
-- the base unit of time is 15 minutes
-- the game world tracks time through an in-world clock
-- activities and lessons communicate their duration before the player commits
+Classmates should feel like people, not affinity bars. Relationship progress is shown through descriptive stages, with friendship and romance treated as distinct outcomes.
 
-Day structure:
-- the school day starts with wake-up at 06:00
-- the player begins in the dormitory
-- before school, the player can act only while there is still enough time to reach school
-- after school, the player has free-form time for activities and travel
-- the player must be back at the dormitory by 21:00
-- from 21:00 to 22:00 the player has one final activity window
-- at 22:00 sleep is mandatory
+### 4. Multiple valid long-term priorities
 
-Typical activity categories:
-- studying
-- working
-- social meetings
-- using city venues such as the cinema
+Academics matter, but they stand beside relationships and life management instead of dominating the whole game. The player should be able to value grades, closeness, stability, or self-development without the product lying about those options.
 
-Lesson model:
-- each standard lesson lasts 3 turns, with each turn representing 15 minutes
-- in each turn, the player chooses an action such as attentive listening, talking, reading, browsing, or napping
-- each lesson action must have a different systemic purpose, not just different flavor
-- lesson choices are built around trade-offs between reward, cost, and risk rather than simple punishment avoidance
-- the player's current condition influences both immediate effectiveness and risk during the lesson
+## Current Product Shape
+
+The currently aligned product model is:
+
+- one playable semester as the first deliverable slice
+- a 12-week semester rhythm
+- a daily loop of dormitory morning, school block, afternoon freedom, and dormitory evening
+- a shared lesson micro-game reused across subjects
+- one fully supported lightweight classmate arc in MVP, with lighter support for the rest of the roster
+- one semester exam period presented as a medium-complexity shared scene with short subject-specific accents
+
+Long-term aspiration beyond MVP:
+
+- the broader game vision still points toward a larger school journey beyond one semester
+- exact post-MVP scale, including final class size, number of arcs, and final multi-year structure, remains pending product scoping
 
 ## Differentiators
 
-- A time progression system where each activity and its duration matter.
-- A granular daily schedule based on 15-minute increments instead of broad day-part abstraction.
-- Day-level management of the student's schedule and resources.
-- Custom story arcs tied to classmates rather than a single dominant main plot.
-- A three-year structure built around recurring and unique calendar events.
-- A schedule-validation system that makes travel time and location matter in everyday planning.
-- A positioning closer to a social sim with systemic time management than to a school-themed RPG.
+- 15-minute time model with meaningful validation and travel pressure
+- school attendance as a central system instead of optional framing
+- repeated lessons as a strategic micro-loop rather than filler
+- relationships surfaced through lived opportunities and descriptive states instead of pure number grind
+- academic outcomes treated as one major pillar among several, not the only path that matters
+- a grounded, cozy-leaning school-life sim tone with moderate pressure and soft failure
 
-## Non-goals
+## Design-Driven Product Decisions
 
-- The game is not intended to be a full RPG.
-- The game is not intended to be a clone of The Sims.
-- The game is not intended to be a heavily main-story-driven RPG like Persona.
+The following are now treated as established product-level decisions because they are already locked in game design:
 
-## Constraints
-
-- Current known constraint: the vision depends on delivering three school years while keeping story arcs and time systems manageable in scope.
-- The game structure depends on a multi-year event calendar with both recurring and unique events, which creates content production pressure.
-- The design must support player freedom without requiring excessive branching lock-in.
-- Open detail: production, content, team, and release constraints are not defined yet.
+- pressure target is cozy-leaning and lightly demanding
+- weekday school attendance is default and central
+- truancy may exist as an exception, but is not a promoted fantasy or core loop
+- the morning slot is moderate: usually one larger action or two small ones
+- the `21:00-22:00` dormitory window allows normal study, but it is usually less efficient because of condition
+- relationships use descriptive stages
+- friendship and romance are distinct
+- the player may explore multiple interests, but can only have one active committed romance at a time
+- grades are one of several equal long-term pillars, not the dominant pillar
+- the semester exam is a shared exam-period scene with short subject-specific accents
+- social opportunities should usually be surfaced in sets of `1-2`
+- lesson variation comes from a roughly `50/50` split between subject and teacher
+- subjects differ mainly through hidden-but-learnable reward biases
+- teachers differ through strictness or tolerance and teaching style
+- players should begin sensing a subject's character within `1-2` lessons
+- MVP includes one extra social venue beyond base locations; the current recommended venue is `park`
 
 ## Success Criteria
 
-- Players feel nostalgia and emotional connection to the school setting.
-- Players are motivated to meet classmates and discover their story arcs.
-- Players feel that time management decisions are meaningful.
-- Players can pursue different priorities without feeling forced into a single correct playstyle.
-- The final exam results and epilogue feel like a credible reflection of how the player lived through school.
+The product direction is working if players can truthfully say:
 
-Open detail: measurable validation criteria still need to be defined.
+- I always wanted a bit more time than I had
+- school felt central instead of decorative
+- lessons were worth paying attention to
+- I cared who I spent time with
+- grades mattered, but they did not erase other playstyles
+- recovering from a rough stretch felt necessary but not hopeless
+- I could play in a relaxed way without feeling punished for not optimizing every day
 
-## High-Level Requirements
+## Constraints And Scope Boundaries
 
-- The game must track time in 15-minute increments using an in-world clock.
-- The game must show the expected duration of an activity before the player starts it.
-- The game must include resource management for at least energy, money, stress, relationships, grades, skills, and mood.
-- The game must support a three-year high school structure.
-- The game must include calendar-driven events across the school timeline.
-- The game must include both recurring annual events and unique events.
-- The game must allow players to pursue different priorities rather than enforcing one primary goal path.
-- The game should avoid excessive hard-lock branching, though some long-term consequences are allowed.
-- The game must end with exam results and an epilogue-style simulation of the character's possible future.
-- The game must begin each day at 06:00 in the dormitory.
-- The game must prevent the player from starting an activity if it would make timely arrival at school impossible.
-- The game must enforce lesson attendance according to the class schedule.
-- The game must allow free-form post-school activity selection until the latest return time to the dormitory.
-- The game must require the player to be back in the dormitory by 21:00.
-- The game must provide one final hour of dormitory activity before mandatory sleep at 22:00.
-- Activity selection must be grounded in world interaction, typically by reaching a place or NPC and confirming the activity in UI.
-- Each known character must have an individual relationship level tracked by the game.
-- Relationship level must be usable as a condition or input for other systems and content.
-- Relationship progress should be presented to the player through descriptive states rather than raw numbers.
-- The game must not include a hard fail state from stress, low energy, or poor academic performance.
-- Stress and exhaustion should reduce player effectiveness rather than causing game over or collapse states.
-- Low effectiveness must reduce outcomes from learning, activities, and rewards rather than blocking play entirely.
-- Low energy, high stress, and poor mood should also create immediate performance and risk consequences during activities, especially during lessons.
-- The academic system must reward lesson engagement and high skill levels with better test and exam outcomes.
-- Each semester must end with an exam.
-- The final semester exam must function as the final exam of the game.
-- Travel between locations must use a distance-based model rather than a flat universal cost.
-- Travel should commonly happen via bus.
-- The first playable version must support at least the dormitory, school, shop, and their surrounding areas.
-- A typical class should contain around 15 classmates, within an expected range of 10 to 20.
-- Each classmate must have their own story arc.
-- The relationship system must support friendship and romance as distinct relationship tracks or states.
-- The class schedule must refresh each semester.
-- Paid work must exist as an optional activity rather than a mandatory progression system.
-- The shop must support purchasing items and purchasable activities where relevant.
-- Grades should be tracked per subject rather than as one single school value.
-- The first playable version should expose the core player-facing stats from the beginning of the game: energy, stress, mood, money, and grades.
-- The first playable version should use a small set of broad skills instead of detailed subject-specific skills.
+- the product must preserve clarity and avoid spreadsheet-like overload
+- routine should remain the dominant texture of play, with moderate event cadence rather than constant interruption
+- the MVP should prove the semester loop, not the full final content scale
+- the MVP should stay small in locations and cast, while still proving academics, social play, travel, and condition management
+- product documentation should not lock unanswered full-game scale details as if they were already decided
+
+## High-Level Product Requirements
+
+- the game must track time in 15-minute increments and show activity duration before commitment
+- the game must validate schedule-breaking actions before they start and distinguish blocked versus risky choices
+- the game must structure standard weekdays around dormitory morning, school block, afternoon freedom, and dormitory evening
+- the game must require return to the dormitory by `21:00` and mandatory sleep at `22:00`
+- weekday school attendance must be the default expected loop
+- lessons must use a shared 3-turn structure with distinct action roles
+- the visible MVP condition stats must be `energy`, `stress`, `mood`, `money`, and `grades`
+- relationships must be tracked per character and presented through descriptive states
+- friendship and romance must be systemically distinct
+- the player may explore multiple interests but may only have one active committed romance at a time
+- grades must be tracked per subject
+- semester performance must come from lessons, study, and the exam period together
+- the exam period must be a playable shared scene rather than an automatic calculation only
+- the MVP location set must support `dormitory`, `school`, `district`, `shop`, and one extra social venue
+- the currently recommended MVP extra social venue is `park`
 
 ## Open Questions
 
-- How exactly are subject-specific lesson variants differentiated while keeping a shared core lesson system?
-- What exact formulas drive immediate and long-term penalties from low energy, high stress, and poor mood?
-- What is the final list of broad skills beyond the currently confirmed MVP set?
-- What is the minimum viable set of city venues beyond the shop for the first release?
-- What are the commercial or release goals for the project?
+- What is the intended post-MVP product scale beyond the first semester: one full year, multiple years, or a staged expansion path?
+- What is the target final class and arc count after MVP proves the core loop?
+- What are the commercial, release, and production constraints that should shape scope decisions?
+- What final ending and epilogue structure should sit above the currently defined semester-level systems?

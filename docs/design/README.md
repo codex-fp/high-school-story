@@ -22,7 +22,7 @@ It translates product intent into playable rules, loops, tuning levers, and cont
 1. [`design-audit.md`](design-audit.md) - what is already decided, what is still underspecified, and what should be designed next
 2. [`design-foundations.md`](design-foundations.md) - player experience goals, systemic tensions, and design principles
 3. [`daily-rhythm-and-time-system.md`](daily-rhythm-and-time-system.md) - daily structure, time rules, travel pressure, and recovery rhythm
-4. [`lesson-system.md`](lesson-system.md) - classroom gameplay loop, action roles, teacher variation, and balancing levers
+4. [`lesson-system.md`](lesson-system.md) - classroom gameplay loop, action roles, classroom tension, and balancing levers
 5. [`stats-and-condition-system.md`](stats-and-condition-system.md) - roles of core stats, condition thresholds, recovery model, and anti-frustration rules
 6. [`relationship-system.md`](relationship-system.md) - friendship and romance structure, social progression, and arc gating rules
 7. [`academic-progression-and-exams.md`](academic-progression-and-exams.md) - subject grades, study loop, semester pacing, and exam design
@@ -31,7 +31,7 @@ It translates product intent into playable rules, loops, tuning levers, and cont
 10. [`dormitory-activity-matrix.md`](dormitory-activity-matrix.md) - concrete morning and evening action matrix for the dormitory loop
 11. [`relationship-opportunity-surfacing.md`](relationship-opportunity-surfacing.md) - how social invitations, hangouts, and milestone beats are surfaced without overload
 12. [`semester-exam-scene-structure.md`](semester-exam-scene-structure.md) - 3-phase exam scene, style choices, result delay, and subject accents
-13. [`subject-and-teacher-variation-framework.md`](subject-and-teacher-variation-framework.md) - how subjects and teachers jointly differentiate the shared lesson system
+13. [`subject-and-teacher-variation-framework.md`](subject-and-teacher-variation-framework.md) - how subjects and teachers differentiate classroom identity while lesson mechanics stay shared
 
 ## Working Principles
 

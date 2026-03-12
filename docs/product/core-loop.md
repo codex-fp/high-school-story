@@ -2,143 +2,182 @@
 
 ## Overview
 
-High School Story is built around a daily loop of time management, movement between locations, scheduled school obligations, and optional self-directed activities. The player is not pushed toward one single win condition. Instead, they shape their own version of success across three years of high school.
+High School Story is built around a readable daily loop where the player manages limited time across school obligations, condition, travel, and relationships. The loop is meant to feel cozy-leaning but lightly demanding: the player should usually have a sensible next move, but not enough time to do everything.
 
-## Core Player Loop
+## Core Daily Loop
 
-1. Check current time, location, schedule, and upcoming calendar constraints.
-2. Choose the next activity based on available time, travel distance, resources, and priorities.
-3. Travel to the required location if needed.
-4. Confirm and perform the activity.
-5. Update time, resources, skills, grades, and relationships.
-6. Repeat until the next hard schedule boundary such as lessons, dorm return time, or sleep.
+1. Start the day in the dormitory at `06:00`.
+2. Use a moderate morning window for preparation, light recovery, or a small social or academic action.
+3. Attend the school block as the default weekday backbone.
+4. Make short lesson-by-lesson and between-class decisions that affect grades, condition, and social momentum.
+5. Use the afternoon and early evening for one major priority plus, usually, one smaller supporting action.
+6. Return to the dormitory by `21:00`.
+7. Use the final `21:00-22:00` window for recovery, prep, light social play, or valid-but-usually-weaker study.
+8. Sleep at `22:00` and carry the consequences of the day into tomorrow.
 
-## Daily Structure
+## Day Structure
 
-### Morning
+### Dormitory morning
 
-- The day starts at 06:00 in the dormitory.
-- The player has a limited pre-school window for short activities.
-- The game prevents starting any activity that would make timely arrival at school impossible.
+- Starts at `06:00`.
+- The morning slot is intentionally moderate.
+- A normal morning usually fits one larger action or two small ones.
+- Typical roles: wash up, breakfast, short rest, review notes, focused study, schedule prep, brief dorm interaction.
+- The player should feel setup pressure, not full free-time freedom.
 
-### School Hours
+### School block
 
-- Lessons happen according to the semester timetable.
-- The timetable changes every semester.
-- The player is expected to attend lessons; skipping is not a standard gameplay path.
-- A standard lesson is played as a 3-turn sequence, with each turn lasting 15 minutes.
-- In each turn, the player chooses an action with a distinct reward, cost, and risk profile.
-- The lesson goal is not only to avoid punishment, but to get the most useful outcome for the player's current needs.
+- School attendance is default and central on weekdays.
+- Truancy is not a promoted fantasy or recommended core strategy.
+- Lessons and short school interstitial windows form the backbone of weekday structure.
+- School is where academics, condition management, and many small social opportunities naturally intersect.
 
-### After School
+### Afternoon freedom
 
-- The player can travel and perform activities freely.
-- Available choices depend on location, time, resources, and relationship opportunities.
-- The player must still be able to return to the dormitory by 21:00.
+- This is the main agency window.
+- A normal afternoon should usually fit one major goal and one small supporting action, not all priorities.
+- Typical competing goals: academic catch-up, relationship progress, work, recovery, venue use, and story advancement.
+
+### Dormitory evening
+
+- The player must return by `21:00`.
+- The final hour is a low-intensity closure window, not dead time.
+- Typical roles: evening wind-down, short rest, light review, prepare for tomorrow, dorm social beat, quiet leisure, focused study.
+- Normal study is allowed from `21:00-22:00`, but usually runs at worse efficiency because of accumulated condition cost.
+
+## Time And Validation Model
+
+- The base unit of time is `15 minutes`.
+- Current time is always visible.
+- Activities show duration before confirmation.
+- Travel shows destination, duration, and expected arrival time.
+- The game validates actions before they start.
+- Impossible actions are blocked.
+- Risky actions are allowed with a warning and readable likely consequences.
+
+The validation model should usually protect the player from accidental self-sabotage while preserving agency for understandable risky choices.
+
+## Weekly And Semester Rhythm
+
+### Weekdays
+
+- Routine is the default texture.
+- Most meaningful pressure comes from timetable structure, condition, and limited free time.
+- Social opportunities during weekdays should usually appear as small ambient signals or `1` meaningful active choice.
 
 ### Weekends
 
-- Weekends use the same 15-minute time model but remove school attendance from the loop.
-- Weekend play should emphasize story arc progress, stronger recovery, and development activities.
-- Weekend gameplay should feel qualitatively different from a normal school day rather than simply offering more free time.
+- Weekends should feel structurally different, not just longer.
+- They should emphasize longer hangouts, better recovery, stronger story beats, and larger catch-up blocks.
+- Weekend timing is the best home for milestone social scenes and larger academic rescue sessions.
 
-### Night
+### Semester rhythm
 
-- From 21:00 to 22:00 the player gets one last activity window in the dormitory.
-- At 22:00 sleep is mandatory.
+- MVP uses one `12-week` semester.
+- The semester should progress through settling in, pattern formation, rising pressure, commitment window, exam and resolution.
+- Routine should remain dominant, with moderate event cadence and a few visible peaks.
 
-## Time System
+## Lesson Loop
 
-- The base unit of time is 15 minutes.
-- The world clock is visible and meaningful.
-- Activities communicate their duration before confirmation.
-- Travel time matters and must be considered before committing.
+### Shared structure
 
-## Main Decision Axes
+- A standard lesson lasts `3` turns.
+- Each turn represents `15 minutes`.
+- The player chooses one action per turn.
+- The result depends on condition, subject, teacher, prior lesson actions, and occasional context events.
 
-The player's everyday decisions revolve around balancing:
+### Lesson actions
 
-- academic progress
-- relationships
-- money
-- mood and stress
-- energy
-- skill growth
-- use of limited free time
+- `attentive listening` - safest academic baseline
+- `talking` - social opportunism with catch risk
+- `reading` - targeted academic focus
+- `browsing` - low-effort relief with academic cost
+- `napping` - short-term survival tool
 
-## Player-Facing Stats
+### Variation model
 
-- Core visible stats in MVP are energy, stress, mood, money, and grades.
-- Relationships are tracked per character but presented through descriptive states rather than raw numbers.
-- MVP skills are broad categories: learning, social, and physical.
+- Lesson variation comes from a roughly `50/50` split between subject and teacher.
+- Subjects differ mainly through hidden-but-learnable reward biases.
+- Teachers differ through strictness or tolerance and teaching style.
+- The system should be readable enough that players start sensing subject character within `1-2` lessons.
 
-## Activity Types
+## Social Loop
 
-The current key activity groups are:
+### Relationship model
 
-- studying
-- paid work
-- social meetings
-- using city venues such as the cinema
-- shopping for items or purchasable activities
+- Relationships are tracked per known classmate.
+- The player-facing layer uses descriptive stages rather than raw numbers.
+- Confirmed baseline stages are `stranger`, `acquaintance`, `comfortable`, `close`, and `very close`.
+- Friendship and romance are distinct outcomes.
+- The player may explore multiple interests, but can only have one active committed romance at a time.
 
-## Lesson Actions
+### Opportunity surfacing
 
-The MVP lesson action set is:
-
-- attentive listening
-- talking
-- reading
-- browsing
-- napping
-
-Each action must support a different player goal, such as grades, relationships, mood, recovery, or specific development.
-
-## Travel Model
-
-- Locations are separated by different distances.
-- Travel cost is not flat across the map.
-- Travel commonly uses the bus system.
-- Location matters because it changes what the player can still do before the next schedule boundary.
-
-## Relationship Loop
-
-- Each known classmate has an individual relationship level.
-- A typical class contains about 15 classmates, with an expected range of 10 to 20.
-- Every classmate has their own story arc.
-- The relationship system supports friendship and romance as separate relational outcomes.
-- Relationship level can gate or influence events, interactions, and other outcomes.
-- In MVP, relationship progress is shown through descriptive states: stranger, acquaintance, likes you, close.
+- Social opportunities should usually be surfaced in sets of `1-2`.
+- Weekdays lean toward ambient signals and medium opportunities.
+- After school and weekends carry the strongest planned hangouts and milestone beats.
+- Missed opportunities should often feel like life tradeoffs, not hard punishment.
 
 ## Academic Loop
 
-- Better lesson engagement improves academic outcomes.
-- Higher skill levels improve results on tests and exams.
 - Grades are tracked per subject.
-- MVP subjects are math, history, literature, science, art, and biology.
-- Each semester ends with an exam.
-- In MVP, the semester exam uses a mixed model: prior performance matters, but the exam is also presented as its own scene or decision sequence.
-- The final semester exam acts as the final exam of the game.
-- Final outcomes contribute to the ending and post-school future simulation.
+- Current MVP subjects are `math`, `history`, `literature`, `science`, `art`, and `biology`.
+- Academic standing comes from lesson performance, targeted study, broad skills, and the semester exam.
+- Grades are one major pillar of long-term outcome, but not the dominant one.
+- The player should be able to recover from academic weakness through intentional effort.
 
-## Failure and Recovery Philosophy
+### Semester exam
 
-- The game does not use hard fail states for stress, fatigue, or poor grades.
-- Negative conditions reduce effectiveness instead of ending the run.
-- Poor condition should lead to weaker learning, weaker activity performance, and lower rewards.
-- Poor condition should also create immediate penalties such as higher risk, weaker action outcomes, mood loss, stress spikes, and wasted turns when appropriate.
-- The game should not reduce already-earned relationship or skill levels.
+- Each semester ends with an exam period.
+- The exam is a medium-complexity shared scene with short subject-specific accents.
+- The scene uses `3` phases and a shared style-choice structure.
+- Semester preparation is the main driver of result.
+- Day-of condition, especially energy and stress, meaningfully affects execution.
 
-## Design Intent
+## Location Loop
 
-- The loop should create constant low-level pressure without punishing experimentation too harshly.
-- Players should feel that planning matters.
-- Players should be able to specialize, but not be forced into one correct playstyle.
-- The experience should support nostalgia, routine, and emergent personal stories.
+The current MVP location set is:
+
+- `dormitory` - recovery and preparation base
+- `school` - mandatory academic and social backbone
+- `district` - connective movement hub
+- `shop` - utility spending and small support actions
+- `park` - extra social venue for hangouts, recovery, and low-pressure scenes
+
+The addition of `park` is important because it proves that social life exists outside school and the dormitory.
+
+## Condition And Recovery Philosophy
+
+- `energy` is the main performance limiter.
+- `stress` is the main risk amplifier.
+- `mood` is the main quality-of-life and social-efficiency stat.
+- `money` opens selected options without replacing time as the main scarcity.
+- Poor condition should create friction, weaker outcomes, and increased risk.
+- Poor condition should not normally create hard fail states or erase earned progress.
+
+## What Is Settled Versus Pending
+
+### Settled in current design
+
+- daily rhythm structure
+- moderate morning slot
+- late-evening study remaining allowed but usually weaker
+- school attendance as central default
+- 1-2 social opportunities at a time
+- descriptive relationship stages
+- distinct friendship and romance structure
+- shared exam-period scene with short subject accents
+- subject and teacher lesson variation framework
+- `park` as the current recommended extra MVP venue
+
+### Pending game design or product follow-up
+
+- exact numeric tuning for condition thresholds, lesson risk, and study efficiency
+- final long-term product scale beyond the first semester
+- detailed post-MVP content plan for larger cast and broader venue set
 
 ## Open Questions
 
-- How should different teachers and subjects modify the shared lesson-action system?
-- What exact formulas drive low-effectiveness penalties and catch-risk changes?
-- Which specific dormitory activities should be available in the morning versus between 21:00 and 22:00?
-- Which city venues beyond the shop are required in the first playable version?
+- How should exact player-facing UI communicate hidden subject reward biases without over-explaining them?
+- What final weighting should be used between semester standing and exam execution?
+- What post-MVP expansion path best fits the proven semester loop?

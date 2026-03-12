@@ -2,163 +2,145 @@
 
 ## Design Goal
 
-Lessons should feel recognizably different across the school schedule without fragmenting into separate mini-games.
+Lessons should feel recognizably different across the school schedule without fragmenting into separate rule sets.
 
 The variation framework should make players feel:
 
-- different classes reward different instincts
+- different classes contribute to different academic tracks
 - different teachers change the emotional feel of the same shared lesson system
 - these differences are learned through play rather than heavily explained in UI
 
 ## Confirmed Decisions
 
-- lesson variation should come from a mix of `subject` and `teacher`
-- the influence split should be roughly `50/50`
-- subjects should differ mainly through `reward biases`
-- teachers should differ through `strictness / tolerance` and `teaching style`
-- teacher differences should be clearly felt in play, but not so strongly that they rewrite the whole system
-- players should mostly perceive teacher differences through outcomes and feel, not explicit UI explanation
-- subject reward biases should stay mostly hidden
-- players should usually start to feel a subject's character quickly, within roughly `1-2` lessons
+- lesson actions should have the same core effects regardless of subject
+- subjects should differ mainly by which subject progress is being advanced
+- teachers should matter mainly in narrative framing, characterization, and scene feel
+- teachers should not meaningfully treat the player differently through separate gameplay rulesets
+- classrooms can still have situational tension, but not as a deep teacher-specific mechanical identity
+- players should understand the lesson system quickly because action roles stay stable across classes
 
 ## Core Design Rule
 
 The lesson system stays shared.
 
-Variation should come from how the same actions are valued, not from replacing the action set for each class.
+Variation should come from fiction, pacing, and progression destination, not from changing what the actions do in each subject.
 
-## Variation Split
+## Subject Role
 
-### Subject role
-
-The subject provides the base profile of the lesson.
+The subject provides the academic destination of the lesson.
 
 It answers:
 
-- what kind of academic behavior this class tends to reward
-- which actions convert best into subject progress
-- what the class is fundamentally about in gameplay terms
+- which grade track is being affected
+- what fiction and classroom context frame the lesson
+- what place this class has in the weekly schedule
 
-### Teacher role
+## Teacher Role
 
-The teacher provides the delivery profile of the lesson.
+The teacher provides the narrative and emotional delivery of the lesson.
 
 It answers:
 
-- how risky disruptive play is
-- how forgiving the classroom feels
-- which actions become more or less efficient under this person's teaching style
+- how the class feels tonally
+- what kind of authority or warmth the player perceives
+- how dialogue, presentation, and scene framing color the same shared lesson mechanics
 
-## Subject Variation Model
 
-Subjects should mainly differ through reward bias.
+## Stable Action Logic
 
-That means the same five lesson actions remain available, but their academic value shifts by subject.
+The core lesson actions should mean the same thing in every class.
 
-Recommended examples:
+- `attentive listening` is the safest academic baseline
+- `talking` is the risky local social action
+- `reading` is a tradeoff action: school reading supports another subject, non-school reading gives light relief
+- `texting` is a targeted remote social action with no guaranteed reply
+- `napping` is the emergency survival action
 
-- `math` biases toward `attentive listening` and `reading`
-- `literature` is more tolerant of `talking` when it maps to discussion value
-- `science` favors focused engagement and punishes drift more clearly
-- `art` may value attentive participation differently and be less academically damaged by low-intensity expressive behavior
-- `history` may reward consistent attention more than opportunistic play
-- `biology` can sit between memorization and conceptual attention depending on the teacher profile
+Current agreed boundaries for action interpretation:
 
-These are reward tendencies, not hard locks.
+- actions should keep stable meanings across subjects
+- `reading` should depend partly on what is being read, not on a subject-specific bias table
+- MVP should use only two reading categories inside lessons: `school reading` and `non-school reading`
+- `school reading` is more tolerated and more academically useful than `non-school reading`
+- `napping` should remain bad almost everywhere, with only slight variation in punishment
+- `texting` replaces `browsing` as the remote social classroom action
 
-## Teacher Variation Model
+## Where Difference Still Comes From
 
-Teachers vary in two confirmed ways.
+Subjects can still feel different through:
 
-### 1. Strictness / tolerance
+- the subject label on resulting progress and grades
+- timetable placement and surrounding schedule pressure
+- lesson fiction, examples, and presentation
+- narrative context linked to specific classes
 
-This controls:
+Teachers can still feel different through:
 
-- catch risk sensitivity
-- patience loss from disruptive actions
-- how quickly risky play becomes unsafe
-
-### 2. Teaching style
-
-This controls:
-
-- which actions convert more efficiently in that classroom
-- how much value the player gets from passive focus versus active engagement
-- whether self-directed behavior like `reading` feels supported or slightly off-pattern
+- dialogue tone
+- visual or written classroom atmosphere
+- narrative events and character impression
+- how scenes are framed around the same mechanics
 
 ## Perceived Difference Target
 
-The target difference level is medium.
+The target difference level is mostly narrative rather than mechanical.
 
 That means:
 
-- players should notice that classes feel different
-- decisions should change sometimes because of subject and teacher
-- the optimal move should not swing so wildly that the system feels arbitrary
+- players should feel different classroom personalities
+- players should not need to relearn action values from subject to subject
+- the lesson system should stay stable and quickly readable
 
-## Hidden-But-Learnable Design
+## Learnability
 
-Because subject biases are mostly hidden, the system must teach itself through play.
+The system should become understandable quickly because the action model is consistent.
 
 Recommended rule:
 
-- after `1-2` lessons, the player should usually begin to sense what that class likes
-- repeated play should confirm that feeling rather than contradict it randomly
-
-This means the reward signal must be readable in outcomes, not buried in tiny invisible modifiers.
+- after `1-2` lessons, the player should understand the basic action economy of the classroom loop
+- later lessons should reinforce player confidence rather than reveal hidden subject-specific exceptions
 
 ## Player Experience Principle
 
 The player should think:
 
-- `talking seems to go better in this class than in that one`
-- `this teacher shuts risky behavior down faster`
-- `reading helped me more here than I expected`
+- `this class improves a different subject, but I still understand how to play it`
+- `this teacher feels different, even though the lesson rules are familiar`
+- `I know what my options mean without relearning the system every period`
 
 Not:
 
-- `I need a wiki to understand why this class works`
-
-## Lesson Action Interpretation
-
-The shared actions should keep the same identity everywhere, but their relative value changes.
-
-- `attentive listening` is always the safest academic baseline
-- `talking` is always the socially opportunistic action, but its academic downside can vary
-- `reading` is always self-directed focus, but some classrooms support it more than others
-- `browsing` is always a relief valve with cost, though punishment sensitivity can vary
-- `napping` is always a survival action, but reaction severity differs by teacher and context
+- `every subject secretly grades my actions differently`
 
 ## Tuning Guidance
 
 To preserve learnability:
 
-- subject reward biases should be noticeable, not microscopic
-- teacher style shifts should modify expected value, not invert the whole logic every time
-- one class should still feel familiar enough to understand after learning another
+- keep action values stable across subjects
+- let contextual tension vary only lightly and situationally
+- rely on presentation and progression destination more than hidden modifier maps
 
 ## Anti-Confusion Rules
 
-- do not make one teacher contradict a subject identity so strongly that the subject stops feeling like itself
-- do not hide all meaningful information if the resulting feedback is too noisy to read
-- do not create perfect secret solutions for each class; the player should still have room for priorities and condition-based adaptation
+- do not build separate hidden action tables per subject
+- do not make teachers feel like separate mechanical subclasses unless the game explains that clearly
+- do not rely on invisible modifier complexity to create classroom identity
 
 ## Balancing Levers
 
-- subject multiplier per action type
-- teacher strictness level
-- teacher patience drain per disruptive action
-- teacher style bonus or penalty per action type
+- core action values shared across classes
+- situational classroom-attention shifts during a lesson
+- reading split between school and non-school material
+- texting effectiveness thresholds by relationship strength
 - floor and ceiling values so no action becomes universally dead or universally dominant
 
 ## Risks And Edge Cases
 
-- if subject biases are too weak, classes blur together
-- if teacher effects are too weak, teachers feel cosmetic
-- if either effect is too strong, the system becomes hard to read
-- if hidden biases take too long to notice, players assume randomness
-- if discovered patterns are too rigid, lessons become solved too quickly
+- if classroom framing is too weak, subjects blur together emotionally
+- if all teachers are only cosmetic in writing, school personality may feel flat
+- if situational tension varies too much without explanation, players may still read it as hidden teacher rules
+- if subject difference exists only in a grade label, classes may need stronger narrative presentation support
 
 ## Recommended Next Step
 
-Next, define the first-pass reward bias map for the MVP subjects so these principles become concrete per class.
+Next, define how each MVP subject should be framed fictionally and narratively so classes feel distinct even with shared mechanics.

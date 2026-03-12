@@ -20,7 +20,7 @@ Each lesson is a 3-turn decision sequence built around choosing the best use of 
 Every turn, the player chooses one classroom action. The result depends on:
 
 - current energy, stress, and mood
-- subject and teacher modifiers
+- current classroom situation
 - previous actions in the same lesson
 - occasional lesson context events
 
@@ -35,7 +35,7 @@ What is the smartest thing to do in class right now, given my condition and prio
 The lesson layer should care about four values:
 
 - `lesson attention` - how prepared the player is to benefit academically right now
-- `teacher patience` - how strict the current classroom tolerance is for disruptive behavior
+- `classroom attention` - how much off-task behavior is likely to attract notice right now
 - `social opening` - whether peer interaction is likely to create relationship value this turn
 - `fatigue pressure` - how likely the player is to underperform, zone out, or seek recovery
 
@@ -77,7 +77,7 @@ Typical effects:
 
 Use case:
 
-- best when social opening is high and teacher patience is not low
+- best when social opening is high and classroom attention is not high
 
 ### Reading
 
@@ -87,31 +87,31 @@ Primary role:
 
 Typical effects:
 
-- high gain to a chosen academic area or exam preparation target
-- weaker standard lesson gain if the subject dislikes independent reading
-- low to medium catch risk depending on teacher
+- supports another chosen subject if the player is reading school material
+- offers minor relief instead if the player is reading non-school material
+- low to medium catch risk depending on classroom situation
 - slight stress increase
 
 Use case:
 
-- when the player wants targeted preparation rather than generic class performance
+- when the player wants to trade current-class focus for cross-subject preparation or light self-regulation
 
-### Browsing
+### Texting
 
 Primary role:
 
-- low-effort mood management with temptation cost
+- remote relationship maintenance and opportunistic social investment
 
 Typical effects:
 
-- small mood relief or stress relief
-- poor grade gain
-- medium catch risk
-- may trigger distraction chains that weaken later turns
+- small relationship gain with one chosen person
+- very low or no grade gain
+- small baseline catch risk that scales with classroom situation
+- no effect if the target relationship is too weak or the other person does not want to risk replying
 
 Use case:
 
-- emergency relief when the player is mentally overloaded but cannot afford a full collapse
+- best when the player wants to invest in someone who is not physically available in the classroom seat context
 
 ### Napping
 
@@ -123,7 +123,7 @@ Typical effects:
 
 - immediate energy recovery
 - no grade gain or grade loss opportunity cost
-- medium to high catch risk depending on teacher
+- medium to high catch risk depending on classroom situation
 - may reduce stress if uninterrupted
 
 Use case:
@@ -148,9 +148,9 @@ Recommended interaction rules:
 
 - repeating `attentive listening` gains consistency but slightly declining marginal value
 - `reading` after `attentive listening` gets a small bonus because the player is already engaged
-- `talking` lowers teacher patience for later turns
-- `browsing` increases fatigue pressure on the next turn
-- `napping` restores energy but sharply lowers teacher patience if noticed
+- `talking` lowers classroom attention for later turns
+- `texting` lowers lesson attention and may lower classroom attention if noticed
+- `napping` restores energy but sharply lowers classroom attention if noticed
 
 These interactions create short-term planning without requiring deep complexity.
 
@@ -161,8 +161,7 @@ Catch risk should be legible but not fully deterministic.
 Recommended behind-the-scenes formula inputs:
 
 - base risk of the chosen action
-- teacher strictness
-- current teacher patience
+- current classroom attention
 - player condition penalties, especially very low energy or very poor mood
 - repetition penalties when the same risky action is used multiple turns
 
@@ -183,41 +182,46 @@ Behavior boundary:
 
 ## Subject Variation Framework
 
-Subjects should differ through modifiers, not fully separate mini-games.
+Subjects should share the same lesson action logic.
 
 Confirmed direction:
 
-- variation is split roughly `50/50` between `subject` and `teacher`
-- subjects differ mainly through reward bias
-- teachers differ through strictness, tolerance, and teaching style
-- most of this should be learned through play rather than explained explicitly in UI
-- players should usually start sensing a subject's character within `1-2` lessons
+- lesson actions should have the same core effects regardless of subject
+- subjects differ mainly by which subject progress they increase, not by separate reward bias tables
+- teachers should matter mainly in narrative framing and character feel, not in major mechanical rule changes
+- classroom tension may still vary situationally, but this should not read as each teacher having a separate gameplay ruleset
 
-Recommended variation layers:
+Practical implications:
 
-### Reward profile
+- `attentive listening` always remains the safest academic baseline
+- `talking` always remains a risky local social action
+- `reading` always remains a tradeoff between cross-subject school reading and non-school relief reading
+- `texting` always remains a targeted remote social action with no guaranteed reply
+- `napping` always remains a survival action
 
-Different subjects favor different action outputs.
+What still differs by subject:
+
+- which subject gains progress from attentive participation in that lesson
+- flavor and fiction of the classroom
+- downstream academic consequences because grades are tracked per subject
+
+What should not differ heavily by subject:
+
+- core action effectiveness tables
+- major punishment profiles per teacher
+- hidden reward bias maps the player must reverse-engineer
+
+Detailed framing guidance is documented in `docs/design/subject-and-teacher-variation-framework.md`.
+
+## Classroom Framing
+
+Teachers and subjects still matter strongly for tone and fiction.
 
 Examples:
 
-- math rewards attentive listening and reading more strongly
-- literature may allow talking to generate discussion value in some contexts
-- art may punish napping less harshly but reward engaged participation differently
-
-### Teacher personality
-
-Teachers define tolerance and response patterns.
-
-Example teacher axes:
-
-- strict versus lenient
-- discussion-friendly versus lecture-heavy
-- supportive versus intimidating
-
-Teaching style also changes the efficiency profile of some actions, not just punishment sensitivity.
-
-Detailed framework is documented in `docs/design/subject-and-teacher-variation-framework.md`.
+- one class can feel dry and demanding while another feels calmer or more expressive
+- one teacher can feel warm, intimidating, distracted, or charismatic
+- the same action can feel emotionally different even if its mechanical role stays consistent
 
 ## Outputs To Meta Progression
 
@@ -235,7 +239,7 @@ This ensures lessons matter even when no story scene is active.
 
 To avoid lessons becoming rote:
 
-- use different teacher profiles across subjects
+- use different classroom fiction and scene framing across subjects
 - rotate contextual events rather than creating one fixed script
 - allow different player priorities to justify different actions
 - keep the best action dependent on condition, not fixed forever
@@ -244,8 +248,7 @@ To avoid lessons becoming rote:
 
 - academic value per action
 - base catch risk per action
-- teacher strictness
-- teacher patience loss and recovery values
+- classroom attention shifts during the lesson
 - cross-turn synergy and anti-spam penalties
 - condition thresholds that lower action effectiveness
 - frequency of context events
@@ -255,8 +258,8 @@ To avoid lessons becoming rote:
 - if attentive listening is always best, the system collapses into a fake choice
 - if risky actions are too rewarding, optimal play becomes disruptive nonsense
 - if catch outcomes are too punishing, players stop experimenting
-- if condition penalties are too weak, napping and browsing lose their purpose
-- if subject variation is too small, lessons blur together
+- if condition penalties are too weak, napping loses its purpose and texting becomes too free
+- if classroom framing is too weak, lessons blur together
 
 ## Recommended Next Step
 
