@@ -232,6 +232,12 @@ The tone should remain human and understandable, not cruel.
 - story arcs should use relationship state as a gate and as tonal context
 - the same beat can play differently depending on closeness or romantic direction
 
+### Preferences
+
+- shared preference tags should give medium-strength chemistry support
+- clear mismatches may create mild friction, but should not outweigh time and behavior
+- NPC preferences should be discovered gradually, then communicated with fairly clear feedback when they matter
+
 ## Player-Facing Communication
 
 To keep relationships readable without exposing hidden math:

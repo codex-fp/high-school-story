@@ -158,6 +158,11 @@ Recommended behavior:
 
 ## Growth Stats
 
+Note:
+
+- broad player creation attributes are tracked separately from these longer-term growth stats
+- initial character identity should come from character creation attributes, while `learning`, `social`, and `physical` remain slower progression tracks earned through play
+
 ### Broad skills
 
 Broad skills are long-term efficiency boosters.
