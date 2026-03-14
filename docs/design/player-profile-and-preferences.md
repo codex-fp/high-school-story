@@ -208,6 +208,7 @@ This cleanly separates competence from identity.
 
 - attributes help shape how well the player handles school demands
 - subject grades remain separate outputs rather than becoming attributes themselves
+- subjects should lean fairly clearly on `1-2` main attributes each, but the game should communicate this only partially rather than as a full exposed matrix
 
 ### Condition
 
@@ -217,6 +218,11 @@ This cleanly separates competence from identity.
 
 - `sociability` and other attributes may color some outcomes
 - preferences remain the stronger compatibility driver
+
+### Subject comfort
+
+- preferences should affect how emotionally comfortable the player feels in specific subjects more than they affect raw academic performance
+- shared interests with a subject area should influence `stress` and `mood` more than direct grade conversion
 
 ### Replayability
 

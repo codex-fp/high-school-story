@@ -33,6 +33,8 @@ It translates product intent into playable rules, loops, tuning levers, and cont
 12. [`semester-exam-scene-structure.md`](semester-exam-scene-structure.md) - 3-phase exam scene, style choices, result delay, and subject accents
 13. [`subject-and-teacher-variation-framework.md`](subject-and-teacher-variation-framework.md) - how subjects and teachers differentiate classroom identity while lesson mechanics stay shared
 14. [`player-profile-and-preferences.md`](player-profile-and-preferences.md) - character creation attributes, point-buy rules, and preference-tag compatibility
+15. [`fictional-framing-map.md`](fictional-framing-map.md) - how subjects feel different through student-profile fit rather than separate mechanics
+16. [`mvp-design-completeness-checklist.md`](mvp-design-completeness-checklist.md) - definition of done for current MVP game design work and what still remains
 
 ## Working Principles
 

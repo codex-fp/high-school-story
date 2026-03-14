@@ -70,6 +70,7 @@ Current agreed boundaries for action interpretation:
 Subjects can still feel different through:
 
 - the subject label on resulting progress and grades
+- the fit between the subject and the current student profile
 - timetable placement and surrounding schedule pressure
 - lesson fiction, examples, and presentation
 - narrative context linked to specific classes
@@ -88,6 +89,7 @@ The target difference level is mostly narrative rather than mechanical.
 That means:
 
 - players should feel different classroom personalities
+- players should feel that some classes suit their student better than others
 - players should not need to relearn action values from subject to subject
 - the lesson system should stay stable and quickly readable
 
@@ -143,4 +145,4 @@ To preserve learnability:
 
 ## Recommended Next Step
 
-Next, define how each MVP subject should be framed fictionally and narratively so classes feel distinct even with shared mechanics.
+Next, define the first concrete fictional framing pass for MVP subjects using student-profile fit as the main differentiator.
