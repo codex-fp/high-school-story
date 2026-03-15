@@ -10,15 +10,17 @@ Their identity should come mainly from what they mean to a given student, not fr
 
 - subjects should differ only lightly in framing and presentation
 - the main difference between subjects should be how they fit the player character's profile
-- subject fit should come from a mix of `attributes` and `preferences`
-- `attributes` matter more for academic progress and performance
-- `preferences` matter more for comfort, `stress`, and `mood`
+- subjects are systemically equal rather than arranged in a hierarchy of importance
+- subject fit should currently be defined mainly through attribute weighting
+- `attributes` drive academic progress and performance directly
 - good fit should improve both results and felt comfort
 - poor fit should worsen both results and felt comfort
 - the benefit for good fit should be noticeable but not overwhelming
-- each subject should map fairly clearly to `1-2` main attributes
+- every subject should map to all core attributes, but with different weights
+- one attribute may dominate while others contribute more lightly
+- `composure` should be treated as a shared modifier, especially under high stress, rather than as a normal subject-weighted stat
 - the mapping should be partially visible to the player through hints, not presented as a full explicit table
-- some subjects may connect narrowly to interests, while others may connect to a wider range of preference tags
+- preferences influence on school subjects is deferred and should not be treated as settled design yet
 
 ## Core Framing Rule
 
@@ -31,7 +33,6 @@ What does this class mean to this version of the protagonist?
 Examples:
 
 - a strong analytical student may feel capable and steady in math
-- a student with matching interests may feel more emotionally at home in a subject
 - a badly matched student may still function, but at higher emotional and academic cost
 
 ## Fit Model
@@ -50,13 +51,15 @@ This affects:
 
 ### 2. Comfort fit
 
-Driven mainly by preferences, with support from the broader character profile.
+Driven mainly by how naturally the student's broader profile matches the subject.
 
 This affects:
 
 - whether the class feels encouraging or draining
 - how much `stress` it tends to generate in that student
 - whether `mood` is preserved or worn down by regular attendance
+
+The exact role of preference tags inside subject comfort is intentionally deferred for later discussion.
 
 ## Result Of Good Fit
 
@@ -93,19 +96,82 @@ The player should feel informed, but still be discovering how their student live
 With mechanics now mostly shared, subjects should feel different through:
 
 - which grade track they advance
-- which `1-2` main attributes they lean on most strongly
-- what kinds of interests or preference tags make the student feel more at home there
+- how their full attribute weighting leans, especially which attribute dominates
 - what emotional place the subject occupies in the school week for that student
+
+## Weighting Model
+
+The current subject-fit model should use simple `1-5` weights for the main attributes:
+
+- `reasoning`
+- `knowledge`
+- `creativity`
+- `sociability`
+- `athletics`
+
+`composure` is not part of the normal per-subject weight table.
+
+It should act more like a cross-subject stability modifier that matters especially when the student is under stress.
+
+## Current MVP Attribute Mapping
+
+### Math
+
+- `reasoning = 5`
+- `knowledge = 3`
+- `creativity = 1`
+- `sociability = 1`
+- `athletics = 1`
+
+### History
+
+- `knowledge = 5`
+- `reasoning = 2`
+- `creativity = 1`
+- `sociability = 1`
+- `athletics = 1`
+
+### Literature
+
+- `knowledge = 4`
+- `creativity = 3`
+- `sociability = 2`
+- `reasoning = 1`
+- `athletics = 1`
+
+### Science
+
+- `reasoning = 5`
+- `knowledge = 4`
+- `creativity = 1`
+- `sociability = 1`
+- `athletics = 1`
+
+### Art
+
+- `creativity = 5`
+- `knowledge = 3`
+- `sociability = 3`
+- `reasoning = 1`
+- `athletics = 1`
+
+### Biology
+
+- `knowledge = 4`
+- `reasoning = 2`
+- `creativity = 1`
+- `sociability = 1`
+- `athletics = 1`
 
 ## MVP Subject Framing Template
 
 For each subject, the final framing pass should define:
 
-1. primary attribute link
-2. possible secondary attribute link
-3. common preference resonance themes
-4. likely emotional reading for a well-matched student
-5. likely emotional reading for a poorly matched student
+1. weighted attribute profile
+2. which attribute clearly dominates
+3. likely experience for a well-matched student
+4. likely experience for a poorly matched student
+5. any later-added preference resonance, if the deferred topic is resolved
 
 ## Player Experience Principle
 
@@ -113,7 +179,7 @@ The player should think:
 
 - this is one of my student's good classes
 - this class drains them, even if they can survive it
-- this subject suits their strengths, but that one suits their tastes
+- this subject suits their strengths more than that one does
 
 Not:
 
@@ -124,10 +190,9 @@ Not:
 
 - if fit bonuses are too small, subject identity feels cosmetic
 - if fit bonuses are too strong, the player feels pushed into narrow specialization
-- if comfort fit matters too little, preferences stop shaping school life
-- if comfort fit matters too much, preferences can overshadow competence
+- if too many subjects end up using nearly identical weights, the map becomes meaningless
 - if attribute mapping is too opaque, the player cannot build a student intentionally
 
 ## Recommended Next Step
 
-Next, define the first concrete framing pass for the MVP subjects using the template in this document.
+Next, decide whether to expand this mapping with the remaining school subjects or move on to the next major content-facing design block.

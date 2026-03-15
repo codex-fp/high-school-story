@@ -76,7 +76,6 @@ For this project, MVP game design should be considered sufficiently complete whe
 ### D. Content framing and content constraints
 
 - [ ] fictional framing pass exists for all MVP subjects
-- [ ] narrative teacher archetypes are defined clearly enough for content work
 - [ ] first classmate arc design constraints are defined clearly enough for narrative and product planning
 
 ### E. Delivery support
@@ -106,7 +105,7 @@ Estimated completeness: `about 80-85%`
 
 Main reason it is not fully complete yet:
 
-- the remaining gaps are now concentrated in content-facing framing and constraints rather than in the central systems themselves
+- the remaining gaps are now concentrated in content-facing framing, arc constraints, and later balancing notes rather than in the central systems themselves
 
 ## Implementation-Ready Complete
 
@@ -137,9 +136,8 @@ Main reason it is not fully complete yet:
 The remaining work to call the current MVP design phase complete is:
 
 1. complete a concrete fictional framing pass for each MVP subject
-2. define narrative teacher archetypes that fit the reduced mechanical role of teachers
-3. define first classmate arc design constraints
-4. group remaining tuning assumptions into an explicit balancing-oriented note or checklist
+2. define first classmate arc design constraints
+3. group remaining tuning assumptions into an explicit balancing-oriented note or checklist
 
 ## What Does Not Need To Be Fully Solved Yet
 
@@ -154,14 +152,14 @@ These topics do not block calling the current MVP design phase complete:
 
 The current phase of game design should be considered done when:
 
-- the three remaining content-facing design blocks are documented
+- the remaining MVP-critical design blocks are documented
 - the remaining unresolved items are mostly tuning questions, not identity questions
 - product and implementation can move forward without reopening the core design of the game
 
 ## Recommended Next Step
 
-Finish the remaining three content-facing design blocks in this order:
+Finish the remaining MVP-critical design blocks in this order:
 
 1. fictional framing pass for MVP subjects
-2. narrative teacher archetypes
-3. first classmate arc design constraints
+2. first classmate arc design constraints
+3. balancing-oriented tuning assumptions note
