@@ -6,6 +6,37 @@ Guidance for agentic coding assistants working in this repository.
 
 High School Story is a social simulation game built on **KGE (Kotlin Game Engine 2D)**, a custom engine included as a Gradle composite build from `./engine`. The game targets JVM 17 via the LWJGL3 desktop backend.
 
+## Documentation Contract
+
+- Work specification-first. Documentation is the contract for this repository.
+- Update documentation before implementation when behavior, workflow, or boundaries change.
+- Keep documentation in English.
+- Keep product intent in `docs/product`, gameplay systems in `docs/design`, and authored scenes in `docs/narrative`.
+- Do not leave durable project rules only in chat history.
+
+## Standard Workflow
+
+1. Confirm the relevant specification or documentation contract before implementation.
+2. Synchronize with `git fetch origin`.
+3. Use the remote default branch on `origin` as the baseline for diffs instead of assuming the local default branch is current.
+4. Keep changes small, explicit, and reviewable.
+5. Update the affected documentation when behavior, workflow, or repository guidance changes.
+
+## Task Mode
+
+- If the explicit `task` skill is not invoked, this repository is in no-task mode.
+- In no-task mode, ticket creation is not required.
+- In no-task mode, task IDs in commits are not required.
+- In no-task mode, pull requests are optional.
+
+## Current Runtime Baseline
+
+- `SandboxLauncher` is the main development entrypoint for live iteration.
+- `MainLauncher` exists, but `GameEntrypoint.run()` is currently `TODO()`, so the end-to-end game flow is not yet implemented.
+- Treat preview tests as visual tooling, not as headless correctness tests.
+- Treat product and design docs as the intended MVP contract, not as proof that every described system is already implemented.
+- Current implemented gameplay surface includes player-character spawning, controllable sandbox ownership, character and bus game objects, town and road Tiled maps, dialogue UI wiring, and the `RoadToLakeview` intro beat preview.
+
 ## Build & Run Commands
 
 All commands use the Gradle wrapper. On Windows use `gradlew.bat`; on Unix use `./gradlew`.
@@ -31,6 +62,12 @@ All commands use the Gradle wrapper. On Windows use `gradlew.bat`; on Unix use `
 ```
 
 > **Note:** Tests in `lwjgl3/src/test/` are "Preview tests" — they open a live LibGDX window for visual iteration, not headless unit tests. There are no traditional headless unit tests in the game layer at this time.
+
+## Setup Preconditions
+
+- The `engine/` directory is a Git submodule and must be available locally before building.
+- Use Java 17. The repository configures Gradle JVM toolchains accordingly.
+- The desktop run task uses the repository `assets/` directory as its working directory.
 
 ## Documentation
 Complete documentation is in `docs/` directory, written fully in English, and is an Obsidian vault.
@@ -234,6 +271,23 @@ class PlayerCharacterPreview {
 | Hoplite 2.9.0 | YAML config (`core/src/main/resources/config.yml`) |
 | KSP 2.2.20-2.0.4 | `@GameObject` annotation processing |
 | JUnit 5.13.4 | Test runner (JUnit Platform) |
+
+## Quality Gates
+
+### Before Commit
+
+- Check that changed files match the intended scope.
+- Keep documentation content in English and consistent with the current repository contract.
+- Confirm internal links and references are correct.
+- Confirm there are no accidental files or hidden artifacts.
+
+### Before Push
+
+- Confirm `git status` is clean except for intended changes.
+- Run relevant workspace checks where practical:
+  - `./gradlew ktlintCheck`
+  - `./gradlew test`
+- If executable validation is skipped, state that clearly in the handoff.
 
 ## Atlassian Rovo MCP
 
