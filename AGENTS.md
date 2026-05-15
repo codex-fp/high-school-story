@@ -25,7 +25,7 @@ High School Story is a social simulation game built on **KGE (Kotlin Game Engine
 ## Task Mode
 
 - If the explicit `task` skill is not invoked, this repository is in no-task mode.
-- In no-task mode, ticket creation is not required.
+- In no-task mode, tracked task creation is not required.
 - In no-task mode, task IDs in commits are not required.
 - In no-task mode, pull requests are optional.
 
@@ -288,10 +288,3 @@ class PlayerCharacterPreview {
   - `./gradlew ktlintCheck`
   - `./gradlew test`
 - If executable validation is skipped, state that clearly in the handoff.
-
-## Atlassian Rovo MCP
-
-When connected to atlassian-rovo-mcp:
-- **MUST** use Jira project key = HSS
-- **MUST** use cloudId = "https://fpiechowski.atlassian.net" (do NOT call getAccessibleAtlassianResources)
-- **MUST** use `maxResults: 10` or `limit: 10` for ALL Jira JQL and Confluence CQL search operations.
