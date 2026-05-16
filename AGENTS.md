@@ -1,157 +1,82 @@
 # AGENTS.md
 
-Guidance for agentic coding assistants working in this repository.
+Guidance for coding agents working in `high-school-story`.
+This file inherits organization defaults from parent `AGENTS.md` files and
+defines only local guidance.
 
-## Project Overview
+## Scope
 
-High School Story is a social simulation game built on **KGE (Kotlin Game Engine 2D)**, a custom engine included as a Gradle composite build from `./engine`. The game targets JVM 17 via the LWJGL3 desktop backend.
+This repository is a social simulation game built on KGE, the Kotlin Game
+Engine 2D, through a Gradle composite build from `./engine`.
+
+- Applies to `high-school-story/`.
+- Inherits broader `codex-fp` guidance when opened inside the organization
+  workspace.
+- The `engine/` directory is a Git submodule and separate Gradle build.
+
+## Purpose
+
+This area owns the High School Story game implementation and authored game
+content.
+
+This area owns:
+
+- Game logic, scenes, maps, dialogue, and project-specific gameplay.
+- Product, design, and narrative documentation for the MVP.
+- Desktop launch and visual preview workflows.
+
+This area does not own:
+
+- Reusable KGE engine behavior except through the `engine/` submodule.
+- Headless correctness tests for visual preview scenarios.
+- Engine-wide architecture decisions that belong in the KGE repository.
+
+## Read Order
+
+Before changing this area, read:
+
+1. `README.md` for the repository overview.
+2. This file and any deeper `AGENTS.md` for the touched path.
+3. `docs/product/`, `docs/design/`, or `docs/narrative/` for the behavior
+   being changed.
+4. The relevant KGE guidance under `engine/` when touching engine APIs.
 
 ## Documentation Contract
 
-- Work specification-first. Documentation is the contract for this repository.
-- Update documentation before implementation when behavior, workflow, or boundaries change.
-- Keep documentation in English.
-- Keep product intent in `docs/product`, gameplay systems in `docs/design`, and authored scenes in `docs/narrative`.
-- Do not leave durable project rules only in chat history.
+- Keep product intent in `docs/product/`.
+- Keep gameplay systems in `docs/design/`.
+- Keep authored scenes in `docs/narrative/`.
+- Treat the docs as the intended MVP contract, not as proof that every
+  described system is already implemented.
+- Update documentation before or with behavior, workflow, or boundary changes.
 
-## Standard Workflow
+## Layout
 
-1. Confirm the relevant specification or documentation contract before implementation.
-2. Synchronize with `git fetch origin`.
-3. Use the remote default branch on `origin` as the baseline for diffs instead of assuming the local default branch is current.
-4. Keep changes small, explicit, and reviewable.
-5. Update the affected documentation when behavior, workflow, or repository guidance changes.
+- `core/` - platform-independent game logic.
+- `lwjgl3/` - desktop launcher and visual preview tests.
+- `engine/` - Git submodule and composite build for KGE.
+- `assets/` - runtime assets used as the desktop run working directory.
+- `docs/` - English Obsidian vault for product, design, and narrative docs.
 
-## Task Mode
+## Architecture And Boundaries
 
-- If the explicit `task` skill is not invoked, this repository is in no-task mode.
-- In no-task mode, tracked task creation is not required.
-- In no-task mode, task IDs in commits are not required.
-- In no-task mode, pull requests are optional.
-
-## Current Runtime Baseline
-
-- `SandboxLauncher` is the main development entrypoint for live iteration.
-- `MainLauncher` exists, but `GameEntrypoint.run()` is currently `TODO()`, so the end-to-end game flow is not yet implemented.
-- Treat preview tests as visual tooling, not as headless correctness tests.
-- Treat product and design docs as the intended MVP contract, not as proof that every described system is already implemented.
-- Current implemented gameplay surface includes player-character spawning, controllable sandbox ownership, character and bus game objects, town and road Tiled maps, dialogue UI wiring, and the `RoadToLakeview` intro beat preview.
-
-## Build & Run Commands
-
-All commands use the Gradle wrapper. On Windows use `gradlew.bat`; on Unix use `./gradlew`.
-
-```bash
-# Run the sandbox (development/iteration mode)
-./gradlew :lwjgl3:run -PmainClass=pro.piechowski.highschoolstory.game.lwjgl3.SandboxLauncher
-
-# Run the full game
-./gradlew :lwjgl3:run -PmainClass=pro.piechowski.highschoolstory.game.lwjgl3.MainLauncher
-
-# Run ALL tests
-./gradlew test
-
-# Run a SINGLE test (fully-qualified class + method name)
-./gradlew :lwjgl3:test --tests "pro.piechowski.highschoolstory.character.player.PlayerCharacterPreview.preview"
-
-# Lint check
-./gradlew ktlintCheck
-
-# Lint auto-format (run before committing)
-./gradlew ktlintFormat
-```
-
-> **Note:** Tests in `lwjgl3/src/test/` are "Preview tests" — they open a live LibGDX window for visual iteration, not headless unit tests. There are no traditional headless unit tests in the game layer at this time.
-
-## Setup Preconditions
-
-- The `engine/` directory is a Git submodule and must be available locally before building.
-- Use Java 17. The repository configures Gradle JVM toolchains accordingly.
-- The desktop run task uses the repository `assets/` directory as its working directory.
-
-## Documentation
-Complete documentation is in `docs/` directory, written fully in English, and is an Obsidian vault.
-
-## Module Structure
-
-```
-high-school-story/
-  core/       — game logic (platform-independent)
-  lwjgl3/     — desktop launcher + Preview tests
-  engine/     — git submodule, composite build (KGE)
-    core/                — engine core (LibGDX, Fleks ECS, Koin, physics)
-    gameplay/            — genre-specific modules (character, dialogue, story, time, …)
-    annotation/          — @GameObject and other annotations
-    annotation-processor/— KSP processor for @GameObject
-```
-
-The engine is a separate Gradle composite build (`includeBuild("./engine")`). Game code lives under `pro.piechowski.highschoolstory`; engine code lives under `pro.piechowski.kge`.
-
-## Code Style
-
-### Formatter & Linter
-
-- **ktlint 1.8.0** is enforced on all subprojects via the `org.jlleitschuh.gradle.ktlint` plugin.
-- Always run `./gradlew ktlintFormat` before submitting changes.
-- The `.editorconfig` at the repo root is the authoritative style source.
-
-### Indentation & Whitespace
-
-- 4 spaces for Kotlin/Java; 2 spaces for `.gradle` files.
-- LF line endings, UTF-8 encoding.
-- Trim trailing whitespace; insert final newline.
-
-### Imports
-
-- **No wildcard/star imports.** The `ij_kotlin_name_count_to_use_star_import` threshold is set to `Int.MAX_VALUE` in `.editorconfig`, effectively banning them. Every import must be explicit.
-- Keep imports alphabetically ordered (ktlint enforces this).
-
-### Naming Conventions
-
-| Element | Convention | Example |
-|---|---|---|
-| Packages | lowercase, dot-separated | `pro.piechowski.highschoolstory.character.player` |
-| Classes / interfaces | PascalCase | `PlayerCharacter`, `RoadToLakeview` |
-| GameObject interfaces | PascalCase + `@GameObject` | `@GameObject interface Bus : Visual, Spatial, Kinetic` |
-| Koin modules | `val <Feature>Module` | `highSchoolStoryModule`, `CharacterModule` |
-| Companion factories | `<Name>Companion` (KSP-generated, extend `EntityGameObjectCompanion<T>`) | `BusCompanion` |
-| Properties / variables | camelCase | `playerCharacter`, `currentMap` |
-| Constants | SCREAMING_SNAKE_CASE | `BusColor.YELLOW` |
-| Suspend factory functions | `operator fun invoke(...)` on companion objects | `PlayerCharacter("First", "Last")` |
-
-### Function Style
-
-- Prefer **expression bodies** (`= expr`) for single-expression functions and properties.
-- Use **trailing lambdas** outside parentheses.
-- Use **named arguments** liberally when constructing complex objects.
-
-```kotlin
-// Preferred
-fun prototype(firstName: String, lastName: String) = Prototype {
-    it.from(PlayerCharacterBase.prototype(firstName, lastName, CharacterBody(), ...))
-}
-```
-
-### Kotlin Features in Use
-
-These experimental APIs are globally opted-in via `build.gradle.kts` and do **not** require per-file opt-in annotations:
-
-| API | Usage |
-|---|---|
-| `kotlin.ExperimentalContextParameters` | `context(ecc: EntityCreateContext)` on functions/classes |
-| `kotlinx.coroutines.ExperimentalCoroutinesApi` | coroutine internals |
-| `kotlin.time.ExperimentalTime` | `Duration`, `.seconds`, `.s` extension values |
-| `kotlin.ExperimentalUnsignedTypes` | unsigned integer types |
-| `arrow.fx.coroutines.await.ExperimentalAwaitAllApi` | `awaitAll { async { … } }` for parallel loading |
-| `org.koin.core.annotation.KoinInternalApi` | Koin DI internals |
-
-If a file-level opt-in is still needed (e.g., for Arrow), use `@file:OptIn(ExperimentalAwaitAllApi::class)`.
-
-## Architecture Patterns
+- The game targets JVM 17 through the LWJGL3 desktop backend.
+- Game code lives under `pro.piechowski.highschoolstory`.
+- Engine code lives under `pro.piechowski.kge`.
+- The engine is a separate Gradle composite build through
+  `includeBuild("./engine")`.
 
 ### GameObject Pattern
 
-Game objects are Kotlin interfaces annotated with `@GameObject`. The KSP processor generates a companion base class. The companion object holds a suspend factory (`invoke`) and a reusable `Prototype` builder.
+- Game objects are Kotlin interfaces annotated with `@GameObject`.
+- The KSP processor generates a companion base class.
+- Companion objects hold suspend factories and reusable `Prototype` builders.
+- `Prototype` is a `fun interface` holding a suspend entity-builder lambda.
+- Prototypes compose through `Entity.from(prototype)`.
+- Keep rendering and physics logic out of `@GameObject` interfaces; delegate to
+  components.
+- Use companion factories named `<Name>Companion` when extending generated
+  `EntityGameObjectCompanion<T>` classes.
 
 ```kotlin
 @GameObject
@@ -159,159 +84,152 @@ interface PlayerCharacter : PlayerCharacterBase {
     companion object : PlayerCharacterCompanion() {
         suspend operator fun invoke(firstName: String, lastName: String): PlayerCharacter =
             invoke(world.entity { it.from(prototype(firstName, lastName)) })
-
-        fun prototype(firstName: String, lastName: String) = Prototype {
-            it.from(PlayerCharacterBase.prototype(...))
-        }
     }
 }
 ```
 
-- `Prototype` is a `fun interface` holding a suspend entity-builder lambda.
-- Prototypes compose via `Entity.from(prototype)`.
-- Never put rendering or physics logic directly in the interface; delegate to components.
+### Entity Component System
 
-### Entity-Component-System (Fleks)
+- Components are plain data classes added to a Fleks `Entity`.
+- Systems extend `IntervalSystem` or `MeasuredIntervalSystem`.
+- Register new systems through the injected `SystemComposer`.
 
-- **Components** are plain data classes added to a Fleks `Entity`.
-- **Systems** extend `IntervalSystem` (or `MeasuredIntervalSystem`), ordered by the injected `SystemComposer`.
-- The `systemComposer` is defined in `core/…/SystemComposer.kt` and injected into the engine — always register new systems there.
+### Dependency Injection
 
-### Dependency Injection (Koin)
+- DI modules live in `Module.kt` files: one per gameplay module plus the root
+  `highSchoolStoryModule` that includes them all.
+- Use `single<Interface> { ConcreteImpl() }` for singletons when an interface
+  is the useful binding key.
+- Prefer lazy `inject<T>()` inside class bodies.
+- Use eager `get<T>()` in companion objects or top-level contexts only when the
+  current pattern requires it.
 
-```kotlin
-// Lazy delegate — preferred inside class bodies
-private val dialogueManager by inject<DialogueManager>()
+### Story And Dialogue
 
-// Eager get — use in companion objects or top-level contexts
-val spriteSheet = get<PlayerCharacterSpriteSheet>()
+- Game scenes are `Story.Beat<GameState>` implementations.
+- Beats declare `shouldBePlayed(state)` or `shouldBeSpawned(state)` and run
+  content through suspending `play()` or `spawn()` coroutines.
+- Dialogue uses the dialogue DSL through `dialogueManager.startDialogue(...)`.
+- Use Arrow `awaitAll { async { ... } }` for parallel asset loading.
+
+## Workflow Overrides
+
+- Treat `SandboxLauncher` as the main development entrypoint for live
+  iteration.
+- Treat `MainLauncher` as incomplete while `GameEntrypoint.run()` remains
+  `TODO()`.
+- Treat preview tests as visual tooling, not headless unit tests.
+- Use `TODO()` for visible unimplemented stubs; do not replace missing behavior
+  with silent no-ops.
+
+## Build, Run, And Validation
+
+Run commands from `high-school-story/`.
+On Windows use `gradlew.bat`; on Unix use `./gradlew`.
+Use Java 17. The repository configures Gradle JVM toolchains accordingly.
+Ensure the `engine/` Git submodule is available before building.
+
+```bash
+./gradlew :lwjgl3:run -PmainClass=pro.piechowski.highschoolstory.game.lwjgl3.SandboxLauncher
+./gradlew :lwjgl3:run -PmainClass=pro.piechowski.highschoolstory.game.lwjgl3.MainLauncher
+./gradlew test
+./gradlew :lwjgl3:test --tests "pro.piechowski.highschoolstory.character.player.PlayerCharacterPreview.preview"
+./gradlew ktlintCheck
+./gradlew ktlintFormat
 ```
 
-- DI modules live in `Module.kt` files: one per gameplay module (e.g., `CharacterModule`, `DialogueModule`) plus the root `highSchoolStoryModule` that includes them all.
-- Use `single<Interface> { ConcreteImpl() }` for singletons; prefer interfaces as the binding key.
+Validation expectations:
 
-### Story / Beat System
+- Run `./gradlew ktlintFormat` before submitting formatting-sensitive changes.
+- Run `./gradlew ktlintCheck` and `./gradlew test` when practical before
+  publishing.
+- Run a specific preview test for visual game-object or scene work.
+- If no executable check applies, state that clearly in the handoff.
 
-Game scenes are `Story.Beat<GameState>` implementations. A beat declares `shouldBePlayed(state)` / `shouldBeSpawned(state)` and runs content in the suspending `play()` / `spawn()` coroutines.
+## Conventions
 
-```kotlin
-class RoadToLakeview private constructor(val bus: Bus) : Story.Beat<GameState> {
-    override fun shouldBePlayed(state: GameState): Boolean = true
-    override suspend fun play() = with(world) { /* … */ }
+- Use 4 spaces for Kotlin and Java; use 2 spaces for Gradle files.
+- Use LF line endings, UTF-8 encoding, final newlines, and trimmed trailing
+  whitespace.
+- Do not use wildcard imports.
+- Keep imports alphabetically ordered.
+- Treat `.editorconfig` at the repository root as the authoritative style
+  source.
+- Prefer expression bodies for single-expression Kotlin functions and
+  properties.
+- Use trailing lambdas outside parentheses and named arguments for complex
+  construction.
+- Use `context(...)` and the globally opted-in experimental Kotlin APIs where
+  they match existing patterns.
+- Let exceptions propagate through coroutines unless the local code has a
+  clearer error contract.
 
-    companion object : Story.Beat.Definition<GameState, RoadToLakeview> {
-        context(ecc: EntityComponentContext)
-        override suspend fun invoke(): RoadToLakeview { … }
-        override fun shouldBeSpawned(state: GameState): Boolean = mapManager.currentMap is Road
-    }
-}
-```
+Experimental APIs are globally opted in through `build.gradle.kts` and do not
+require per-file opt-in annotations unless the local compiler still requires
+one:
 
-### Dialogue DSL
+| API | Usage |
+|---|---|
+| `kotlin.ExperimentalContextParameters` | `context(ecc: EntityCreateContext)` on functions and classes |
+| `kotlinx.coroutines.ExperimentalCoroutinesApi` | coroutine internals |
+| `kotlin.time.ExperimentalTime` | `Duration`, `.seconds`, `.s` extension values |
+| `kotlin.ExperimentalUnsignedTypes` | unsigned integer types |
+| `arrow.fx.coroutines.await.ExperimentalAwaitAllApi` | `awaitAll { async { ... } }` for parallel loading |
+| `org.koin.core.annotation.KoinInternalApi` | Koin DI internals |
 
-```kotlin
-dialogueManager.startDialogue(
-    dialogue {
-        playerCharacter.says("Some line.")
-        wait(2.seconds)
-        npcCharacter.says("Another line.")
-    }
-).await()
-```
+Naming conventions:
 
-### Async / Parallel Loading (Arrow)
+| Element | Convention | Example |
+|---|---|---|
+| Packages | lowercase, dot-separated | `pro.piechowski.highschoolstory.character.player` |
+| Classes and interfaces | PascalCase | `PlayerCharacter` |
+| GameObject interfaces | PascalCase plus `@GameObject` | `@GameObject interface Bus : Visual, Spatial, Kinetic` |
+| Koin modules | `val <Feature>Module` | `CharacterModule` |
+| Properties and variables | camelCase | `playerCharacter` |
+| Constants | SCREAMING_SNAKE_CASE | `BusColor.YELLOW` |
+| Suspend factory functions | `operator fun invoke(...)` | `PlayerCharacter("First", "Last")` |
 
-Use `awaitAll { async { … } }` from Arrow for parallel asset loading:
+## Runtime Or Deployment Notes
 
-```kotlin
-suspend operator fun invoke() = awaitAll {
-    val textures = async { Textures() }
-    val maps = async { Maps() }
-    Assets(textures.await(), maps.await())
-}
-```
+- The desktop run task uses `assets/` as its working directory.
+- Preview tests in `lwjgl3/src/test/` open a live LibGDX window and do not
+  assert headless correctness.
+- There are no traditional headless unit tests in the game layer at this time.
+- Always pass the Koin DI module, such as `highSchoolStoryModule`, to
+  `preview(...)`.
+- Load assets before spawning game objects in preview tests.
+- Current implemented gameplay includes player-character spawning, controllable
+  sandbox ownership, character and bus game objects, town and road Tiled maps,
+  dialogue UI wiring, and the `RoadToLakeview` intro beat preview.
 
-## Error Handling
-
-- Let exceptions propagate through coroutines; there is no explicit try/catch convention in the game layer.
-- Use Arrow's structured `awaitAll` for parallel coroutines to get proper cancellation and error propagation.
-- Use `TODO()` as a placeholder for unimplemented stubs during development — do not leave silent no-ops.
-
-## Preview Tests
-
-Preview tests in `lwjgl3/src/test/` open a live LibGDX window. They use JUnit 5 (`@Test`) but are purely visual — they do not assert anything.
-
-```kotlin
-class PlayerCharacterPreview {
-    @Test
-    fun preview() {
-        preview(highSchoolStoryModule) {
-            get<AssetsLoader<Assets>>().load()
-            PlayerCharacter("Preview", "Character")
-        }
-    }
-}
-```
-
-- Always pass the Koin DI module (`highSchoolStoryModule`) to `preview(...)`.
-- Load assets before spawning game objects.
-- Run a specific preview: `./gradlew :lwjgl3:test --tests "<FullyQualifiedClass>.<methodName>"`
-
-## Key Technologies
+Technology baseline:
 
 | Library | Role |
 |---|---|
 | LibGDX 1.13.1 | Rendering backend |
 | KTX 1.13.1-rc1 | Kotlin extensions for LibGDX |
-| Fleks 2.11 | Entity-Component-System |
+| Fleks 2.11 | Entity Component System |
 | Koin 4.0.3 | Dependency injection |
-| Box2D (via LibGDX) | Physics |
-| KtxAsync / Kotlin Coroutines 1.10.2 | Async game logic |
+| Box2D through LibGDX | Physics |
+| KtxAsync and Kotlin Coroutines 1.10.2 | Async game logic |
 | Arrow 2.2.0 | `awaitAll` parallel coroutines |
-| Hoplite 2.9.0 | YAML config (`core/src/main/resources/config.yml`) |
+| Hoplite 2.9.0 | YAML config in `core/src/main/resources/config.yml` |
 | KSP 2.2.20-2.0.4 | `@GameObject` annotation processing |
-| JUnit 5.13.4 | Test runner (JUnit Platform) |
+| JUnit 5.13.4 | Preview test runner |
 
 ## Quality Gates
 
-### Before Commit
+- Confirm changed files match this repository's scope.
+- Confirm documentation and implementation agree.
+- Confirm internal links and file references remain correct.
+- Confirm the `engine/` submodule is available before build verification.
+- Review the diff for accidental generated output, hidden artifacts, local
+  state, and scope creep.
 
-- Check that changed files match the intended scope.
-- Keep documentation content in English and consistent with the current repository contract.
-- Confirm internal links and references are correct.
-- Confirm there are no accidental files or hidden artifacts.
+## References
 
-### Before Push
-
-- Confirm `git status` is clean except for intended changes.
-- Run relevant workspace checks where practical:
-  - `./gradlew ktlintCheck`
-  - `./gradlew test`
-- If executable validation is skipped, state that clearly in the handoff.
-
-<CRITICAL_INSTRUCTION>
-
-## BACKLOG WORKFLOW INSTRUCTIONS
-
-This project uses Backlog.md MCP for all task and project management activities.
-
-**CRITICAL GUIDANCE**
-
-- If your client supports MCP resources, read `backlog://workflow/overview` to understand when and how to use Backlog for this project.
-- If your client only supports tools or the above request fails, call `backlog.get_backlog_instructions()` to load the tool-oriented overview. Use the `instruction` selector when you need `task-creation`, `task-execution`, or `task-finalization`.
-
-- **First time working here?** Read the overview resource IMMEDIATELY to learn the workflow
-- **Already familiar?** You should have the overview cached ("## Backlog.md Overview (MCP)")
-- **When to read it**: BEFORE creating tasks, or when you're unsure whether to track work
-
-These guides cover:
-- Decision framework for when to create tasks
-- Search-first workflow to avoid duplicates
-- Links to detailed guides for task creation, execution, and finalization
-- MCP tools reference
-
-You MUST read the overview resource to understand the complete workflow. The information is NOT summarized here.
-
-</CRITICAL_INSTRUCTION>
-
-<!-- BACKLOG.MD MCP GUIDELINES END -->
+- `README.md` - repository overview.
+- `docs/product/` - product intent.
+- `docs/design/` - gameplay system design.
+- `docs/narrative/` - authored scenes.
+- `engine/` - KGE composite build.
