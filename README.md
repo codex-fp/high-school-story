@@ -1,68 +1,96 @@
 # High School Story
 
-High School Story is a Kotlin/JVM social simulation game where the player creates a high school student and guides them through school years, relationships, lessons, activities, and exams.
+High School Story is a Kotlin/JVM school-life social simulation game where the
+player creates a high school student and guides them through routine, lessons,
+relationships, activities, and exams.
 
-The game is built on Kotlin Game Engine 2D through the `engine/` Gradle composite build.
+The game is built on Kotlin Game Engine 2D through the `engine/` Gradle
+composite build.
 
-## Product Shape
+## What Is This?
 
-- Cozy-leaning, lightly demanding school-life sim built around limited time and school routine.
-- MVP direction is one playable semester with a 12-week rhythm.
-- Core loop: dormitory morning, weekday school block, afternoon free time, dormitory evening, and sleep.
-- Intended systems include 15-minute time, lessons, travel pressure, relationships, condition management, grades, and a semester exam.
-- MVP locations are documented as dormitory, school, district, shop, and park.
+High School Story is a cozy-leaning, lightly demanding social simulation game.
+The intended player experience is a readable school routine where time is
+limited, school attendance is central, and everyday choices shape a personal
+semester story.
 
-## Current Implementation Baseline
+Current MVP direction:
 
-- `SandboxLauncher` is the current development entrypoint for interactive iteration.
-- `MainLauncher` exists, but the game entrypoint in `core` is still a `TODO()`, so the full game flow is not implemented yet.
-- `lwjgl3/src/test/` contains visual preview tests that open a live LibGDX window instead of running as headless assertions.
-- Current implemented surface includes player-character spawning, player ownership for input, character and bus game objects, town and road Tiled maps, dialogue UI wiring, and the `RoadToLakeview` intro beat preview.
+- One playable semester.
+- A `12`-week school rhythm.
+- A daily loop of dormitory morning, weekday school block, afternoon free time,
+  dormitory evening, and sleep.
+- Systems for `15-minute` time, travel pressure, lessons, condition,
+  relationships, grades, and a semester exam.
+- MVP locations: `dormitory`, `school`, `district`, `shop`, and `park`.
 
 ## Repository Boundary
 
-- `core/` owns platform-independent game logic.
-- `lwjgl3/` owns the desktop launcher and visual preview tests.
-- `engine/` is the included Kotlin Game Engine build used by the game.
-- `docs/` is the design and product documentation vault.
+This repository owns the game layer:
 
-## Architecture Snapshot
+- Game-specific logic, scenes, maps, dialogue, assets, and authored content.
+- Product and gameplay design contracts for the High School Story MVP.
+- Desktop launchers, sandbox iteration, and visual preview tests.
 
-- The game layer is Kotlin-first and runs on JVM 17.
-- Runtime composition uses Koin dependency injection through `highSchoolStoryModule`.
-- World state and gameplay objects are built on the KGE + Fleks ECS stack.
-- Story scenes are implemented as `Story.Beat<GameState>` coroutines.
-- Assets and configuration are loaded from the repository, with runtime configuration in `core/src/main/resources/config.yml`.
+This repository does not own reusable Kotlin Game Engine behavior. Engine
+architecture and reusable implementation rules belong in `engine/`.
 
-## Start Here
+## Quick Start
 
-1. Read [AGENTS.md](AGENTS.md) for coding-agent guidance, architecture rules, and validation commands.
-2. Read [docs/product/README.md](docs/product/README.md) for product-facing intent and MVP scope.
-3. Read [docs/design/README.md](docs/design/README.md) for system-level game design.
-4. Read [docs/narrative/README.md](docs/narrative/README.md) for implementation-ready story content.
-
-## Common Commands
-
-Use the Gradle wrapper from the repository root.
+Use Java 17 and initialize the `engine/` submodule before building.
 
 ```bash
 ./gradlew :lwjgl3:run -PmainClass=pro.piechowski.highschoolstory.game.lwjgl3.SandboxLauncher
-./gradlew :lwjgl3:run -PmainClass=pro.piechowski.highschoolstory.game.lwjgl3.MainLauncher
 ./gradlew test
 ./gradlew ktlintCheck
-./gradlew ktlintFormat
 ```
 
 On Windows, use `gradlew.bat` with the same tasks.
 
-## Setup Notes
+## Current Status
 
-- Initialize the `engine/` Git submodule before building if it is not present locally.
-- Use Java 17. Gradle toolchains are configured in the build.
-- Assets are loaded from the repository `assets/` directory; the desktop run task uses that directory as its working directory.
+- `SandboxLauncher` is the current development entrypoint for interactive
+  iteration.
+- `MainLauncher` exists, but `GameEntrypoint.run()` is still `TODO()`.
+- Visual preview tests in `lwjgl3/src/test/` open a live LibGDX window and are
+  not headless unit tests.
+- Current implemented surface includes player-character spawning, player input
+  ownership, character and bus game objects, town and road Tiled maps, dialogue
+  UI wiring, and the `RoadToLakeview` intro beat preview.
+
+## High-Level Architecture
+
+- `core/` contains platform-independent game logic under
+  `pro.piechowski.highschoolstory`.
+- `lwjgl3/` contains desktop launchers and live preview tests.
+- `assets/` contains runtime assets and is the desktop run working directory.
+- `docs/narrative/` contains authored story content and should remain narrative
+  focused.
+- `engine/` is a Git submodule and included Gradle build for Kotlin Game Engine
+  2D.
+
+Read [ARCHITECTURE.md](ARCHITECTURE.md) for the game-layer architecture and
+`engine/ARCHITECTURE.md` for reusable engine architecture.
+
+## Documentation Map
+
+- [AGENTS.md](AGENTS.md) - AI operational contract for this game repository.
+- [ARCHITECTURE.md](ARCHITECTURE.md) - game-layer architecture and boundaries.
+- [DESIGN.md](DESIGN.md) - product and gameplay design contract for the MVP.
+- [STYLEGUIDE.md](STYLEGUIDE.md) - game-layer coding and documentation
+  conventions.
+- [docs/narrative/README.md](docs/narrative/README.md) - narrative content
+  index.
+- [engine/README.md](engine/README.md) - Kotlin Game Engine overview.
+- [engine/ARCHITECTURE.md](engine/ARCHITECTURE.md) - reusable KGE architecture.
+- [engine/STYLEGUIDE.md](engine/STYLEGUIDE.md) - reusable KGE implementation
+  conventions.
 
 ## Documentation Rules
 
 - Keep documentation in English.
-- Keep product intent in `docs/product`, gameplay systems in `docs/design`, and authored scenes in `docs/narrative`.
-- Update the existing source of truth when a decision changes instead of adding parallel notes.
+- Keep product and gameplay design for the game in `DESIGN.md`.
+- Keep game architecture in `ARCHITECTURE.md`.
+- Keep reusable engine architecture in `engine/ARCHITECTURE.md`.
+- Keep authored scenes and story text in `docs/narrative/`.
+- Update the owning document instead of adding parallel notes.
