@@ -16,7 +16,8 @@ The game layer owns:
 - Game-specific Koin modules, assets, maps, sprites, scenes, dialogue, and story
   beats.
 - Desktop launcher wiring and High School Story visual preview tests.
-- Product and gameplay design contracts in `DESIGN.md`.
+- Product and gameplay design contracts in `DESIGN.md` and topic-specific design
+  documentation in `docs/design/`.
 - Authored story content in `docs/narrative/`.
 
 The engine layer owns:
@@ -36,6 +37,7 @@ Game code may depend on engine code. Engine code must not depend on this game.
 - `lwjgl3/` - desktop launchers, distribution packaging, and live visual
   preview tests.
 - `assets/` - runtime assets used as the desktop run working directory.
+- `docs/design/` - topic-specific game design documentation.
 - `docs/narrative/` - authored story content and narrative index.
 - `engine/` - mani-managed checkout and included Gradle build for Kotlin Game
   Engine 2D.
@@ -104,18 +106,21 @@ objects.
 
 - The game follows engine architecture instead of redefining it locally, because
   KGE owns reusable runtime, ECS, and game-object patterns.
-- Product and gameplay design live in `DESIGN.md`, because they are game
-  contracts rather than engine architecture.
+- Product and gameplay design overview lives in `DESIGN.md`, while detailed
+  topic-specific design documentation lives in `docs/design/`, because both are
+  game contracts rather than engine architecture.
 - Narrative content remains in `docs/narrative/`, because authored story files
   benefit from a dedicated content index.
-- `docs/product/`, `docs/design/`, and `docs/development/` are retired in favor
-  of conventional root documentation.
+- `docs/product/` and `docs/development/` remain retired in favor of
+  conventional root documentation and the approved `docs/design/` and
+  `docs/narrative/` spaces.
 
 ## References
 
 - [README.md](README.md)
 - [DESIGN.md](DESIGN.md)
 - [STYLEGUIDE.md](STYLEGUIDE.md)
+- [docs/design/README.md](docs/design/README.md)
 - [docs/narrative/README.md](docs/narrative/README.md)
 - [engine/ARCHITECTURE.md](engine/ARCHITECTURE.md)
 - [engine/STYLEGUIDE.md](engine/STYLEGUIDE.md)

@@ -10,13 +10,14 @@ files and adds only game-local rules.
 
 - Repository/workspace root:
   `C:\Users\fpiec\IdeaProjects\codex-fp\high-school-story`
-- Primary specification source(s): `DESIGN.md`, `ARCHITECTURE.md`,
-  `docs/narrative/`
+- Primary specification source(s): `DESIGN.md`, `docs/design/`,
+  `ARCHITECTURE.md`, `docs/narrative/`
 - Primary implementation source(s): `core/`, `lwjgl3/`, `assets/`
 - Primary verification target(s): local Gradle test tasks, local desktop run via
   `SandboxLauncher`, local live preview tests in `lwjgl3/src/test/`
 - Primary documentation target(s): `README.md`, `AGENTS.md`,
-  `ARCHITECTURE.md`, `DESIGN.md`, `STYLEGUIDE.md`, `docs/narrative/`
+  `ARCHITECTURE.md`, `DESIGN.md`, `STYLEGUIDE.md`, `docs/design/`,
+  `docs/narrative/`
 - Task tracking system/source: `backlog.md` CLI for git-repo task tracking,
   configured by `.backlog/config.yml`
 - Publish target: git remote `origin`
@@ -30,12 +31,14 @@ files and adds only game-local rules.
   to pushing code to remote git.
 
 - Authoritative contract files: `AGENTS.md`, `README.md`, `ARCHITECTURE.md`,
-  `DESIGN.md`, `STYLEGUIDE.md`, `docs/narrative/README.md`, `docs/narrative/`,
-  `engine/ARCHITECTURE.md`, `engine/STYLEGUIDE.md`
+  `DESIGN.md`, `STYLEGUIDE.md`, `docs/design/README.md`, `docs/design/`,
+  `docs/narrative/README.md`, `docs/narrative/`, `engine/ARCHITECTURE.md`,
+  `engine/STYLEGUIDE.md`
 - If code and docs disagree, trust: the owning documentation contract, then
   update implementation or documentation so they match in the same change
 - If multiple sources disagree, resolve in this order: direct user instruction,
-  this `AGENTS.md`, `DESIGN.md`, `ARCHITECTURE.md`, `STYLEGUIDE.md`,
+  this `AGENTS.md`, `DESIGN.md`, `docs/design/README.md`, design files in
+  `docs/design/`, `ARCHITECTURE.md`, `STYLEGUIDE.md`,
   `docs/narrative/README.md`, narrative files in `docs/narrative/`, `README.md`,
   implementation code, then parent or engine documentation when the question is
   game-local
@@ -67,7 +70,8 @@ files and adds only game-local rules.
     code is published to `origin`
 - Required task states: `To Do`, `In Progress`, `Done`
 - Acceptance criteria source: the relevant `backlog.md` task plus the owning
-  specification in `DESIGN.md`, `ARCHITECTURE.md`, or `docs/narrative/`
+  specification in `DESIGN.md`, `docs/design/`, `ARCHITECTURE.md`, or
+  `docs/narrative/`
 - If no existing task is found, create task in: the `backlog.md` CLI tracker for
   this repository
 
@@ -116,11 +120,11 @@ files and adds only game-local rules.
 
 ## 4) Documentation targets
 
-- Specification documentation target: `DESIGN.md`, `ARCHITECTURE.md`,
-  `docs/narrative/`
-- Implementation/change documentation target: update the owning root document in
-  place: `README.md`, `ARCHITECTURE.md`, `DESIGN.md`, `STYLEGUIDE.md`, or
-  `docs/narrative/`
+- Specification documentation target: `DESIGN.md`, `docs/design/`,
+  `ARCHITECTURE.md`, `docs/narrative/`
+- Implementation/change documentation target: update the owning document in
+  place: `README.md`, `ARCHITECTURE.md`, `DESIGN.md`, `STYLEGUIDE.md`,
+  `docs/design/`, or `docs/narrative/`
 - Verification evidence target: the active `backlog.md` task when used,
   otherwise the final handoff summary
 - Release/change log target: Not applicable: this repository does not maintain a
@@ -131,8 +135,9 @@ files and adds only game-local rules.
 - Stale documentation handling: replace or remove stale guidance in the owning
   document; do not leave parallel notes that conflict with the current contract
 
-- ADR/design-record target: Not applicable: the repository uses conventional
-  root documentation instead of a separate ADR directory
+- ADR target: Not applicable: this repository does not maintain a separate ADR
+  directory. Topic-specific game design records may live under `docs/design/`
+  when they do not belong in the root `DESIGN.md` overview.
 - Operator/runbook target: Not applicable: this repository has no deployed
   runtime or operator runbook set
 
@@ -225,10 +230,14 @@ files and adds only game-local rules.
 - Treat `MainLauncher` as incomplete until the full game flow is implemented.
 - Treat preview tests as visual tooling that opens a live LibGDX window, not as
   headless unit tests.
-- Keep game-specific guidance in root conventional documentation files.
+- Keep game-specific guidance in root conventional documentation files unless a
+  more specific approved directory applies, such as `docs/design/` for design
+  topics or `docs/narrative/` for authored narrative content.
+- Keep game design overview and cross-cutting product contracts in `DESIGN.md`;
+  keep topic-specific design documentation in `docs/design/`.
 - Keep narrative content in `docs/narrative/`.
-- Do not recreate `docs/product/`, `docs/design/`, or `docs/development/`
-  unless a future documentation contract explicitly reintroduces them.
+- Do not recreate `docs/product/` or `docs/development/` unless a future
+  documentation contract explicitly reintroduces them.
 - Keep documentation, code-facing text, comments, commit messages, and
   configuration in English.
 - Follow `STYLEGUIDE.md` for game-layer conventions.
@@ -259,8 +268,8 @@ files and adds only game-local rules.
 - Read `README.md` for onboarding and project status.
 - Read `ARCHITECTURE.md` before changing game-layer boundaries, modules,
   runtime composition, launchers, or dependency rules.
-- Read `DESIGN.md` before changing product scope, gameplay systems, MVP
-  behavior, pacing, or authored-system assumptions.
+- Read `DESIGN.md` and `docs/design/README.md` before changing product scope,
+  gameplay systems, MVP behavior, pacing, or authored-system assumptions.
 - Read `STYLEGUIDE.md` before changing naming, formatting, package structure,
   Kotlin idioms, preview tests, or local conventions.
 - Read `docs/narrative/README.md` before changing authored narrative content.

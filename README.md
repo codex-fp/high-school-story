@@ -82,6 +82,8 @@ Read [ARCHITECTURE.md](ARCHITECTURE.md) for the game-layer architecture and
 - [AGENTS.md](AGENTS.md) - AI operational contract for this game repository.
 - [ARCHITECTURE.md](ARCHITECTURE.md) - game-layer architecture and boundaries.
 - [DESIGN.md](DESIGN.md) - product and gameplay design contract for the MVP.
+- [docs/design/README.md](docs/design/README.md) - topic-specific game design
+  documentation index and scope.
 - [STYLEGUIDE.md](STYLEGUIDE.md) - game-layer coding and documentation
   conventions.
 - [docs/narrative/README.md](docs/narrative/README.md) - narrative content
@@ -94,7 +96,8 @@ Read [ARCHITECTURE.md](ARCHITECTURE.md) for the game-layer architecture and
 ## Documentation Rules
 
 - Keep documentation in English.
-- Keep product and gameplay design for the game in `DESIGN.md`.
+- Keep the product and gameplay design overview for the game in `DESIGN.md`.
+- Keep topic-specific game design documentation in `docs/design/`.
 - Keep game architecture in `ARCHITECTURE.md`.
 - Keep reusable engine architecture in `engine/ARCHITECTURE.md`.
 - Keep authored scenes and story text in `docs/narrative/`.
