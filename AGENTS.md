@@ -105,9 +105,10 @@ files and adds only game-local rules.
   changes create a direct conflict, or when the required documentation owner is
   unclear
 
-- OS/runtime prerequisites: Java 17, initialized `engine/` submodule, Gradle via
-  `./gradlew` on Unix or `gradlew.bat` on Windows
-- Local setup shortcut: `git submodule update --init --recursive && ./gradlew test`
+- OS/runtime prerequisites: Java 17, installed `mani`, synced `engine/`
+  checkout via `mani sync`, Gradle via `./gradlew` on Unix or `gradlew.bat` on
+  Windows
+- Local setup shortcut: `mani sync && ./gradlew test`
 - Known expensive checks to avoid by default:
   `./gradlew :lwjgl3:run -PmainClass=pro.piechowski.highschoolstory.game.lwjgl3.SandboxLauncher`
   and live preview tests in `lwjgl3/src/test/`; run them when changing visual
@@ -182,9 +183,9 @@ files and adds only game-local rules.
   `lwjgl3/build/distributions/` for distribution archives and scripts
 - Artifact identity/version source: `projectVersion` in `gradle.properties`
   combined with archive naming in `lwjgl3/build.gradle.kts`
-- Packaging prerequisites: Java 17, initialized `engine/` submodule, successful
-  Gradle build environment, and any platform packaging assets already present in
-  `lwjgl3/icons/`
+- Packaging prerequisites: Java 17, installed `mani`, synced `engine/`
+  checkout via `mani sync`, successful Gradle build environment, and any
+  platform packaging assets already present in `lwjgl3/icons/`
 - Evidence required: packaging command run, resulting artifact file path, and
   artifact filename including version
 
@@ -217,8 +218,8 @@ files and adds only game-local rules.
 
 ## Game-Local Rules
 
-- Treat `engine/` as a Git submodule and separate Gradle build included through
-  `includeBuild("./engine")`.
+- Treat `engine/` as a mani-managed checkout and separate Gradle build included
+  through `includeBuild("./engine")`.
 - Treat `SandboxLauncher` as the main development entrypoint while
   `GameEntrypoint.run()` remains `TODO()`.
 - Treat `MainLauncher` as incomplete until the full game flow is implemented.

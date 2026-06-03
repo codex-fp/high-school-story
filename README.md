@@ -37,9 +37,14 @@ architecture and reusable implementation rules belong in `engine/`.
 
 ## Quick Start
 
-Use Java 17 and initialize the `engine/` submodule before building.
+Use Java 17, install [`mani`](https://github.com/alajmo/mani), and sync the
+managed `engine/` checkout before building.
+
+If you previously initialized `engine/` as a submodule in an older clone,
+remove the old submodule checkout metadata locally before the first `mani sync`.
 
 ```bash
+mani sync
 ./gradlew :lwjgl3:run -PmainClass=pro.piechowski.highschoolstory.game.lwjgl3.SandboxLauncher
 ./gradlew test
 ./gradlew ktlintCheck
@@ -66,8 +71,8 @@ On Windows, use `gradlew.bat` with the same tasks.
 - `assets/` contains runtime assets and is the desktop run working directory.
 - `docs/narrative/` contains authored story content and should remain narrative
   focused.
-- `engine/` is a Git submodule and included Gradle build for Kotlin Game Engine
-  2D.
+- `engine/` is a mani-managed checkout and included Gradle build for Kotlin Game
+  Engine 2D.
 
 Read [ARCHITECTURE.md](ARCHITECTURE.md) for the game-layer architecture and
 `engine/ARCHITECTURE.md` for reusable engine architecture.

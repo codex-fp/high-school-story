@@ -37,7 +37,8 @@ Game code may depend on engine code. Engine code must not depend on this game.
   preview tests.
 - `assets/` - runtime assets used as the desktop run working directory.
 - `docs/narrative/` - authored story content and narrative index.
-- `engine/` - Git submodule and included Gradle build for Kotlin Game Engine 2D.
+- `engine/` - mani-managed checkout and included Gradle build for Kotlin Game
+  Engine 2D.
 
 ## Runtime Composition
 

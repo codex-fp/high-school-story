@@ -1,0 +1,11 @@
+sync_gitignore: true
+
+projects:
+  engine:
+    path: engine
+    url: https://github.com/fpiechowski/kotlin-game-engine
+    branch: master
+    desc: Kotlin Game Engine 2D Gradle composite build
+    tags:
+      - engine
+      - gradle
