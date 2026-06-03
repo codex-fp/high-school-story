@@ -2,7 +2,7 @@ project_name: "High School Story"
 default_status: "To Do"
 statuses: ["To Do", "In Progress", "Done"]
 labels: []
-definition_of_done: ["Implemented", "Tested", "Documented", "Reviewed", "Released"]
+definition_of_done: ["Specification or owning documentation is updated when behavior changes", "Implementation matches the accepted task scope", "Required Gradle checks pass", "Relevant visual preview or launcher scenario is verified when applicable", "Verification evidence records commands run", "Verification evidence records scenario steps", "Verification evidence records observed results", "Verification evidence records relevant logs or artifact notes", "Self-review is completed before handoff", "Final handoff references the HSS task ID and residual risks"]
 date_format: yyyy-mm-dd
 max_column_width: 20
 default_editor: "idea"
