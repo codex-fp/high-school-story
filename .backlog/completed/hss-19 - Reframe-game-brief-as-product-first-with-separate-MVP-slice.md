@@ -1,10 +1,10 @@
 ---
 id: HSS-19
 title: Reframe game brief as product-first with separate MVP slice
-status: In Progress
+status: Done
 assignee: []
 created_date: '2026-06-09 18:58'
-updated_date: '2026-06-09 19:03'
+updated_date: '2026-06-09 19:04'
 labels:
   - design
   - docs
@@ -58,7 +58,7 @@ Update the High School Story game brief so it describes the full three-year game
 ## Implementation Notes
 
 <!-- SECTION:NOTES:BEGIN -->
-Verification evidence: reviewed current brief/addendum/decision log against the completed brainstorming session; performed a self-review plus one targeted post-update review to confirm the brief now clearly separates the full-game promise from the MVP slice; promoted the product-first brief into docs/game-brief.md; updated docs/index.md and docs/project-overview.md to point at the durable brief; staged only the intended task, brainstorming artifact, brief files, and durable doc promotion files; excluded _bmad-output/gds-workflow-status.yaml as local workflow state.
+Verification evidence: reviewed current brief/addendum/decision log against the completed brainstorming session; performed a self-review plus one targeted post-update review to confirm the brief now clearly separates the full-game promise from the MVP slice; promoted the product-first brief into docs/game-brief.md; updated docs/index.md and docs/project-overview.md to point at the durable brief; staged only the intended task, brainstorming artifact, brief files, and durable doc promotion files; excluded _bmad-output/gds-workflow-status.yaml as local workflow state. Git history: committed docs(brief): HSS-19 reframe full-game brief and docs(brief): HSS-19 promote durable game brief, then pushed origin/master.
 <!-- SECTION:NOTES:END -->
 
 ## Final Summary
