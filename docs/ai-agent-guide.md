@@ -33,7 +33,13 @@ Before editing, read:
 - Use `.backlog/` as the local task source.
 - Required task states are `To Do`, `In Progress`, and `Done`.
 - Link implementation and verification evidence to the active task.
-- Branches and commits, when requested, should include the task ID.
+
+## Git Naming Conventions
+
+- Branch name format: `TASK-ID/short-description`.
+- PR title format: `TASK-ID Short description`.
+- Commit message format: Conventional Commits with the task ID at the start of the summary text, for example `type(scope): TASK-ID Short description`.
+- When branches, PRs, or commits are requested, include the active task ID using the formats above.
 
 ## Editing Boundaries
 

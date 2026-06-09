@@ -115,3 +115,9 @@ Globally opted-in APIs include `kotlin.ExperimentalContextParameters`,
   path, packaging, or narrative changes.
 - Keep documentation and code-facing text in English.
 - Record verification evidence in the active `HSS-<number>` task.
+
+## Git Workflow Conventions
+
+- Branch name format: `TASK-ID/short-description`.
+- PR title format: `TASK-ID Short description`.
+- Commit message format: Conventional Commits with the task ID at the start of the summary text, for example `type(scope): TASK-ID Short description`.

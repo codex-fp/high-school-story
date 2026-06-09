@@ -214,6 +214,10 @@ prevent drift from the game, engine, and documentation contracts.
 - `MainLauncher` is wired but incomplete until the full game path exists.
 - Packaging tasks are local only: `:lwjgl3:jar`, `:lwjgl3:jarWin`,
   `:lwjgl3:jarLinux`, `:lwjgl3:jarMac`, and `:lwjgl3:dist`.
+- Branch names use `TASK-ID/short-description`.
+- PR titles use `TASK-ID Short description`.
+- Commit messages use Conventional Commits with the task ID at the start of the
+  summary text, for example `type(scope): TASK-ID Short description`.
 - Do not push to remote git, mutate GitHub state, edit secrets, or alter files
   outside the workspace without explicit user approval.
 
