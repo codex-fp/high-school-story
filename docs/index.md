@@ -15,13 +15,14 @@ this documentation set.
 | Runtime backend | LibGDX LWJGL3 desktop |
 | Primary code language | Kotlin |
 | Task tracker | `backlog.md` under `.backlog/` |
-| Active documentation promotion task | `HSS-17` |
+| Active documentation promotion task | `HSS-19` |
 
 ## Documentation Map
 
 | Document | Purpose |
 |---|---|
 | [project-overview.md](project-overview.md) | Product summary, repository ownership, current status, and BMAD conventions. |
+| [game-brief.md](game-brief.md) | Durable product-level game brief and canonical full-game product promise. |
 | [architecture.md](architecture.md) | Game-layer architecture, runtime composition, engine boundary, dependencies, and risks. |
 | [game-design.md](game-design.md) | Durable MVP-first Game Design Document and canonical gameplay design source of truth. |
 | [development-guide.md](development-guide.md) | Setup, commands, verification, packaging, workflow, and style conventions. |

@@ -2,14 +2,15 @@
 
 ## Product Summary
 
-High School Story is a Kotlin/JVM school-life social simulation game. The player
-creates a high school student and guides them through routine, lessons,
-relationships, activities, travel, condition management, grades, and semester
-outcomes.
+High School Story is a Kotlin/JVM school-life social simulation game. The full
+product promise is a three-year high school journey from the start of Year 1 to
+graduation at the end of Year 3. The player creates a high school student and
+guides them through routine, lessons, relationships, activities, travel,
+condition management, grades, seasonal school life, and long-form outcomes.
 
 The intended experience is grounded, nostalgic, cozy-leaning, and lightly
-demanding. Time matters, relationships matter, school pressure matters, and there
-should be no single correct way to live through the semester.
+demanding. Time matters, relationships matter, school pressure matters, and
+there should be no single correct way to live through high school.
 
 ## Repository Ownership
 
@@ -40,18 +41,24 @@ Engine 2D implementation and conventions belong in `engine/`.
 This project uses BMAD/GDS documentation conventions:
 
 - `docs/index.md` is the master documentation entrypoint.
+- `docs/game-brief.md` is the durable product-level brief and canonical full-game
+  promise.
+- `docs/game-design.md` is the durable MVP-first GDD and canonical gameplay
+  implementation design source.
 - `_bmad-output/project-context.md` is optimized for AI-agent context loading.
 - `.backlog/` stores task traceability with `HSS-<number>` IDs.
 - Root compatibility files point to the canonical BMAD-native documents.
 
 ## Current Product Status
 
-The project has a promoted MVP-first durable GDD in `docs/game-design.md`.
-Remaining design work is concentrated in subject framing, first classmate arc
-constraints, social profile categories, starting-profile tuning, academic failure
-thresholds, money pressure, and balancing assumptions. Implementation is still
-early and centered on engine integration, previews, game objects, map loading,
-and intro-beat wiring.
+The project has a promoted durable product brief in `docs/game-brief.md` and a
+promoted MVP-first durable GDD in `docs/game-design.md`. Remaining design work
+is concentrated in subject framing, first classmate arc constraints, social
+profile categories, starting-profile tuning, academic failure thresholds, money
+pressure, balancing assumptions, and the post-MVP path from the first semester
+slice to the full three-year product. Implementation is still early and centered
+on engine integration, previews, game objects, map loading, and intro-beat
+wiring.
 
 ## Current Risks
 
