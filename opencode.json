@@ -1,13 +1,5 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  "agent": {
-    "build": {
-      "disable": true
-    },
-    "plan": {
-      "disable": true
-    }
-  },
   "mcp": {
     "backlog": {
       "type": "local",
