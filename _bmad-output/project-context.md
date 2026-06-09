@@ -2,7 +2,7 @@
 project_name: 'High School Story'
 user_name: 'Filip'
 date: '2026-06-09'
-task_id: 'HSS-12'
+task_id: 'HSS-17'
 sections_completed:
   - technology_stack
   - critical_implementation_rules
@@ -12,6 +12,7 @@ sections_completed:
   - testing_rules
   - platform_build_rules
   - critical_dont_miss_rules
+  - promoted_gdd_rules
 existing_patterns_found: 8
 status: 'complete'
 rule_count: 86
@@ -123,16 +124,38 @@ prevent drift from the game, engine, and documentation contracts.
 ### Game Design Rules Agents Must Preserve
 
 - MVP is one playable `12`-week semester with `15-minute` time increments.
+- `docs/game-design.md` is the durable MVP-first GDD and canonical gameplay
+  design source of truth.
+- Core fantasy is Second-Chance Student Life: the player returns to high school
+  with clearer awareness, intention, and agency than real adolescence allowed.
 - Core weekday rhythm: dormitory morning, school block, afternoon freedom,
   dormitory evening, sleep.
 - Weekday starts at dormitory `06:00`; return to dormitory by `21:00`; sleep at
   `22:00`.
-- Standard lessons use `3` decision turns of `15` minutes each.
+- Standard lessons use `3` decision turns of `15` minutes each and lesson feel is
+  driven mainly by subject identity, not teacher behavior.
 - MVP locations are `dormitory`, `school`, `district`, `shop`, and `park`.
+- After-school discovery is place-first through compact locations with stable
+  identities and readable points of interest.
 - Relationship progress is player-facing descriptive stages, not raw numbers.
-- Condition stats are `energy`, `stress`, `mood`, `money`, and grades. Poor
-  condition should create friction and risk, not hard fail states or erased
+- Relationship rewards are memory-making first; systemic bonuses should remain
+  light or absent.
+- Known classmates expose discovered preferences, current location, and
+  availability through an in-world social media/profile layer.
+- MVP social scope is one fully supported classmate arc plus minimal teaser
+  support for the remaining classmates. Full vision gives every classmate a rich
+  arc.
+- Starting player profile uses direct interest/preference toggles plus academic
+  `1-10` point-buy attributes. These axes start independent.
+- Condition stats are `energy`, `stress`, and `mood`; `money` is a regular
+  secondary soft constraint; grades are separate academic standing.
+- Poor condition should create friction and risk, not hard fail states or erased
   progress.
+- Academic collapse is the one hard floor: fully neglecting school can fail the
+  semester after readable grade visibility and at most one explicit critical
+  warning.
+- Money baseline is weekly allowance. Abstract part-time work is an emergency
+  top-up and lifestyle tradeoff, not a content-rich subplot or default grind.
 - The game should feel cozy-leaning and lightly demanding: limited time matters,
   but one bad day should not ruin a run.
 
@@ -220,6 +243,9 @@ prevent drift from the game, engine, and documentation contracts.
 - No explicit performance budget is documented for the game. Agents should avoid
   inventing hard targets and should record any new budget in the owning design or
   architecture document first.
+- The promoted durable GDD is `docs/game-design.md`. Planning artifacts under
+  `_bmad-output/planning-artifacts/` are workflow history unless explicitly
+  promoted into `docs/`.
 
 ## Usage Guidelines
 
@@ -239,4 +265,4 @@ prevent drift from the game, engine, and documentation contracts.
 - Update it when stack versions, engine contracts, documentation structure, or
   implementation patterns change.
 - Remove rules that become stale, duplicated, or obvious from the current code.
-- Last updated: 2026-06-09 for `HSS-13`.
+- Last updated: 2026-06-09 for `HSS-17`.

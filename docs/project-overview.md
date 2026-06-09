@@ -46,10 +46,12 @@ This project uses BMAD/GDS documentation conventions:
 
 ## Current Product Status
 
-The project is vision-complete and close to MVP-design-complete. Remaining design
-work is concentrated in subject framing, first classmate arc constraints, and
-balancing assumptions. Implementation is still early and centered on engine
-integration, previews, game objects, map loading, and intro-beat wiring.
+The project has a promoted MVP-first durable GDD in `docs/game-design.md`.
+Remaining design work is concentrated in subject framing, first classmate arc
+constraints, social profile categories, starting-profile tuning, academic failure
+thresholds, money pressure, and balancing assumptions. Implementation is still
+early and centered on engine integration, previews, game objects, map loading,
+and intro-beat wiring.
 
 ## Current Risks
 

@@ -15,7 +15,7 @@ this documentation set.
 | Runtime backend | LibGDX LWJGL3 desktop |
 | Primary code language | Kotlin |
 | Task tracker | `backlog.md` under `.backlog/` |
-| Active migration task | `HSS-13` |
+| Active documentation promotion task | `HSS-17` |
 
 ## Documentation Map
 
@@ -23,7 +23,7 @@ this documentation set.
 |---|---|
 | [project-overview.md](project-overview.md) | Product summary, repository ownership, current status, and BMAD conventions. |
 | [architecture.md](architecture.md) | Game-layer architecture, runtime composition, engine boundary, dependencies, and risks. |
-| [game-design.md](game-design.md) | MVP product and gameplay design contract. |
+| [game-design.md](game-design.md) | Durable MVP-first Game Design Document and canonical gameplay design source of truth. |
 | [development-guide.md](development-guide.md) | Setup, commands, verification, packaging, workflow, and style conventions. |
 | [source-tree-analysis.md](source-tree-analysis.md) | Repository layout and critical path explanation. |
 | [component-inventory.md](component-inventory.md) | Implemented game objects, systems, assets, launchers, and previews. |
@@ -48,5 +48,7 @@ this documentation set.
   compatibility entrypoints only.
 - Update the owning document in this directory before or with behavior,
   architecture, workflow, command, path, packaging, or narrative changes.
+- Treat `_bmad-output/planning-artifacts/` as workflow history unless a planning
+  artifact is explicitly promoted into `docs/`.
 - Do not recreate old `docs/design/` or `docs/narrative/` folders unless the
   BMAD documentation contract is intentionally changed.
