@@ -169,3 +169,4 @@ nul
 **/resource-config.json
 /engine/
 /imgui.log
+/in-memoria.db
