@@ -1,0 +1,242 @@
+---
+project_name: 'High School Story'
+user_name: 'Filip'
+date: '2026-06-09'
+task_id: 'HSS-12'
+sections_completed:
+  - technology_stack
+  - critical_implementation_rules
+  - engine_specific_rules
+  - performance_rules
+  - code_organization_rules
+  - testing_rules
+  - platform_build_rules
+  - critical_dont_miss_rules
+existing_patterns_found: 8
+status: 'complete'
+rule_count: 86
+optimized_for_llm: true
+source_documents:
+  - README.md
+  - AGENTS.md
+  - ARCHITECTURE.md
+  - DESIGN.md
+  - STYLEGUIDE.md
+  - docs/index.md
+  - docs/project-overview.md
+  - docs/architecture.md
+  - docs/game-design.md
+  - docs/development-guide.md
+  - docs/source-tree-analysis.md
+  - docs/component-inventory.md
+  - docs/narrative-content.md
+  - docs/ai-agent-guide.md
+  - engine/README.md
+  - engine/AGENTS.md
+---
+
+# Project Context for AI Agents
+
+Critical implementation rules for AI agents working on High School Story. This
+file is optimized for LLM context and records the unobvious project rules that
+prevent drift from the game, engine, and documentation contracts.
+
+## Technology Stack & Versions
+
+- Game: Kotlin/JVM school-life social simulation built on Kotlin Game Engine 2D
+  through `includeBuild("./engine")`.
+- Runtime backend: LibGDX `1.13.1`, KTX `1.13.1-rc1`, LWJGL3 desktop backend.
+- Language and toolchain: Kotlin `2.2.20`, Java toolchain `17`, Gradle wrapper.
+- Engine architecture: code-centric KGE, Fleks ECS `2.11`, Koin `4.0.3`, KSP
+  `2.2.20-2.0.4` for `@GameObject` generation.
+- Async and data: Kotlin coroutines `1.10.2`, Arrow FX Coroutines `2.2.0`,
+  Hoplite `2.9.0` for `core/src/main/resources/config.yml`.
+- Testing and packaging: JUnit `5.13.4`, ktlint plugin catalog version `14.0.1`
+  with ktlint engine `1.8.0`, Construo `1.7.1`, project version `1.0.0`.
+
+## Critical Implementation Rules
+
+### Source Of Truth
+
+- Use this file first for agent execution context, then the active backlog task,
+  then the owning durable document for details.
+- `docs/project-overview.md` owns product summary and current status.
+- `docs/game-design.md` owns product scope and gameplay rules.
+- `docs/architecture.md` owns game-layer boundaries. `engine/_bmad-output/project-context.md`,
+  `engine/README.md`, and `engine/AGENTS.md` own reusable engine rules.
+- `docs/narrative-content.md` owns implementation-ready authored narrative
+  content.
+- If implementation and docs disagree, update the owning document and code in
+  the same change instead of adding a parallel note.
+
+### Repository Boundary
+
+- This repository owns game-specific code, scenes, maps, dialogue, assets,
+  desktop launchers, previews, and High School Story product/design contracts.
+- `engine/` is a mani-managed reusable KGE checkout. Do not introduce High
+  School Story assets, story, tuning, or packages into reusable engine code.
+- Game packages live under `pro.piechowski.highschoolstory`. Engine packages live
+  under `pro.piechowski.kge`.
+- Game code may depend on engine modules. Engine code must not depend on game
+  packages or product decisions.
+
+### Engine Consumption Rules
+
+- Treat Kotlin Game Engine as a separate reusable project with its own context at
+  `engine/_bmad-output/project-context.md`.
+- Keep this game context focused on High School Story implementation and content;
+  do not duplicate reusable KGE internals here.
+- Before changing `engine/`, switch to the engine context and use engine `KGE-<number>`
+  task traceability.
+- In the game layer, use KGE APIs according to engine docs and keep game-specific
+  composition in `highSchoolStoryModule` and game packages.
+- `SandboxLauncher` is the game development entrypoint. `MainLauncher` is
+  incomplete while `GameEntrypoint.run()` remains `TODO()`.
+
+### Story, Dialogue, And Game State
+
+- Implement playable scenes as `Story.Beat<GameState>` with a companion
+  `Story.Beat.Definition<GameState, BeatType>`.
+- Put beat gating in `shouldBePlayed(...)` and `shouldBeSpawned(...)`; do not
+  hide scene eligibility in unrelated launch or UI code.
+- Run scene content through suspending `play()` or `spawn()` coroutines. Let
+  coroutine exceptions propagate unless a local API has a clearer error contract.
+- Use `DialogueManager.startDialogue(...).await()` for dialogue sequences.
+- Set required `Calendar`, `Clock`, map, camera, and player state explicitly in
+  previewable scene beats.
+- Keep authored script text in English in `docs/narrative-content.md`. Existing Polish
+  placeholder dialogue in code should be treated as implementation drift unless
+  intentionally localized in a future contract.
+
+### Assets, Maps, And Runtime Files
+
+- Desktop run tasks use `assets/` as the working directory. Runtime asset paths
+  are relative to `assets/`.
+- Load required assets before spawning preview objects or scene content.
+- Use `AssetsLoader { Assets() }` and the project `Assets` aggregate for game
+  assets. Keep asset loading suspending and explicit.
+- Use Arrow `awaitAll { async { ... } }` for parallel asset loading when it
+  matches the existing `Assets` pattern.
+- Runtime configuration is loaded from `core/src/main/resources/config.yml` via
+  Hoplite `PropertySource.resource("/config.yml")`.
+
+### Game Design Rules Agents Must Preserve
+
+- MVP is one playable `12`-week semester with `15-minute` time increments.
+- Core weekday rhythm: dormitory morning, school block, afternoon freedom,
+  dormitory evening, sleep.
+- Weekday starts at dormitory `06:00`; return to dormitory by `21:00`; sleep at
+  `22:00`.
+- Standard lessons use `3` decision turns of `15` minutes each.
+- MVP locations are `dormitory`, `school`, `district`, `shop`, and `park`.
+- Relationship progress is player-facing descriptive stages, not raw numbers.
+- Condition stats are `energy`, `stress`, `mood`, `money`, and grades. Poor
+  condition should create friction and risk, not hard fail states or erased
+  progress.
+- The game should feel cozy-leaning and lightly demanding: limited time matters,
+  but one bad day should not ruin a run.
+
+### Code Organization Rules
+
+- Keep platform-independent game logic in `core/`.
+- Keep desktop launchers, packaging, and live preview tests in `lwjgl3/`.
+- Keep runtime assets in `assets/`.
+- Use one Koin module per gameplay area plus root `highSchoolStoryModule`.
+- Use package names that mirror gameplay areas, e.g.
+  `character.player`, `vehicle.bus`, `story.intro`, `map`, `asset`.
+- Naming: packages lowercase dot-separated; classes/interfaces PascalCase;
+  variables/properties camelCase; constants and enum entries SCREAMING_SNAKE_CASE;
+  suspend factories use `operator fun invoke(...)`.
+- Follow `.editorconfig`: 4 spaces for Kotlin and Gradle Kotlin DSL, LF, UTF-8,
+  final newline, no wildcard imports, alphabetized imports.
+
+### Performance Rules
+
+- No explicit FPS or frame-budget contract exists yet. Avoid inventing one; use
+  narrow local profiling or visual preview evidence when changing hot runtime
+  systems.
+- Treat Fleks ECS systems, movement, rendering, physics, input, and dialogue UI
+  updates as likely hot paths. Avoid per-frame allocations and avoid broad world
+  scans unless an existing engine pattern does so.
+- Reusable engine system performance rules belong in
+  `engine/_bmad-output/project-context.md`; this project should only document
+  game-specific performance budgets once accepted.
+- Keep heavyweight asset loading out of per-frame or repeated scene logic. Load
+  assets before spawning game objects in previews and scenes.
+
+### Testing Rules
+
+- Run `./gradlew test` for normal automated verification after code changes that
+  affect non-visual logic.
+- Run `./gradlew ktlintCheck` after Kotlin or Gradle edits; run
+  `./gradlew ktlintFormat` after formatting-sensitive Kotlin or Gradle edits.
+- Treat `lwjgl3/src/test/` previews as live visual tooling that opens a LibGDX
+  window, not headless unit tests.
+- Preview tests must pass `highSchoolStoryModule` to `preview(...)` and load
+  required assets before spawning objects or playing beats.
+- Run a targeted preview test after changing visual game objects, maps,
+  dialogue, scenes, or launcher wiring.
+- Do not use shared services, paid APIs, real accounts, or non-local
+  environments for verification.
+
+### Platform & Build Rules
+
+- Use Java 17 toolchains for compiled output. Gradle may run on any JDK supported
+  by the wrapper.
+- Sync `engine/` with `mani sync` before build work that depends on the managed
+  engine checkout.
+- Use `./gradlew` on Unix/WSL and `gradlew.bat` on Windows.
+- Primary local run command is
+  `./gradlew :lwjgl3:run -PmainClass=pro.piechowski.highschoolstory.game.lwjgl3.SandboxLauncher`.
+- `MainLauncher` is wired but incomplete until the full game path exists.
+- Packaging tasks are local only: `:lwjgl3:jar`, `:lwjgl3:jarWin`,
+  `:lwjgl3:jarLinux`, `:lwjgl3:jarMac`, and `:lwjgl3:dist`.
+- Do not push to remote git, mutate GitHub state, edit secrets, or alter files
+  outside the workspace without explicit user approval.
+
+### Critical Don't-Miss Rules
+
+- Do not replace missing behavior with silent no-ops. Use `TODO()` for visible
+  unimplemented stubs.
+- Do not make undocumented behavior, architecture, gameplay, workflow, command,
+  path, packaging, or narrative contract changes.
+- Do not recreate retired `docs/product/`, `docs/development/`, `docs/design/`,
+  or `docs/narrative/` spaces unless a future documentation contract explicitly
+  reintroduces them.
+- Do not treat visual preview tests as CI-safe headless tests.
+- Do not place game-specific tuning or story inside `engine/`.
+- Do not add backward-compatibility code unless persisted data, shipped
+  behavior, external consumers, or explicit requirements justify it.
+- Do not churn generated output, runtime state, local machine data, secrets, or
+  credentials.
+- If a requested change crosses the game/engine boundary or instructions
+  conflict with authoritative docs, stop and ask before editing.
+
+## Known Documentation Gaps
+
+- Legacy root documents were replaced in `HSS-13` with BMAD-native entrypoints;
+  use `docs/` plus `_bmad-output/project-context.md` as the current source of
+  truth.
+- No explicit performance budget is documented for the game. Agents should avoid
+  inventing hard targets and should record any new budget in the owning design or
+  architecture document first.
+
+## Usage Guidelines
+
+### For AI Agents
+
+- Read this file before implementing game code or modifying project guidance.
+- Follow all listed rules exactly; when uncertain, choose the narrower and more
+  restrictive interpretation.
+- If a new durable pattern emerges, update this file and the owning source
+  document in the same change.
+- Keep final handoffs tied to the active `HSS-<number>` backlog task when one
+  exists.
+
+### For Humans
+
+- Keep this file lean and focused on rules agents are likely to miss.
+- Update it when stack versions, engine contracts, documentation structure, or
+  implementation patterns change.
+- Remove rules that become stale, duplicated, or obvious from the current code.
+- Last updated: 2026-06-09 for `HSS-13`.

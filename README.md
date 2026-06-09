@@ -1,104 +1,94 @@
 # High School Story
 
-High School Story is a Kotlin/JVM school-life social simulation game where the
-player creates a high school student and guides them through routine, lessons,
-relationships, activities, and exams.
+High School Story is a Kotlin/JVM desktop school-life social simulation game. The
+player creates a high school student and guides them through school routine,
+lessons, relationships, condition management, travel, and semester outcomes.
 
-The game is built on Kotlin Game Engine 2D through the `engine/` Gradle
-composite build.
+This repository is BMAD/GDS-native. Durable project knowledge lives in `docs/`,
+AI execution context lives in `_bmad-output/project-context.md`, and work is
+tracked with `backlog.md` tasks using `HSS-<number>` IDs.
 
-## What Is This?
+## Current State
 
-High School Story is a cozy-leaning, lightly demanding social simulation game.
-The intended player experience is a readable school routine where time is
-limited, school attendance is central, and everyday choices shape a personal
-semester story.
-
-Current MVP direction:
-
-- One playable semester.
-- A `12`-week school rhythm.
-- A daily loop of dormitory morning, weekday school block, afternoon free time,
-  dormitory evening, and sleep.
-- Systems for `15-minute` time, travel pressure, lessons, condition,
-  relationships, grades, and a semester exam.
-- MVP locations: `dormitory`, `school`, `district`, `shop`, and `park`.
-
-## Repository Boundary
-
-This repository owns the game layer:
-
-- Game-specific logic, scenes, maps, dialogue, assets, and authored content.
-- Product and gameplay design contracts for the High School Story MVP.
-- Desktop launchers, sandbox iteration, and visual preview tests.
-
-This repository does not own reusable Kotlin Game Engine behavior. Engine
-architecture and reusable implementation rules belong in `engine/`.
+- Active traceability task for this documentation migration: `HSS-13`.
+- Current development entrypoint: `SandboxLauncher`.
+- Full-game entrypoint: `MainLauncher`, currently incomplete because
+  `GameEntrypoint.run()` is intentionally `TODO()`.
+- Implemented surface: player-character spawning, player input ownership,
+  character and bus game objects, town and road Tiled maps, dialogue UI wiring,
+  and the `RoadToLakeview` intro preview.
+- Visual preview tests in `lwjgl3/src/test/` open a live LibGDX window and are
+  development tools, not headless unit tests.
 
 ## Quick Start
 
-Use Java 17, install [`mani`](https://github.com/alajmo/mani), and sync the
-managed `engine/` checkout before building.
+Prerequisites:
 
-If you previously initialized `engine/` as a submodule in an older clone,
-remove the old submodule checkout metadata locally before the first `mani sync`.
+- Java 17 toolchain.
+- Gradle wrapper from this repository.
+- `mani` installed for the managed `engine/` checkout.
+
+Setup and run:
 
 ```bash
 mani sync
 ./gradlew :lwjgl3:run -PmainClass=pro.piechowski.highschoolstory.game.lwjgl3.SandboxLauncher
+```
+
+Verification commands:
+
+```bash
 ./gradlew test
 ./gradlew ktlintCheck
 ```
 
 On Windows, use `gradlew.bat` with the same tasks.
 
-## Current Status
+## Repository Map
 
-- `SandboxLauncher` is the current development entrypoint for interactive
-  iteration.
-- `MainLauncher` exists, but `GameEntrypoint.run()` is still `TODO()`.
-- Visual preview tests in `lwjgl3/src/test/` open a live LibGDX window and are
-  not headless unit tests.
-- Current implemented surface includes player-character spawning, player input
-  ownership, character and bus game objects, town and road Tiled maps, dialogue
-  UI wiring, and the `RoadToLakeview` intro beat preview.
+| Path | Purpose |
+|---|---|
+| `core/` | Platform-independent High School Story game logic. |
+| `lwjgl3/` | Desktop launchers, packaging tasks, and live visual previews. |
+| `assets/` | Runtime assets; desktop run tasks use this as the working directory. |
+| `engine/` | Mani-managed Kotlin Game Engine 2D checkout included through Gradle composite build. |
+| `docs/` | BMAD-native project documentation and source of truth for humans and agents. |
+| `_bmad/` | Installed BMAD/GDS configuration and workflow support. |
+| `_bmad-output/project-context.md` | Lean AI-agent execution context generated from the project docs. |
+| `.backlog/` | `backlog.md` task tracking files. |
 
-## High-Level Architecture
+## Documentation Entry Points
 
-- `core/` contains platform-independent game logic under
-  `pro.piechowski.highschoolstory`.
-- `lwjgl3/` contains desktop launchers and live preview tests.
-- `assets/` contains runtime assets and is the desktop run working directory.
-- `docs/narrative/` contains authored story content and should remain narrative
-  focused.
-- `engine/` is a mani-managed checkout and included Gradle build for Kotlin Game
-  Engine 2D.
+- [docs/index.md](docs/index.md) - master BMAD-native documentation index.
+- [docs/project-overview.md](docs/project-overview.md) - product, scope, and
+  current status.
+- [docs/architecture.md](docs/architecture.md) - game-layer architecture and
+  boundaries.
+- [docs/game-design.md](docs/game-design.md) - MVP design contract and gameplay
+  rules.
+- [docs/development-guide.md](docs/development-guide.md) - setup, build,
+  testing, packaging, and workflow.
+- [docs/source-tree-analysis.md](docs/source-tree-analysis.md) - repository and
+  source layout.
+- [docs/component-inventory.md](docs/component-inventory.md) - current game
+  components, scenes, assets, and previews.
+- [docs/narrative-content.md](docs/narrative-content.md) - narrative content
+  source for the implemented intro arc.
+- [docs/ai-agent-guide.md](docs/ai-agent-guide.md) - operational rules for AI
+  coding agents.
 
-Read [ARCHITECTURE.md](ARCHITECTURE.md) for the game-layer architecture and
-`engine/ARCHITECTURE.md` for reusable engine architecture.
+Compatibility files `AGENTS.md`, `ARCHITECTURE.md`, `DESIGN.md`, and
+`STYLEGUIDE.md` remain at the repository root as thin BMAD-native entrypoints for
+tools that expect those filenames. The canonical documentation is the linked
+`docs/` set above.
 
-## Documentation Map
+## Project Boundaries
 
-- [AGENTS.md](AGENTS.md) - AI operational contract for this game repository.
-- [ARCHITECTURE.md](ARCHITECTURE.md) - game-layer architecture and boundaries.
-- [DESIGN.md](DESIGN.md) - product and gameplay design contract for the MVP.
-- [docs/design/README.md](docs/design/README.md) - topic-specific game design
-  documentation index and scope.
-- [STYLEGUIDE.md](STYLEGUIDE.md) - game-layer coding and documentation
-  conventions.
-- [docs/narrative/README.md](docs/narrative/README.md) - narrative content
-  index.
-- [engine/README.md](engine/README.md) - Kotlin Game Engine overview.
-- [engine/ARCHITECTURE.md](engine/ARCHITECTURE.md) - reusable KGE architecture.
-- [engine/STYLEGUIDE.md](engine/STYLEGUIDE.md) - reusable KGE implementation
-  conventions.
+This repository owns game-specific implementation and content for High School
+Story. It does not own reusable Kotlin Game Engine behavior. Reusable engine
+changes belong under `engine/` and must follow `engine/README.md` and
+`engine/AGENTS.md`.
 
-## Documentation Rules
-
-- Keep documentation in English.
-- Keep the product and gameplay design overview for the game in `DESIGN.md`.
-- Keep topic-specific game design documentation in `docs/design/`.
-- Keep game architecture in `ARCHITECTURE.md`.
-- Keep reusable engine architecture in `engine/ARCHITECTURE.md`.
-- Keep authored scenes and story text in `docs/narrative/`.
-- Update the owning document instead of adding parallel notes.
+External mutation is not part of normal development. Do not push to remote git,
+change GitHub state, edit secrets, or mutate anything outside the workspace
+without explicit approval.

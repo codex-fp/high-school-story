@@ -4,7 +4,7 @@ title: Define first classmate arc constraints and cast roles
 status: To Do
 assignee: []
 created_date: '2026-06-02 20:26'
-updated_date: '2026-06-02 20:36'
+updated_date: '2026-06-09 09:56'
 labels:
   - design
   - mvp
@@ -13,11 +13,11 @@ labels:
 milestone: m-0
 dependencies: []
 references:
-  - DESIGN.md
-  - docs/narrative/README.md
+  - docs/game-design.md
+  - docs/narrative-content.md
 documentation:
-  - DESIGN.md
-  - docs/narrative/README.md
+  - docs/game-design.md
+  - docs/narrative-content.md
 priority: high
 ordinal: 2000
 ---
@@ -36,6 +36,12 @@ Define the MVP social cast at a product-design level and choose one classmate fo
 - [ ] #4 Friendship and romance handling expectations are documented for the first arc
 - [ ] #5 Remaining classmates have lighter MVP interaction roles defined
 <!-- AC:END -->
+
+## Implementation Notes
+
+<!-- SECTION:NOTES:BEGIN -->
+HSS-13 documentation migration updated task references from retired root/legacy docs to BMAD-native docs.
+<!-- SECTION:NOTES:END -->
 
 ## Definition of Done
 <!-- DOD:BEGIN -->
