@@ -25,6 +25,7 @@ tracked with `backlog.md` tasks using `HSS-<number>` IDs.
 Prerequisites:
 
 - Java 17 toolchain.
+- Gradle runtime JDK 17 through 25.
 - Gradle wrapper from this repository.
 - `mani` installed for the managed `engine/` checkout.
 
@@ -43,6 +44,14 @@ Verification commands:
 ```
 
 On Windows, use `gradlew.bat` with the same tasks.
+
+IntelliJ sync note:
+
+- Set `Settings > Build, Execution, Deployment > Build Tools > Gradle > Gradle JVM`
+  to a supported JDK such as 21, 24, or 25.
+- Keep the project toolchain target at Java 17 for compiled output.
+- The project wrapper is aligned with the included engine build on Gradle 9.3.0,
+  so Java 25-based IntelliJ runtimes can sync successfully.
 
 ## Repository Map
 
