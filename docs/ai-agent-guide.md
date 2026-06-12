@@ -31,8 +31,16 @@ Before editing, read:
 
 - Use `HSS-<number>` task IDs.
 - Use `.backlog/` as the local task source.
+- Treat `.backlog/` task files as durable git-tracked project artifacts, not disposable local scratch notes.
 - Required task states are `To Do`, `In Progress`, and `Done`.
 - Link implementation and verification evidence to the active task.
+
+## Brainstorming Workflow Rules
+
+- Keep durable brainstorming-specific behavior in BMAD-native docs and `_bmad/custom/` skill overrides, not in root `AGENTS.md` beyond compatibility-entrypoint guidance.
+- During brainstorming workflows, show visible session progress at each question or topic.
+- Include the current question or topic number, the total planned question or topic count when known, and short labels for the current and completed topics.
+- Prefer a simple checklist-style progress block so the user can immediately see where the session is, what is done, and what remains.
 
 ## Git Naming Conventions
 
@@ -40,6 +48,7 @@ Before editing, read:
 - PR title format: `TASK-ID Short description`.
 - Commit message format: Conventional Commits with the task ID at the start of the summary text, for example `type(scope): TASK-ID Short description`.
 - When branches, PRs, or commits are requested, include the active task ID using the formats above.
+- When a workflow changes `.backlog/` task files as part of the work, stage and commit those task-file updates together with the related implementation or documentation unless the user explicitly asks to leave them uncommitted.
 
 ## Editing Boundaries
 

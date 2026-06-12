@@ -1,0 +1,6 @@
+[workflow]
+
+persistent_facts = [
+  "During brainstorming, show visible session progress at every question or topic.",
+  "For each brainstorming prompt, include the current question or topic number, the total planned count when known, and a short checklist-style list of completed, current, and upcoming topics.",
+]

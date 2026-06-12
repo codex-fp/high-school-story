@@ -61,6 +61,7 @@ prevent drift from the game, engine, and documentation contracts.
 
 - Use this file first for agent execution context, then the active backlog task,
   then the owning durable document for details.
+- Keep root `AGENTS.md` as a compatibility entrypoint; put durable agent behavior rules in `docs/` and BMAD customization files under `_bmad/custom/`.
 - `docs/project-overview.md` owns product summary and current status.
 - `docs/game-design.md` owns product scope and gameplay rules.
 - `docs/architecture.md` owns game-layer boundaries. `engine/_bmad-output/project-context.md`,
@@ -189,6 +190,13 @@ prevent drift from the game, engine, and documentation contracts.
   suspend factories use `operator fun invoke(...)`.
 - Follow `.editorconfig`: 4 spaces for Kotlin and Gradle Kotlin DSL, LF, UTF-8,
   final newline, no wildcard imports, alphabetized imports.
+
+### Workflow And Task Rules
+
+- Treat `.backlog/` task files as durable git-tracked project artifacts.
+- When work changes a `.backlog/` task file, stage and commit that task-file update together with the related repository change unless the user explicitly asks to keep it out of git.
+- During brainstorming workflows, show visible session progress for every question or topic.
+- Brainstorming progress should include the current question or topic number, the overall session position when known, and short labels in a checklist-style summary so the user can see what is done and what remains.
 
 ### Performance Rules
 
