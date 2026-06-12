@@ -50,8 +50,8 @@
 |---|---|---|
 | `SandboxLauncher` | `lwjgl3/src/main/kotlin/.../SandboxLauncher.kt` | Main development entrypoint. |
 | `MainLauncher` | `lwjgl3/src/main/kotlin/.../MainLauncher.kt` | Future full-game entrypoint. |
-| `PlayerCharacterPreview` | `lwjgl3/src/test/kotlin/.../PlayerCharacterPreview.kt` | Live visual preview for player character. |
-| `RoadToLakeviewPreview` | `lwjgl3/src/test/kotlin/.../RoadToLakeviewPreview.kt` | Live visual preview for intro beat. |
+| `PlayerCharacterPreview` | `lwjgl3/src/preview/kotlin/.../PlayerCharacterPreview.kt` | Live visual preview for player character. |
+| `RoadToLakeviewPreview` | `lwjgl3/src/preview/kotlin/.../RoadToLakeviewPreview.kt` | Live visual preview for intro beat. |
 
 ## Known Implementation Gaps
 

@@ -162,7 +162,7 @@ prevent drift from the game, engine, and documentation contracts.
 ### Code Organization Rules
 
 - Keep platform-independent game logic in `core/`.
-- Keep desktop launchers, packaging, and live preview tests in `lwjgl3/`.
+- Keep desktop launchers, packaging, and live preview tooling in `lwjgl3/`.
 - Keep runtime assets in `assets/`.
 - Use one Koin module per gameplay area plus root `highSchoolStoryModule`.
 - Use package names that mirror gameplay areas, e.g.
@@ -193,9 +193,9 @@ prevent drift from the game, engine, and documentation contracts.
   affect non-visual logic.
 - Run `./gradlew ktlintCheck` after Kotlin or Gradle edits; run
   `./gradlew ktlintFormat` after formatting-sensitive Kotlin or Gradle edits.
-- Treat `lwjgl3/src/test/` previews as live visual tooling that opens a LibGDX
-  window, not headless unit tests.
-- Preview tests must pass `highSchoolStoryModule` to `preview(...)` and load
+- Treat `lwjgl3/src/preview/` previews as live visual tooling run manually
+  through `:lwjgl3:preview`, not headless unit tests.
+- Preview sources must pass `highSchoolStoryModule` to `preview(...)` and load
   required assets before spawning objects or playing beats.
 - Run a targeted preview test after changing visual game objects, maps,
   dialogue, scenes, or launcher wiring.
@@ -230,7 +230,7 @@ prevent drift from the game, engine, and documentation contracts.
 - Do not recreate retired `docs/product/`, `docs/development/`, `docs/design/`,
   or `docs/narrative/` spaces unless a future documentation contract explicitly
   reintroduces them.
-- Do not treat visual preview tests as CI-safe headless tests.
+- Do not treat visual preview sources as CI-safe headless tests.
 - Do not place game-specific tuning or story inside `engine/`.
 - Do not add backward-compatibility code unless persisted data, shipped
   behavior, external consumers, or explicit requirements justify it.

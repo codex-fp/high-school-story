@@ -31,7 +31,7 @@
 | `core/src/main/kotlin/pro/piechowski/highschoolstory/` | Platform-independent game implementation. |
 | `core/src/main/resources/config.yml` | Runtime configuration loaded through Hoplite. |
 | `lwjgl3/src/main/kotlin/` | Desktop launchers. |
-| `lwjgl3/src/test/kotlin/` | Live visual preview tests. |
+| `lwjgl3/src/preview/kotlin/` | Live visual preview sources run manually through `:lwjgl3:preview`. |
 | `assets/maps/` | Tiled map files and map tooling output. |
 | `assets/textures/` | Runtime textures and sprite sheets. |
 | `assets/ui/` | UI skin, atlas, fonts, and UI graphics. |

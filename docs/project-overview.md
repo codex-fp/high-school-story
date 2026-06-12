@@ -18,7 +18,7 @@ This repository owns:
 
 - High School Story game code under `pro.piechowski.highschoolstory`.
 - Game-specific Koin modules, objects, scenes, maps, dialogue, and assets.
-- Desktop launchers, packaging, and live visual preview tests.
+- Desktop launchers, packaging, and live visual preview tooling.
 - Product, design, narrative, development, and agent documentation for the game.
 
 This repository does not own reusable engine behavior. Reusable Kotlin Game

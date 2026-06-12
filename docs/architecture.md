@@ -80,7 +80,7 @@ logic, and suspending `play()` or `spawn()` content. Dialogue uses
 `DialogueManager.startDialogue(...).await()`.
 
 `RoadToLakeview` currently sets date, time, camera strategy, and dialogue flow
-inside its beat implementation. Preview tests explicitly load assets, set the
+inside its beat implementation. Preview sources explicitly load assets, set the
 road map, spawn the player, and play the beat.
 
 ## Assets And Maps
@@ -95,9 +95,10 @@ Runtime configuration is loaded from `core/src/main/resources/config.yml`.
 
 ## Visual Preview Architecture
 
-Preview tests in `lwjgl3/src/test/` open live LibGDX windows. They are local
-visual development tools. They must pass `highSchoolStoryModule` to
-`preview(...)` and load required assets before spawning objects or scenes.
+Preview sources in `lwjgl3/src/preview/` open live LibGDX windows through the
+manual `:lwjgl3:preview` Gradle task. They are local visual development tools.
+They must pass `highSchoolStoryModule` to `preview(...)` and load required
+assets before spawning objects or scenes.
 
 ## Dependency And Package Rules
 

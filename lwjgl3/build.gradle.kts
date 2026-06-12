@@ -10,6 +10,10 @@ plugins {
 }
 
 sourceSets.main { resources.srcDirs(parent!!.file("assets").path) }
+val previewSourceSet = sourceSets.create("preview")
+
+configurations[previewSourceSet.implementationConfigurationName].extendsFrom(configurations.testImplementation.get())
+configurations[previewSourceSet.runtimeOnlyConfigurationName].extendsFrom(configurations.testRuntimeOnly.get())
 
 val mainClassName = "pro.piechowski.highschoolstory.lwjgl3.Lwjgl3Launcher"
 application.mainClass = mainClassName
@@ -55,6 +59,18 @@ dependencies {
 val os = System.getProperty("os.name").lowercase(Locale.getDefault())
 
 tasks.named<JavaExec>("run") {
+    workingDir = parent!!.file("assets")
+
+    if (os.contains("mac")) jvmArgs("-XstartOnFirstThread")
+}
+
+tasks.register<Test>("preview") {
+    description = "Runs manual LibGDX previews."
+    group = "verification"
+    testClassesDirs = previewSourceSet.output.classesDirs
+    classpath = previewSourceSet.runtimeClasspath
+    shouldRunAfter(tasks.test)
+    useJUnitPlatform()
     workingDir = parent!!.file("assets")
 
     if (os.contains("mac")) jvmArgs("-XstartOnFirstThread")

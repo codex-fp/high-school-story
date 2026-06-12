@@ -59,7 +59,8 @@ Before editing, read:
 - Use engine `KGE-<number>` backlog traceability for reusable engine work.
 - Use `SandboxLauncher` for development iteration.
 - Treat `MainLauncher` as incomplete until the full game flow exists.
-- Treat preview tests as live visual tools that open LibGDX windows.
+- Treat `lwjgl3` preview sources as live visual tools run manually through
+  `:lwjgl3:preview`.
 
 ## Documentation Rules
 

@@ -35,6 +35,7 @@ this documentation set.
 
 - Start sandbox: `./gradlew :lwjgl3:run -PmainClass=pro.piechowski.highschoolstory.game.lwjgl3.SandboxLauncher`
 - Run tests: `./gradlew test`
+- Run manual previews: `./gradlew :lwjgl3:preview`
 - Run lint: `./gradlew ktlintCheck`
 - Format Kotlin/Gradle: `./gradlew ktlintFormat`
 - Sync engine checkout: `mani sync`

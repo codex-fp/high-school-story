@@ -24,6 +24,7 @@ submodule metadata locally before the first `mani sync`.
 ./gradlew :lwjgl3:run -PmainClass=pro.piechowski.highschoolstory.game.lwjgl3.SandboxLauncher
 ./gradlew :lwjgl3:run -PmainClass=pro.piechowski.highschoolstory.game.lwjgl3.MainLauncher
 ./gradlew test
+./gradlew :lwjgl3:preview
 ./gradlew ktlintCheck
 ./gradlew ktlintFormat
 ```
@@ -54,15 +55,19 @@ user explicitly asks.
 - Run `./gradlew ktlintFormat` after formatting-sensitive Kotlin or Gradle
   edits.
 - Run the relevant live preview after visual object, map, dialogue, scene, or
-  launcher changes.
+  launcher changes with `:lwjgl3:preview`.
 - Documentation-only changes can be verified by reading the generated docs,
   checking links and paths, and recording evidence in the backlog task.
 
-Preview example:
+Preview examples:
 
 ```bash
-./gradlew :lwjgl3:test --tests "pro.piechowski.highschoolstory.character.player.PlayerCharacterPreview.preview"
+./gradlew :lwjgl3:preview
+./gradlew :lwjgl3:preview --tests "pro.piechowski.highschoolstory.character.player.PlayerCharacterPreview.preview"
 ```
+
+Visual previews live in `lwjgl3/src/preview/kotlin/` so they do not run as part
+of the default automated `test` or `check` lifecycle.
 
 ## Coding Conventions
 
