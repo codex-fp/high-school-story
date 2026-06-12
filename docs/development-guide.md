@@ -2,8 +2,7 @@
 
 ## Prerequisites
 
-- Java 17 toolchain for compiled output.
-- Gradle runtime JDK 17 through 25.
+- JDK 17 or newer. The build compiles project output with Java 17 toolchains.
 - Gradle wrapper from this repository.
 - `mani` installed to synchronize the managed `engine/` checkout.
 - Local desktop environment capable of opening LibGDX LWJGL3 windows for preview
@@ -18,14 +17,6 @@ mani sync
 
 If an older clone has `engine/` initialized as a git submodule, remove stale
 submodule metadata locally before the first `mani sync`.
-
-## IntelliJ Sync
-
-- Set `Settings > Build, Execution, Deployment > Build Tools > Gradle > Gradle JVM`
-  to any supported runtime JDK, including JDK 21, 24, or 25.
-- Keep Java 17 as the compilation toolchain target used by the build.
-- The root project wrapper uses Gradle 9.3.0, which supports running Gradle on
-  Java 25 while preserving Java 17 compilation toolchains.
 
 ## Common Commands
 
