@@ -123,37 +123,54 @@ prevent drift from the game, engine, and documentation contracts.
 
 ### Game Design Rules Agents Must Preserve
 
-- MVP is one playable `12`-week semester with `15-minute` time increments.
-- `docs/game-design.md` is the durable MVP-first GDD and canonical gameplay
-  design source of truth.
+- `docs/game-design.md` is the durable full-game-first GDD and canonical
+  gameplay design source of truth.
+- Full game target is three school years from Year 1 entry to Year 3 graduation.
+- Year 1 and Year 2 carry the strongest discovery, relationship development,
+  club identity, routine-building, and school-life density; Year 3 focuses on
+  culmination, consequences, future choice, last chances, and closure.
+- Initial delivery target is the Year 1 Semester 1 vertical slice: one playable
+  `12`-week semester with `15-minute` time increments.
 - Core fantasy is Second-Chance Student Life: the player returns to high school
   with clearer awareness, intention, and agency than real adolescence allowed.
+- Full-game emotional thesis is remembered school life through beautiful
+  incompleteness and found people.
 - Core weekday rhythm: dormitory morning, school block, afternoon freedom,
   dormitory evening, sleep.
 - Weekday starts at dormitory `06:00`; return to dormitory by `21:00`; sleep at
   `22:00`.
 - Standard lessons use `3` decision turns of `15` minutes each and lesson feel is
   driven mainly by subject identity, not teacher behavior.
-- MVP locations are `dormitory`, `school`, `district`, `shop`, and `park`.
+- Initial vertical-slice locations may be `dormitory`, `school`, `district`,
+  `shop`, and `park`; full game targets roughly `15-25` discoverable Lakeview
+  travel destinations.
 - After-school discovery is place-first through compact locations with stable
   identities and readable points of interest.
 - Relationship progress is player-facing descriptive stages, not raw numbers.
 - Relationship rewards are memory-making first; systemic bonuses should remain
   light or absent.
-- Known classmates expose discovered preferences, current location, and
-  availability through an in-world social media/profile layer.
-- MVP social scope is one fully supported classmate arc plus minimal teaser
-  support for the remaining classmates. Full vision gives every classmate a rich
-  arc.
+- Full-game social target is `10` core classmates with full multi-year arcs; one
+  run should meaningfully advance about `3-5` arcs and usually one
+  best-friend-level bond.
+- Romance is optional but fully supported and consumes social capacity; best
+  friend and romance may overlap but do not have to.
+- The in-game phone exposes planning apps such as calendar, map, social media,
+  messages, class/grade info, and memory album.
+- Known classmates expose discovered preferences, posts, current location,
+  availability, and memories through an in-world social media/profile layer.
+- Full game targets `4-5` thematic clubs as a mid-layer identity system with arcs
+  lighter than core classmate arcs.
 - Starting player profile uses direct interest/preference toggles plus academic
   `1-10` point-buy attributes. These axes start independent.
 - Condition stats are `energy`, `stress`, and `mood`; `money` is a regular
-  secondary soft constraint; grades are separate academic standing.
+  secondary soft constraint; grades are academic standing and a co-equal
+  long-term outcome driver with relationships.
 - Poor condition should create friction and risk, not hard fail states or erased
   progress.
 - Academic collapse is the one hard floor: fully neglecting school can fail the
-  semester after readable grade visibility and at most one explicit critical
-  warning.
+  semester and end the run after readable grade visibility and at most one
+  explicit critical warning. Recovery saves should be offered from about `3`
+  days, `2` weeks, and `2` months earlier.
 - Money baseline is weekly allowance. Abstract part-time work is an emergency
   top-up and lifestyle tradeoff, not a content-rich subplot or default grind.
 - The game should feel cozy-leaning and lightly demanding: limited time matters,

@@ -64,7 +64,7 @@ On Windows, use `gradlew.bat` with the same tasks.
   current status.
 - [docs/architecture.md](docs/architecture.md) - game-layer architecture and
   boundaries.
-- [docs/game-design.md](docs/game-design.md) - MVP design contract and gameplay
+- [docs/game-design.md](docs/game-design.md) - full-game-first GDD and gameplay
   rules.
 - [docs/development-guide.md](docs/development-guide.md) - setup, build,
   testing, packaging, and workflow.

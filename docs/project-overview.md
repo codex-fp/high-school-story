@@ -43,8 +43,8 @@ This project uses BMAD/GDS documentation conventions:
 - `docs/index.md` is the master documentation entrypoint.
 - `docs/game-brief.md` is the durable product-level brief and canonical full-game
   promise.
-- `docs/game-design.md` is the durable MVP-first GDD and canonical gameplay
-  implementation design source.
+- `docs/game-design.md` is the durable full-game-first GDD and canonical
+  gameplay design source.
 - `_bmad-output/project-context.md` is optimized for AI-agent context loading.
 - `.backlog/` stores task traceability with `HSS-<number>` IDs.
 - Root compatibility files point to the canonical BMAD-native documents.
@@ -52,13 +52,13 @@ This project uses BMAD/GDS documentation conventions:
 ## Current Product Status
 
 The project has a promoted durable product brief in `docs/game-brief.md` and a
-promoted MVP-first durable GDD in `docs/game-design.md`. Remaining design work
-is concentrated in subject framing, first classmate arc constraints, social
-profile categories, starting-profile tuning, academic failure thresholds, money
-pressure, balancing assumptions, and the post-MVP path from the first semester
-slice to the full three-year product. Implementation is still early and centered
-on engine integration, previews, game objects, map loading, and intro-beat
-wiring.
+promoted full-game-first durable GDD in `docs/game-design.md`. Remaining design
+work is concentrated in subject framing, initial classmate arc constraints,
+social profile categories, starting-profile tuning, academic failure thresholds,
+money pressure, balancing assumptions, and the delivery path from the Year 1
+Semester 1 vertical slice to the full three-year product. Implementation is still
+early and centered on engine integration, previews, game objects, map loading,
+and intro-beat wiring.
 
 ## Current Risks
 

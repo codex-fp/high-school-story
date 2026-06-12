@@ -178,9 +178,9 @@ Current scope assumptions:
 
 - Team, budget, and production timeline are not yet formalized in repository
   documentation.
-- The current documented implementation surface suggests an MVP-first solo or
-  small-team project, so the product vision must be separated clearly from the
-  initial validation slice.
+- The current documented implementation surface suggests a solo or small-team
+  first delivery phase, so the full product vision must stay clearly separated
+  from the initial validation slice.
 
 Full-game shape:
 
