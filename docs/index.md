@@ -23,7 +23,8 @@ this documentation set.
 |---|---|
 | [project-overview.md](project-overview.md) | Product summary, repository ownership, current status, and BMAD conventions. |
 | [game-brief.md](game-brief.md) | Durable product-level game brief and canonical full-game product promise. |
-| [architecture.md](architecture.md) | Game-layer architecture, runtime composition, engine boundary, dependencies, and risks. |
+| [architecture.md](architecture.md) | Technical architecture: KGE integration, runtime composition, engine boundary, dependencies, and risks. |
+| [game-architecture.md](game-architecture.md) | Durable game-architecture source of truth for discrete-time simulation, game state, daily loop, lessons, relationships, phone read models, locations, saves, and content scaling. |
 | [game-design.md](game-design.md) | Durable full-game-first Game Design Document and canonical gameplay design source of truth. |
 | [narrative-design.md](narrative-design.md) | Durable full-game-first Narrative Design Document covering story thesis, protagonist, core cast arcs, Lakeview place memory, dialogue, endings, and narrative delivery. |
 | [development-guide.md](development-guide.md) | Setup, commands, verification, packaging, workflow, and style conventions. |

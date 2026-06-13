@@ -19,7 +19,8 @@ lives in `docs/` and the lean execution context lives in
 | Topic | Owner |
 |---|---|
 | Project overview and status | `docs/project-overview.md` |
-| Game-layer architecture | `docs/architecture.md` |
+| Technical architecture and engine boundary | `docs/architecture.md` |
+| Game architecture and simulation structure | `docs/game-architecture.md` |
 | MVP gameplay and product design | `docs/game-design.md` |
 | Full-game narrative design | `docs/narrative-design.md` |
 | Setup, verification, packaging, workflow | `docs/development-guide.md` |

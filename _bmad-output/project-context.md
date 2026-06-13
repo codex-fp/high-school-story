@@ -26,6 +26,7 @@ source_documents:
   - docs/index.md
   - docs/project-overview.md
   - docs/architecture.md
+  - docs/game-architecture.md
   - docs/game-design.md
   - docs/narrative-design.md
   - docs/development-guide.md
@@ -68,7 +69,13 @@ prevent drift from the game, engine, and documentation contracts.
 - `docs/narrative-design.md` owns full-game narrative design: story thesis,
   protagonist premise, core cast arcs, relationship ending rules, Lakeview place
   memory, dialogue framework, and narrative delivery rules.
-- `docs/architecture.md` owns game-layer boundaries. `engine/_bmad-output/project-context.md`,
+- `docs/architecture.md` owns technical architecture, KGE integration, runtime
+  composition, package rules, launchers, previews, and game-layer boundaries.
+- `docs/game-architecture.md` owns product-facing game architecture: discrete-time
+  simulation, game state, daily loop, lessons, relationships, phone read models,
+  locations, authored content, save/recovery, content scaling, and game-level
+  architecture risks.
+- `engine/_bmad-output/project-context.md`,
   `engine/README.md`, and `engine/AGENTS.md` own reusable engine rules.
 - `docs/narrative-content.md` owns implementation-ready authored narrative
   content.
