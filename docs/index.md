@@ -25,10 +25,11 @@ this documentation set.
 | [game-brief.md](game-brief.md) | Durable product-level game brief and canonical full-game product promise. |
 | [architecture.md](architecture.md) | Game-layer architecture, runtime composition, engine boundary, dependencies, and risks. |
 | [game-design.md](game-design.md) | Durable full-game-first Game Design Document and canonical gameplay design source of truth. |
+| [narrative-design.md](narrative-design.md) | Durable full-game-first Narrative Design Document covering story thesis, protagonist, core cast arcs, Lakeview place memory, dialogue, endings, and narrative delivery. |
 | [development-guide.md](development-guide.md) | Setup, commands, verification, packaging, workflow, and style conventions. |
 | [source-tree-analysis.md](source-tree-analysis.md) | Repository layout and critical path explanation. |
 | [component-inventory.md](component-inventory.md) | Implemented game objects, systems, assets, launchers, and previews. |
-| [narrative-content.md](narrative-content.md) | Authored narrative source for the intro arc and implementation notes. |
+| [narrative-content.md](narrative-content.md) | Implementation-ready authored narrative source for playable story beats and scripts. |
 | [ai-agent-guide.md](ai-agent-guide.md) | AI coding-agent operational contract. |
 
 ## Quick Reference

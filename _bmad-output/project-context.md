@@ -27,6 +27,7 @@ source_documents:
   - docs/project-overview.md
   - docs/architecture.md
   - docs/game-design.md
+  - docs/narrative-design.md
   - docs/development-guide.md
   - docs/source-tree-analysis.md
   - docs/component-inventory.md
@@ -64,6 +65,9 @@ prevent drift from the game, engine, and documentation contracts.
 - Keep root `AGENTS.md` as a compatibility entrypoint; put durable agent behavior rules in `docs/` and BMAD customization files under `_bmad/custom/`.
 - `docs/project-overview.md` owns product summary and current status.
 - `docs/game-design.md` owns product scope and gameplay rules.
+- `docs/narrative-design.md` owns full-game narrative design: story thesis,
+  protagonist premise, core cast arcs, relationship ending rules, Lakeview place
+  memory, dialogue framework, and narrative delivery rules.
 - `docs/architecture.md` owns game-layer boundaries. `engine/_bmad-output/project-context.md`,
   `engine/README.md`, and `engine/AGENTS.md` own reusable engine rules.
 - `docs/narrative-content.md` owns implementation-ready authored narrative

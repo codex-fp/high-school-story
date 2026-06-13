@@ -4,7 +4,7 @@ title: Prepare narrative brainstorming session for narrative design workflow
 status: In Progress
 assignee: []
 created_date: '2026-06-12 12:35'
-updated_date: '2026-06-13 22:36'
+updated_date: '2026-06-13 22:37'
 labels:
   - design
   - narrative
@@ -16,14 +16,23 @@ references:
   - docs/game-design.md
   - _bmad-output/brainstorming-session-2026-06-13.md
   - _bmad-output/narrative-design.md
+  - docs/narrative-design.md
 documentation:
   - docs/ai-agent-guide.md
   - _bmad-output/project-context.md
   - docs/game-design.md
+  - docs/narrative-design.md
   - docs/narrative-content.md
+  - docs/index.md
+  - AGENTS.md
 modified_files:
   - _bmad-output/brainstorming-session-2026-06-13.md
   - _bmad-output/narrative-design.md
+  - docs/narrative-design.md
+  - docs/index.md
+  - docs/narrative-content.md
+  - _bmad-output/project-context.md
+  - AGENTS.md
 priority: high
 ordinal: 18100
 ---
@@ -45,12 +54,14 @@ Set up and run a game narrative brainstorming session grounded in docs/game-brie
 ## Implementation Notes
 
 <!-- SECTION:NOTES:BEGIN -->
-Prepared the narrative workflow input set: `HSS-24` tracks the work, the GDS narrative brainstorming session is captured in `_bmad-output/brainstorming-session-2026-06-13.md`, and `_bmad-output/narrative-design.md` is available as the draft NDD artifact for review/promotion.
+Promoted the draft Narrative Design Document to durable documentation at `docs/narrative-design.md`. Updated `docs/index.md`, `docs/narrative-content.md`, `AGENTS.md`, and `_bmad-output/project-context.md` so full-game narrative design and implementation-ready authored narrative content have separate source-of-truth ownership.
+
+Verification after promotion: documentation-only changes; no Gradle checks or visual previews run because no game code, Kotlin, Gradle, scenes, maps, or runtime assets changed. Self-review checked documentation ownership consistency and references.
 <!-- SECTION:NOTES:END -->
 
 ## Definition of Done
 <!-- DOD:BEGIN -->
-- [ ] #1 Specification or owning documentation is updated when behavior changes
+- [x] #1 Specification or owning documentation is updated when behavior changes
 - [x] #2 Implementation matches the accepted task scope
 - [ ] #3 Required Gradle checks pass
 - [ ] #4 Relevant visual preview or launcher scenario is verified when applicable

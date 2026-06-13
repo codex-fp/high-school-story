@@ -21,11 +21,12 @@ lives in `docs/` and the lean execution context lives in
 | Project overview and status | `docs/project-overview.md` |
 | Game-layer architecture | `docs/architecture.md` |
 | MVP gameplay and product design | `docs/game-design.md` |
+| Full-game narrative design | `docs/narrative-design.md` |
 | Setup, verification, packaging, workflow | `docs/development-guide.md` |
 | Code and documentation conventions | `docs/ai-agent-guide.md` and `docs/development-guide.md` |
 | Source tree and module layout | `docs/source-tree-analysis.md` |
 | Implemented components and assets | `docs/component-inventory.md` |
-| Authored narrative content | `docs/narrative-content.md` |
+| Implementation-ready authored narrative content | `docs/narrative-content.md` |
 | Reusable engine rules | `engine/_bmad-output/project-context.md`, `engine/README.md`, and `engine/AGENTS.md` |
 
 If docs and code disagree, update the owning document and implementation in the
