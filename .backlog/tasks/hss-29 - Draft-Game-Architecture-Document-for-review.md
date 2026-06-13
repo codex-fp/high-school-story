@@ -19,9 +19,14 @@ references:
   - _bmad-output/brainstorming-session-2026-06-09-game-architecture.md
 documentation:
   - _bmad-output/game-architecture.md
+  - docs/game-architecture.md
 modified_files:
   - .backlog/tasks/hss-29 - Draft-Game-Architecture-Document-for-review.md
   - _bmad-output/game-architecture.md
+  - docs/game-architecture.md
+  - docs/index.md
+  - AGENTS.md
+  - _bmad-output/project-context.md
 priority: high
 ordinal: 2900
 ---
@@ -66,6 +71,11 @@ Gradle, runtime asset, or visual scene changes.
 
 Publication evidence: committed the draft document in `16d427f` with message
 `docs(architecture): HSS-29 draft game architecture document`.
+
+Promotion evidence: promoted the draft to durable documentation in
+`docs/game-architecture.md`, updated documentation entrypoints and lean agent
+context, and committed the promotion in `07cb951` with message
+`docs(architecture): HSS-29 promote game architecture document`.
 <!-- SECTION:NOTES:END -->
 
 ## Final Summary
