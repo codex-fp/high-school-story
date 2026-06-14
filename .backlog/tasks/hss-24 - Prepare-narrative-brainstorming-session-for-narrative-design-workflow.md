@@ -1,10 +1,10 @@
 ---
 id: HSS-24
 title: Prepare narrative brainstorming session for narrative design workflow
-status: In Progress
+status: Done
 assignee: []
 created_date: '2026-06-12 12:35'
-updated_date: '2026-06-13 22:37'
+updated_date: '2026-06-14 00:59'
 labels:
   - design
   - narrative
@@ -59,6 +59,12 @@ Promoted the draft Narrative Design Document to durable documentation at `docs/n
 Verification after promotion: documentation-only changes; no Gradle checks or visual previews run because no game code, Kotlin, Gradle, scenes, maps, or runtime assets changed. Self-review checked documentation ownership consistency and references.
 <!-- SECTION:NOTES:END -->
 
+## Final Summary
+
+<!-- SECTION:FINAL_SUMMARY:BEGIN -->
+Closed HSS-24 after confirming the narrative brainstorming output and promoted narrative design documentation are present and referenced. Acceptance criteria are complete; Gradle checks and live preview remain not applicable because the task changed documentation, workflow artifacts, and source-of-truth ownership only, with no Kotlin, Gradle, scene, map, launcher, or asset behavior changes.
+<!-- SECTION:FINAL_SUMMARY:END -->
+
 ## Definition of Done
 <!-- DOD:BEGIN -->
 - [x] #1 Specification or owning documentation is updated when behavior changes
@@ -70,5 +76,5 @@ Verification after promotion: documentation-only changes; no Gradle checks or vi
 - [x] #7 Verification evidence records observed results
 - [x] #8 Verification evidence records relevant logs or artifact notes
 - [x] #9 Self-review is completed before handoff
-- [ ] #10 Final handoff references the HSS task ID and residual risks
+- [x] #10 Final handoff references the HSS task ID and residual risks
 <!-- DOD:END -->
