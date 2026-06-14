@@ -24,116 +24,157 @@ _Ideas will be captured as we progress through the session._
 **Selected Mode:** YOLO
 
 **Techniques Available:**
-- MDA Framework
-- Player Fantasy Mining
+- MDA Framework Exploration
 - Core Loop Brainstorming
-- Genre/Pattern Mashup
+- Player Fantasy Mining
+- Genre Mashup
 - Verbs Before Nouns
 - Failure State Design
-- Ludonarrative Harmony
 - Emotion Targeting
-- Emergence Engineering
+- Accessibility Layers
+- Game Feel Playground
 - Constraint-Based Creativity
+- Reference Blending
+- What If Scenarios
 
 **Focus Areas:**
-- Core gameplay loop for a calendar-driven school-life simulation
-- Player fantasy centered on a second chance at adolescence
-- Discrete time, readable state transitions, and low hidden simulation
-- Relationship, grades, condition, and memory as the main interacting domains
-- Diegetic planning through the in-game phone
-- Academic failure as the only hard fail state
-- Modular authored content that scales across three school years
-- Strong harmony between daily routine, emotional tone, and systemic consequences
+- Player fantasy and emotional promise of High School Story
+- Core loop UX: what the player reads, decides, and feels moment to moment
+- HUD and diegetic vs non-diegetic information surfaces
+- Menu and navigation architecture for school-life simulation
+- Input schemes and prompt language across desktop and handheld-style play assumptions
+- Accessibility floor, legibility, pacing, and content density
+- Game feel and feedback for social sim interactions, time progression, phone use, and scene transitions
+- Key memorable UX moments that should anchor the later UX Design Document
 
 ## Ideas Generated
 
-**[Category #1]**: Day As Emotional Funnel
-_Core Loop_: The day is not just a time container, but an emotional funnel: the school block generates pressure and hooks, while the after-school segment converts them into one or two genuinely meaningful choices. The architecture should reinforce that most of the game's emotional value happens after school, but is prepared by what happened earlier.
-_Novelty_: This is not a generic schedule sim; the rhythm of school -> freedom -> consequence should act as the primary drama engine.
+**[UX Category #1]: Progressive Legibility**
+_Core Loop_: The player starts with only partially legible action and system knowledge, acts under uncertainty, then earns clearer UI communication through repeated use and observation.
+_Novelty_: Interface clarity itself becomes a progression layer, not only player skill.
 
-**[Category #2]**: Phone As Fairness Layer
-_Core Loop_: The phone acts as a diegetic read model of the world: it shows the calendar, messages, profiles, map, memories, and availability signals. The player plans from information that is readable but incomplete, so decisions stay fair while still feeling alive and uncertain.
-_Novelty_: The phone UI is not an accessory; it is the layer that turns hidden simulation into legible planning without exposing everything as spreadsheets.
+**[UX Category #2]: Discovery Through Commitment**
+_Core Loop_: Choosing an action is also a way of discovering what that action truly means, costs, and tends to affect over time.
+_Novelty_: Exploration applies to system semantics, not just places and characters.
 
-**[Category #3]**: Memory As Outcome Engine
-_Core Loop_: Memories are not only collectible album entries, but interpretations of where the player was present, who they shared moments with, and what they did not fully complete. The memory architecture should gather people-place-event motifs and feed semester, year, and graduation summaries.
-_Novelty_: Instead of ending relationships through flags or affinity scores alone, the game resolves them through memory, presence, and incompleteness.
+**[UX Category #3]: Action Knowledge Reveal**
+_Core Loop_: Actions begin as named options without full transparency, then gradually reveal their likely effects and modifiers after repeated use.
+_Novelty_: The UI records learned behavioral knowledge instead of exposing full mechanics immediately.
 
-**[Category #4]**: Relationship Arcs As State Weaves
-_Core Loop_: Relationships should emerge from several intertwined axes: stage, arc progress, discovered preferences, availability windows, trust signals, and shared memory motifs. Relationship progression should not be a single bar, but a weave of systemic state and authored beats.
-_Novelty_: This avoids dating-sim optimization and preserves the feeling that closeness comes from a series of resonant moments rather than point farming.
+**[UX Category #4]: Hybrid Soft-Language Feedback**
+_Core Loop_: Once discovered, action outcomes are communicated with human-readable, qualitative language rather than hard optimization labels.
+_Novelty_: Fair planning information stays readable without collapsing the game into a spreadsheet.
 
-**[Category #5]**: Academic Pressure As Slow-Burn Antagonist
-_Core Loop_: School acts as a steady systemic antagonist: it does not remove agency, but continually restricts and corrects priorities through lessons, study, exams, and semester-failure risk. It should be visible, understandable, and escalating without becoming oppressive on any single day.
-_Novelty_: The hard fail state should result from readable long-term neglect, not one bad decision, so the architecture must support warnings, checkpoints, and regained control.
+**[UX Category #5]: Phone As Primary Game Hub**
+_Core Loop_: The phone acts as the main menu and central interaction surface, combining planning, navigation, social information, and private emotional surfaces.
+_Novelty_: Utilitarian planning and personal intimacy live in one consistent diegetic system.
 
-**[Category #6]**: Place-First Social Discovery
-_Core Loop_: Locations carry both practical and emotional functions; the player does not merely "go to the park", but builds a repeatable relationship with a place whose meaning changes with people, time, and previous scenes. The location architecture should support hotspots, route availability, social presence, and place memory.
-_Novelty_: Town exploration should stay compact but personal; places should remember context, not only offer actions.
+**[UX Category #6]: Lightweight Phone Overlay**
+_Core Loop_: The phone opens as a fast, hideable overlay that occupies about one third of the screen while freezing time and preserving the visible world behind it.
+_Novelty_: Deep phone functionality exists without breaking overworld flow or treating the phone as a separate mode.
 
-**[Category #7]**: Meaningful Incompleteness By Design
-_Core Loop_: The game should actively show what was not chosen: missed invites, unread posts, unseen places, unfinished arcs, and near-friendships. This is not failure reporting, but part of the run's identity.
-_Novelty_: The architecture must represent unchosen paths as a positively interpretable outcome, not just missing content.
+**[UX Category #7]: Deep-but-Fast Phone Information Architecture**
+_Core Loop_: The phone supports both shallow checks and deeper screens: calendar view, map view, conversation list and threads, profiles, and a memory album with fullscreen photo view.
+_Novelty_: A compact overlay still carries full-stack UI depth.
+
+**[UX Category #8]: Rich Always-On HUD**
+_Core Loop_: The base HUD keeps time, place, condition, and money visible so the player can read the day at a glance without reopening the phone constantly.
+_Novelty_: The HUD supports fast daily planning while leaving deeper systems to the phone.
+
+**[UX Category #9]: Portrait-Driven Dialogue Presentation**
+_Core Loop_: Dialogue uses classic 2D jRPG-style structure with textbox, nameplate, and high-quality portrait sprites visible almost always during conversations.
+_Novelty_: The presentation borrows jRPG readability and emotional staging without turning the overall genre into a jRPG.
+
+**[UX Category #10]: Full-Line Dialogue Choices Without Pre-Hints**
+_Core Loop_: The player sees full or near-full dialogue lines, chooses without tonal or relational preview hints, then reads consequences through character reaction and later phone surfaces.
+_Novelty_: Social interpretation lives after the choice, not in pre-labeled option tags.
+
+**[UX Category #11]: Lightweight Post-Dialogue Trace**
+_Core Loop_: Dialogue choices leave subtle but readable traces in later messages, profiles, availability, and future reactions, rather than direct HUD-based feedback.
+_Novelty_: Relationship consequences become socially legible through world response, not through immediate stat popups.
+
+**[UX Category #12]: Lightweight Confirmation For Time-Costing Actions**
+_Core Loop_: Every time-costing action gets a fast confirmation that highlights time cost and core risk without turning each action into a heavy modal interruption.
+_Novelty_: Time pressure remains explicit and fair, but flow stays brisk.
+
+**[UX Category #13]: Map-Led Travel With Stepwise Walking Discovery**
+_Core Loop_: Travel is chosen from the map, showing travel duration and arrival time, while walking can discover adjacent locations step by step.
+_Novelty_: The map is both a planner and a discovery surface.
+
+**[UX Category #14]: Classroom jRPG-Like Tension Loop**
+_Core Loop_: Lessons run as three 15-minute turns with a stable action menu, risk of failure, items, safe/risky/reactive actions, and semi-readable teacher attention.
+_Novelty_: Lessons borrow the tension structure of jRPG combat while remaining fictionally grounded as classroom life.
+
+**[UX Category #15]: Teacher Attention As Risk/Reward Surface**
+_Core Loop_: Some lesson actions interact with teacher attention; being watched can cause punishment if risky actions fail, but can also reward good play when the player uses attention well.
+_Novelty_: The teacher becomes a tactical pressure source rather than just passive lesson framing.
+
+**[UX Category #16]: Lesson Outcomes Fold Back Into Daily Life**
+_Core Loop_: Lessons do not end with a battle-results screen; instead, gains and losses feed smoothly into grades, stress, mood, and the rest of the school day.
+_Novelty_: A combat-shaped subsystem resolves in life-sim tone rather than combat tone.
 
 ---
 
 ## Themes and Patterns
 
-- School generates pressure; after-school generates identity.
-- Readable planning matters more than numeric transparency.
-- Presence, not completionism, should drive emotional payoff.
-- Relationships, places, and memory should converge in the ending layer.
-- Fairness depends on surfacing opportunity windows without over-explaining the world.
+- Progressive UX legibility is a core pillar, not a secondary flourish.
+- Fairness-critical systems should become clearer faster than social systems.
+- The phone is the structural center of the game's UX.
+- The HUD should support quick state reading, while the phone holds deeper planning and emotional information.
+- Relationship interpretation should remain socially grounded and non-numeric.
+- Dialogue should be expressive and portrait-forward, but not overloaded with meta guidance.
+- The game may look jRPG-adjacent, but only lessons borrow jRPG mechanics strongly.
+- Lessons are the biggest system differentiator and may require future GDD and architecture synchronization.
 
 ## Promising Combinations
 
-- `Phone As Fairness Layer` + `Meaningful Incompleteness By Design`
-- `Memory As Outcome Engine` + `Relationship Arcs As State Weaves`
-- `Place-First Social Discovery` + `Day As Emotional Funnel`
-- `Academic Pressure As Slow-Burn Antagonist` + checkpoint/recovery architecture
+- Progressive legibility + soft-language UI + phone hub
+- Rich HUD + lightweight phone overlay + frozen-time planning
+- Portrait-driven dialogue + no pre-hints + phone-based aftermath
+- Map-led travel + stepwise walking discovery + hidden locations as unknown entries
+- Lesson tension loop + teacher attention + life-sim consequence carryover
 
 ## Session Summary
 
 ### Most Promising Concepts
 
-**Top Pick: Memory As Outcome Engine**
-It sharpens the game's emotional differentiator. It gives the architecture a concrete way to interpret presence, absence, and incompleteness across relationships, places, and endings without collapsing into score-driven resolution.
+**Top Pick: Phone-Centered Progressive UX**
+This concept best unifies the game's planning, readability, and emotional tone. The phone becomes the primary game hub, while the player gradually earns deeper understanding of actions and systems through play instead of receiving spreadsheet-like transparency upfront.
 
-**Runner-up: Phone As Fairness Layer**
-It solves a central usability problem: how to make a rich stateful simulation planable without exposing it as raw optimization. It also ties strongly into the project's diegetic UX direction.
+**Runner-up: Classroom jRPG-Like Tension Loop**
+This is the strongest subsystem differentiator. It gives lessons a mechanically rich identity through turn structure, teacher attention, and risk/reward decisions while still resolving back into a grounded school-life rhythm.
 
-**Honorable Mention: Relationship Arcs As State Weaves**
-It provides the right shape for long-form closeness in this game: systemic enough for consistency, authored enough for emotional specificity.
+**Honorable Mention: Portrait-Driven Social Interpretation**
+This direction supports the narrative heart of the game. Dialogue remains expressive and emotionally legible through portraits and full-line choices, while relationship consequences stay interpretive and surface later through phone-based aftermath rather than pre-labeled hints.
 
 ### Key Insights
 
-- The most important architectural boundary is between pressure generation and identity expression: school creates constraints, after-school choices define the run.
-- The phone should be treated as infrastructure for fair planning, not just feature UI.
-- Memory should be modeled as an interpretive system that feeds summaries and endings, not only as flavor collectibles.
-- Relationship progression should combine descriptive stages with authored state and shared motifs.
-- Incompleteness should be represented as meaningful outcome data, not silent absence.
+- Progressive UX legibility should be treated as a first-class design pillar.
+- The phone is the structural center of both utilitarian planning and private social space.
+- Fairness-critical systems should communicate more clearly than emotional and social systems.
+- The game can present like a 2D jRPG while remaining mechanically a life sim outside lesson gameplay.
+- Lessons are now a major system identity and should later be synchronized with durable GDD and game-architecture contracts.
 
 ### Recommended Next Steps
 
-1. Translate these concepts into concrete architecture decisions for state domains, services, and data ownership.
-2. Update the Game Architecture Document so memory, phone fairness, relationship weave, and incompleteness are explicit architectural concerns.
-3. Review the durable document against the technical architecture doc to keep game-layer and engine-layer boundaries clean.
+1. Convert this session into a dedicated UX workspace with `DESIGN.md` and `EXPERIENCE.md` spines.
+2. Reconcile the lesson-loop direction against `docs/game-design.md` and `docs/game-architecture.md` before implementation work.
+3. Use the phone/HUD/dialogue decisions as the backbone for key-screen mockups and IA tables.
 
 ---
 
 ## Session Complete
 
 **Date:** 2026-06-14
-**Duration:** Brainstorming session
 **Participant:** Filip
 
 ### Output
 
 This brainstorming session generated:
 
-- 7 raw ideas
-- 7 developed concepts
-- 5 emerging themes
+- 16 raw ideas
+- 8+ developed concepts
+- 8 emerging themes
 
 ### Document Status
 
