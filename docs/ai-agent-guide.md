@@ -15,6 +15,9 @@ Before editing, read:
 - The owning document in `docs/` for the topic being changed.
 - `engine/_bmad-output/project-context.md`, `engine/README.md`, and
   `engine/AGENTS.md` before touching reusable engine code.
+- Use the appropriate context layer for the question at hand: `mem0` for stored
+  memory, `gitnexus` for codebase graph questions, and `hss-docs-rag`
+  (LlamaIndex over `docs/` and `_bmad-output/`) for documentation retrieval.
 
 ## Work Sequence
 
@@ -76,6 +79,12 @@ Before editing, read:
 - Keep durable project docs in `docs/`.
 - Keep root all-caps files as compatibility entrypoints only.
 - Keep `_bmad-output/project-context.md` lean and agent-focused.
+- Treat the local documentation RAG layer as a retrieval aid over canonical
+  project docs, not as a second source of truth. Update the owning document when
+  the contract changes.
+- Preferred context routing: `mem0` answers memory questions, `gitnexus`
+  answers code graph and impact questions, and `hss-docs-rag` answers questions
+  about BMAD docs, workflow docs, and `_bmad-output/` guidance.
 - Keep documentation, code-facing strings, comments, commit messages, and config
   in English unless a future localization contract says otherwise.
 - Do not recreate retired `docs/design/` or `docs/narrative/` folders unless the

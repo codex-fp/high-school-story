@@ -79,6 +79,9 @@ prevent drift from the game, engine, and documentation contracts.
   `engine/README.md`, and `engine/AGENTS.md` own reusable engine rules.
 - `docs/narrative-content.md` owns implementation-ready authored narrative
   content.
+- Local agent context layers are split intentionally: `mem0` for memory,
+  `gitnexus` for repository code knowledge graph queries, and `hss-docs-rag`
+  for documentation retrieval over `docs/` and `_bmad-output/`.
 - If implementation and docs disagree, update the owning document and code in
   the same change instead of adding a parallel note.
 
@@ -206,6 +209,9 @@ prevent drift from the game, engine, and documentation contracts.
 
 - Treat `.backlog/` task files as durable git-tracked project artifacts.
 - When work changes a `.backlog/` task file, stage and commit that task-file update together with the related repository change unless the user explicitly asks to keep it out of git.
+- When choosing retrieval tools inside Codex, prefer `hss-docs-rag` for
+  documentation questions, `gitnexus` for code structure and impact questions,
+  and `mem0` for long-lived memory recall.
 - During brainstorming workflows, show visible session progress for every question or topic.
 - Brainstorming progress should include the current question or topic number, the overall session position when known, and short labels in a checklist-style summary so the user can see what is done and what remains.
 

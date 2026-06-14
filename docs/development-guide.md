@@ -37,10 +37,24 @@ incomplete until the full game flow is implemented.
 - `docs/codex-mem0-selfhosted.md` documents the local mem0 MCP setup for Codex
   memory.
 - `docs/codex-gitnexus-selfhosted.md` documents the local GitNexus MCP setup for
-  Codex code knowledge-graph indexing.
+  Codex code knowledge-graph indexing and the optional official Web UI bridge.
+- `docs/codex-llamaindex-docs-rag.md` documents the local LlamaIndex plus
+  dedicated Qdrant setup for Codex documentation retrieval over `docs/` and
+  `_bmad-output/`.
 - GitNexus repository indexing is local-only. Keep `/.gitnexus/` out of git and
   preserve the repository-owned `AGENTS.md` by using `gitnexus analyze
   --skip-agents-md --skip-skills` for this project.
+- Use `gitnexus serve` when you want the official browser UI to inspect the
+  existing local index. Stop the serve process before reindexing or depending
+  on concurrent GitNexus CLI/MCP graph access.
+- Keep the documentation RAG state local under `/.docs-rag/` and run it against
+  a dedicated Qdrant instance on a different port than mem0. The repository
+  project-scoped Codex config expects the docs RAG instance at
+  `http://127.0.0.1:6334`.
+- Use the three Codex context layers intentionally: `mem0` for memory,
+  `gitnexus` for code structure and execution relationships, and
+  `hss-docs-rag` for durable project documentation in `docs/` and
+  `_bmad-output/`.
 
 ## Packaging
 
@@ -128,6 +142,9 @@ Globally opted-in APIs include `kotlin.ExperimentalContextParameters`,
 - Use `_bmad-output/project-context.md` as the compact agent context.
 - Update documentation before or with behavior, architecture, workflow, command,
   path, packaging, or narrative changes.
+- When the user asks documentation questions or cross-document contract checks,
+  prefer the documentation RAG layer before relying on memory or code search
+  alone.
 - Keep documentation and code-facing text in English.
 - Record verification evidence in the active `HSS-<number>` task.
 

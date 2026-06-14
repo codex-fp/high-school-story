@@ -32,7 +32,8 @@ this documentation set.
 | [component-inventory.md](component-inventory.md) | Implemented game objects, systems, assets, launchers, and previews. |
 | [narrative-content.md](narrative-content.md) | Implementation-ready authored narrative source for playable story beats and scripts. |
 | [ai-agent-guide.md](ai-agent-guide.md) | AI coding-agent operational contract. |
-| [codex-gitnexus-selfhosted.md](codex-gitnexus-selfhosted.md) | Local GitNexus setup for Codex code knowledge-graph indexing and MCP access. |
+| [codex-gitnexus-selfhosted.md](codex-gitnexus-selfhosted.md) | Local GitNexus setup for Codex code knowledge-graph indexing, MCP access, and the official Web UI bridge workflow. |
+| [codex-llamaindex-docs-rag.md](codex-llamaindex-docs-rag.md) | Local LlamaIndex plus dedicated Qdrant setup for Codex documentation RAG over `docs/` and `_bmad-output/`. |
 
 ## Quick Reference
 
@@ -44,6 +45,7 @@ this documentation set.
 - Sync engine checkout: `mani sync`
 - Lean agent context: `_bmad-output/project-context.md`
 - Local Codex code graph tooling: `docs/codex-gitnexus-selfhosted.md`
+- Local Codex documentation RAG tooling: `docs/codex-llamaindex-docs-rag.md`
 
 ## Source Of Truth Rules
 

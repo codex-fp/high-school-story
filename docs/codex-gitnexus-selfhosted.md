@@ -11,6 +11,7 @@ This project keeps GitNexus local:
 
 - MCP server: official `gitnexus` CLI
 - MCP transport: stdio through `gitnexus mcp`
+- Web UI bridge: official `gitnexus serve` local HTTP server
 - Repository index: `/.gitnexus/` inside this workspace
 - Global registry and MCP config: `~/.gitnexus/` and `~/.codex/config.toml`
 
@@ -84,6 +85,46 @@ gitnexus list
 If Codex was already running before `gitnexus setup`, restart Codex before the
 first live GitNexus MCP use.
 
+## Web UI Bridge
+
+GitNexus also supports the official browser UI without re-uploading or
+re-indexing this repository. Start the local bridge from the repository root:
+
+```bash
+source ~/.nvm/nvm.sh
+nvm use 24
+gitnexus serve
+```
+
+This starts the local HTTP bridge on `http://127.0.0.1:4747` by default. The
+official GitNexus Web UI can connect to that local server and browse the
+existing `high-school-story` index directly from `/.gitnexus/` and
+`~/.gitnexus/registry.json`.
+
+Practical local workflow:
+
+1. Ensure the repository index is already up to date with `gitnexus analyze`.
+2. Start `gitnexus serve`.
+3. Open the official browser UI and let it connect to the local server.
+4. Stop `gitnexus serve` before reindexing, running GitNexus CLI graph queries,
+   or depending on concurrent GitNexus MCP activity.
+
+## Operational Constraint: Local Database Locking
+
+Upstream GitNexus currently has a practical locking limitation when `gitnexus
+serve` is active: concurrent GitNexus CLI commands that open the same local
+database can fail with KuzuDB file-lock errors. Treat the Web UI bridge as a
+dedicated foreground workflow rather than something that should run alongside
+reindexing or heavy GitNexus CLI/MCP usage in the same repository.
+
+For this repository, use the following rule:
+
+- If you need the browser UI, run `gitnexus serve` and avoid parallel
+  `gitnexus analyze`, `gitnexus status`, `gitnexus query`, `gitnexus context`,
+  or other GitNexus-backed MCP operations until the serve process is stopped.
+- If you need to refresh the index or rely on GitNexus MCP queries in Codex,
+  stop the serve process first, then run the required command.
+
 ## Current Machine Status
 
 Verified on 2026-06-14:
@@ -95,6 +136,8 @@ Verified on 2026-06-14:
   `nvm`-managed CLI path.
 - `gitnexus analyze --skip-agents-md --force .` indexed this repository
   successfully in about `6.8s`.
+- `gitnexus serve --help` exposes the official Web UI bridge command with
+  default port `4747` and default host `127.0.0.1`.
 - `gitnexus status` reports the repository as up to date at commit `c36a42f`.
 - `gitnexus list` shows `high-school-story` with `123` indexed files, `1541`
   symbols, `1721` edges, `11` clusters, and `4` processes.
@@ -107,3 +150,6 @@ Verified on 2026-06-14:
 - GitNexus skipped `assets/maps/town.tmx` because it exceeded the default
   `512KB` large-file limit. Raise `GITNEXUS_MAX_FILE_SIZE` if that file needs to
   participate in the graph later.
+- The official browser UI is best treated as an on-demand exploration mode for
+  this local repository setup, not as a permanently running sidecar next to
+  GitNexus CLI/MCP activity.

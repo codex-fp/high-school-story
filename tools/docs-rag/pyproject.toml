@@ -1,0 +1,23 @@
+[project]
+name = "hss-docs-rag"
+version = "0.1.0"
+description = "Local LlamaIndex and Qdrant documentation RAG MCP server for High School Story."
+requires-python = ">=3.12"
+dependencies = [
+    "llama-index-core>=0.14.0",
+    "llama-index-embeddings-ollama>=0.8.0",
+    "llama-index-vector-stores-qdrant>=0.9.0",
+    "mcp>=1.20.0",
+    "qdrant-client>=1.11.0",
+]
+
+[project.scripts]
+hss-docs-rag-index = "hss_docs_rag.cli:main"
+hss-docs-rag-mcp = "hss_docs_rag.server:main"
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.package-dir]
+"" = "src"

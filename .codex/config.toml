@@ -1,3 +1,8 @@
 [mcp_servers.backlog]
 command = "backlog"
 args = ["mcp", "start"]
+
+[mcp_servers.hss-docs-rag]
+command = "uv"
+args = ["run", "--project", "tools/docs-rag", "hss-docs-rag-mcp"]
+env = { HSS_DOCS_RAG_COLLECTION = "high_school_story_docs", HSS_DOCS_RAG_DOC_PATHS = "docs,_bmad-output", HSS_DOCS_RAG_EMBED_BASE_URL = "http://127.0.0.1:11434", HSS_DOCS_RAG_EMBED_MODEL = "bge-m3:latest", HSS_DOCS_RAG_QDRANT_URL = "http://127.0.0.1:6334", HSS_DOCS_RAG_TOP_K = "5" }
