@@ -14,6 +14,7 @@ source_documents:
   - docs/project-overview.md
   - _bmad-output/project-context.md
   - _bmad-output/brainstorming-session-2026-06-09-game-architecture.md
+  - _bmad-output/brainstorming-session-2026-06-14.md
 promotion_note: >-
   Promoted from _bmad-output/game-architecture.md after review request. This
   document owns product/game architecture decisions that complement the
@@ -57,11 +58,18 @@ hybrid**:
 - The game state is the coordination surface for calendar, clock, player
   condition, money, grades, relationships, discovered locations, discovered
   preferences, phone data, story flags, memories, and save checkpoints.
+- The school block primarily generates pressure, hooks, and obligations, while
+  after-school freedom is the main identity-expression layer where the run
+  becomes personal.
 - Authoring units are small, state-aware beats rather than monolithic scripts:
   lessons, location actions, classmate arc beats, phone posts, messages, school
   events, club events, exam scenes, memory entries, and graduation epilogues.
 - Player-facing planning is diegetic through phone apps instead of abstract
-  debug panels.
+  debug panels; the phone is the fairness layer that makes the simulation
+  legible without turning it into exposed optimization math.
+- Memory is not only collectible flavor. It is an outcome engine that interprets
+  presence, absence, recurring motifs, and unfinished paths across semesters,
+  years, and graduation.
 - The engine provides rendering, ECS, maps, dialogue, input, preview, and
   infrastructure. High School Story owns product-specific simulation rules,
   content gates, pacing, and state interpretation.
@@ -272,9 +280,11 @@ Recommended minimum state per core classmate:
 - Relationship stage: stranger, acquaintance, comfortable, close, very close.
 - Arc progress by year or beat chain.
 - Discovered preferences and profile facts.
+- Trust signals or other small state markers that indicate whether the
+  relationship is opening, stabilizing, strained, or repairing.
 - Current known location and availability, when known.
 - Message state and invitation state.
-- Shared memories.
+- Shared memories and recurring motifs tied to people, places, or events.
 - Special bond: none, best friend, romance.
 - Conflict/repair tone, if relevant.
 - Final-year presence for ending interpretation.
@@ -302,10 +312,28 @@ The architecture should preserve meaningful incompleteness. A full run should
 support deep progress with about 3-5 classmate arcs, not completion of all 10.
 This is a content and pacing rule, not only a balance target.
 
+### Opportunity Surfacing Rule
+
+Relationship architecture should surface opportunity windows clearly enough that
+players can make intentional plans without being handed full route solutions.
+Important examples include:
+
+- Invitations and social hooks that are visible through messages, posts,
+  calendar entries, or known routines.
+- Availability hints that explain why someone is plausibly reachable now.
+- Readable soft blockers such as curfew, low money, low condition, or club
+  commitments.
+- Missed opportunities that remain visible afterward as memories, unread posts,
+  changed tone, or unavailable follow-up beats rather than disappearing without
+  trace.
+
 ## Phone And Information Architecture
 
 The phone is the main diegetic information layer. It should be implemented as a
-set of read models derived from game state and authored content.
+set of read models derived from game state and authored content. Its main
+architectural job is fairness: it should expose enough of the world that the
+player can form plans, compare tradeoffs, and understand why a choice matters,
+while still preserving uncertainty, discovery, and social texture.
 
 | App | Purpose | Primary Inputs |
 |---|---|---|
@@ -318,6 +346,18 @@ set of read models derived from game state and authored content.
 
 Phone content should be authored, lightweight, and state-aware. It should not
 become a simulated internet.
+
+### Phone Fairness Rules
+
+- Read models should prefer descriptive, player-facing interpretation over raw
+  system values when both are possible.
+- The phone may expose that an opportunity exists, is risky, or has likely
+  consequences without revealing hidden formulas or exact route solutions.
+- Different apps may expose the same underlying state at different resolutions:
+  the calendar shows commitment pressure, the map shows travel reality, and the
+  social layer shows interpersonal opportunity.
+- Phone information should help the player understand missed chances after the
+  fact, not only available chances before commitment.
 
 ## Location And Travel Architecture
 
@@ -332,6 +372,8 @@ Each recurring place should have:
 - Hotspots or interaction points.
 - Associated classmates, clubs, events, or arc beats.
 - Memory album hooks.
+- Context-sensitive meaning that can change with time, repetition, and who is
+  present there.
 
 Initial vertical-slice locations may be dormitory, school, district, shop, and
 park. The full game can expand toward roughly 15-25 discoverable destinations.
@@ -408,6 +450,21 @@ ending label:
 - Paths not taken.
 - Optional post-graduation glimpse.
 
+### Memory Interpretation Rules
+
+Memory should be treated as an interpretive layer over accumulated run state,
+not only a bucket of unlocked collectibles.
+
+- Memory records should preserve people-place-event motifs rather than only flat
+  scene IDs.
+- Repeated presence in the same place with the same person should be allowed to
+  build a stronger shared motif than unrelated one-off scenes.
+- Missed invitations, unfinished arcs, and altered routines may also create
+  memory-relevant absence markers when they help the ending interpret the run.
+- Graduation, semester summaries, and year transitions should read memory data
+  alongside academics, clubs, and relationship state rather than treating memory
+  as a separate bonus layer.
+
 ## Content Scaling Architecture
 
 The full game target is content-heavy. To keep expansion manageable, content
@@ -422,6 +479,9 @@ should scale by repeatable structures:
   availability hint, memory entry, academic notice.
 - Year transitions summarize accumulated state instead of requiring every
   possible path to have bespoke cutscenes.
+- Incompleteness should be represented intentionally through reusable absence
+  patterns such as missed invites, unread posts, unfinished motifs, and known
+  but unclosed relationship threads.
 
 The Year 1 Semester 1 slice should validate these structures with minimal
 content: five locations, five classmates, one fully supported lightweight arc,
@@ -491,6 +551,9 @@ future implementation tasks:
   separate state model.
 - Phone apps can drift into disconnected UI unless they are read models over the
   same canonical state.
+- The simulation can feel manipulative or opaque if the phone exposes too little
+  information to plan, or too much information to preserve mystery and social
+  texture.
 - Academic failure can feel unfair if grade risk and recovery checkpoints are not
   designed with the save architecture from the start.
 - Location expansion can dilute the game if new places do not have practical and
