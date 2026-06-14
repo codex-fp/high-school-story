@@ -32,6 +32,16 @@ submodule metadata locally before the first `mani sync`.
 Use `SandboxLauncher` for normal development iteration. Treat `MainLauncher` as
 incomplete until the full game flow is implemented.
 
+## Local Codex Tooling
+
+- `docs/codex-mem0-selfhosted.md` documents the local mem0 MCP setup for Codex
+  memory.
+- `docs/codex-gitnexus-selfhosted.md` documents the local GitNexus MCP setup for
+  Codex code knowledge-graph indexing.
+- GitNexus repository indexing is local-only. Keep `/.gitnexus/` out of git and
+  preserve the repository-owned `AGENTS.md` by using `gitnexus analyze
+  --skip-agents-md --skip-skills` for this project.
+
 ## Packaging
 
 Local packaging tasks:

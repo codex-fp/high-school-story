@@ -32,6 +32,7 @@ this documentation set.
 | [component-inventory.md](component-inventory.md) | Implemented game objects, systems, assets, launchers, and previews. |
 | [narrative-content.md](narrative-content.md) | Implementation-ready authored narrative source for playable story beats and scripts. |
 | [ai-agent-guide.md](ai-agent-guide.md) | AI coding-agent operational contract. |
+| [codex-gitnexus-selfhosted.md](codex-gitnexus-selfhosted.md) | Local GitNexus setup for Codex code knowledge-graph indexing and MCP access. |
 
 ## Quick Reference
 
@@ -42,6 +43,7 @@ this documentation set.
 - Format Kotlin/Gradle: `./gradlew ktlintFormat`
 - Sync engine checkout: `mani sync`
 - Lean agent context: `_bmad-output/project-context.md`
+- Local Codex code graph tooling: `docs/codex-gitnexus-selfhosted.md`
 
 ## Source Of Truth Rules
 
