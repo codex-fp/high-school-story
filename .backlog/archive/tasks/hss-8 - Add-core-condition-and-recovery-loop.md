@@ -4,17 +4,14 @@ title: Add core condition and recovery loop
 status: To Do
 assignee: []
 created_date: '2026-06-02 20:29'
-updated_date: '2026-06-02 20:36'
+updated_date: '2026-06-14 18:07'
 labels:
   - implementation
   - mvp
   - condition
   - balance
 milestone: m-1
-dependencies:
-  - HSS-2
-  - HSS-4
-  - HSS-5
+dependencies: []
 references:
   - DESIGN.md
 documentation:

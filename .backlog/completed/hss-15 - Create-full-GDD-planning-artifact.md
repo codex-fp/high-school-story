@@ -4,21 +4,13 @@ title: Create full GDD planning artifact
 status: Done
 assignee: []
 created_date: '2026-06-09 11:09'
-updated_date: '2026-06-09 11:19'
+updated_date: '2026-06-14 18:07'
 labels:
   - design
   - gdd
   - planning
 milestone: m-0
-dependencies:
-  - HSS-1
-  - HSS-2
-  - HSS-3
-  - HSS-4
-  - HSS-5
-  - HSS-6
-  - HSS-7
-  - HSS-8
+dependencies: []
 references:
   - docs/game-design.md
   - docs/project-overview.md

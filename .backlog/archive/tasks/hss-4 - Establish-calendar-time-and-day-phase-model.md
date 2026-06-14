@@ -4,16 +4,14 @@ title: Establish calendar time and day phase model
 status: To Do
 assignee: []
 created_date: '2026-06-02 20:28'
-updated_date: '2026-06-02 20:36'
+updated_date: '2026-06-14 18:07'
 labels:
   - implementation
   - mvp
   - time
   - core-systems
 milestone: m-1
-dependencies:
-  - HSS-1
-  - HSS-2
+dependencies: []
 references:
   - DESIGN.md
   - ARCHITECTURE.md

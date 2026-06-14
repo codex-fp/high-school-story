@@ -1,42 +1,39 @@
 ---
-id: HSS-6
-title: Add travel network and action validation for MVP locations
+id: HSS-5
+title: Build first playable weekday skeleton
 status: To Do
 assignee: []
-created_date: '2026-06-02 20:29'
-updated_date: '2026-06-02 20:36'
+created_date: '2026-06-02 20:28'
+updated_date: '2026-06-14 18:07'
 labels:
   - implementation
   - mvp
-  - travel
-  - validation
+  - gameplay-loop
 milestone: m-1
-dependencies:
-  - HSS-4
-  - HSS-5
+dependencies: []
 references:
   - DESIGN.md
-  - ARCHITECTURE.md
+  - README.md
 documentation:
   - DESIGN.md
-  - ARCHITECTURE.md
 priority: high
-ordinal: 6000
+ordinal: 5000
 ---
 
 ## Description
 
 <!-- SECTION:DESCRIPTION:BEGIN -->
-Implement location-to-location travel and pre-action validation for the MVP spaces so time pressure becomes readable and the player cannot accidentally violate school attendance or return-time rules without explicit rule-breaking support.
+Create the first coherent weekday loop that starts in the dormitory, transitions into the school block, exposes afternoon and evening free time, and ends with enforced return and automatic sleep. This task should prove the shape of the daily rhythm even if some actions still use placeholder content.
 <!-- SECTION:DESCRIPTION:END -->
 
 ## Acceptance Criteria
 <!-- AC:BEGIN -->
-- [ ] #1 Dormitory school district shop and park exist as valid gameplay locations even if some use placeholder presentation
-- [ ] #2 Travel shows destination duration and expected arrival time
-- [ ] #3 Impossible actions or travel are blocked before confirmation
-- [ ] #4 Risky actions give readable warnings where allowed
-- [ ] #5 School attendance and return-to-dorm boundaries are enforced
+- [ ] #1 A weekday starts in the dormitory at 06:00
+- [ ] #2 Morning supports at least one meaningful action before school
+- [ ] #3 The school block is entered through a clear transition
+- [ ] #4 Afternoon and evening free time exist after school
+- [ ] #5 The player must return to the dormitory by 21:00
+- [ ] #6 Sleep occurs automatically at 22:00
 <!-- AC:END -->
 
 ## Definition of Done
