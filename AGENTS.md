@@ -37,6 +37,20 @@ lives in `docs/` and the lean execution context lives in
 If docs and code disagree, update the owning document and implementation in the
 same change. Do not add parallel notes that leave conflicting guidance in place.
 
+## Context Routing Rules
+
+- Use `mem0` for prior-session decisions, user preferences, and long-lived
+  project memory.
+- For documentation questions, workflow rules, owner-document lookup, or BMAD
+  guidance, call `hss-docs-rag` before reading files directly.
+- For code understanding, execution tracing, impact analysis, review, or
+  refactoring questions, call `gitnexus` before using filesystem search.
+- After MCP retrieval, read the returned owner documents or source files needed
+  for exact implementation and verification.
+- Fall back to direct filesystem search and file reads when MCP results are
+  unavailable, stale, too noisy, or when exact line-level verification is
+  required.
+
 ## Task And Traceability Rules
 
 - Task IDs use `HSS-<number>`.

@@ -15,20 +15,49 @@ Before editing, read:
 - The owning document in `docs/` for the topic being changed.
 - `engine/_bmad-output/project-context.md`, `engine/README.md`, and
   `engine/AGENTS.md` before touching reusable engine code.
-- Use the appropriate context layer for the question at hand: `mem0` for stored
-  memory, `gitnexus` for codebase graph questions, and `hss-docs-rag`
-  (LlamaIndex over `docs/` and `_bmad-output/`) for documentation retrieval.
+- Use the appropriate context layer for the question at hand:
+  - `mem0` for stored memory, prior decisions, and user preferences.
+  - `hss-docs-rag` first for documentation questions, workflow rules,
+    owner-document lookup, and `_bmad-output/` guidance.
+  - `gitnexus` first for codebase graph questions, execution tracing, impact
+    analysis, code review, and refactoring.
 
 ## Work Sequence
 
 1. Confirm the intended behavior or contract.
 2. Run `git fetch origin` before substantial repository work.
-3. Inspect the relevant code, docs, and game/engine boundary.
-4. Update the owning documentation before or with contract changes.
-5. Implement the smallest coherent change.
-6. Run relevant verification or explain why it is not applicable.
-7. Record changed files, commands, observed results, and residual risk in the
+3. Route the question through the right MCP context layer before broad
+   filesystem search:
+   - Documentation or workflow question: call `hss-docs-rag`.
+   - Code understanding or blast-radius question: call `gitnexus`.
+   - Prior-decision or preference question: call `mem0`.
+4. Inspect the relevant code, docs, and game/engine boundary.
+5. Update the owning documentation before or with contract changes.
+6. Implement the smallest coherent change.
+7. Run relevant verification or explain why it is not applicable.
+8. Record changed files, commands, observed results, and residual risk in the
    final handoff and active backlog task.
+
+## MCP Routing Rules
+
+- Call `hss-docs-rag` before direct file reads when you need owner documents,
+  workflow instructions, architecture contracts, gameplay rules, UX rules,
+  narrative guidance, or `_bmad-output/` context.
+- Call `gitnexus` before `rg` or ad hoc file browsing when you need code
+  structure, execution flow, symbol relationships, impact analysis, review
+  surface, or refactoring context.
+- After MCP retrieval, open the returned owner documents or source files needed
+  for exact implementation details, edits, and verification.
+- Fall back to direct filesystem search and file reads when:
+  - MCP results are unavailable.
+  - The GitNexus index is stale and refreshing it is not practical in the
+    current turn.
+  - RAG results are too noisy or do not surface the owner document you need.
+  - Exact line-level wording or source verification is required before editing
+    or quoting.
+- Prefer `rg` and direct file reads as a verification layer after MCP routing,
+  not as the default first step for non-trivial documentation or codebase
+  understanding questions.
 
 ## Task Tracking
 
@@ -82,9 +111,10 @@ Before editing, read:
 - Treat the local documentation RAG layer as a retrieval aid over canonical
   project docs, not as a second source of truth. Update the owning document when
   the contract changes.
-- Preferred context routing: `mem0` answers memory questions, `gitnexus`
-  answers code graph and impact questions, and `hss-docs-rag` answers questions
-  about BMAD docs, workflow docs, and `_bmad-output/` guidance.
+- Context routing is operational, not optional: `mem0` answers memory
+  questions, `gitnexus` is the first stop for code graph and impact questions,
+  and `hss-docs-rag` is the first stop for BMAD docs, workflow docs, and
+  `_bmad-output/` guidance.
 - Keep documentation, code-facing strings, comments, commit messages, and config
   in English unless a future localization contract says otherwise.
 - Keep owner documents under the indexed `docs/game/`, `docs/engineering/`, and

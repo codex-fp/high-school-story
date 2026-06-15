@@ -69,6 +69,7 @@ prevent drift from the game, engine, and documentation contracts.
 - `docs/project-overview.md` owns product summary and current status.
 - `docs/game/brief.md` owns the product-level brief and full-game promise.
 - `docs/game/gdd.md` owns product scope and gameplay rules.
+- `docs/agent/guide.md` owns the AI-agent operational contract.
 - `docs/game/ux/design.md` owns durable UX visual identity and UI presentation
   decisions.
 - `docs/game/ux/experience.md` owns durable UX information architecture, HUD, phone,
@@ -86,6 +87,9 @@ prevent drift from the game, engine, and documentation contracts.
   `engine/README.md`, and `engine/AGENTS.md` own reusable engine rules.
 - `docs/game/narrative/content.md` owns implementation-ready authored narrative
   content.
+- `docs/agent/code-knowledge-graph.md`,
+  `docs/agent/documentation-rag.md`, and `docs/agent/local-memory.md` own local
+  agent-tooling setup for retrieval layers.
 - Local agent context layers are split intentionally: `mem0` for memory,
   `gitnexus` for repository code knowledge graph queries, and `hss-docs-rag`
   for documentation retrieval over `docs/` and `_bmad-output/`.
@@ -216,9 +220,16 @@ prevent drift from the game, engine, and documentation contracts.
 
 - Treat `.backlog/` task files as durable git-tracked project artifacts.
 - When work changes a `.backlog/` task file, stage and commit that task-file update together with the related repository change unless the user explicitly asks to keep it out of git.
-- When choosing retrieval tools inside the active client, prefer `hss-docs-rag` for
-  documentation questions, `gitnexus` for code structure and impact questions,
-  and `mem0` for long-lived memory recall.
+- When choosing retrieval tools inside the active client, use `hss-docs-rag`
+  first for documentation questions, workflow rules, owner-document lookup, and
+  `_bmad-output/` guidance.
+- Use `gitnexus` first for code understanding, execution tracing, impact
+  analysis, review, and refactoring questions.
+- Use `mem0` for long-lived memory recall, prior decisions, and user
+  preferences.
+- Fall back to filesystem search and direct file reads when MCP retrieval is
+  unavailable, stale, too noisy, or when exact line-level verification is
+  required before editing.
 - During brainstorming workflows, show visible session progress for every question or topic.
 - Brainstorming progress should include the current question or topic number, the overall session position when known, and short labels in a checklist-style summary so the user can see what is done and what remains.
 
