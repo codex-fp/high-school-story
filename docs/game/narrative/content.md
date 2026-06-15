@@ -4,8 +4,7 @@
 
 This document is the BMAD-native source for implementation-ready authored
 narrative content in High School Story. Full-game narrative design lives in
-`docs/narrative-design.md`. This document replaces the previous
-`docs/narrative/` split for playable scripts and should be updated before or
+`docs/game/narrative/design.md`. This document should be updated before or
 with changes to authored story beats.
 
 ## Intro: Arrival To Lakeview

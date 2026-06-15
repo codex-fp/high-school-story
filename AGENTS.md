@@ -10,7 +10,7 @@ lives in `docs/` and the lean execution context lives in
 1. `_bmad-output/project-context.md` for compact implementation rules.
 2. `.backlog/tasks/` active task, using the `HSS-<number>` task ID.
 3. `docs/index.md` for the documentation map.
-4. `docs/ai-agent-guide.md` for operational rules.
+4. `docs/agent/guide.md` for operational rules.
 5. Topic owner document in `docs/` before changing behavior, architecture,
    design, workflow, or authored content.
 
@@ -19,17 +19,19 @@ lives in `docs/` and the lean execution context lives in
 | Topic | Owner |
 |---|---|
 | Project overview and status | `docs/project-overview.md` |
-| Technical architecture and engine boundary | `docs/architecture.md` |
-| Game architecture and simulation structure | `docs/game-architecture.md` |
-| MVP gameplay and product design | `docs/game-design.md` |
-| UX visual identity and UI presentation | `docs/ux-design.md` |
-| UX behavior, information architecture, and interaction rules | `docs/ux-experience.md` |
-| Full-game narrative design | `docs/narrative-design.md` |
-| Setup, verification, packaging, workflow | `docs/development-guide.md` |
-| Code and documentation conventions | `docs/ai-agent-guide.md` and `docs/development-guide.md` |
-| Source tree and module layout | `docs/source-tree-analysis.md` |
-| Implemented components and assets | `docs/component-inventory.md` |
-| Implementation-ready authored narrative content | `docs/narrative-content.md` |
+| Product brief and full-game promise | `docs/game/brief.md` |
+| Technical architecture and engine boundary | `docs/engineering/architecture.md` |
+| Game architecture and simulation structure | `docs/game/architecture.md` |
+| Gameplay design and GDD | `docs/game/gdd.md` |
+| UX visual identity and UI presentation | `docs/game/ux/design.md` |
+| UX behavior, information architecture, and interaction rules | `docs/game/ux/experience.md` |
+| Full-game narrative design | `docs/game/narrative/design.md` |
+| Implementation-ready authored narrative content | `docs/game/narrative/content.md` |
+| Setup, verification, packaging, workflow | `docs/engineering/development-guide.md` |
+| Code and documentation conventions | `docs/agent/guide.md` and `docs/engineering/development-guide.md` |
+| Source tree and module layout | `docs/engineering/source-tree.md` |
+| Implemented components and assets | `docs/engineering/component-inventory.md` |
+| Local agent tooling and retrieval layers | `docs/agent/` |
 | Reusable engine rules | `engine/_bmad-output/project-context.md`, `engine/README.md`, and `engine/AGENTS.md` |
 
 If docs and code disagree, update the owning document and implementation in the

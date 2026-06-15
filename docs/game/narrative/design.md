@@ -8,8 +8,8 @@ status: 'promoted'
 narrativeComplexity: 'Heavy'
 task_id: 'HSS-24'
 source_inputs:
-  - docs/game-design.md
-  - docs/narrative-content.md
+  - docs/game/gdd.md
+  - docs/game/narrative/content.md
   - _bmad-output/brainstorming-session-2026-06-13.md
   - _bmad-output/narrative-design.md
 ---
@@ -164,7 +164,7 @@ Opening principles:
 - The room should be quiet enough for anxiety and anticipation to land before
   sleep.
 
-The implementation-ready version of this intro lives in `docs/narrative-content.md`.
+The implementation-ready version of this intro lives in `docs/game/narrative/content.md`.
 
 ## Protagonist
 

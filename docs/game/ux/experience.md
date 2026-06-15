@@ -7,11 +7,11 @@ version: '1.0'
 status: 'promoted'
 task_id: 'HSS-35'
 source_documents:
-  - docs/game-brief.md
-  - docs/game-design.md
-  - docs/game-architecture.md
-  - docs/narrative-design.md
-  - docs/architecture.md
+  - docs/game/brief.md
+  - docs/game/gdd.md
+  - docs/game/architecture.md
+  - docs/game/narrative/design.md
+  - docs/engineering/architecture.md
   - docs/project-overview.md
   - _bmad-output/brainstorming-session-2026-06-14.md
   - _bmad-output/planning-artifacts/ux-designs/ux-High School Story-2026-06-14/EXPERIENCE.md
@@ -28,7 +28,7 @@ promotion_note: >-
 
 This is the durable UX behavior and information-architecture source of truth for
 High School Story. It owns how the interface behaves across the HUD, phone,
-dialogue, travel planning, and lesson systems. It complements `docs/ux-design.md`,
+dialogue, travel planning, and lesson systems. It complements `docs/game/ux/design.md`,
 which owns visual identity and presentation tokens.
 
 This document intentionally captures the accepted UX contract rather than
@@ -40,7 +40,7 @@ document is the durable UX owner.
 
 High School Story is a desktop-first 2D school-life simulation built on tilemap
 navigation, dialogue, authored content, and menu-heavy planning.
-`docs/ux-design.md` is the visual identity reference; this spine defines how
+`docs/game/ux/design.md` is the visual identity reference; this spine defines how
 the interface behaves.
 
 The default interaction posture is:

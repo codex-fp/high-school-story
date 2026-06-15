@@ -32,14 +32,14 @@ submodule metadata locally before the first `mani sync`.
 Use `SandboxLauncher` for normal development iteration. Treat `MainLauncher` as
 incomplete until the full game flow is implemented.
 
-## Local Codex Tooling
+## Local Agent Tooling
 
-- `docs/codex-mem0-selfhosted.md` documents the local mem0 MCP setup for Codex
+- `docs/agent/local-memory.md` documents the local mem0 MCP setup for agent
   memory.
-- `docs/codex-gitnexus-selfhosted.md` documents the local GitNexus MCP setup for
-  Codex code knowledge-graph indexing and the optional official Web UI bridge.
-- `docs/codex-llamaindex-docs-rag.md` documents the local LlamaIndex plus
-  dedicated Qdrant setup for Codex documentation retrieval over `docs/` and
+- `docs/agent/code-knowledge-graph.md` documents the local GitNexus MCP setup
+  for code knowledge-graph indexing and the optional official Web UI bridge.
+- `docs/agent/documentation-rag.md` documents the local LlamaIndex plus
+  dedicated Qdrant setup for documentation retrieval over `docs/` and
   `_bmad-output/`.
 - GitNexus repository indexing is local-only. Keep `/.gitnexus/` out of git and
   preserve the repository-owned `AGENTS.md` by using `gitnexus analyze
@@ -49,9 +49,9 @@ incomplete until the full game flow is implemented.
   on concurrent GitNexus CLI/MCP graph access.
 - Keep the documentation RAG state local under `/.docs-rag/` and run it against
   a dedicated Qdrant instance on a different port than mem0. The repository
-  project-scoped Codex config expects the docs RAG instance at
+  project-scoped client config expects the docs RAG instance at
   `http://127.0.0.1:6334`.
-- Use the three Codex context layers intentionally: `mem0` for memory,
+- Use the three agent context layers intentionally: `mem0` for memory,
   `gitnexus` for code structure and execution relationships, and
   `hss-docs-rag` for durable project documentation in `docs/` and
   `_bmad-output/`.

@@ -7,11 +7,11 @@ version: '1.0'
 status: 'promoted'
 task_id: 'HSS-35'
 source_documents:
-  - docs/game-brief.md
-  - docs/game-design.md
-  - docs/game-architecture.md
-  - docs/narrative-design.md
-  - docs/architecture.md
+  - docs/game/brief.md
+  - docs/game/gdd.md
+  - docs/game/architecture.md
+  - docs/game/narrative/design.md
+  - docs/engineering/architecture.md
   - docs/project-overview.md
   - _bmad-output/brainstorming-session-2026-06-14.md
   - _bmad-output/planning-artifacts/ux-designs/ux-High School Story-2026-06-14/DESIGN.md
@@ -112,7 +112,7 @@ components:
 This is the durable UX visual-identity source of truth for High School Story. It
 owns how the user interface should look, read, and stage attention across the
 HUD, phone overlay, dialogue presentation, travel planning, and lesson
-subsystems. It complements `docs/ux-experience.md`, which owns behavioral UX
+subsystems. It complements `docs/game/ux/experience.md`, which owns behavioral UX
 rules and information architecture.
 
 The current token layer includes explicit assumptions where the UX workflow

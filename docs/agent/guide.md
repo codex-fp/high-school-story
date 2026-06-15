@@ -1,4 +1,4 @@
-# AI Agent Guide
+# Agent Guide
 
 ## Purpose
 
@@ -87,8 +87,9 @@ Before editing, read:
   about BMAD docs, workflow docs, and `_bmad-output/` guidance.
 - Keep documentation, code-facing strings, comments, commit messages, and config
   in English unless a future localization contract says otherwise.
-- Do not recreate retired `docs/design/` or `docs/narrative/` folders unless the
-  BMAD-native documentation model is intentionally changed.
+- Keep owner documents under the indexed `docs/game/`, `docs/engineering/`, and
+  `docs/agent/` structure unless the documentation model is intentionally
+  changed and the owner map is updated in the same change.
 
 ## Verification Evidence Template
 

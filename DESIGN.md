@@ -1,7 +1,7 @@
 # DESIGN.md
 
 This compatibility file has been replaced by the BMAD-native game design
-contract at [docs/game-design.md](docs/game-design.md).
+contract at [docs/game/gdd.md](docs/game/gdd.md).
 
 Use that file as the canonical product and gameplay source of truth. It covers:
 
@@ -11,4 +11,4 @@ Use that file as the canonical product and gameplay source of truth. It covers:
   condition, recovery, and location roles.
 - MVP acceptance criteria, current design status, and open design questions.
 
-Authored story content lives in [docs/narrative-content.md](docs/narrative-content.md).
+Authored story content lives in [docs/game/narrative/content.md](docs/game/narrative/content.md).

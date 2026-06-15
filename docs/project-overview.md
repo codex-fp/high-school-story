@@ -41,28 +41,30 @@ Engine 2D implementation and conventions belong in `engine/`.
 This project uses BMAD/GDS documentation conventions:
 
 - `docs/index.md` is the master documentation entrypoint.
-- `docs/game-brief.md` is the durable product-level brief and canonical full-game
+- `docs/game/brief.md` is the durable product-level brief and canonical full-game
   promise.
-- `docs/game-design.md` is the durable full-game-first GDD and canonical
+- `docs/game/gdd.md` is the durable full-game-first GDD and canonical
   gameplay design source.
-- `docs/ux-design.md` owns durable UX visual identity and presentation rules.
-- `docs/ux-experience.md` owns durable UX interaction, IA, and behavior rules.
+- `docs/game/ux/design.md` owns durable UX visual identity and presentation rules.
+- `docs/game/ux/experience.md` owns durable UX interaction, IA, and behavior rules.
+- `docs/engineering/architecture.md` owns technical architecture and engine
+  boundaries.
 - `_bmad-output/project-context.md` is optimized for AI-agent context loading.
 - `.backlog/` stores task traceability with `HSS-<number>` IDs.
 - Root compatibility files point to the canonical BMAD-native documents.
 
 ## Current Product Status
 
-The project has a promoted durable product brief in `docs/game-brief.md` and a
-promoted full-game-first durable GDD in `docs/game-design.md`. The project now
-also has promoted durable UX documentation in `docs/ux-design.md` and
-`docs/ux-experience.md`, establishing the phone-centered UX, rich HUD, dialogue
-presentation rules, travel UX, and lesson-interface contract. Remaining design
-work is concentrated in social profile categories, final visual direction
-choices, balancing assumptions, and the delivery path from the Year 1 Semester 1
-vertical slice to the full three-year product. Implementation is still early and
-centered on engine integration, previews, game objects, map loading, and
-intro-beat wiring.
+The project has a promoted durable product brief in `docs/game/brief.md` and a
+promoted full-game-first durable GDD in `docs/game/gdd.md`. The project now
+also has promoted durable UX documentation in `docs/game/ux/design.md` and
+`docs/game/ux/experience.md`, establishing the phone-centered UX, rich HUD,
+dialogue presentation rules, travel UX, and lesson-interface contract.
+Remaining design work is concentrated in social profile categories, final visual
+direction choices, balancing assumptions, and the delivery path from the Year 1
+Semester 1 vertical slice to the full three-year product. Implementation is
+still early and centered on engine integration, previews, game objects, map
+loading, and intro-beat wiring.
 
 ## Current Risks
 

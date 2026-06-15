@@ -1,7 +1,7 @@
 # ARCHITECTURE.md
 
 This compatibility file has been replaced by the BMAD-native architecture
-documentation at [docs/architecture.md](docs/architecture.md).
+documentation at [docs/engineering/architecture.md](docs/engineering/architecture.md).
 
 Use that file as the canonical game-layer architecture contract. It covers:
 

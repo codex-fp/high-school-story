@@ -62,19 +62,19 @@ On Windows, use `gradlew.bat` with the same tasks.
 - [docs/index.md](docs/index.md) - master BMAD-native documentation index.
 - [docs/project-overview.md](docs/project-overview.md) - product, scope, and
   current status.
-- [docs/architecture.md](docs/architecture.md) - game-layer architecture and
-  boundaries.
-- [docs/game-design.md](docs/game-design.md) - full-game-first GDD and gameplay
+- [docs/game/gdd.md](docs/game/gdd.md) - full-game-first GDD and gameplay
   rules.
-- [docs/development-guide.md](docs/development-guide.md) - setup, build,
+- [docs/engineering/architecture.md](docs/engineering/architecture.md) - technical architecture and
+  engine boundaries.
+- [docs/engineering/development-guide.md](docs/engineering/development-guide.md) - setup, build,
   testing, packaging, and workflow.
-- [docs/source-tree-analysis.md](docs/source-tree-analysis.md) - repository and
+- [docs/engineering/source-tree.md](docs/engineering/source-tree.md) - repository and
   source layout.
-- [docs/component-inventory.md](docs/component-inventory.md) - current game
+- [docs/engineering/component-inventory.md](docs/engineering/component-inventory.md) - current game
   components, scenes, assets, and previews.
-- [docs/narrative-content.md](docs/narrative-content.md) - narrative content
+- [docs/game/narrative/content.md](docs/game/narrative/content.md) - narrative content
   source for the implemented intro arc.
-- [docs/ai-agent-guide.md](docs/ai-agent-guide.md) - operational rules for AI
+- [docs/agent/guide.md](docs/agent/guide.md) - operational rules for AI
   coding agents.
 
 Compatibility files `AGENTS.md`, `ARCHITECTURE.md`, `DESIGN.md`, and

@@ -1,6 +1,6 @@
-# Local LlamaIndex Documentation RAG For Codex
+# Local Documentation RAG Setup
 
-High School Story uses a third local Codex context layer for documentation
+High School Story uses a third local AI-agent context layer for documentation
 retrieval:
 
 - `mem0` stores memory.
@@ -52,7 +52,7 @@ binary on this machine:
 
 This gives the docs RAG its own container, port, and persistent volume.
 
-## Project-Scoped Codex Registration
+## Project-Scoped Client Registration
 
 This repository includes a project-scoped `.codex/config.toml` entry:
 
@@ -66,8 +66,8 @@ env = { HSS_DOCS_RAG_COLLECTION = "high_school_story_docs", HSS_DOCS_RAG_DOC_PAT
 Because this lives in `.codex/config.toml`, the server is scoped to this trusted
 project instead of becoming another machine-global MCP registration.
 
-If Codex was already running before this file changed, restart Codex before the
-first live `hss-docs-rag` tool call.
+If the active client was already running before this file changed, restart it
+before the first live `hss-docs-rag` tool call.
 
 ## Install And Rebuild The Index
 
@@ -108,7 +108,7 @@ Run a local retrieval check:
 uv run --project tools/docs-rag hss-docs-rag-index search "source of truth for gameplay design"
 ```
 
-Check the project-scoped Codex MCP registration:
+Check the project-scoped client MCP registration:
 
 ```bash
 codex mcp list
@@ -124,11 +124,11 @@ Use the context layers deliberately:
   codebase structure.
 - Use `hss-docs-rag` for repository documentation, especially:
   - `_bmad-output/project-context.md`
-  - `docs/ai-agent-guide.md`
-  - `docs/architecture.md`
-  - `docs/game-design.md`
-  - `docs/narrative-design.md`
-  - `docs/development-guide.md`
+  - `docs/agent/guide.md`
+  - `docs/engineering/architecture.md`
+  - `docs/game/gdd.md`
+  - `docs/game/narrative/design.md`
+  - `docs/engineering/development-guide.md`
 
 If retrieved documentation conflicts with implementation, update the owning
 document and implementation in the same change. The RAG layer helps find the

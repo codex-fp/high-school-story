@@ -1,8 +1,8 @@
 # STYLEGUIDE.md
 
 This compatibility file has been replaced by BMAD-native implementation guidance
-in [docs/development-guide.md](docs/development-guide.md) and
-[docs/ai-agent-guide.md](docs/ai-agent-guide.md).
+in [docs/engineering/development-guide.md](docs/engineering/development-guide.md) and
+[docs/agent/guide.md](docs/agent/guide.md).
 
 Use those files as the canonical style and workflow contract. They cover:
 

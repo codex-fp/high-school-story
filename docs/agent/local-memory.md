@@ -1,7 +1,7 @@
-# Local mem0-mcp-selfhosted Integration For Codex
+# Local Memory MCP Setup
 
 High School Story uses `mem0-mcp-selfhosted` as the local memory MCP server for
-Codex. This keeps the memory layer out of Mem0 Cloud:
+AI-agent tooling. This keeps the memory layer out of Mem0 Cloud:
 
 - MCP server: `elvismdev/mem0-mcp-selfhosted`
 - MCP transport: stdio through `uvx`
@@ -56,7 +56,7 @@ After the Ollama container is running, pull the required local models:
 "/mnt/c/Program Files/Docker/Docker/resources/bin/docker.exe" exec hss-ollama ollama pull bge-m3
 ```
 
-## Codex Registration
+## Client Registration On This Machine
 
 Register the MCP server:
 
@@ -75,13 +75,13 @@ codex mcp add hss-mem0 \
   -- uvx --from git+https://github.com/elvismdev/mem0-mcp-selfhosted.git mem0-mcp-selfhosted
 ```
 
-Codex stores the registration in `~/.codex/config.toml`. On this machine that
-file is symlinked to
+The active client on this machine stores the registration in
+`~/.codex/config.toml`. That file is symlinked to
 `/mnt/c/Users/fpiec/IdeaProjects/codex-fp/codex-home/config.toml`.
 
 ## Verification
 
-Check the Codex registration:
+Check the client registration:
 
 ```bash
 codex mcp list
@@ -95,8 +95,8 @@ curl http://localhost:6333/healthz
 curl http://localhost:11434/api/tags
 ```
 
-Once both services are running, restart Codex and use the `hss-mem0` MCP tools
-to add and search a small test memory.
+Once both services are running, restart the client and use the `hss-mem0` MCP
+tools to add and search a small test memory.
 
 Current machine status on 2026-06-14:
 
@@ -107,8 +107,8 @@ Current machine status on 2026-06-14:
   returns `healthz check passed`.
 - Ollama is running in Docker as `hss-ollama`; `curl http://localhost:11434/api/tags`
   lists `qwen3:14b` and `bge-m3:latest`.
-- The current Codex session does not dynamically load MCP servers added after
-  startup. Restart Codex before the first live `hss-mem0` MCP tool call.
+- The current client session does not dynamically load MCP servers added after
+  startup. Restart the client before the first live `hss-mem0` MCP tool call.
 
 ## Notes
 

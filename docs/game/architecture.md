@@ -7,10 +7,10 @@ version: '1.0'
 status: 'promoted'
 task_id: 'HSS-29'
 source_documents:
-  - docs/game-brief.md
-  - docs/game-design.md
-  - docs/narrative-design.md
-  - docs/architecture.md
+  - docs/game/brief.md
+  - docs/game/gdd.md
+  - docs/game/narrative/design.md
+  - docs/engineering/architecture.md
   - docs/project-overview.md
   - _bmad-output/project-context.md
   - _bmad-output/brainstorming-session-2026-06-09-game-architecture.md
@@ -31,7 +31,7 @@ structured as a playable social simulation, how gameplay systems relate to each
 other, and which architectural decisions should keep future implementation
 consistent.
 
-It complements `docs/architecture.md`. The technical architecture document still
+It complements `docs/engineering/architecture.md`. The technical architecture document still
 owns Kotlin Game Engine 2D integration, game/engine boundaries, runtime
 composition, package rules, launchers, and preview tooling. This document owns
 product-facing game architecture: discrete-time simulation, game state, daily
@@ -426,9 +426,9 @@ risk.
 
 Authoring should preserve source-of-truth boundaries:
 
-- `docs/narrative-content.md` owns implementation-ready authored prose until a
+- `docs/game/narrative/content.md` owns implementation-ready authored prose until a
   more structured content pipeline exists.
-- `docs/narrative-design.md` owns narrative design principles and classmate arc
+- `docs/game/narrative/design.md` owns narrative design principles and classmate arc
   foundations.
 - Code should implement accepted content; it should not silently invent canon.
 

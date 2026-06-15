@@ -1,11 +1,12 @@
-# Local GitNexus Integration For Codex
+# Local Code Knowledge Graph Setup
 
-High School Story uses GitNexus as a local code knowledge graph for Codex. This
+High School Story uses GitNexus as a local code knowledge graph for AI-agent
+tooling. This
 is separate from `mem0-mcp-selfhosted`:
 
 - `mem0` stores user or workspace memory.
 - GitNexus indexes the repository structure, symbols, edges, clusters, and flows
-  so Codex can query code relationships through MCP.
+  so agent tooling can query code relationships through MCP.
 
 This project keeps GitNexus local:
 
@@ -13,7 +14,7 @@ This project keeps GitNexus local:
 - MCP transport: stdio through `gitnexus mcp`
 - Web UI bridge: official `gitnexus serve` local HTTP server
 - Repository index: `/.gitnexus/` inside this workspace
-- Global registry and MCP config: `~/.gitnexus/` and `~/.codex/config.toml`
+- Global registry and active-client MCP config: `~/.gitnexus/` and `~/.codex/config.toml`
 
 ## Prerequisites
 
@@ -24,7 +25,7 @@ This project keeps GitNexus local:
 This machine also has system `node v20.20.2`, but GitNexus `1.6.7` requires
 `node >=22`, so run GitNexus commands through `nvm`.
 
-## Codex Registration
+## Client Registration On This Machine
 
 Install GitNexus under the `nvm` Node runtime and run the one-time setup:
 
@@ -37,7 +38,7 @@ gitnexus setup
 
 `gitnexus setup` updates `~/.codex/config.toml` with a stable absolute-path MCP
 command instead of using a cold-start `npx` invocation. On this machine the
-Codex registration is:
+active-client registration is:
 
 ```toml
 [mcp_servers.gitnexus]
@@ -45,7 +46,7 @@ command = "/home/fpiechowski/.nvm/versions/node/v24.14.1/bin/gitnexus"
 args = ["mcp"]
 ```
 
-The same setup also configures OpenCode and installs global Codex skills under
+The same setup also configures OpenCode and installs global agent skills under
 `~/.agents/skills/`.
 
 ## Repository Indexing
@@ -60,14 +61,14 @@ gitnexus analyze --skip-agents-md --skip-skills --force .
 
 Use `--skip-agents-md` to preserve the repository-owned BMAD-native `AGENTS.md`.
 Use `--skip-skills` to avoid generating repo-local `.claude/` skill files that
-are not needed for Codex here.
+are not needed for this setup.
 
 GitNexus stores repository graph data in `/.gitnexus/`. That directory must stay
 local and is ignored by git in this repository.
 
 ## Verification
 
-Check the Codex registration:
+Check the client registration:
 
 ```bash
 codex mcp list
@@ -82,8 +83,8 @@ gitnexus status
 gitnexus list
 ```
 
-If Codex was already running before `gitnexus setup`, restart Codex before the
-first live GitNexus MCP use.
+If the active client was already running before `gitnexus setup`, restart it
+before the first live GitNexus MCP use.
 
 ## Web UI Bridge
 
@@ -122,7 +123,7 @@ For this repository, use the following rule:
 - If you need the browser UI, run `gitnexus serve` and avoid parallel
   `gitnexus analyze`, `gitnexus status`, `gitnexus query`, `gitnexus context`,
   or other GitNexus-backed MCP operations until the serve process is stopped.
-- If you need to refresh the index or rely on GitNexus MCP queries in Codex,
+- If you need to refresh the index or rely on GitNexus MCP queries in the active client,
   stop the serve process first, then run the required command.
 
 ## Current Machine Status
@@ -131,7 +132,7 @@ Verified on 2026-06-14:
 
 - `source ~/.nvm/nvm.sh && nvm use 24 >/dev/null && gitnexus --version`
   returns `1.6.7`.
-- `gitnexus setup` configured Codex and OpenCode successfully.
+- `gitnexus setup` configured the current Codex/OpenCode toolchain successfully.
 - `~/.codex/config.toml` contains a `gitnexus` MCP entry pointing to the
   `nvm`-managed CLI path.
 - `gitnexus analyze --skip-agents-md --force .` indexed this repository

@@ -25,17 +25,17 @@ source_documents:
   - STYLEGUIDE.md
   - docs/index.md
   - docs/project-overview.md
-  - docs/architecture.md
-  - docs/game-architecture.md
-  - docs/game-design.md
-  - docs/ux-design.md
-  - docs/ux-experience.md
-  - docs/narrative-design.md
-  - docs/development-guide.md
-  - docs/source-tree-analysis.md
-  - docs/component-inventory.md
-  - docs/narrative-content.md
-  - docs/ai-agent-guide.md
+  - docs/engineering/architecture.md
+  - docs/game/architecture.md
+  - docs/game/gdd.md
+  - docs/game/ux/design.md
+  - docs/game/ux/experience.md
+  - docs/game/narrative/design.md
+  - docs/engineering/development-guide.md
+  - docs/engineering/source-tree.md
+  - docs/engineering/component-inventory.md
+  - docs/game/narrative/content.md
+  - docs/agent/guide.md
   - engine/README.md
   - engine/AGENTS.md
 ---
@@ -67,23 +67,24 @@ prevent drift from the game, engine, and documentation contracts.
   then the owning durable document for details.
 - Keep root `AGENTS.md` as a compatibility entrypoint; put durable agent behavior rules in `docs/` and BMAD customization files under `_bmad/custom/`.
 - `docs/project-overview.md` owns product summary and current status.
-- `docs/game-design.md` owns product scope and gameplay rules.
-- `docs/ux-design.md` owns durable UX visual identity and UI presentation
+- `docs/game/brief.md` owns the product-level brief and full-game promise.
+- `docs/game/gdd.md` owns product scope and gameplay rules.
+- `docs/game/ux/design.md` owns durable UX visual identity and UI presentation
   decisions.
-- `docs/ux-experience.md` owns durable UX information architecture, HUD, phone,
+- `docs/game/ux/experience.md` owns durable UX information architecture, HUD, phone,
   dialogue, travel, lesson interaction, and accessibility-floor behavior rules.
-- `docs/narrative-design.md` owns full-game narrative design: story thesis,
+- `docs/game/narrative/design.md` owns full-game narrative design: story thesis,
   protagonist premise, core cast arcs, relationship ending rules, Lakeview place
   memory, dialogue framework, and narrative delivery rules.
-- `docs/architecture.md` owns technical architecture, KGE integration, runtime
+- `docs/engineering/architecture.md` owns technical architecture, KGE integration, runtime
   composition, package rules, launchers, previews, and game-layer boundaries.
-- `docs/game-architecture.md` owns product-facing game architecture: discrete-time
+- `docs/game/architecture.md` owns product-facing game architecture: discrete-time
   simulation, game state, daily loop, lessons, relationships, phone read models,
   locations, authored content, save/recovery, content scaling, and game-level
   architecture risks.
 - `engine/_bmad-output/project-context.md`,
   `engine/README.md`, and `engine/AGENTS.md` own reusable engine rules.
-- `docs/narrative-content.md` owns implementation-ready authored narrative
+- `docs/game/narrative/content.md` owns implementation-ready authored narrative
   content.
 - Local agent context layers are split intentionally: `mem0` for memory,
   `gitnexus` for repository code knowledge graph queries, and `hss-docs-rag`
@@ -126,7 +127,7 @@ prevent drift from the game, engine, and documentation contracts.
 - Use `DialogueManager.startDialogue(...).await()` for dialogue sequences.
 - Set required `Calendar`, `Clock`, map, camera, and player state explicitly in
   previewable scene beats.
-- Keep authored script text in English in `docs/narrative-content.md`. Existing Polish
+- Keep authored script text in English in `docs/game/narrative/content.md`. Existing Polish
   placeholder dialogue in code should be treated as implementation drift unless
   intentionally localized in a future contract.
 
@@ -144,7 +145,7 @@ prevent drift from the game, engine, and documentation contracts.
 
 ### Game Design Rules Agents Must Preserve
 
-- `docs/game-design.md` is the durable full-game-first GDD and canonical
+- `docs/game/gdd.md` is the durable full-game-first GDD and canonical
   gameplay design source of truth.
 - Full game target is three school years from Year 1 entry to Year 3 graduation.
 - Year 1 and Year 2 carry the strongest discovery, relationship development,
@@ -215,7 +216,7 @@ prevent drift from the game, engine, and documentation contracts.
 
 - Treat `.backlog/` task files as durable git-tracked project artifacts.
 - When work changes a `.backlog/` task file, stage and commit that task-file update together with the related repository change unless the user explicitly asks to keep it out of git.
-- When choosing retrieval tools inside Codex, prefer `hss-docs-rag` for
+- When choosing retrieval tools inside the active client, prefer `hss-docs-rag` for
   documentation questions, `gitnexus` for code structure and impact questions,
   and `mem0` for long-lived memory recall.
 - During brainstorming workflows, show visible session progress for every question or topic.
@@ -295,7 +296,7 @@ prevent drift from the game, engine, and documentation contracts.
 - No explicit performance budget is documented for the game. Agents should avoid
   inventing hard targets and should record any new budget in the owning design or
   architecture document first.
-- The promoted durable GDD is `docs/game-design.md`. Planning artifacts under
+- The promoted durable GDD is `docs/game/gdd.md`. Planning artifacts under
   `_bmad-output/planning-artifacts/` are workflow history unless explicitly
   promoted into `docs/`.
 
