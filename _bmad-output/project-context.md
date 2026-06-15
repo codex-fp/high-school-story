@@ -28,6 +28,8 @@ source_documents:
   - docs/architecture.md
   - docs/game-architecture.md
   - docs/game-design.md
+  - docs/ux-design.md
+  - docs/ux-experience.md
   - docs/narrative-design.md
   - docs/development-guide.md
   - docs/source-tree-analysis.md
@@ -66,6 +68,10 @@ prevent drift from the game, engine, and documentation contracts.
 - Keep root `AGENTS.md` as a compatibility entrypoint; put durable agent behavior rules in `docs/` and BMAD customization files under `_bmad/custom/`.
 - `docs/project-overview.md` owns product summary and current status.
 - `docs/game-design.md` owns product scope and gameplay rules.
+- `docs/ux-design.md` owns durable UX visual identity and UI presentation
+  decisions.
+- `docs/ux-experience.md` owns durable UX information architecture, HUD, phone,
+  dialogue, travel, lesson interaction, and accessibility-floor behavior rules.
 - `docs/narrative-design.md` owns full-game narrative design: story thesis,
   protagonist premise, core cast arcs, relationship ending rules, Lakeview place
   memory, dialogue framework, and narrative delivery rules.

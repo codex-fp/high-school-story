@@ -26,6 +26,8 @@ this documentation set.
 | [architecture.md](architecture.md) | Technical architecture: KGE integration, runtime composition, engine boundary, dependencies, and risks. |
 | [game-architecture.md](game-architecture.md) | Durable game-architecture source of truth for discrete-time simulation, game state, daily loop, lessons, relationships, phone read models, locations, saves, and content scaling. |
 | [game-design.md](game-design.md) | Durable full-game-first Game Design Document and canonical gameplay design source of truth. |
+| [ux-design.md](ux-design.md) | Durable UX visual-identity and presentation source of truth for HUD, phone, dialogue, travel, and lesson UI. |
+| [ux-experience.md](ux-experience.md) | Durable UX behavior, information-architecture, and interaction-contract source of truth. |
 | [narrative-design.md](narrative-design.md) | Durable full-game-first Narrative Design Document covering story thesis, protagonist, core cast arcs, Lakeview place memory, dialogue, endings, and narrative delivery. |
 | [development-guide.md](development-guide.md) | Setup, commands, verification, packaging, workflow, and style conventions. |
 | [source-tree-analysis.md](source-tree-analysis.md) | Repository layout and critical path explanation. |

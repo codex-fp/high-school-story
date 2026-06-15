@@ -45,6 +45,8 @@ This project uses BMAD/GDS documentation conventions:
   promise.
 - `docs/game-design.md` is the durable full-game-first GDD and canonical
   gameplay design source.
+- `docs/ux-design.md` owns durable UX visual identity and presentation rules.
+- `docs/ux-experience.md` owns durable UX interaction, IA, and behavior rules.
 - `_bmad-output/project-context.md` is optimized for AI-agent context loading.
 - `.backlog/` stores task traceability with `HSS-<number>` IDs.
 - Root compatibility files point to the canonical BMAD-native documents.
@@ -52,13 +54,15 @@ This project uses BMAD/GDS documentation conventions:
 ## Current Product Status
 
 The project has a promoted durable product brief in `docs/game-brief.md` and a
-promoted full-game-first durable GDD in `docs/game-design.md`. Remaining design
-work is concentrated in subject framing, initial classmate arc constraints,
-social profile categories, starting-profile tuning, academic failure thresholds,
-money pressure, balancing assumptions, and the delivery path from the Year 1
-Semester 1 vertical slice to the full three-year product. Implementation is still
-early and centered on engine integration, previews, game objects, map loading,
-and intro-beat wiring.
+promoted full-game-first durable GDD in `docs/game-design.md`. The project now
+also has promoted durable UX documentation in `docs/ux-design.md` and
+`docs/ux-experience.md`, establishing the phone-centered UX, rich HUD, dialogue
+presentation rules, travel UX, and lesson-interface contract. Remaining design
+work is concentrated in social profile categories, final visual direction
+choices, balancing assumptions, and the delivery path from the Year 1 Semester 1
+vertical slice to the full three-year product. Implementation is still early and
+centered on engine integration, previews, game objects, map loading, and
+intro-beat wiring.
 
 ## Current Risks
 

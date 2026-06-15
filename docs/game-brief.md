@@ -123,7 +123,8 @@ Primary mechanics:
 
 - Fifteen-minute time progression across days, weeks, semesters, school years,
   and the full three-year run.
-- Three-turn lessons with distinct action choices.
+- Three-turn lessons with distinct action choices, semi-readable teacher
+  attention, and tactical risk/reward framing inside a classroom presentation.
 - Per-subject grades, condition management, weekly allowance, and optional
   abstract work.
 - Descriptive relationship stages, long-form classmate arcs, and in-world

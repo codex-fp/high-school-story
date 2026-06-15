@@ -322,19 +322,22 @@ dominates development.
 Standard lessons use `3` decision turns. Each turn represents `15` minutes and
 offers one player action.
 
-Lesson actions:
+Lesson command structure:
 
-- `attentive listening`: safest academic baseline.
-- `talking`: social opportunism with catch risk.
-- `reading`: targeted academic focus.
-- `browsing`: low-effort relief with academic cost.
-- `napping`: short-term survival tool.
+- `safe actions`: reliable academic or stabilizing choices such as attentive
+  baseline work.
+- `risky actions`: higher-variance choices that can trade academic focus for
+  relief, opportunism, or shortcut value.
+- `reactive actions`: recovery or cover choices used when lesson pressure or
+  teacher attention turns against the player.
+- `items`: limited consumable or situational support actions when available.
 
-Lesson variation is driven mainly by subject identity. Subjects differ through
-hidden-but-learnable reward biases, tone, and action weighting. Teachers can be
-characters, social hooks, and optional arc participants, but should not be the
-dominant factor in how lessons play or feel. Players should begin sensing a
-subject's character within `1-2` lessons.
+Lesson variation is still driven mainly by subject identity. Subjects differ
+through hidden-but-learnable reward biases, tone, and action weighting, while
+teachers create semi-readable attention pressure that changes the risk profile of
+the same command families. The result should feel tactically sharper than a
+generic menu loop without becoming a bespoke subject minigame or a full combat
+RPG. Players should begin sensing a subject's character within `1-2` lessons.
 
 ### Academics And Grades
 

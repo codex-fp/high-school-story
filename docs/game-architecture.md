@@ -248,15 +248,31 @@ Lessons should use one shared architecture:
 
 Core lesson actions:
 
-- Attentive listening.
-- Talking.
-- Reading.
-- Browsing.
-- Napping.
+- Safe actions.
+- Risky actions.
+- Reactive actions.
+- Items, when enabled by context or inventory.
 
 Subject identity should be data-driven enough to avoid duplicating lesson logic
 per subject. Each subject can define reward biases, risk tendencies, feedback
-phrasing, common hooks, and grade contribution rules.
+phrasing, common hooks, grade contribution rules, and how teacher attention
+changes the same command families. Teacher attention should be semi-readable:
+clear enough that players can make tactical calls, but not reduced to a literal
+combat meter. The architecture should support lessons feeling more like a
+classroom tension loop than a static action list while still remaining one shared
+subsystem rather than bespoke subject minigames.
+
+Recommended turn structure:
+
+1. Resolve subject context and current teacher-attention posture.
+2. Present the stable command families for the current turn.
+3. Apply subject weighting, current condition, and attention-sensitive risk.
+4. Resolve academic gain, stress or mood change, and immediate tactical outcome.
+5. Carry the result into the next turn and later academic state.
+
+Getting caught should be able to cause immediate turn loss, condition harm, and
+academic setback. Good play under attention should be able to create academic
+gain, tactical stabilization, and mild confidence or mood reward.
 
 Academic failure must be readable:
 

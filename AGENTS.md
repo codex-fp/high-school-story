@@ -22,6 +22,8 @@ lives in `docs/` and the lean execution context lives in
 | Technical architecture and engine boundary | `docs/architecture.md` |
 | Game architecture and simulation structure | `docs/game-architecture.md` |
 | MVP gameplay and product design | `docs/game-design.md` |
+| UX visual identity and UI presentation | `docs/ux-design.md` |
+| UX behavior, information architecture, and interaction rules | `docs/ux-experience.md` |
 | Full-game narrative design | `docs/narrative-design.md` |
 | Setup, verification, packaging, workflow | `docs/development-guide.md` |
 | Code and documentation conventions | `docs/ai-agent-guide.md` and `docs/development-guide.md` |
