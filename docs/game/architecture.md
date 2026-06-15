@@ -375,6 +375,38 @@ become a simulated internet.
 - Phone information should help the player understand missed chances after the
   fact, not only available chances before commitment.
 
+### UI Session, Alert, And Accessibility Ownership
+
+These runtime behaviors are owned by the game-layer architecture because they
+define how the accepted UX contract behaves in play. Reusable engine widgets or
+transition helpers may live in KGE, but High School Story owns the product rule
+for when they appear, what they block, and how they read.
+
+Recommended ownership split:
+
+- **Phone overlay session state** belongs to a game-layer UI session model that
+  tracks whether the phone is open, which app or detail view is active, which
+  moments block phone use, and what navigation depth the player is in.
+- **Pause semantics** belong to the same UI session layer: when the phone is
+  open, meaningful simulation progression pauses even though the world remains
+  visible behind the overlay.
+- **Contextual alerts** belong to a shared alert-routing layer that receives
+  events from action validation, calendar urgency, travel resolution, academic
+  risk, and messaging systems, then decides which alerts should surface without
+  creating permanent nagging.
+- **Accessibility-floor behavior** belongs to the game-layer presentation
+  contract: reduced-motion preference dampens overlay transitions and lesson
+  emphasis, condition signals do not rely on color alone, and focus order stays
+  coherent across HUD, phone, dialogue, and lesson surfaces.
+
+Recommended minimum UI-session state:
+
+- Surface posture: overworld, phone overlay, dialogue, lesson, or blocked.
+- Phone app selection and any deeper detail view stack.
+- Whether meaningful simulation is paused.
+- Current contextual alert queue with priority, expiry, and dismissal state.
+- Accessibility preferences that affect motion, emphasis, and readability.
+
 ## Location And Travel Architecture
 
 Locations are compact playable spaces, hubs, or scenes with stable identities.
