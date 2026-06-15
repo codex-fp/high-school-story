@@ -175,3 +175,4 @@ nul
 /.docs-rag/
 /tools/docs-rag/.venv/
 /tools/docs-rag/src/hss_docs_rag.egg-info/
+AGENTS.local.md

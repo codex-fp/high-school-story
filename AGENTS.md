@@ -11,7 +11,8 @@ lives in `docs/` and the lean execution context lives in
 2. `.backlog/tasks/` active task, using the `HSS-<number>` task ID.
 3. `docs/index.md` for the documentation map.
 4. `docs/agent/guide.md` for operational rules.
-5. Topic owner document in `docs/` before changing behavior, architecture,
+5. `AGENTS.local.md` at the repository root, but only if that file exists locally; treat it as personal machine-local guidance rather than project documentation.
+6. Topic owner document in `docs/` before changing behavior, architecture,
    design, workflow, or authored content.
 
 ## Source Of Truth
@@ -59,6 +60,14 @@ same change. Do not add parallel notes that leave conflicting guidance in place.
 - Reference the task ID in documentation changes, implementation handoff, commit
   message, or branch name.
 - Do not publish or push without explicit user approval.
+
+## Local Personal Guidance
+
+- If `AGENTS.local.md` exists at the repository root, read it after the shared
+  project guidance and treat it as a personal, machine-local supplement.
+- Keep individual developer tooling preferences, tmux workflows, and other
+  non-project-specific instructions in `AGENTS.local.md`, not in shared project
+  docs.
 
 ## Engineering Rules
 
