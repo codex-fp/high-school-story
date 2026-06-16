@@ -51,10 +51,13 @@ incomplete until the full game flow is implemented.
   a dedicated Qdrant instance on a different port than mem0. The repository
   project-scoped client config expects the docs RAG instance at
   `http://127.0.0.1:6334`.
-- Use the three agent context layers intentionally: `mem0` for memory,
-  `gitnexus` for code structure and execution relationships, and
-  `hss-docs-rag` for durable project documentation in `docs/` and
-  `_bmad-output/`.
+- Use the three agent context layers intentionally: `mem0` for long-lived
+  memory and preferences not already present in repo docs or the current
+  session, `gitnexus` for code structure and execution relationships, and
+  `hss-docs-rag` for semantic or cross-document retrieval over durable project
+  documentation in `docs/` and `_bmad-output/`. Prefer direct file search and
+  reads for exact keyword lookup, known-document lookup, and line-level
+  verification.
 
 ## Packaging
 
@@ -142,9 +145,10 @@ Globally opted-in APIs include `kotlin.ExperimentalContextParameters`,
 - Use `_bmad-output/project-context.md` as the compact agent context.
 - Update documentation before or with behavior, architecture, workflow, command,
   path, packaging, or narrative changes.
-- When the user asks documentation questions or cross-document contract checks,
-  prefer the documentation RAG layer before relying on memory or code search
-  alone.
+- When the user asks semantic documentation questions or cross-document
+  contract checks, prefer the documentation RAG layer before relying on memory
+  or code search alone. For exact keyword, path, or wording lookups, prefer
+  direct file search and reads.
 - Keep documentation and code-facing text in English.
 - Record verification evidence in the active `HSS-<number>` task.
 

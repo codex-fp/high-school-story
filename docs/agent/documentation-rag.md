@@ -119,10 +119,13 @@ codex mcp get hss-docs-rag
 
 Use the context layers deliberately:
 
-- Use `mem0` for memory about prior sessions, preferences, and long-lived facts.
+- Use `mem0` for memory about prior sessions, preferences, and long-lived facts
+  that are not already captured in repository docs or the current session.
 - Use `gitnexus` for code symbols, impact analysis, execution flows, and
   codebase structure.
-- Use `hss-docs-rag` for repository documentation, especially:
+- Use direct file search and reads for exact keyword lookup, known-document
+  lookup, path discovery, and line-level verification.
+- Use `hss-docs-rag` for semantic repository-documentation search, especially:
   - `_bmad-output/project-context.md`
   - `docs/agent/guide.md`
   - `docs/engineering/architecture.md`

@@ -93,6 +93,11 @@ prevent drift from the game, engine, and documentation contracts.
 - Local agent context layers are split intentionally: `mem0` for memory,
   `gitnexus` for repository code knowledge graph queries, and `hss-docs-rag`
   for documentation retrieval over `docs/` and `_bmad-output/`.
+- Choose retrieval by question type: direct file search for exact keyword or
+  path lookup, `hss-docs-rag` for semantic or cross-document documentation
+  retrieval, `gitnexus` for code graph questions, and `mem0` for long-lived
+  history or user preferences not already present in repo docs or the current
+  session.
 - If implementation and docs disagree, update the owning document and code in
   the same change instead of adding a parallel note.
 
@@ -220,13 +225,15 @@ prevent drift from the game, engine, and documentation contracts.
 
 - Treat `.backlog/` task files as durable git-tracked project artifacts.
 - When work changes a `.backlog/` task file, stage and commit that task-file update together with the related repository change unless the user explicitly asks to keep it out of git.
-- When choosing retrieval tools inside the active client, use `hss-docs-rag`
-  first for documentation questions, workflow rules, owner-document lookup, and
-  `_bmad-output/` guidance.
+- For documentation questions, use direct file search and reads for exact
+  lookup, known documents, and line-level verification; use `hss-docs-rag`
+  first for semantic or cross-document retrieval, owner-document discovery when
+  keywords are unclear, and `_bmad-output/` or workflow guidance spread across
+  multiple docs.
 - Use `gitnexus` first for code understanding, execution tracing, impact
   analysis, review, and refactoring questions.
-- Use `mem0` for long-lived memory recall, prior decisions, and user
-  preferences.
+- Use `mem0` only for long-lived memory recall, prior decisions, and user
+  preferences not already captured in repo docs or the current session.
 - Fall back to filesystem search and direct file reads when MCP retrieval is
   unavailable, stale, too noisy, or when exact line-level verification is
   required before editing.

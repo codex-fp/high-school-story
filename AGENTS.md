@@ -40,17 +40,21 @@ same change. Do not add parallel notes that leave conflicting guidance in place.
 
 ## Context Routing Rules
 
-- Use `mem0` for prior-session decisions, user preferences, and long-lived
-  project memory.
-- For documentation questions, workflow rules, owner-document lookup, or BMAD
-  guidance, call `hss-docs-rag` before reading files directly.
+- Use `mem0` only for prior-session decisions, user preferences, and long-lived
+  project memory that is not already captured in repository docs or the current
+  session context.
+- For documentation questions, choose the retrieval method based on the task:
+  - Use direct file search and reads first for keyword lookup, exact wording,
+    path discovery, and line-level verification.
+  - Use `hss-docs-rag` first for semantic search, cross-document questions,
+    owner-document discovery when keywords are unclear, and BMAD/workflow
+    guidance described across multiple docs.
 - For code understanding, execution tracing, impact analysis, review, or
   refactoring questions, call `gitnexus` before using filesystem search.
 - After MCP retrieval, read the returned owner documents or source files needed
   for exact implementation and verification.
-- Fall back to direct filesystem search and file reads when MCP results are
-  unavailable, stale, too noisy, or when exact line-level verification is
-  required.
+- Fall back between RAG and direct filesystem search as needed when one method
+  is unavailable, stale, noisy, incomplete, or slower than the task requires.
 
 ## Task And Traceability Rules
 
