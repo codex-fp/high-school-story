@@ -8,14 +8,16 @@ launch_command=""
 pane_title=""
 role=""
 parent_pane=""
+prompt_mode="paste"
 dry_run=0
 
 usage() {
     cat <<'EOF'
-Usage: launch-agent-tmux-pane.sh --session <name> --window <window> --prompt-file <file> --launch-command <command> [--pane-title <title>] [--role <role>] [--parent-pane <pane-id>] [--dry-run]
+Usage: launch-agent-tmux-pane.sh --session <name> --window <window> --launch-command <command> [--prompt-file <file>] [--prompt-mode paste|argv|none] [--pane-title <title>] [--role <role>] [--parent-pane <pane-id>] [--dry-run]
 
 Starts a new tmux pane in the requested window, launches the requested agent
-client command, then pastes the prompt file contents and submits Enter.
+client command, then either pastes the prompt, passes it as a final CLI
+argument, or skips prompt injection entirely.
 EOF
 }
 
@@ -50,6 +52,11 @@ while [[ $# -gt 0 ]]; do
             launch_command="$2"
             shift 2
             ;;
+        --prompt-mode)
+            require_arg "$1" "${2:-}"
+            prompt_mode="$2"
+            shift 2
+            ;;
         --pane-title)
             require_arg "$1" "${2:-}"
             pane_title="$2"
@@ -81,19 +88,36 @@ while [[ $# -gt 0 ]]; do
     esac
 done
 
-if [[ -z "$session" || -z "$window" || -z "$prompt_file" || -z "$launch_command" ]]; then
+case "$prompt_mode" in
+    paste|argv|none)
+        ;;
+    *)
+        echo "Unsupported prompt mode: $prompt_mode" >&2
+        usage >&2
+        exit 1
+        ;;
+esac
+
+if [[ -z "$session" || -z "$window" || -z "$launch_command" ]]; then
     usage >&2
     exit 1
 fi
 
-if [[ ! -f "$prompt_file" ]]; then
-    echo "Prompt file not found: $prompt_file" >&2
+if [[ "$prompt_mode" != "none" && -z "$prompt_file" ]]; then
+    echo "Prompt file is required when prompt mode is $prompt_mode" >&2
     exit 1
 fi
 
-if [[ ! -s "$prompt_file" ]]; then
-    echo "Prompt file is empty: $prompt_file" >&2
-    exit 1
+if [[ -n "$prompt_file" ]]; then
+    if [[ ! -f "$prompt_file" ]]; then
+        echo "Prompt file not found: $prompt_file" >&2
+        exit 1
+    fi
+
+    if [[ "$prompt_mode" != "none" && ! -s "$prompt_file" ]]; then
+        echo "Prompt file is empty: $prompt_file" >&2
+        exit 1
+    fi
 fi
 
 tmux has-session -t "$session" >/dev/null 2>&1 || {
@@ -128,7 +152,13 @@ fi
 if [[ -n "$pane_title" ]]; then
     payload_segments+=("export TMUX_PANE_TITLE_HINT=$(printf '%q' "$pane_title")")
 fi
-payload_segments+=("exec $launch_command")
+
+launch_fragment="exec $launch_command"
+if [[ "$prompt_mode" == "argv" ]]; then
+    prompt_arg="$(<"$prompt_file")"
+    launch_fragment+=" $(printf '%q' "$prompt_arg")"
+fi
+payload_segments+=("$launch_fragment")
 
 launch_payload=""
 for segment in "${payload_segments[@]}"; do
@@ -151,6 +181,7 @@ prompt_file=$prompt_file
 role=$role
 parent_pane=$parent_pane
 pane_title=$pane_title
+prompt_mode=$prompt_mode
 shell_command=$shell_command
 EOF
     exit 0
@@ -170,11 +201,13 @@ for _ in $(seq 1 40); do
     sleep 0.25
 done
 
-buffer_name="agent-tmux-${window}-$$"
-tmux load-buffer -b "$buffer_name" "$prompt_file"
-tmux paste-buffer -b "$buffer_name" -t "$pane_id"
-tmux send-keys -t "$pane_id" Enter
-tmux delete-buffer -b "$buffer_name" >/dev/null 2>&1 || true
+if [[ "$prompt_mode" == "paste" ]]; then
+    buffer_name="agent-tmux-${window}-$$"
+    tmux load-buffer -b "$buffer_name" "$prompt_file"
+    tmux paste-buffer -b "$buffer_name" -t "$pane_id"
+    tmux send-keys -t "$pane_id" Enter
+    tmux delete-buffer -b "$buffer_name" >/dev/null 2>&1 || true
+fi
 
 cat <<EOF
 pane_id=$pane_id
@@ -186,4 +219,5 @@ launch_command=$launch_command
 role=$role
 parent_pane=$parent_pane
 pane_title=$pane_title
+prompt_mode=$prompt_mode
 EOF
