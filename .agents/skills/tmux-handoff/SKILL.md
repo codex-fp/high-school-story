@@ -1,52 +1,59 @@
 ---
 name: tmux-handoff
-description: Launch a fresh Codex tmux pane with a handoff prompt. Use when the user asks to hand off work to a new tmux-backed Codex session.
+description: Prepare a handoff prompt and launch a fresh agent client in a new tmux pane. Use when the user asks to hand off work to a separate tmux-backed agent session, whether the client command is Codex, Claude Code, OpenCode, or another terminal agent resolved from project or local agent instructions.
 ---
 
 # Tmux Handoff
 
-Use this skill when the user wants a new Codex session started in tmux and fed a handoff prompt.
+Launch a separate agent session in tmux and feed it a ready-to-run handoff.
 
-## Project-specific routing
+## Resolve the launch contract
 
-Resolve the tmux session name, allowed windows, default window routing, and
-Codex launch flags from the active project agent instructions.
+Read the active project agent instructions before launching anything. Resolve:
 
-## What this skill does
+- tmux session name
+- allowed windows and default window routing
+- default agent client command such as `codex`, `codex --yolo`, `claude`, or `opencode`
+- any local-only conventions from `AGENTS.local.md` when it exists
 
-1. Build a handoff prompt for a fresh agent.
-2. Launch a new pane in the resolved tmux target.
-3. Start the resolved Codex launch command from project instructions or use default `codex`.
-4. Paste the handoff prompt into the new Codex session and submit it.
+Do not hardcode project names, window names, or client commands in the skill itself.
 
-## Handoff prompt requirements
+## Build the handoff prompt
 
-Keep the prompt compact and task-oriented. Include:
+Keep the prompt compact and executable. Include:
 
-- The requested outcome.
-- The active backlog task ID when one exists.
-- Relevant files, commands, constraints, and known findings.
-- What the new session should do first.
-- What it must not do.
+- requested outcome
+- active backlog task ID when one exists
+- files, commands, constraints, and known findings that matter
+- what the new session should do first
+- what it must not do
 
-Do not write a generic summary. Write a working handoff for immediate execution.
+If the client supports thread or session renaming, tell it to rename itself early with a label that hints this is a handoff session. Prefer a label that also includes the parent pane when that information is available.
 
-## Execution steps
+## Launch the pane
 
-1. Resolve the target window.
-2. Resolve the tmux session name and Codex launch command from project instructions.
-3. Create a temporary prompt file with a multiline handoff prompt.
-4. Run:
+1. Resolve the target window from user intent or project defaults.
+2. Resolve the tmux session and agent client command from the project instructions.
+3. Write the prompt to a temporary file.
+4. Launch the pane with:
 
 ```bash
-bash .agents/skills/tmux-handoff/scripts/launch-codex-tmux-pane.sh --session "<session>" --window "<window>" --prompt-file "<prompt-file>" --launch-command "<codex command>"
+bash .agents/skills/tmux-handoff/scripts/launch-agent-tmux-pane.sh \
+  --session "<session>" \
+  --window "<window>" \
+  --prompt-file "<prompt-file>" \
+  --launch-command "<agent client command>" \
+  --role handoff \
+  --pane-title "<title hint>" \
+  [--parent-pane "<pane id>"]
 ```
 
-5. Capture the returned `pane_id`, `session`, and `window`.
-6. Tell the user which tmux target was started and what the handoff covers.
+5. Capture the returned `pane_id`, `session`, `window`, and `target`.
+6. Tell the user where the session is running and what the handoff covers.
 
 ## Safety checks
 
-- If the user specifies a window outside the project-defined allowed set, stop and ask.
+- If the requested window is outside the project-defined allowed set, stop and ask.
 - If the tmux session or window does not exist, stop and report the exact missing target.
-- Do not improvise alternate launch flags. Use the launch command defined by project instructions.
+- If the project instructions do not define a launch command, use plain `codex` as the fallback only when no stronger local convention exists.
+- Do not invent client-specific flags. Use the resolved launch command as written.

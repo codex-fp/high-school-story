@@ -65,9 +65,8 @@ same change. Do not add parallel notes that leave conflicting guidance in place.
 
 - If `AGENTS.local.md` exists at the repository root, read it after the shared
   project guidance and treat it as a personal, machine-local supplement.
-- Keep individual developer tooling preferences, tmux workflows, and other
-  non-project-specific instructions in `AGENTS.local.md`, not in shared project
-  docs.
+- Keep individual developer preferences and other non-project-specific
+  instructions in `AGENTS.local.md`, not in shared project docs.
 
 ## Engineering Rules
 

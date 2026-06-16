@@ -1,0 +1,4 @@
+interface:
+  display_name: "Tmux Handoff"
+  short_description: "Launch agent handoffs in tmux panes"
+  default_prompt: "Use $tmux-handoff to launch a fresh agent pane with a handoff prompt."
