@@ -1,0 +1,89 @@
+# generated: 2026-06-16T21:24:29+02:00
+# last_updated: 2026-06-16T21:31:00+02:00
+# project: High School Story
+# project_key: NOKEY
+# tracking_system: file-system
+# story_location: {project-root}/_bmad-output/implementation-artifacts
+#
+# STATUS DEFINITIONS:
+# ==================
+# Epic Status:
+#   - backlog: Epic not yet started
+#   - in-progress: Epic actively being worked on
+#   - done: All stories in epic completed
+#
+# Epic Status Transitions:
+#   - backlog -> in-progress: Automatically when first story is created (via create-story)
+#   - in-progress -> done: Manually when all stories reach 'done' status
+#
+# Story Status:
+#   - backlog: Story only exists in epic file
+#   - ready-for-dev: Story file created in stories folder
+#   - in-progress: Developer actively working on implementation
+#   - review: Ready for code review (via Dev's code-review workflow)
+#   - done: Story completed
+#
+# Retrospective Status:
+#   - optional: Can be completed but not required
+#   - done: Retrospective has been completed
+#
+# WORKFLOW NOTES:
+# ===============
+# - Epic transitions to 'in-progress' automatically when first story is created
+# - Stories can be worked in parallel if team capacity allows
+# - Developer typically creates next story after previous one is 'done' to incorporate learnings
+# - Dev moves story to 'review', then runs code-review (fresh context, different LLM recommended)
+
+generated: 2026-06-16T21:24:29+02:00
+last_updated: 2026-06-16T21:31:00+02:00
+project: High School Story
+project_key: NOKEY
+tracking_system: file-system
+story_location: "{project-root}/_bmad-output/implementation-artifacts"
+
+development_status:
+  epic-1: in-progress
+  1-1-create-a-student-identity: ready-for-dev
+  1-2-arrive-in-lakeview-and-reach-the-dormitory: backlog
+  1-3-start-the-first-morning-with-a-readable-day-state: backlog
+  1-4-open-the-phone-and-inspect-the-day-without-spending-time: backlog
+  1-5-preview-and-confirm-time-costing-actions: backlog
+  1-6-travel-between-discovered-locations-using-the-map: backlog
+  epic-1-retrospective: optional
+  epic-2: backlog
+  2-1-enter-the-school-block-with-clear-obligations: backlog
+  2-2-play-a-standard-three-turn-lesson: backlog
+  2-3-feel-subject-identity-and-teacher-attention: backlog
+  2-4-inspect-academic-standing-and-upcoming-pressure: backlog
+  2-5-take-semester-exams-and-receive-results: backlog
+  2-6-fail-a-semester-fairly-and-recover-from-checkpoints: backlog
+  epic-2-retrospective: optional
+  epic-3: backlog
+  3-1-track-everyday-condition-and-money: backlog
+  3-2-recover-in-different-places-with-different-textures: backlog
+  3-3-receive-allowance-and-use-emergency-part-time-work: backlog
+  3-4-use-weekends-for-longer-form-planning: backlog
+  3-5-grow-learning-social-and-physical-tendencies-over-time: backlog
+  epic-3-retrospective: optional
+  epic-4: backlog
+  4-1-meet-classmates-and-track-descriptive-relationship-stages: backlog
+  4-2-unlock-profiles-posts-and-messages-for-known-classmates: backlog
+  4-3-discover-preferences-through-play-instead-of-guessing: backlog
+  4-4-plan-social-pursuit-from-known-location-and-availability-clues: backlog
+  4-5-complete-the-featured-popular-status-holder-arc: backlog
+  4-6-form-special-bonds-without-replacing-friendship: backlog
+  epic-4-retrospective: optional
+  epic-5: backlog
+  5-1-expand-the-travel-network-through-discovery: backlog
+  5-2-give-places-stable-identity-and-revisit-value: backlog
+  5-3-join-a-club-and-add-it-to-weekly-routine: backlog
+  5-4-use-clubs-and-places-to-unlock-new-belonging-paths: backlog
+  5-5-let-rotating-peripheral-characters-add-texture-without-becoming-full-routes: backlog
+  epic-5-retrospective: optional
+  epic-6: backlog
+  6-1-carry-the-run-across-semesters-and-school-years: backlog
+  6-2-scale-the-social-layer-to-a-full-multi-year-cast-with-capacity-limits: backlog
+  6-3-preserve-memories-and-meaningful-absence-in-the-memory-album: backlog
+  6-4-reach-graduation-with-a-composed-personal-outcome: backlog
+  6-5-interpret-academic-identity-and-future-direction-at-graduation: backlog
+  epic-6-retrospective: optional
