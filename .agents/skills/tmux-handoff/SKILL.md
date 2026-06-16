@@ -18,6 +18,17 @@ Read the active project agent instructions before launching anything. Resolve:
 
 Do not hardcode project names, window names, or client commands in the skill itself.
 
+## Prefer native startup prompts
+
+Avoid tmux paste timing when the client can accept the initial prompt natively.
+
+Verified locally:
+
+- Codex accepts a startup prompt as a trailing positional argument, so `codex "<prompt>"` and `codex --yolo "<prompt>"` can start the session with the prompt already attached.
+- OpenCode exposes a `--prompt` flag for startup prompts. When launching OpenCode interactively, prefer `opencode --prompt "<prompt>"` over tmux paste injection.
+
+For unverified clients that do not expose a native startup prompt mechanism, fall back to tmux paste.
+
 ## Build the handoff prompt
 
 Keep the prompt compact and executable. Include:
@@ -41,12 +52,15 @@ If the client supports thread or session renaming, tell it to rename itself earl
 bash .agents/skills/tmux-handoff/scripts/launch-agent-tmux-pane.sh \
   --session "<session>" \
   --window "<window>" \
-  --prompt-file "<prompt-file>" \
   --launch-command "<agent client command>" \
+  --prompt-file "<prompt-file>" \
+  --prompt-mode auto \
   --role handoff \
   --pane-title "<title hint>" \
   [--parent-pane "<pane id>"]
 ```
+
+If the resolved client is OpenCode and the base command is plain `opencode`, adjust the launch command to `opencode --prompt` so the launcher can deliver the prompt natively with `--prompt-mode argv` or `auto`.
 
 5. Capture the returned `pane_id`, `session`, `window`, and `target`.
 6. Tell the user where the session is running and what the handoff covers.
@@ -57,3 +71,4 @@ bash .agents/skills/tmux-handoff/scripts/launch-agent-tmux-pane.sh \
 - If the tmux session or window does not exist, stop and report the exact missing target.
 - If the project instructions do not define a launch command, use plain `codex` as the fallback only when no stronger local convention exists.
 - Do not invent client-specific flags. Use the resolved launch command as written.
+- Exception: for verified native startup-prompt support such as Codex positional prompts or OpenCode `--prompt`, it is acceptable to wrap the base client command so the prompt is delivered natively instead of by tmux paste.

@@ -18,6 +18,8 @@ Read the active project agent instructions before launching anything. Resolve:
 
 Resolve the originating pane ID from the current tmux session. Pass that pane ID into the delegated prompt and into the launcher with `--parent-pane`.
 
+Prefer native startup prompts for the delegated child session when the client supports them. Verified locally, Codex accepts a trailing startup prompt and OpenCode exposes a `--prompt` flag. Use tmux paste only as the fallback for clients without a native startup-prompt path.
+
 ## Build the delegated-task prompt
 
 Keep the prompt compact and explicit. Include:
@@ -53,12 +55,15 @@ If the client supports session or thread renaming, tell it to rename itself earl
 bash .agents/skills/tmux-handoff/scripts/launch-agent-tmux-pane.sh \
   --session "<session>" \
   --window "<window>" \
-  --prompt-file "<prompt-file>" \
   --launch-command "<agent client command>" \
+  --prompt-file "<prompt-file>" \
+  --prompt-mode auto \
   --role task \
   --parent-pane "<origin pane id>" \
   --pane-title "<title hint>"
 ```
+
+If the resolved client is OpenCode and the base command is plain `opencode`, adjust it to `opencode --prompt` before launching so the prompt goes through the native startup path.
 
 5. Capture the returned `pane_id`, `session`, `window`, and `target`.
 6. Tell the user where the delegated task is running and which pane should receive the return handoff.

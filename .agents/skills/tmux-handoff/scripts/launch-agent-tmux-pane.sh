@@ -8,12 +8,12 @@ launch_command=""
 pane_title=""
 role=""
 parent_pane=""
-prompt_mode="paste"
+prompt_mode="auto"
 dry_run=0
 
 usage() {
     cat <<'EOF'
-Usage: launch-agent-tmux-pane.sh --session <name> --window <window> --launch-command <command> [--prompt-file <file>] [--prompt-mode paste|argv|none] [--pane-title <title>] [--role <role>] [--parent-pane <pane-id>] [--dry-run]
+Usage: launch-agent-tmux-pane.sh --session <name> --window <window> --launch-command <command> [--prompt-file <file>] [--prompt-mode auto|paste|argv|none] [--pane-title <title>] [--role <role>] [--parent-pane <pane-id>] [--dry-run]
 
 Starts a new tmux pane in the requested window, launches the requested agent
 client command, then either pastes the prompt, passes it as a final CLI
@@ -89,7 +89,7 @@ while [[ $# -gt 0 ]]; do
 done
 
 case "$prompt_mode" in
-    paste|argv|none)
+    auto|paste|argv|none)
         ;;
     *)
         echo "Unsupported prompt mode: $prompt_mode" >&2
@@ -118,6 +118,31 @@ if [[ -n "$prompt_file" ]]; then
         echo "Prompt file is empty: $prompt_file" >&2
         exit 1
     fi
+fi
+
+client_name="${launch_command%% *}"
+resolved_prompt_mode="$prompt_mode"
+if [[ "$prompt_mode" == "auto" ]]; then
+    case "$client_name" in
+        codex)
+            resolved_prompt_mode="argv"
+            ;;
+        opencode)
+            if [[ "$launch_command" == "opencode run"* || "$launch_command" == "opencode --prompt"* || "$launch_command" == "opencode "* && "$launch_command" == *" --prompt"* ]]; then
+                resolved_prompt_mode="argv"
+            else
+                resolved_prompt_mode="paste"
+            fi
+            ;;
+        *)
+            resolved_prompt_mode="paste"
+            ;;
+    esac
+fi
+
+if [[ "$resolved_prompt_mode" != "none" && -z "$prompt_file" ]]; then
+    echo "Prompt file is required when resolved prompt mode is $resolved_prompt_mode" >&2
+    exit 1
 fi
 
 tmux has-session -t "$session" >/dev/null 2>&1 || {
@@ -154,7 +179,7 @@ if [[ -n "$pane_title" ]]; then
 fi
 
 launch_fragment="exec $launch_command"
-if [[ "$prompt_mode" == "argv" ]]; then
+if [[ "$resolved_prompt_mode" == "argv" ]]; then
     prompt_arg="$(<"$prompt_file")"
     launch_fragment+=" $(printf '%q' "$prompt_arg")"
 fi
@@ -182,6 +207,7 @@ role=$role
 parent_pane=$parent_pane
 pane_title=$pane_title
 prompt_mode=$prompt_mode
+resolved_prompt_mode=$resolved_prompt_mode
 shell_command=$shell_command
 EOF
     exit 0
@@ -201,7 +227,7 @@ for _ in $(seq 1 40); do
     sleep 0.25
 done
 
-if [[ "$prompt_mode" == "paste" ]]; then
+if [[ "$resolved_prompt_mode" == "paste" ]]; then
     buffer_name="agent-tmux-${window}-$$"
     tmux load-buffer -b "$buffer_name" "$prompt_file"
     tmux paste-buffer -b "$buffer_name" -t "$pane_id"
@@ -220,4 +246,5 @@ role=$role
 parent_pane=$parent_pane
 pane_title=$pane_title
 prompt_mode=$prompt_mode
+resolved_prompt_mode=$resolved_prompt_mode
 EOF
