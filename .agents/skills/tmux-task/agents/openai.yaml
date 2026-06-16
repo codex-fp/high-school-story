@@ -1,4 +1,0 @@
-interface:
-  display_name: "Tmux Task"
-  short_description: "Delegate subtasks via tmux panes"
-  default_prompt: "Use $tmux-task to launch a delegated agent task in tmux and return results after confirmation."

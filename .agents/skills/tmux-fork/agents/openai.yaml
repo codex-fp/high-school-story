@@ -1,4 +1,0 @@
-interface:
-  display_name: "Tmux Fork"
-  short_description: "Fork agent work into tmux panes"
-  default_prompt: "Use $tmux-fork to split the current agent work into a new tmux pane."
