@@ -6,6 +6,7 @@ window=""
 prompt_file=""
 launch_command=""
 pane_title=""
+context_label=""
 role=""
 parent_pane=""
 prompt_mode="auto"
@@ -13,7 +14,7 @@ dry_run=0
 
 usage() {
     cat <<'EOF'
-Usage: launch-agent-tmux-pane.sh --session <name> --window <window> --launch-command <command> [--prompt-file <file>] [--prompt-mode auto|paste|argv|none] [--pane-title <title>] [--role <role>] [--parent-pane <pane-id>] [--dry-run]
+Usage: launch-agent-tmux-pane.sh --session <name> --window <window> --launch-command <command> [--prompt-file <file>] [--prompt-mode auto|paste|argv|none] [--pane-title <title>] [--context-label <label>] [--role <role>] [--parent-pane <pane-id>] [--dry-run]
 
 Starts a new tmux pane in the requested window, launches the requested agent
 client command, then either pastes the prompt, passes it as a final CLI
@@ -62,6 +63,11 @@ while [[ $# -gt 0 ]]; do
             pane_title="$2"
             shift 2
             ;;
+        --context-label)
+            require_arg "$1" "${2:-}"
+            context_label="$2"
+            shift 2
+            ;;
         --role)
             require_arg "$1" "${2:-}"
             role="$2"
@@ -101,6 +107,10 @@ esac
 if [[ -z "$session" || -z "$window" || -z "$launch_command" ]]; then
     usage >&2
     exit 1
+fi
+
+if [[ -z "$pane_title" && -n "$context_label" ]]; then
+    pane_title="$context_label"
 fi
 
 if [[ "$prompt_mode" != "none" && -z "$prompt_file" ]]; then
@@ -177,6 +187,9 @@ fi
 if [[ -n "$pane_title" ]]; then
     payload_segments+=("export TMUX_PANE_TITLE_HINT=$(printf '%q' "$pane_title")")
 fi
+if [[ -n "$context_label" ]]; then
+    payload_segments+=("export TMUX_AGENT_CONTEXT_LABEL=$(printf '%q' "$context_label")")
+fi
 
 launch_fragment="exec $launch_command"
 if [[ "$resolved_prompt_mode" == "argv" ]]; then
@@ -206,6 +219,7 @@ prompt_file=$prompt_file
 role=$role
 parent_pane=$parent_pane
 pane_title=$pane_title
+context_label=$context_label
 prompt_mode=$prompt_mode
 resolved_prompt_mode=$resolved_prompt_mode
 shell_command=$shell_command
@@ -245,6 +259,7 @@ launch_command=$launch_command
 role=$role
 parent_pane=$parent_pane
 pane_title=$pane_title
+context_label=$context_label
 prompt_mode=$prompt_mode
 resolved_prompt_mode=$resolved_prompt_mode
 EOF

@@ -4,7 +4,7 @@ title: Extend repo-local tmux agent orchestration skills
 status: Done
 assignee: []
 created_date: '2026-06-16 12:24'
-updated_date: '2026-06-16 12:57'
+updated_date: '2026-06-16 13:27'
 labels: []
 dependencies: []
 modified_files:
@@ -31,9 +31,11 @@ Update the existing repo-local tmux skills so they work for agent handoff, sessi
 <!-- AC:BEGIN -->
 - [x] #1 `tmux-handoff` and `tmux-fork` describe an agent-client-agnostic workflow that resolves tmux routing and launch command from active project instructions instead of assuming Codex-specific defaults.
 - [x] #2 A new `tmux-task` skill exists and instructs the delegated session to prepare a return handoff for the originating pane, ask for user confirmation before sending results back, and only then paste the result into the original tmux pane.
-- [x] #3 Shared launcher support for tmux pane creation and prompt injection works with arbitrary launch commands and supports enough metadata to distinguish parent and child sessions when the agent client permits rename hints.
+- [x] #3 Shared launcher support for tmux pane creation and prompt injection works with arbitrary launch commands and carries enough metadata to distinguish parent and child sessions.
 - [x] #4 Skill folders include valid metadata and pass the skill validator for the affected tmux skills.
 <!-- AC:END -->
+
+
 
 ## Implementation Plan
 
@@ -75,7 +77,7 @@ Verification:
 - `bash .agents/skills/tmux-handoff/scripts/launch-agent-tmux-pane.sh --session high-school-story --window engineering --prompt-file <tmp> --launch-command 'claude' --role task --parent-pane '%1' --pane-title 'task <- %1' --dry-run`
 - `git diff --check`
 
-Residual risk: session or thread renaming remains client-dependent, so the skills can only instruct the launched agent to rename itself when that client exposes a rename command or equivalent workflow. `AGENTS.local.md` is intentionally machine-local and gitignored, so its mention of `tmux-task` is not part of the pushed repository state.
+`AGENTS.local.md` is intentionally machine-local and gitignored, so its mention of `tmux-task` is not part of the pushed repository state.
 <!-- SECTION:FINAL_SUMMARY:END -->
 
 ## Definition of Done

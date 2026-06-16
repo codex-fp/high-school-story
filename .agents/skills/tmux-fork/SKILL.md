@@ -12,11 +12,11 @@ Spawn a parallel agent session that inherits the current run context and owns a 
 Read the active project agent instructions first. Resolve:
 
 - tmux session name
-- allowed windows and default window routing
 - default agent client command
 - any local-only overrides from `AGENTS.local.md` when present
 
 Resolve the current pane ID when possible. Use `tmux display-message -p '#{pane_id}'` if the session is already inside tmux.
+When the user did not specify a window, prefer the currently active tmux window in the resolved session. Do not treat local guidance as a closed list of allowed window names.
 
 Detect whether the resolved client supports native session forking. Prefer the native client mechanism over a pasted manual handoff whenever it exists.
 
@@ -24,7 +24,21 @@ Detect whether the resolved client supports native session forking. Prefer the n
 
 A fork inherits the current run's context and narrows it to a parallel subproblem.
 
-Build the fork prompt around:
+Pick a short fork label before you launch the pane. The label should let the parent identify this exact fork later, for example `inventory-check` or `docs-rag-debug`.
+
+Build the fork prompt around a metadata block plus the task body.
+
+Required metadata:
+
+- `TMUX_SKILL: tmux-fork`
+- `FORK_LABEL: <label>`
+- `PARENT_AGENT_SESSION_ID: <exact id for native forks, otherwise id or unknown>`
+- `PARENT_TMUX_SESSION: <session>`
+- `PARENT_TMUX_WINDOW: <window>`
+- `PARENT_TMUX_PANE: <pane id or unknown>`
+- `BACKLOG_TASK_ID: <id or none>`
+
+Then include:
 
 - current objective
 - what has already been inspected, changed, or ruled out
@@ -33,8 +47,7 @@ Build the fork prompt around:
 - expected return shape such as findings, patch, or verification evidence
 
 Use the fork to offload a bounded piece of work, not to duplicate the whole session.
-
-If the client supports session or thread renaming, instruct it to rename itself early with a fork label that hints at the parent pane.
+Tell the child fork to mention the same `FORK_LABEL` in its first acknowledgement and any final report so the parent can map the result to the right branch of work.
 
 ## Native fork first
 
@@ -59,6 +72,7 @@ bash .agents/skills/tmux-handoff/scripts/launch-agent-tmux-pane.sh \
   --launch-command "codex fork <session-id>" \
   --prompt-file "<prompt-file>" \
   --prompt-mode argv \
+  --context-label "<fork label>" \
   --role fork \
   --pane-title "<title hint>" \
   [--parent-pane "<pane id>"]
@@ -80,7 +94,7 @@ If the resolved client does not support native session forking, fall back to a p
 
 ## Launch the pane
 
-1. Resolve the target window.
+1. Resolve the target window in this order: explicit user target, currently active tmux window in the resolved session.
 2. Resolve the tmux session and launch command from the project instructions.
 3. Capture the parent pane ID when available.
 4. Write the fork prompt to a temporary file.
@@ -93,6 +107,7 @@ bash .agents/skills/tmux-handoff/scripts/launch-agent-tmux-pane.sh \
   --launch-command "<native fork command>" \
   --prompt-file "<prompt-file>" \
   --prompt-mode argv \
+  --context-label "<fork label>" \
   --role fork \
   --pane-title "<title hint>" \
   [--parent-pane "<pane id>"]
@@ -107,17 +122,18 @@ bash .agents/skills/tmux-handoff/scripts/launch-agent-tmux-pane.sh \
   --launch-command "<agent client command>" \
   --prompt-file "<prompt-file>" \
   --prompt-mode paste \
+  --context-label "<fork label>" \
   --role fork \
   --pane-title "<title hint>" \
   [--parent-pane "<pane id>"]
 ```
 
-7. Capture the returned `pane_id`, `session`, `window`, and `target`.
-8. Tell the user what was forked, whether it used native client forking or fallback handoff, and where the fork is running.
+7. Capture the returned `pane_id`, `session`, `window`, `target`, and `context_label`.
+8. Tell the user what was forked, which `FORK_LABEL` it owns, whether it used native client forking or fallback handoff, and where the fork is running.
 
 ## Safety checks
 
-- If the requested window is outside the project-defined allowed set, stop and ask.
+- If the user explicitly requested a tmux window and that window does not exist in the resolved session, stop and report the exact missing target.
 - If the tmux session or window does not exist, stop and report the exact missing target.
 - If the current pane cannot be resolved, do not fake a parent-pane link. Continue without it or fall back to `tmux-handoff` if the user only wanted a generic separate session.
 - For Codex, prefer an explicit session UUID over `--last` whenever both are possible.
