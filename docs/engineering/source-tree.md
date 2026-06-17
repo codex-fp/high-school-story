@@ -11,7 +11,6 @@
 ├── STYLEGUIDE.md
 ├── _bmad/
 ├── _bmad-output/
-├── .backlog/
 ├── assets/
 ├── core/
 ├── docs/
@@ -37,6 +36,8 @@
 | `assets/ui/` | UI skin, atlas, fonts, and UI graphics. |
 | `engine/` | Managed reusable Kotlin Game Engine checkout. |
 | `docs/` | BMAD-native project documentation. |
+| `_bmad-output/implementation-artifacts/` | BMAD sprint-state and implementation story artifacts. |
+| `_bmad-output/planning-artifacts/` | BMAD planning artifacts, including the current epic/story breakdown. |
 
 ## Game Package Layout
 

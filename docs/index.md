@@ -13,7 +13,7 @@ root entrypoints, `docs/game/`, `docs/engineering/`, and `docs/agent/`.
 | Engine | Kotlin Game Engine 2D through `engine/` Gradle composite build |
 | Runtime backend | LibGDX LWJGL3 desktop |
 | Primary code language | Kotlin |
-| Task tracker | `backlog.md` under `.backlog/` |
+| Task tracker | BMAD story files in `_bmad-output/implementation-artifacts/` plus sprint execution in `sprint-status.yaml` |
 | Active documentation organization task | `HSS-36` |
 
 ## Start Here

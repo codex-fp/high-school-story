@@ -11,7 +11,8 @@ the critical operational rules.
 Before editing, read:
 
 - `_bmad-output/project-context.md`.
-- Active `.backlog/tasks/HSS-*` task or create one if the work is substantial.
+- `_bmad-output/implementation-artifacts/sprint-status.yaml` and the active
+  implementation story file when the work belongs to a current BMAD story.
 - The owning document in `docs/` for the topic being changed.
 - `engine/_bmad-output/project-context.md`, `engine/README.md`, and
   `engine/AGENTS.md` before touching reusable engine code.
@@ -42,7 +43,7 @@ Before editing, read:
 6. Implement the smallest coherent change.
 7. Run relevant verification or explain why it is not applicable.
 8. Record changed files, commands, observed results, and residual risk in the
-   final handoff and active backlog task.
+   final handoff and active BMAD story artifact when one exists.
 
 ## MCP Routing Rules
 
@@ -71,11 +72,14 @@ Before editing, read:
 
 ## Task Tracking
 
-- Use `HSS-<number>` task IDs.
-- Use `.backlog/` as the local task source.
-- Treat `.backlog/` task files as durable git-tracked project artifacts, not disposable local scratch notes.
-- Required task states are `To Do`, `In Progress`, and `Done`.
-- Link implementation and verification evidence to the active task.
+- Use `_bmad-output/planning-artifacts/epics.md` as the planning source for
+  epics and story breakdown.
+- Use `_bmad-output/implementation-artifacts/sprint-status.yaml` as the current
+  sprint execution source.
+- Keep implementation story artifacts under
+  `_bmad-output/implementation-artifacts/`.
+- Link implementation and verification evidence to the active BMAD story when
+  the work is story-driven.
 
 ## Brainstorming Workflow Rules
 
@@ -86,11 +90,9 @@ Before editing, read:
 
 ## Git Naming Conventions
 
-- Branch name format: `TASK-ID/short-description`.
-- PR title format: `TASK-ID Short description`.
-- Commit message format: Conventional Commits with the task ID at the start of the summary text, for example `type(scope): TASK-ID Short description`.
-- When branches, PRs, or commits are requested, include the active task ID using the formats above.
-- When a workflow changes `.backlog/` task files as part of the work, stage and commit those task-file updates together with the related implementation or documentation unless the user explicitly asks to leave them uncommitted.
+- When branches, PRs, or commits are requested for story-driven work, include
+  the active BMAD story key when practical.
+- Keep commit messages in Conventional Commits format.
 
 ## Editing Boundaries
 
@@ -107,7 +109,7 @@ Before editing, read:
 - Keep reusable engine code under `engine/` and `pro.piechowski.kge`.
 - Treat `engine/` as a managed standalone project, not a place for game-specific
   content.
-- Use engine `KGE-<number>` backlog traceability for reusable engine work.
+- Use the engine project's own task or story workflow for reusable engine work.
 - Use `SandboxLauncher` for development iteration.
 - Treat `MainLauncher` as incomplete until the full game flow exists.
 - Treat `lwjgl3` preview sources as live visual tools run manually through

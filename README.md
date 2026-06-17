@@ -5,12 +5,12 @@ player creates a high school student and guides them through school routine,
 lessons, relationships, condition management, travel, and semester outcomes.
 
 This repository is BMAD/GDS-native. Durable project knowledge lives in `docs/`,
-AI execution context lives in `_bmad-output/project-context.md`, and work is
-tracked with `backlog.md` tasks using `HSS-<number>` IDs.
+AI execution context lives in `_bmad-output/project-context.md`, planning truth
+lives in `_bmad-output/planning-artifacts/epics.md`, and sprint execution lives
+in `_bmad-output/implementation-artifacts/sprint-status.yaml`.
 
 ## Current State
 
-- Active traceability task for this documentation migration: `HSS-13`.
 - Current development entrypoint: `SandboxLauncher`.
 - Full-game entrypoint: `MainLauncher`, currently incomplete because
   `GameEntrypoint.run()` is intentionally `TODO()`.
@@ -55,7 +55,6 @@ On Windows, use `gradlew.bat` with the same tasks.
 | `docs/` | BMAD-native project documentation and source of truth for humans and agents. |
 | `_bmad/` | Installed BMAD/GDS configuration and workflow support. |
 | `_bmad-output/project-context.md` | Lean AI-agent execution context generated from the project docs. |
-| `.backlog/` | `backlog.md` task tracking files. |
 
 ## Documentation Entry Points
 
@@ -72,6 +71,8 @@ On Windows, use `gradlew.bat` with the same tasks.
   source layout.
 - [docs/engineering/component-inventory.md](docs/engineering/component-inventory.md) - current game
   components, scenes, assets, and previews.
+- [_bmad-output/planning-artifacts/epics.md](_bmad-output/planning-artifacts/epics.md) - BMAD planning breakdown of epics and stories.
+- [_bmad-output/implementation-artifacts/sprint-status.yaml](_bmad-output/implementation-artifacts/sprint-status.yaml) - current BMAD sprint execution state.
 - [docs/game/narrative/content.md](docs/game/narrative/content.md) - narrative content
   source for the implemented intro arc.
 - [docs/agent/guide.md](docs/agent/guide.md) - operational rules for AI

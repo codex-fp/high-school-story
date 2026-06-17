@@ -63,8 +63,10 @@ prevent drift from the game, engine, and documentation contracts.
 
 ### Source Of Truth
 
-- Use this file first for agent execution context, then the active backlog task,
-  then the owning durable document for details.
+- Use this file first for agent execution context, then
+  `_bmad-output/implementation-artifacts/sprint-status.yaml` plus the active
+  BMAD story artifact when the work is story-driven, then the owning durable
+  document for details.
 - Keep root `AGENTS.md` as a compatibility entrypoint; put durable agent behavior rules in `docs/` and BMAD customization files under `_bmad/custom/`.
 - `docs/project-overview.md` owns product summary and current status.
 - `docs/game/brief.md` owns the product-level brief and full-game promise.
@@ -223,8 +225,9 @@ prevent drift from the game, engine, and documentation contracts.
 
 ### Workflow And Task Rules
 
-- Treat `.backlog/` task files as durable git-tracked project artifacts.
-- When work changes a `.backlog/` task file, stage and commit that task-file update together with the related repository change unless the user explicitly asks to keep it out of git.
+- Treat `_bmad-output/implementation-artifacts/` story files and
+  `sprint-status.yaml` as the active BMAD execution artifacts for repository
+  work.
 - For documentation questions, use direct file search and reads for exact
   lookup, known documents, and line-level verification; use `hss-docs-rag`
   first for semantic or cross-document retrieval, owner-document discovery when
@@ -327,8 +330,7 @@ prevent drift from the game, engine, and documentation contracts.
   restrictive interpretation.
 - If a new durable pattern emerges, update this file and the owning source
   document in the same change.
-- Keep final handoffs tied to the active `HSS-<number>` backlog task when one
-  exists.
+- Keep final handoffs tied to the active BMAD story artifact when one exists.
 
 ### For Humans
 

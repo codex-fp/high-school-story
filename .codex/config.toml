@@ -1,7 +1,3 @@
-[mcp_servers.backlog]
-command = "backlog"
-args = ["mcp", "start"]
-
 [mcp_servers.hss-docs-rag]
 command = "uv"
 args = ["run", "--project", "tools/docs-rag", "hss-docs-rag-mcp"]

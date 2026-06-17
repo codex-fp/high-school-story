@@ -50,7 +50,10 @@ This project uses BMAD/GDS documentation conventions:
 - `docs/engineering/architecture.md` owns technical architecture and engine
   boundaries.
 - `_bmad-output/project-context.md` is optimized for AI-agent context loading.
-- `.backlog/` stores task traceability with `HSS-<number>` IDs.
+- `_bmad-output/planning-artifacts/epics.md` stores the current BMAD epic and
+  story breakdown.
+- `_bmad-output/implementation-artifacts/sprint-status.yaml` stores the current
+  BMAD sprint execution state.
 - Root compatibility files point to the canonical BMAD-native documents.
 
 ## Current Product Status

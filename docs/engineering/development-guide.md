@@ -84,7 +84,8 @@ user explicitly asks.
 - Run the relevant live preview after visual object, map, dialogue, scene, or
   launcher changes with `:lwjgl3:preview`.
 - Documentation-only changes can be verified by reading the generated docs,
-  checking links and paths, and recording evidence in the backlog task.
+  checking links and paths, and recording evidence in the active BMAD story or
+  sprint artifact when one exists.
 
 Preview examples:
 
@@ -150,10 +151,11 @@ Globally opted-in APIs include `kotlin.ExperimentalContextParameters`,
   or code search alone. For exact keyword, path, or wording lookups, prefer
   direct file search and reads.
 - Keep documentation and code-facing text in English.
-- Record verification evidence in the active `HSS-<number>` task.
+- Record verification evidence in the active BMAD story artifact or handoff when
+  the work is story-driven.
 
 ## Git Workflow Conventions
 
-- Branch name format: `TASK-ID/short-description`.
-- PR title format: `TASK-ID Short description`.
-- Commit message format: Conventional Commits with the task ID at the start of the summary text, for example `type(scope): TASK-ID Short description`.
+- When a change belongs to a BMAD implementation story, prefer including the
+  story key in the branch name, PR title, and commit summary text.
+- Commit messages should stay in Conventional Commits format.

@@ -9,11 +9,5 @@
     "paths": [
       ".agents/skills"
     ]
-  },
-  "mcp": {
-    "backlog": {
-      "type": "local",
-      "command": ["backlog", "mcp", "start"]
-    }
   }
 }
