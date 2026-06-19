@@ -2,3 +2,19 @@
 command = "uv"
 args = ["run", "--project", "tools/docs-rag", "hss-docs-rag-mcp"]
 env = { HSS_DOCS_RAG_COLLECTION = "high_school_story_docs", HSS_DOCS_RAG_DOC_PATHS = "docs,_bmad-output", HSS_DOCS_RAG_EMBED_BASE_URL = "http://127.0.0.1:11434", HSS_DOCS_RAG_EMBED_MODEL = "bge-m3:latest", HSS_DOCS_RAG_QDRANT_URL = "http://127.0.0.1:6334", HSS_DOCS_RAG_TOP_K = "5" }
+
+[mcp_servers.hss-mem0]
+command = "uvx"
+args = ["--from", "git+https://github.com/elvismdev/mem0-mcp-selfhosted.git", "mem0-mcp-selfhosted"]
+
+[mcp_servers.hss-mem0.env]
+MEM0_COLLECTION = "high_school_story_codex"
+MEM0_EMBED_DIMS = "1024"
+MEM0_EMBED_MODEL = "bge-m3"
+MEM0_EMBED_PROVIDER = "ollama"
+MEM0_ENABLE_GRAPH = "false"
+MEM0_HISTORY_DB_PATH = "/home/fpiechowski/high-school-story/.mem0/history.db"
+MEM0_LLM_MODEL = "qwen3:14b"
+MEM0_LLM_PROVIDER = "ollama"
+MEM0_PROVIDER = "ollama"
+MEM0_USER_ID = "filip"

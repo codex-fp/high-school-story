@@ -56,32 +56,40 @@ After the Ollama container is running, pull the required local models:
 "/mnt/c/Program Files/Docker/Docker/resources/bin/docker.exe" exec hss-ollama ollama pull bge-m3
 ```
 
-## Client Registration On This Machine
+## Client Registration For This Repository
 
-Register the MCP server:
+Register the MCP server in the project-local Codex config:
 
 ```bash
-codex mcp add hss-mem0 \
-  --env MEM0_PROVIDER=ollama \
-  --env MEM0_LLM_PROVIDER=ollama \
-  --env MEM0_LLM_MODEL=qwen3:14b \
-  --env MEM0_EMBED_PROVIDER=ollama \
-  --env MEM0_EMBED_MODEL=bge-m3 \
-  --env MEM0_EMBED_DIMS=1024 \
-  --env MEM0_USER_ID=filip \
-  --env MEM0_COLLECTION=high_school_story_codex \
-  --env MEM0_ENABLE_GRAPH=false \
-  --env MEM0_HISTORY_DB_PATH=/home/fpiechowski/high-school-story/.mem0/history.db \
-  -- uvx --from git+https://github.com/elvismdev/mem0-mcp-selfhosted.git mem0-mcp-selfhosted
+mkdir -p .codex
 ```
 
-The active client on this machine stores the registration in
-`~/.codex/config.toml`. That file is symlinked to
-`/mnt/c/Users/fpiec/IdeaProjects/codex-fp/codex-home/config.toml`.
+Then add this stanza to `.codex/config.toml` in the repository root:
+
+```toml
+[mcp_servers.hss-mem0]
+command = "uvx"
+args = ["--from", "git+https://github.com/elvismdev/mem0-mcp-selfhosted.git", "mem0-mcp-selfhosted"]
+
+[mcp_servers.hss-mem0.env]
+MEM0_COLLECTION = "high_school_story_codex"
+MEM0_EMBED_DIMS = "1024"
+MEM0_EMBED_MODEL = "bge-m3"
+MEM0_EMBED_PROVIDER = "ollama"
+MEM0_ENABLE_GRAPH = "false"
+MEM0_HISTORY_DB_PATH = "/home/fpiechowski/high-school-story/.mem0/history.db"
+MEM0_LLM_MODEL = "qwen3:14b"
+MEM0_LLM_PROVIDER = "ollama"
+MEM0_PROVIDER = "ollama"
+MEM0_USER_ID = "filip"
+```
+
+Keep `hss-mem0` out of `~/.codex/config.toml` so it only loads for this
+repository.
 
 ## Verification
 
-Check the client registration:
+Check the client registration from this repository root:
 
 ```bash
 codex mcp list
@@ -98,11 +106,13 @@ curl http://localhost:11434/api/tags
 Once both services are running, restart the client and use the `hss-mem0` MCP
 tools to add and search a small test memory.
 
-Current machine status on 2026-06-14:
+Current machine status on 2026-06-19:
 
 - `uvx --from git+https://github.com/elvismdev/mem0-mcp-selfhosted.git python -c 'import mem0_mcp_selfhosted; print(mem0_mcp_selfhosted.__version__)'`
   returns `0.3.2`.
-- `codex mcp list` shows `hss-mem0` enabled as a stdio server.
+- `.codex/config.toml` in this repository contains the `hss-mem0` MCP
+  registration.
+- `~/.codex/config.toml` no longer contains the `hss-mem0` MCP registration.
 - Qdrant is running in Docker as `hss-qdrant`; `curl http://localhost:6333/healthz`
   returns `healthz check passed`.
 - Ollama is running in Docker as `hss-ollama`; `curl http://localhost:11434/api/tags`
