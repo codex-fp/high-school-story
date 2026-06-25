@@ -18,7 +18,7 @@ updated: 2026-06-25
 - The game is a nostalgic, cozy school-life sim centered on the emotional cost of time.
 - The player guides a student through three years of high school, balancing academics, relationships, and wellbeing.
 - Time is one of the main scarce resources, with day-level and week-level planning pressure; energy, stress, and mood are also major resources.
-- Relationships should grow through attention, interaction, repeated investment, compatibility, and care for specific characters.
+- Relationships should grow through a hybrid of smaller repeatable interactions and larger scripted story milestones. Compatibility accelerates growth but does not replace attention, effort, or interaction.
 - Clubs and social circles should provide activities, access, and tradeoffs, but they are only one expression of the player's broader life path.
 - The ending should combine a hard academic verdict with a softer reflective life epilogue.
 - The brief is intended as a working context artifact for developers and AI agents, not as an external publisher-facing document.
@@ -45,12 +45,12 @@ updated: 2026-06-25
 
 ### Provisional One-Sentence Game Description
 
-- A nostalgic high-school life sim where the player spends three school years balancing academics, relationships, and wellbeing under constant time pressure, with their identity emerging from the opportunities they choose and the ones they lose.
+- A nostalgic high-school life sim where the player starts with light identity inputs from character creation, then spends three school years balancing academics, relationships, and wellbeing under constant time pressure, with richer identity emerging from the opportunities they choose and the ones they lose.
 
 ### Provisional Player Fantasy
 
 - To live through a more intentional, emotionally meaningful version of adolescence without being able to have everything.
-- To shape a personal high-school life path through everyday presence, tradeoffs, and belonging.
+- To shape a personal high-school life path through starting preferences, everyday choices, tradeoffs, and belonging.
 - To look back at graduation and feel that a unique life was truly lived, rather than merely optimized.
 
 ### Provisional Emotional Promise
@@ -62,8 +62,9 @@ updated: 2026-06-25
 ### Provisional Differentiation Signals
 
 - Time is treated as the main emotional and mechanical currency, down to small visible decisions.
-- Relationships grow through presence, regularity, compatibility, and shared spaces rather than mostly through scripted quest chains.
-- Identity is shaped primarily by chosen activities, time allocation, and developed relationships; clubs are one expression of that, not the whole identity system.
+- Relationships grow through repeatable contact points such as conversation, texting, meetings/hangouts, gifts, and similar interactions, then advance through larger scripted story milestones.
+- Compatibility accelerates relationship growth but is not the relationship engine by itself.
+- Character creation defines a light starting identity through stats and favorites/preferences; richer school identity is shaped by chosen activities, time allocation, developed relationships, and sacrificed opportunities.
 - FOMO comes from too many worthwhile characters, activities, and time-bound events competing for limited time.
 - The ending acts as a life interpretation and memory mirror, not just a score screen or route completion summary.
 - Smartphone and social media function as social navigation and planning tools inside the simulation, not just UI dressing.
@@ -78,7 +79,7 @@ updated: 2026-06-25
 
 - Primary fantasy: author a personal life path and accept its cost.
 - Positioning target: nostalgic school social sim.
-- Main hook: high-school identity emerges from chosen activities and how time is split between study, relationships, and fun.
+- Main hook: high-school identity starts with stats and favorites/preferences, then becomes richer through chosen activities and how time is split between study, relationships, and fun.
 - Emotional priority:
   - Nostalgia
   - Attachment
@@ -102,22 +103,22 @@ updated: 2026-06-25
 1. Review the day's constraints, opportunities, and known schedules through the calendar, school context, and smartphone.
 2. Choose how to spend limited time blocks across school, study, social contact, travel, rest, and optional activities.
 3. Move through classes and locations, making small but meaningful activity decisions that consume time and affect energy, stress, mood, academics, and relationships.
-4. Build or miss relationship opportunities through presence, timing, compatibility, and repeated contact in the right places.
+4. Build or miss relationship opportunities through repeatable interactions such as conversation, texting, meetings/hangouts, gifts, and similar contact points; larger scripted classmate story milestones unlock after reaching the required relationship level.
 5. End the day or week by absorbing outcomes: stat changes, unlocked events, changed bonds, missed opportunities, and upcoming pressure points.
 6. Repeat across weeks and semesters until long-term life-path consequences are reflected in exam outcomes, memories, relationships, and epilogue.
 
 ### Provisional Gameplay Pillars
 
 - Time and wellbeing as core currencies: every meaningful action has a visible opportunity cost, while energy, stress, and mood strongly shape what the player can do and how well it works.
-- Relationships through engagement: bonds grow through attention, interaction, repeated investment, and care for specific characters.
-- Life-path identity through tradeoffs: the player's style emerges from what they prioritize and what they give up.
+- Relationships through interaction and story milestones: bonds grow through smaller repeatable interactions, while major scripted classmate story quests unlock after the required relationship level is reached.
+- Starting identity enriched through tradeoffs: stats and favorites/preferences give the protagonist an initial shape, while the player's school identity grows richer through what they prioritize and what they give up.
 - School structure as emotional pressure: days, weeks, semesters, exams, and events create pacing and stakes.
 
 ### Provisional Primary Decision Forms
 
 - Time allocation appears to be the dominant decision layer.
 - Place and availability seem to be the second layer, because where the player goes determines which opportunities and characters are reachable.
-- Relationship investment appears to be the third layer, expressed through repeated contact, attention, and compatible activities.
+- Relationship investment appears to be the third layer, expressed through repeatable contact, attention, gifts, meetings/hangouts, compatible activities, and milestone progression.
 - Wellbeing management is a full resource pillar across the loop, especially through energy, stress, and mood.
 
 ### Provisional Tension Hierarchy
@@ -160,7 +161,7 @@ updated: 2026-06-25
 
 ### Positioning Line
 
-- Stardew-like one-more-day loop, but about school identity, relationships, and time pressure instead of farming, where time, wellbeing, and relationships decide who you became.
+- Stardew-like one-more-day loop, but about school identity, relationships, and time pressure instead of farming, where starting traits, time, wellbeing, and relationships shape who you became.
 
 ## Scope and MVP Extract
 
@@ -202,10 +203,11 @@ updated: 2026-06-25
   - Gender.
   - Initial attributes.
   - Favorites.
-  - Preferences such as music, films, and food.
+  - Preferences such as music, films, literature, and food.
 - Attribute effects:
   - Partial aptitude differences for specific school subjects.
   - Compatibility effects with NPCs.
+- Favorites/preferences influence relationship texture, compatibility, activity flavor, and how the protagonist initially feels personalized.
 - Romance: important part of the game and one of the most interesting possible run elements.
 - Art direction: 2D pixel art.
 - Audio direction: lo-fi, cozy, school ambient, with a little teen-drama flavor.
@@ -216,12 +218,14 @@ updated: 2026-06-25
 - Concern: 10-15 classmates may feel small for a school class, but 20+ classmates is likely too large for story arc scope.
 - MVP target: 5 classmates, including one with a partial story arc.
 - Recommended working direction for brief: define 12 core classmates with full arcs as the production target, plus optional background or lightweight students if the school needs to feel more populated.
+- Relationship progression model: repeatable interactions raise relationship level, while larger scripted story milestones advance personal arcs once the required level is reached.
+- Compatibility modifies relationship growth speed or efficiency rather than replacing interaction.
 
 ## Risks and Open Questions Extract
 
 ### Key Risks
 
-- Relationship content scope: 12 full classmates can carry the fantasy, but each full arc adds writing, event scripting, balancing, art, QA, and localization burden.
+- Relationship content scope: 12 full classmates can carry the fantasy, but each full arc adds repeatable interactions, scripted milestones, writing, event scripting, balancing, art, QA, and localization burden.
 - Lesson system complexity: lessons are full gameplay, so they need enough depth to matter without turning the game into a classroom minigame collection.
 - Wellbeing balance: energy, stress, and mood must matter strongly, but should not make the player feel trapped in maintenance chores.
 - Time-pressure tone: the game needs painful tradeoffs, but not a spreadsheet-optimization feel that fights the cozy/narrative positioning.
@@ -235,6 +239,7 @@ updated: 2026-06-25
 - How exactly do lessons play moment to moment?
 - How do energy, stress, and mood affect different activity categories?
 - How many relationship stages does each classmate arc need?
+- What repeatable interactions are needed between scripted story milestones?
 - Which classmates are romanceable, and under what constraints?
 - How much of the school population is mechanically meaningful versus background flavor?
 - What is the exact semester calendar structure for MVP?
