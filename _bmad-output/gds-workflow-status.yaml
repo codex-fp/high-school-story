@@ -2,11 +2,11 @@ project_name: High School Story
 project_type: game
 tracking_version: "1.0"
 initialized_at: "2026-06-24T14:13:17.3565773+02:00"
-current_workflow: create-game-brief
-next_workflow: create-game-brief
+current_workflow: gdd
+next_workflow: gdd
 workflows:
   brainstorm-game: C:\Users\fpiec\high-school-story\_bmad-output\brainstorming-session-2026-06-24T14-13-17.md
-  create-game-brief: pending
+  create-game-brief: C:\Users\fpiec\high-school-story\_bmad-output\planning-artifacts\briefs\brief-High School Story-2026-06-25\brief.md
   gdd: pending
   create-architecture: pending
   narrative: pending
