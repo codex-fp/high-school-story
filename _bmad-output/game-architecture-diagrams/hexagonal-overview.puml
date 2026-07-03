@@ -1,0 +1,156 @@
+@startuml
+title High School Story - Hexagonal Architecture Overview v0
+
+skinparam componentStyle rectangle
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam linetype ortho
+skinparam defaultFontName Arial
+
+skinparam package {
+  BorderColor #2f2a26
+  BackgroundColor #fff8ea
+}
+
+skinparam component {
+  BorderColor #2f2a26
+  BackgroundColor #f8efe0
+}
+
+skinparam interface {
+  BorderColor #2f2a26
+  BackgroundColor #f3f7ff
+}
+
+legend right
+  Direction:
+  <<Inbound Adapter>>
+  <<Outbound Adapter>>
+  <<Inbound Port>>
+  <<Outbound Port>>
+
+  Technology:
+  <<Godot>>
+  <<FileSystem>>
+  <<JSON>>
+  <<R3>>
+
+  Application:
+  <<Command Handler>>
+  <<Query Service>>
+  <<Read Model>>
+  <<Reactive Projection>>
+
+  Domain:
+  <<Aggregate>>
+  <<Domain Service>>
+  <<Domain Event>>
+
+  Content / Tooling:
+  <<Content Definition>>
+  <<Validator>>
+  <<Preview Tool>>
+endlegend
+
+package "Godot Host\nHigh School Story.csproj" as GodotHost {
+  component "Input Adapter" as InputAdapter <<Inbound Adapter>> <<Godot>>
+  component "HUD / Phone / Dialogue Views" as GodotViews <<Outbound Adapter>> <<Godot>>
+  component "Save File Adapter" as SaveFileAdapter <<Outbound Adapter>> <<Godot>> <<FileSystem>>
+  component "Audio Adapter" as AudioAdapter <<Outbound Adapter>> <<Godot>>
+  component "Content Preview Adapter" as ContentPreviewAdapter <<Inbound Adapter>> <<Godot>>
+}
+
+package "Application\nHighSchoolStory.Application" as Application {
+  component "Command Handlers" as CommandHandlers <<Command Handler>>
+  component "Query Services" as QueryServices <<Query Service>>
+  component "Runtime Mode State" as RuntimeMode <<Reactive Projection>> <<R3>>
+  component "UI Read Models" as ReadModels <<Read Model>>
+  component "R3 Reactive Projections" as ReactiveProjections <<Reactive Projection>> <<R3>>
+  component "Projection Updater" as ProjectionUpdater
+  component "Save Orchestrator" as SaveOrchestrator
+}
+
+package "Ports\nHighSchoolStory.Ports" as Ports {
+  interface "ISaveStore" as ISaveStore <<Outbound Port>>
+  interface "IContentRepository" as IContentRepository <<Outbound Port>>
+  interface "IAudioOutput" as IAudioOutput <<Outbound Port>>
+  interface "IClock" as IClock <<Outbound Port>>
+  interface "INotificationOutput" as INotificationOutput <<Outbound Port>>
+}
+
+package "Domain\nHighSchoolStory.Domain" as Domain {
+  component "GameState" as GameState <<Aggregate>>
+  component "Time / Calendar Rules" as TimeRules <<Domain Service>>
+  component "Activity Rules" as ActivityRules <<Domain Service>>
+  component "Lesson Rules" as LessonRules <<Domain Service>>
+  component "Relationship Rules" as RelationshipRules <<Domain Service>>
+  component "Wellbeing Rules" as WellbeingRules <<Domain Service>>
+  component "Memory Ledger Inputs" as MemoryLedgerInputs
+  component "Domain Events / Results" as DomainEvents <<Domain Event>>
+}
+
+package "Content\nHighSchoolStory.Content" as Content {
+  component "System JSON Content" as SystemJson <<Content Definition>> <<JSON>>
+  component "Dialogue JSON" as DialogueJson <<Content Definition>> <<JSON>>
+  component "Schema Validator" as SchemaValidator <<Validator>>
+  component "Preview Report Generator" as PreviewReportGenerator <<Preview Tool>>
+}
+
+InputAdapter --> CommandHandlers : player intent / commands
+GodotViews --> QueryServices : queries / subscriptions
+ReactiveProjections --> GodotViews : typed view streams
+
+CommandHandlers --> GameState : mutate canonical state
+CommandHandlers --> TimeRules
+CommandHandlers --> ActivityRules
+CommandHandlers --> LessonRules
+CommandHandlers --> RelationshipRules
+CommandHandlers --> WellbeingRules
+CommandHandlers --> DomainEvents : receives results/events
+
+ProjectionUpdater --> GameState : reads source of truth
+ProjectionUpdater --> ReadModels : builds screen views
+ProjectionUpdater --> ReactiveProjections : publishes
+QueryServices --> ReadModels : returns typed views
+RuntimeMode --> ReactiveProjections
+
+CommandHandlers --> IContentRepository
+CommandHandlers --> IClock
+CommandHandlers --> IAudioOutput
+CommandHandlers --> INotificationOutput
+SaveOrchestrator --> ISaveStore
+SaveOrchestrator --> GameState : snapshots / restores
+
+SaveFileAdapter ..|> ISaveStore
+AudioAdapter ..|> IAudioOutput
+SystemJson ..|> IContentRepository
+DialogueJson ..|> IContentRepository
+ContentPreviewAdapter --> SchemaValidator
+
+SchemaValidator --> SystemJson
+SchemaValidator --> DialogueJson
+PreviewReportGenerator --> SchemaValidator
+
+GameState --> MemoryLedgerInputs
+GameState --> DomainEvents
+
+note bottom of Domain
+  No Godot.
+  No R3.
+  No adapters.
+  Plain C# canonical persisted state.
+end note
+
+note bottom of Application
+  R3 starts here.
+  Reactive projections are UI/read state,
+  not the persisted source of truth.
+end note
+
+note bottom of GodotHost
+  Thin view and infrastructure adapter.
+  Presents state and captures input.
+  Does not own game rules.
+end note
+
+@enduml
