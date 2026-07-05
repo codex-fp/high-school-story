@@ -57,7 +57,7 @@ package "Godot Host\nHigh School Story.csproj" as GodotHost {
   component "HUD / Phone / Dialogue Views" as GodotViews <<Outbound Adapter>> <<Godot>>
   component "Save File Adapter" as SaveFileAdapter <<Outbound Adapter>> <<Godot>> <<FileSystem>>
   component "Audio Adapter" as AudioAdapter <<Outbound Adapter>> <<Godot>>
-  component "Content Preview Adapter" as ContentPreviewAdapter <<Inbound Adapter>> <<Godot>>
+  component "Content Validation Preview Adapter" as ContentValidationPreviewAdapter <<Inbound Adapter>> <<Godot>>
 }
 
 package "Application\nHighSchoolStory.Application" as Application {
@@ -125,7 +125,7 @@ SaveFileAdapter ..|> ISaveStore
 AudioAdapter ..|> IAudioOutput
 SystemJson ..|> IContentRepository
 DialogueJson ..|> IContentRepository
-ContentPreviewAdapter --> SchemaValidator
+ContentValidationPreviewAdapter --> SchemaValidator
 
 SchemaValidator --> SystemJson
 SchemaValidator --> DialogueJson
