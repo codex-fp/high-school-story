@@ -291,12 +291,9 @@ Architecture diagrams are maintained as editable PlantUML sources plus rendered 
 
 ![Hexagonal architecture overview](diagrams/hexagonal-overview.svg)
 
-![Hexagonal architecture overview v2](diagrams/hexagonal-overview-v2.svg)
-
 Sources:
 
 - `diagrams/hexagonal-overview.puml`
-- `diagrams/hexagonal-overview-v2.puml`
 
 ### Remaining Architectural Decisions
 
@@ -722,8 +719,6 @@ Current companion:
 
 - `diagrams/hexagonal-overview.puml`
 - `diagrams/hexagonal-overview.svg`
-- `diagrams/hexagonal-overview-v2.puml`
-- `diagrams/hexagonal-overview-v2.svg`
 
 Stereotypes use multiple labels rather than fake inheritance:
 

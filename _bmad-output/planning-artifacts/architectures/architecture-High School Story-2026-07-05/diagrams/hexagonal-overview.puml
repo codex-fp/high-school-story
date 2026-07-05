@@ -1,156 +1,125 @@
 @startuml
-title High School Story - Hexagonal Architecture Overview v0
+title High School Story - Hexagonal Architecture Framework
 
-skinparam componentStyle rectangle
-skinparam packageStyle rectangle
 skinparam shadowing false
 skinparam linetype ortho
 skinparam defaultFontName Arial
+skinparam componentStyle rectangle
+skinparam packageStyle rectangle
+
+skinparam rectangle {
+  BorderColor #2f2a26
+  BackgroundColor #fff8ea
+  RoundCorner 16
+}
 
 skinparam package {
   BorderColor #2f2a26
-  BackgroundColor #fff8ea
+  BackgroundColor #fffdf6
+  RoundCorner 18
 }
 
 skinparam component {
   BorderColor #2f2a26
   BackgroundColor #f8efe0
+  RoundCorner 12
 }
 
 skinparam interface {
   BorderColor #2f2a26
-  BackgroundColor #f3f7ff
+  BackgroundColor #eef5ff
 }
 
-legend right
-  Direction:
-  <<Inbound Adapter>>
-  <<Outbound Adapter>>
-  <<Inbound Port>>
-  <<Outbound Port>>
-
-  Technology:
-  <<Godot>>
-  <<FileSystem>>
-  <<JSON>>
-  <<R3>>
-
-  Application:
-  <<Command Handler>>
-  <<Query Service>>
-  <<Read Model>>
-  <<Reactive Projection>>
-
-  Domain:
-  <<Aggregate>>
-  <<Domain Service>>
-  <<Domain Event>>
-
-  Content / Tooling:
-  <<Content Definition>>
-  <<Validator>>
-  <<Preview Tool>>
-endlegend
-
-package "Godot Host\nHigh School Story.csproj" as GodotHost {
-  component "Input Adapter" as InputAdapter <<Inbound Adapter>> <<Godot>>
-  component "HUD / Phone / Dialogue Views" as GodotViews <<Outbound Adapter>> <<Godot>>
-  component "Save File Adapter" as SaveFileAdapter <<Outbound Adapter>> <<Godot>> <<FileSystem>>
-  component "Audio Adapter" as AudioAdapter <<Outbound Adapter>> <<Godot>>
-  component "Content Validation Preview Adapter" as ContentValidationPreviewAdapter <<Inbound Adapter>> <<Godot>>
+skinparam note {
+  BorderColor #66594c
+  BackgroundColor #fff8df
 }
 
-package "Application\nHighSchoolStory.Application" as Application {
-  component "Command Handlers" as CommandHandlers <<Command Handler>>
-  component "Query Services" as QueryServices <<Query Service>>
-  component "Runtime Mode State" as RuntimeMode <<Reactive Projection>> <<R3>>
-  component "UI Read Models" as ReadModels <<Read Model>>
-  component "R3 Reactive Projections" as ReactiveProjections <<Reactive Projection>> <<R3>>
-  component "Projection Updater" as ProjectionUpdater
-  component "Save Orchestrator" as SaveOrchestrator
+left to right direction
+
+rectangle "Primary / Driving Infrastructure" as PrimaryInfra #dfeeda {
+  component "Infrastructure Component\nGodot input / CLI / debug UI" as DrivingInfraComponent <<Infrastructure Component>>
 }
 
-package "Ports\nHighSchoolStory.Ports" as Ports {
-  interface "ISaveStore" as ISaveStore <<Outbound Port>>
-  interface "IContentRepository" as IContentRepository <<Outbound Port>>
-  interface "IAudioOutput" as IAudioOutput <<Outbound Port>>
-  interface "IClock" as IClock <<Outbound Port>>
-  interface "INotificationOutput" as INotificationOutput <<Outbound Port>>
+rectangle "Inbound Adapter" as InboundAdapterArea #eef5ff {
+  component "InputAdapter\ntranslates external intent to Application API" as InboundAdapter <<Inbound Adapter>>
 }
 
-package "Domain\nHighSchoolStory.Domain" as Domain {
-  component "GameState" as GameState <<Aggregate>>
-  component "Time / Calendar Rules" as TimeRules <<Domain Service>>
-  component "Activity Rules" as ActivityRules <<Domain Service>>
-  component "Lesson Rules" as LessonRules <<Domain Service>>
-  component "Relationship Rules" as RelationshipRules <<Domain Service>>
-  component "Wellbeing Rules" as WellbeingRules <<Domain Service>>
-  component "Memory Ledger Inputs" as MemoryLedgerInputs
-  component "Domain Events / Results" as DomainEvents <<Domain Event>>
+hexagon "Core" as Core #fff8ea {
+  rectangle "Inbound Port\nApplication API" as InboundPortArea #ffffff {
+    interface "Application Command / Query API" as InboundPort <<Inbound Port>>
+  }
+
+  rectangle "Application" as Application #fff3d8 {
+    component "Command Handler" as CommandHandler <<Command Handler>>
+    component "Query Handler" as QueryHandler <<Query Handler>>
+    component "Application Service" as ApplicationService <<Application Service>>
+    component "Read Model / Projection" as Projection <<Read Model>> <<Reactive Projection>>
+    interface "IProjectionReader\nread-only R3 streams" as ProjectionReader <<Projection Reader API>>
+
+    rectangle "Domain" as Domain #ffffff {
+      component "Domain Model\nAggregate / Entity / Value Object" as DomainModel <<Domain Model>>
+      component "Domain Service / Policy" as DomainService <<Domain Service>>
+      component "Domain Event / Result" as DomainEvent <<Domain Event>>
+    }
+  }
+
+  rectangle "Outbound Port" as OutboundPortArea #ffffff {
+    interface "ISaveStore / IClock /\nIAudioOutput / IContentRepository" as OutboundPort <<Outbound Port>>
+  }
 }
 
-package "Content\nHighSchoolStory.Content" as Content {
-  component "System JSON Content" as SystemJson <<Content Definition>> <<JSON>>
-  component "Dialogue JSON" as DialogueJson <<Content Definition>> <<JSON>>
-  component "Schema Validator" as SchemaValidator <<Validator>>
-  component "Preview Report Generator" as PreviewReportGenerator <<Preview Tool>>
+rectangle "Outbound Adapter" as OutboundAdapterArea #eef5ff {
+  component "OutputAdapter\nimplements outbound port" as OutboundAdapter <<Outbound Adapter>>
 }
 
-InputAdapter --> CommandHandlers : player intent / commands
-GodotViews --> QueryServices : queries / subscriptions
-ReactiveProjections --> GodotViews : typed view streams
+rectangle "Secondary / Driven Infrastructure" as SecondaryInfra #f8c995 {
+  component "Infrastructure Component\nfile system / audio / clock / content source" as DrivenInfraComponent <<Infrastructure Component>>
+}
 
-CommandHandlers --> GameState : mutate canonical state
-CommandHandlers --> TimeRules
-CommandHandlers --> ActivityRules
-CommandHandlers --> LessonRules
-CommandHandlers --> RelationshipRules
-CommandHandlers --> WellbeingRules
-CommandHandlers --> DomainEvents : receives results/events
+rectangle "Presentation Infrastructure" as PresentationInfra #f8efe0 {
+  component "Presenter\nbinds Application projection to Godot view" as Presenter <<Presenter>>
+  component "View\nGodot scene / control / node tree" as View <<View>>
+}
 
-ProjectionUpdater --> GameState : reads source of truth
-ProjectionUpdater --> ReadModels : builds screen views
-ProjectionUpdater --> ReactiveProjections : publishes
-QueryServices --> ReadModels : returns typed views
-RuntimeMode --> ReactiveProjections
+DrivingInfraComponent --> InboundAdapter
+InboundAdapter --> InboundPort
+InboundPort --> CommandHandler
+InboundPort --> QueryHandler
 
-CommandHandlers --> IContentRepository
-CommandHandlers --> IClock
-CommandHandlers --> IAudioOutput
-CommandHandlers --> INotificationOutput
-SaveOrchestrator --> ISaveStore
-SaveOrchestrator --> GameState : snapshots / restores
+CommandHandler --> ApplicationService
+QueryHandler --> ApplicationService
+ApplicationService --> DomainModel : aggregate methods
+ApplicationService --> DomainService : policies / cross-aggregate rules
+DomainModel --> DomainService
+DomainModel --> DomainEvent : produces
+DomainService --> DomainEvent : produces
+DomainEvent --> CommandHandler : returned to Application
 
-SaveFileAdapter ..|> ISaveStore
-AudioAdapter ..|> IAudioOutput
-SystemJson ..|> IContentRepository
-DialogueJson ..|> IContentRepository
-ContentValidationPreviewAdapter --> SchemaValidator
+CommandHandler --> OutboundPort
+ApplicationService --> OutboundPort
+OutboundPort <|.. OutboundAdapter
+OutboundAdapter --> DrivenInfraComponent
 
-SchemaValidator --> SystemJson
-SchemaValidator --> DialogueJson
-PreviewReportGenerator --> SchemaValidator
+CommandHandler --> Projection
+QueryHandler --> Projection
+Projection --> ProjectionReader : exposes
+Presenter --> ProjectionReader : subscribes
+Presenter --> View
 
-GameState --> MemoryLedgerInputs
-GameState --> DomainEvents
+note bottom of Core
+  Dependencies cross into Core through ports.
+  Core contains Application; Application contains Domain.
+end note
 
 note bottom of Domain
-  No Godot.
-  No R3.
-  No adapters.
-  Plain C# canonical persisted state.
+  Domain is plain C# canonical gameplay truth.
+  No Godot, no R3, no JSON, no Ports, no logging.
 end note
 
-note bottom of Application
-  R3 starts here.
-  Reactive projections are UI/read state,
-  not the persisted source of truth.
-end note
-
-note bottom of GodotHost
-  Thin view and infrastructure adapter.
-  Presents state and captures input.
-  Does not own game rules.
+note bottom of PresentationInfra
+  Presentation is infrastructure.
+  Presenters do not query Domain directly and do not mutate GameState.
 end note
 
 @enduml
