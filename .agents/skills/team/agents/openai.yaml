@@ -1,0 +1,4 @@
+interface:
+  display_name: "Team"
+  short_description: "Set up facilitator-led agent teams"
+  default_prompt: "Use $team to set up this Codex thread with a facilitator and useful BMAD/GDS consultants."
