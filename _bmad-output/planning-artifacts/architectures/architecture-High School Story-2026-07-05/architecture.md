@@ -11,7 +11,7 @@ platform: 'PC / Steam'
 
 # Source Documents
 gdd: '_bmad-output/planning-artifacts/gdds/gdd-High School Story-2026-06-25/gdd.md'
-epics: '_bmad-output/planning-artifacts/gdds/gdd-High School Story-2026-06-25/epics.md'
+epics: '_bmad-output/planning-artifacts/epics.md'
 brief: '_bmad-output/planning-artifacts/briefs/brief-High School Story-2026-06-25/brief.md'
 ---
 

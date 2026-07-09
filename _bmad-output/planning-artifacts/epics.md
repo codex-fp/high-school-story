@@ -346,10 +346,20 @@ This classification preserves the complete preproduction traceability while prev
 | UX-DR25 | FVS Journey Candidate | Use as a canonical first relationship-discovery journey: phone clue -> profile/map -> travel -> world occasion -> dialogue -> flags/feedback/profile update. |
 | UX-DR26-UX-DR27 | Process / Deferred UX | EXPERIENCE.md and DESIGN.md remain contracts. Deferred mockups do not block architecture, but full surfaces should not be overbuilt before content/read-model needs are known. |
 
+### Story Type Taxonomy
+
+Use these story types during implementation planning:
+
+- **Player:** delivers behavior, feedback, or interface the player directly experiences.
+- **Technical Enabler:** creates architecture, tooling, contracts, fixtures, or infrastructure needed by player-facing stories.
+- **Evidence Gate:** proves existing behavior through tests, ScenarioRunner paths, smoke tests, validation output, or reviewable artifacts.
+- **Constraint:** captures scope, boundary, compliance, or quality rules that must be enforced by owning stories rather than built as standalone product breadth.
+
 ### First Vertical Slice Execution Thread
 
 This thread is not a replacement for the product epics. It is the recommended ordering for the first implementable stories across multiple epics:
 
+0. Foundation solution/project structure and architecture guardrails.
 1. Content fixture.
 2. ContentValidator.
 3. ScenarioRunner happy path.
@@ -488,6 +498,16 @@ FR60: Cross-cutting technical enabler - Content-driven authoring support across 
 
 ## Epic List
 
+### Foundation 0: Implementation Foundation and Architecture Guardrails
+
+The implementation repo has the Godot host, clean C# solution boundaries, test harnesses, content tooling entry points, and architecture guardrails needed before feature stories consume the first vertical-slice fixture.
+
+**FRs covered:** FR60
+
+**Relevant NFRs / UX-DRs:** NFR24-NFR30
+
+**Implementation notes:** This is a technical foundation, not a player-facing epic. It exists to make the first feature story executable without hiding setup work inside content acceptance criteria.
+
 ### Epic 1: Time, Calendar, and Daily Commitments
 
 Player can live through structured school days and weekends where time, schedule, travel, school attendance, curfew, sleep, and calendar pressure create meaningful tradeoffs.
@@ -566,6 +586,48 @@ Player can safely save/load, preserve consequences, complete the MVP semester, a
 
 ## Epic Sections
 
+### Foundation 0: Implementation Foundation and Architecture Guardrails
+
+The implementation repo has the Godot host, clean C# solution boundaries, test harnesses, content tooling entry points, and architecture guardrails needed before feature stories consume the first vertical-slice fixture.
+
+**FRs covered:** FR60
+
+**Relevant NFRs / UX-DRs:** NFR24-NFR30
+
+**Implementation notes:** Complete this foundation before Story 1.1. It should be treated as a technical enabler and may be implemented as the first sprint item or waived only by explicit implementation lead decision.
+
+### Story 0.1: Create Godot Host and Clean C# Solution Boundaries
+
+Story Type: Technical Enabler
+
+As a developer,
+I want the Godot host, C# solution layout, tooling entry points, and boundary tests created,
+So that feature stories can consume validated content and Application commands without introducing Godot or raw-content dependencies into gameplay rules.
+
+**Acceptance Criteria:**
+
+**Given** the implementation workspace is initialized
+**When** the solution is inspected
+**Then** Domain, Application, Ports, Content, Godot host, tools, and test projects exist with references matching the architecture document
+**And** the Godot host compiles without pulling gameplay rules into scene scripts.
+
+**Given** architecture boundaries are tested
+**When** ArchitectureTests run
+**Then** Domain, Application, Content, and the Godot host enforce no forbidden Godot, R3, raw JSON, infrastructure, or presentation dependencies according to the architecture document
+**And** violations fail with readable project/type/member diagnostics.
+
+**Given** content tooling is invoked
+**When** ContentValidator and ScenarioRunner entry points are built or executed with help/version commands
+**Then** each tool starts through a documented command-line path
+**And** missing content fixtures return typed, readable errors instead of unhandled exceptions.
+
+**Given** the first feature stories begin
+**When** Story 1.1, Story 1.2, and later FVS stories need content catalogs, Application commands, ports, or tests
+**Then** they use this foundation rather than creating parallel project structure, ad hoc loaders, or Godot-only simulation paths.
+
+Coverage: FR60, NFR24, NFR25, NFR26, NFR27, NFR28, NFR29, NFR30
+Tags: FVS, Technical Enabler, Constraint
+
 ### Epic 1: Time, Calendar, and Daily Commitments
 
 Player can live through structured school days and weekends where time, schedule, travel, school attendance, curfew, sleep, and calendar pressure create meaningful tradeoffs.
@@ -579,6 +641,8 @@ Player can live through structured school days and weekends where time, schedule
 **Epic 1 Test Evidence:** Rejected commands must return typed Result errors and leave GameState unchanged. Preview and execution paths must share the same feasibility reason-code model. Time-dependent tests must use a controlled clock, not Godot frame time. ContentValidator coverage must include schedule alignment, travel costs, hard boundaries, weekend plans, and authored attendance exceptions. ScenarioRunner coverage must include the school-day happy path plus representative blocked, stale-preview, and boundary paths. Read-model snapshots must verify player-facing reason consistency.
 
 ### Story 1.1: Validated First School-Day Schedule Fixture
+
+Story Type: Technical Enabler
 
 As a developer,
 I want a minimal content-driven first school-day schedule fixture,
@@ -600,7 +664,6 @@ So that the first vertical slice can prove time, commitments, and school-day anc
 **When** time and commitment data is requested
 **Then** gameplay systems receive schedule data through the validated ContentCatalog
 **And** no runtime command handler reads raw JSON files or hardcodes the first-day schedule.
-**And** before the FVS fixture is consumed by Application tests or ScenarioRunner, Domain, Ports, Application, Content, tools, and test projects exist and ArchitectureTests enforce no-Godot/no-R3/no-Content boundary rules for Domain, Application, Content, and the Godot host.
 
 **Given** the fixture is scoped to the first vertical slice
 **When** broader semester content is absent
@@ -611,6 +674,8 @@ Coverage: FR4, FR5, FR6, FR60, NFR24, NFR29, NFR30
 Tags: FVS, Technical Enabler, Constraint
 
 ### Story 1.2: Deterministic Daily Loop Scenario Runner Path
+
+Story Type: Evidence Gate
 
 As a developer,
 I want a deterministic ScenarioRunner path for the first playable school day,
@@ -1859,6 +1924,8 @@ Tags: MVP, UX
 
 ### Story 3.11: Academic ScenarioRunner and Validation Evidence
 
+Story Type: Evidence Gate
+
 As a developer,
 I want deterministic academic scenario evidence for the MVP loop,
 So that lessons, homework, tests, and academic read models can be trusted before broad content expansion.
@@ -2223,6 +2290,8 @@ Coverage: FR1, FR13, FR17, FR21, FR22, FR23, FR24, FR46, FR49, FR51, FR56, FR58,
 Tags: MVP, Cross-Epic, Technical Enabler
 
 ### Story 4.9: Character Creation Scenario and Test Evidence
+
+Story Type: Evidence Gate
 
 As a developer,
 I want deterministic character-creation evidence and a reusable protagonist fixture,
@@ -2679,6 +2748,8 @@ Tags: FVS, MVP, Cross-Epic, Technical Enabler
 
 ### Story 5.13: Relationship and Dialogue Scenario Evidence
 
+Story Type: Evidence Gate
+
 As a developer,
 I want deterministic relationship and dialogue evidence,
 So that social progression and authored consequences can be trusted before broad content expansion.
@@ -3021,6 +3092,8 @@ Tags: FVS, MVP, Cross-Epic, UX
 
 ### Story 6.9: Safe Save and Load Entry Points
 
+Story Type: Player
+
 As a player,
 I want the phone to explain when saving or loading is available,
 So that system actions feel predictable without risking transient gameplay state.
@@ -3090,6 +3163,8 @@ Coverage: FR33, FR34, FR35, FR36, FR37, FR38, FR49, FR58, FR60, NFR13, NFR17, NF
 Tags: FVS, MVP, Cross-Epic, Constraint
 
 ### Story 6.11: Smartphone Scenario and UX Evidence
+
+Story Type: Evidence Gate
 
 As a developer,
 I want deterministic smartphone scenario and navigation evidence,
@@ -3519,6 +3594,8 @@ Tags: MVP, Cross-Epic, Constraint
 
 ### Story 7.12: Location, Club, and Event Scenario Evidence
 
+Story Type: Evidence Gate
+
 As a developer,
 I want deterministic world, club, and event scenarios,
 So that presence, attendance, and authored event routes remain trustworthy as content expands.
@@ -3944,10 +4021,12 @@ So that the world feels alive without relying on full voice acting.
 Coverage: FR45, FR55, FR57, FR58, FR60, NFR13, NFR19, NFR20, NFR23, NFR24, UX-DR20, UX-DR21, UX-DR23
 Tags: MVP, Constraint
 
-### Story 8.12: Godot Presentation Smoke Tests and UX Journey Evidence
+### Story 8.12: Early Godot Presentation Smoke Tests and UX Journey Evidence
+
+Story Type: Evidence Gate
 
 As a developer,
-I want focused Godot and visual evidence for representative player journeys,
+I want focused early Godot and visual evidence for representative player journeys,
 So that presentation remains operable, readable, and performant as features integrate.
 
 **Acceptance Criteria:**
@@ -3957,7 +4036,7 @@ So that presentation remains operable, readable, and performant as features inte
 **Then** it renders nonblank exploration HUD/prompt, activity confirmation/result, phone, lesson, and dialogue surfaces from production read models
 **And** submitted intents use production Application handlers rather than presentation-only simulation.
 **And** fast adapter/contract tests separately verify intent mapping and read-model consumption without Godot, while visual baselines verify layout only.
-**And** early presentation smoke may validate currently available Application read models, but canonical FVS completion smoke runs after the Epic 9 save/load round-trip and verifies rebuilt projections after resume.
+**And** this story may validate currently available Application read models before Epic 9 save/load completion, while post-load projection smoke is owned by Story 9.12.
 
 **Given** first school morning, afternoon under time pressure, and Nell Social-clue-to-world-dialogue journeys are exercised
 **When** controller navigation proceeds
@@ -4347,6 +4426,8 @@ Tags: MVP, Cross-Epic, UX
 
 ### Story 9.12: Save, Recovery, and Semester Completion Evidence
 
+Story Type: Evidence Gate
+
 As a developer,
 I want deterministic save and completion evidence,
 So that restoring state and reflecting a semester remain trustworthy across change.
@@ -4357,6 +4438,7 @@ So that restoring state and reflecting a semester remain trustworthy across chan
 **When** ScenarioRunner saves after the representative path, mutates forward, loads, and resumes
 **Then** canonical state, rebuilt projections, logical location, available actions, known information, and player-facing feedback match the expected saved point
 **And** the FVS save gate covers current-schema manual save/load round-trip, blocked unsafe save, projection rebuild, and resumed playable context through production Application commands and storage ports.
+**And** post-load Godot smoke verifies that rebuilt projections after resume still render the expected HUD, phone, lesson/dialogue handoff, focus target, and blocked-action feedback without presentation-only state.
 
 **Given** save failure paths are tested
 **When** manual save is blocked, storage fails, a command repeats/conflicts, a fixture is migrated, or corruption is detected
