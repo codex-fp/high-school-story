@@ -1,0 +1,74 @@
+{
+  "schema_version": 2,
+  "subject": ".agents/skills/gds-coached-dev-story",
+  "generated": "2026-07-10T11:23:30Z",
+  "verdict": "Good coached workflow with one high-impact path-resolution omission.",
+  "grade": "good",
+  "summary": "The workflow preserves the formal GDS story lifecycle while making user approval, narrow scope, review evidence, and testing explicit at every unit of work. Its primary gap is structural: it references multiple internal resources without defining the skill-root path-resolution contract, leaving a later agent to infer it.",
+  "standards": {
+    "canon": "C:/Users/fpiec/high-school-story/.agents/skills/bmad-workflow-builder/references/prompt-quality-canon.md",
+    "principles": "C:/Users/fpiec/high-school-story/.agents/skills/bmad-workflow-builder/references/skill-quality-principles.md",
+    "scripts": "C:/Users/fpiec/high-school-story/.agents/skills/bmad-workflow-builder/references/script-standards.md"
+  },
+  "themes": [
+    {
+      "title": "Internal resource resolution",
+      "root_cause": "The skill loads internal resources but does not state how bare paths and runtime placeholders resolve.",
+      "finding_ids": ["architecture-1"],
+      "action": "Add the standard Resolution rules block near the overview, covering bare paths, {project-root}, and {skill-name}."
+    },
+    {
+      "title": "Customization discoverability",
+      "root_cause": "The customization file supports overrides but does not tell users where the team and personal override files live.",
+      "finding_ids": ["customization-1"],
+      "action": "Add the standard team and personal override paths to the generated customize.toml header."
+    }
+  ],
+  "strengths": [
+    "The explicit mode table turns pair-programming choices into durable workflow state rather than a loose conversational convention.",
+    "Per-unit completion requires both scope-aware diff review and validation evidence, preventing checkbox-only progress.",
+    "The prompt stays below the desired token tier and carves only the end-of-story checklist, which is loaded only at the review gate.",
+    "No deterministic helper is prematurely introduced: task-to-AC mapping, scope assessment, review, and validation choice are contextual judgments."
+  ],
+  "recommendations": [
+    {
+      "rank": 1,
+      "action": "Add the standard Resolution rules block to SKILL.md.",
+      "resolves": ["architecture-1"]
+    },
+    {
+      "rank": 2,
+      "action": "Add standard override-file locations to customize.toml.",
+      "resolves": ["customization-1"]
+    }
+  ],
+  "experience": {
+    "journeys": [
+      {
+        "name": "Coached implementation",
+        "steps": "Story intake -> smallest incomplete unit -> explicit mode -> tested review checkpoint -> evidence-gated completion -> explicit story finalization."
+      }
+    ],
+    "headless": "Fundamentally interactive by design: the workflow's value depends on explicit user mode selection and approval gates."
+  },
+  "findings": [
+    {
+      "id": "architecture-1",
+      "lens": "architecture",
+      "severity": "high",
+      "title": "Missing Resolution rules for internal references",
+      "location": "SKILL.md: Overview",
+      "evidence": "SKILL.md references customize.toml and references/checklist.md, and uses {skill-root}, but has no Resolution rules block defining internal path and placeholder resolution.",
+      "recommendation": "Add the canonical Resolution rules block near Overview so an executing agent resolves internal files and project paths consistently."
+    },
+    {
+      "id": "customization-1",
+      "lens": "customization",
+      "severity": "low",
+      "title": "Override locations are absent from customization header",
+      "location": "customize.toml:1",
+      "evidence": "The generated header says DO NOT EDIT but does not identify the team and personal override files that users should edit.",
+      "recommendation": "Add the standard {project-root}/_bmad/custom/gds-coached-dev-story.toml and .user.toml paths to the header."
+    }
+  ]
+}
