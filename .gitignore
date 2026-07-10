@@ -4,3 +4,7 @@
 .idea/
 .obsidian/workspace.json
 .obsidian/workspace-mobile.json
+
+# Python cache
+__pycache__/
+*.py[cod]
