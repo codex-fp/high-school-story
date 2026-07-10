@@ -62,13 +62,27 @@ Before every implementation increment, present a checkpoint containing:
 - a red-phase or validation plan, including the narrowest useful test command;
 - risks, assumptions, and any decision that needs the user's answer.
 
-Then ask the user to choose a mode explicitly. Recognize an unambiguous natural-language request as a fallback only. At the smallest uncertainty about the intended action or scope, stop and ask which mode the user wants; do not infer.
+This explanation is the required first step for every unit. Only after it, present a numbered, natural-language menu in `{communication_language}`. Do not show internal mode names, a comma-delimited command list, or technical identifiers to the user.
 
-Use these modes:
+Present this implementation menu after the explanation:
+
+1. **I will implement this part myself** - give the agreed next slice and validation target, then pause.
+2. **Make the agreed small change for me** - implement only the approved slice and run its relevant tests before the next checkpoint.
+3. **Let's clarify the approach first** - continue teaching the design, trade-offs, code path, and test approach without changing code or task state.
+
+After the user or agent has made an implementation change, present a separate verification menu:
+
+1. **Review the change with me** - inspect the diff against the approved scope, linked AC, and Dev Notes.
+2. **Run the checks** - run the agreed targeted tests first, then broader relevant regression checks when practical.
+3. **Mark this work as complete** - only after the review and validation evidence satisfy the unit DoD.
+
+Map the selected natural-language option to the internal control mode below. Explicit numbered choices are preferred. Recognize an unambiguous natural-language request as a fallback only. At the smallest uncertainty about the intended action or scope, ask the user to choose from the current numbered menu; do not infer.
+
+Use these internal control modes; never render their labels in a user-facing menu:
 
 | Mode | Behavior |
 | --- | --- |
-| `explain-only` | Explain the design, code path, trade-offs, and test approach. Do not edit code or task state. |
+| `explain-only` | Continue the explanation after the user chooses to clarify the approach. Do not edit code or task state. |
 | `user-implements` | Give the user a tightly scoped next step and validation target, then pause. On return, move to `review-diff`; do not mark the task complete yet. |
 | `agent-patch` | Implement only the change set the user accepted for the current unit. Run relevant tests automatically, then present a tested diff summary and pause for review. |
 | `review-diff` | Review the current diff against the current unit, linked AC, Dev Notes, and approved scope. Identify omissions, regressions, scope drift, and test gaps. Do not complete the task. |
@@ -89,7 +103,7 @@ A task or subtask may be marked complete only when all of these are true:
 - No unresolved defect, scope drift, or blocking question remains.
 - The File List, Dev Agent Record, and Change Log accurately describe the completed work when they changed.
 
-When the user selects `mark-task-complete`, present the evidence briefly. If it is insufficient, explain the missing gate and return to the appropriate mode. Never check a box based on an implementation claim alone.
+When the user chooses to mark work as complete, present the evidence briefly. If it is insufficient, explain the missing gate and return to the appropriate verification option. Never check a box based on an implementation claim alone.
 
 ## Story Completion And Review Gate
 
