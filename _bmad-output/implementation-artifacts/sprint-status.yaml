@@ -1,0 +1,163 @@
+# generated: 2026-07-09T23:01:42.6761722+02:00
+# last_updated: 2026-07-09
+# project: High School Story
+# project_key: NOKEY
+# tracking_system: file-system
+# story_location: _bmad-output/implementation-artifacts
+
+# STATUS DEFINITIONS:
+# ==================
+# Epic Status:
+#   - backlog: Epic not yet started
+#   - in-progress: Epic actively being worked on
+#   - done: All stories in epic completed
+#
+# Epic Status Transitions:
+#   - backlog -> in-progress: Automatically when first story is created (via create-story)
+#   - in-progress -> done: Manually when all stories reach 'done' status
+#
+# Story Status:
+#   - backlog: Story only exists in epic file
+#   - ready-for-dev: Story file created in stories folder
+#   - in-progress: Developer actively working on implementation
+#   - review: Ready for code review (via Dev's code-review workflow)
+#   - done: Story completed
+#
+# Retrospective Status:
+#   - optional: Can be completed but not required
+#   - done: Retrospective has been completed
+#
+# WORKFLOW NOTES:
+# ===============
+# - Epic transitions to 'in-progress' automatically when first story is created
+# - Stories can be worked in parallel if team capacity allows
+# - Developer typically creates next story after previous one is 'done' to incorporate learnings
+# - Dev moves story to 'review', then runs code-review (fresh context, different LLM recommended)
+
+generated: 2026-07-09T23:01:42.6761722+02:00
+last_updated: 2026-07-09
+project: High School Story
+project_key: NOKEY
+tracking_system: file-system
+story_location: _bmad-output/implementation-artifacts
+
+development_status:
+  epic-0: in-progress
+  0-1-create-godot-host-and-clean-c-solution-boundaries: ready-for-dev
+  epic-0-retrospective: optional
+  epic-1: backlog
+  1-1-validated-first-school-day-schedule-fixture: backlog
+  1-2-deterministic-daily-loop-scenario-runner-path: backlog
+  1-3-fifteen-minute-time-and-commitment-policy: backlog
+  1-4-school-day-anchors-and-mandatory-attendance: backlog
+  1-5-shared-feasibility-preview-for-activities-and-travel: backlog
+  1-6-wake-snooze-wind-down-and-sleep-boundaries: backlog
+  1-7-campus-and-off-campus-travel-rules: backlog
+  1-8-weekend-day-structure: backlog
+  1-9-player-facing-time-pressure-feedback: backlog
+  epic-1-retrospective: optional
+  epic-2: backlog
+  2-1-minimal-activity-catalog-and-consequence-fixture: backlog
+  2-2-activity-resolution-command-and-typed-effects: backlog
+  2-3-energy-stress-and-qualitative-mood-model: backlog
+  2-4-recovery-rest-sleep-snooze-and-favorite-aligned-effects: backlog
+  2-5-activity-result-feedback-read-model: backlog
+  2-6-low-energy-and-high-stress-availability-friction: backlog
+  2-7-light-money-and-allowance-consequences: backlog
+  2-8-off-school-activity-roles-for-cafe-park-dorm-and-convenience-store: backlog
+  2-9-future-obligations-missed-opportunities-and-memory-hooks: backlog
+  epic-2-retrospective: optional
+  epic-3: backlog
+  3-1-validated-mvp-academic-calendar-and-subject-fixture: backlog
+  3-2-active-lesson-session-runtime: backlog
+  3-3-lesson-action-categories-and-contextual-variants: backlog
+  3-4-lesson-risk-teacher-checks-and-caught-outcomes: backlog
+  3-5-lesson-block-feedback-and-final-lesson-result: backlog
+  3-6-subject-knowledge-grades-teacher-impression-and-exam-readiness-model: backlog
+  3-7-homework-and-deadline-management: backlog
+  3-8-smaller-tests-and-week-20-exam-period: backlog
+  3-9-academic-failure-and-checkpoint-recovery-options: backlog
+  3-10-school-app-journal-academic-read-models: backlog
+  3-11-academic-scenariorunner-and-validation-evidence: backlog
+  epic-3-retrospective: optional
+  epic-4: backlog
+  4-1-protagonist-identity-fixture-and-validation: backlog
+  4-2-character-creation-session-navigation-and-review: backlog
+  4-3-starting-attribute-point-buy-system: backlog
+  4-4-attribute-influence-contract-for-school-life: backlog
+  4-5-favorites-and-preference-selection: backlog
+  4-6-preference-influence-without-hard-locks: backlog
+  4-7-pixel-art-sprite-customization-contract: backlog
+  4-8-starting-identity-summary-and-first-day-handoff: backlog
+  4-9-character-creation-scenario-and-test-evidence: backlog
+  epic-4-retrospective: optional
+  epic-5: backlog
+  5-1-validated-mvp-classmate-and-relationship-fixture: backlog
+  5-2-relationship-state-and-player-facing-tiers: backlog
+  5-3-systemic-relationship-interactions-and-tier-progression: backlog
+  5-4-active-dialogue-session-and-concrete-choices: backlog
+  5-5-dialogue-effects-branching-and-convergence: backlog
+  5-6-dialogue-variants-across-story-and-communication-contexts: backlog
+  5-7-contextual-story-beat-eligibility-and-gating: backlog
+  5-8-early-exposure-and-intro-beats-for-all-five-classmates: backlog
+  5-9-nell-three-beat-mvp-partial-arc: backlog
+  5-10-mvp-narrative-beat-schedule-and-cross-epic-hooks: backlog
+  5-11-mvp-romance-eligibility-and-platonic-path-constraints: backlog
+  5-12-relationship-memories-and-future-acknowledgement-hooks: backlog
+  5-13-relationship-and-dialogue-scenario-evidence: backlog
+  epic-5-retrospective: optional
+  epic-6: backlog
+  6-1-phone-shell-app-registry-and-context-access-policy: backlog
+  6-2-phone-navigation-back-stack-focus-restoration-and-notifications: backlog
+  6-3-calendar-of-known-commitments-and-timed-clues: backlog
+  6-4-map-destinations-travel-feasibility-and-travel-handoff: backlog
+  6-5-social-feed-profiles-and-known-relationship-clues: backlog
+  6-6-message-threads-and-contextual-replies: backlog
+  6-7-school-app-and-journal-integration: backlog
+  6-8-phone-settings-controls-and-accessibility-entry: backlog
+  6-9-safe-save-and-load-entry-points: backlog
+  6-10-information-visibility-and-non-remote-activity-enforcement: backlog
+  6-11-smartphone-scenario-and-ux-evidence: backlog
+  epic-6-retrospective: optional
+  epic-7: backlog
+  7-1-validated-location-club-and-event-fixture: backlog
+  7-2-world-presence-and-location-interaction-discovery: backlog
+  7-3-mvp-campus-location-roles: backlog
+  7-4-off-school-locations-and-direct-travel-network: backlog
+  7-5-off-school-services-purchases-errands-and-odd-jobs: backlog
+  7-6-science-and-literary-club-membership-and-weekly-meetings: backlog
+  7-7-club-participation-without-grind-or-relationship-hard-gates: backlog
+  7-8-fixed-events-attendance-windows-and-partial-participation: backlog
+  7-9-harvest-evening-choice-experience: backlog
+  7-10-science-showcase-sprint-choices: backlog
+  7-11-zine-deadline-crisis-and-non-member-route: backlog
+  7-12-location-club-and-event-scenario-evidence: backlog
+  epic-7-retrospective: optional
+  epic-8: backlog
+  8-1-presentation-foundation-design-tokens-and-shared-components: backlog
+  8-2-controller-input-adaptive-glyphs-focus-and-back-contract: backlog
+  8-3-exploration-hud-and-in-world-interaction-prompts: backlog
+  8-4-activity-confirmation-result-feedback-and-toast-presentation: backlog
+  8-5-smartphone-frame-and-shared-app-presentation: backlog
+  8-6-focused-lesson-presentation: backlog
+  8-7-large-and-small-dialogue-presentation-modes: backlog
+  8-8-summary-and-high-pressure-state-presentation: backlog
+  8-9-accessibility-remapping-and-motion-feedback-controls: backlog
+  8-10-mvp-pixel-art-world-and-character-asset-scope: backlog
+  8-11-mvp-audio-music-ambience-and-feedback-cues: backlog
+  8-12-early-godot-presentation-smoke-tests-and-ux-journey-evidence: backlog
+  epic-8-retrospective: optional
+  epic-9: backlog
+  9-1-versioned-save-envelope-and-canonical-game-state-contract: backlog
+  9-2-application-owned-save-legality-policy: backlog
+  9-3-manual-save-slots-and-safe-load-commands: backlog
+  9-4-start-of-day-and-end-of-day-autosaves: backlog
+  9-5-load-rebuild-of-projections-and-playable-context: backlog
+  9-6-save-migration-corruption-detection-and-recoverable-failure: backlog
+  9-7-academic-failure-checkpoints-and-recovery-execution: backlog
+  9-8-intentional-memory-record-model: backlog
+  9-9-mvp-semester-completion-and-reflection-input-snapshot: backlog
+  9-10-semester-reflection-selection-and-composition: backlog
+  9-11-personalized-memory-ledger-read-model: backlog
+  9-12-save-recovery-and-semester-completion-evidence: backlog
+  epic-9-retrospective: optional

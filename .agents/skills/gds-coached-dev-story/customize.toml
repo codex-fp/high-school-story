@@ -1,0 +1,23 @@
+# DO NOT EDIT -- overwritten on every update.
+#
+# Workflow customization surface for gds-coached-dev-story. Mirrors the
+# agent customization shape under the [workflow] namespace.
+# Team overrides:     {project-root}/_bmad/custom/gds-coached-dev-story.toml
+# Personal overrides: {project-root}/_bmad/custom/gds-coached-dev-story.user.toml
+
+[workflow]
+
+# Configurable below. Overrides merge per BMad structural rules:
+# scalars: override wins; arrays (persistent_facts, activation_steps_*): append.
+
+activation_steps_prepend = []
+activation_steps_append = []
+
+# Persistent facts the workflow keeps in mind for the whole run.
+# Each entry is either a literal sentence or a file reference prefixed with file:.
+
+persistent_facts = [
+  "file:{project-root}/**/project-context.md",
+]
+
+on_complete = ""
