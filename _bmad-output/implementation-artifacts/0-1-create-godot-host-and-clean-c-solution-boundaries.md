@@ -30,7 +30,7 @@ so that feature stories can consume validated content and Application commands w
   - [x] Create `src/HighSchoolStory.Domain/HighSchoolStory.Domain.csproj` with no project references and no package references beyond the absolute runtime/BCL minimum.
   - [x] Create `src/HighSchoolStory.Ports/HighSchoolStory.Ports.csproj` referencing Domain only.
   - [x] Create `src/HighSchoolStory.Application/HighSchoolStory.Application.csproj` referencing Domain and Ports, with R3 available only at the Application boundary.
-  - [ ] Create `src/HighSchoolStory.Content/HighSchoolStory.Content.csproj` referencing Domain and Ports only.
+  - [x] Create `src/HighSchoolStory.Content/HighSchoolStory.Content.csproj` referencing Domain and Ports only.
   - [ ] Create `src/HighSchoolStory.Godot/` as a source folder compiled by the root Godot host, not as a separate clean `.csproj`.
 - [ ] Wire the Godot host as composition root (AC: 1, 4)
   - [ ] Add explicit `ProjectReference` entries from `High School Story.csproj` to Application, Ports, and Content.
@@ -277,6 +277,14 @@ GPT-5 Codex (coached development workflow)
 - **Files / components:** `src/HighSchoolStory.Application/HighSchoolStory.Application.csproj`, `Directory.Packages.props` (consumed only; no change expected)
 - **Validation:** `dotnet build src/HighSchoolStory.Application/HighSchoolStory.Application.csproj`, `dotnet list src/HighSchoolStory.Application/HighSchoolStory.Application.csproj reference`, and `dotnet list src/HighSchoolStory.Application/HighSchoolStory.Application.csproj package`.
 
+#### T2.S4 - Create `src/HighSchoolStory.Content/HighSchoolStory.Content.csproj` referencing Domain and Ports only (v1)
+
+- **Status:** Approved
+- **Approach:** Add a minimal `Microsoft.NET.Sdk` project targeting `net10.0`, with `ProjectReference` entries only to Domain and Ports and no package references or example source types.
+- **Scope:** Content project file only; do not yet add it to the solution or implement JSON loading, validation, migrations, or runtime catalog types.
+- **Files / components:** `src/HighSchoolStory.Content/HighSchoolStory.Content.csproj`
+- **Validation:** `dotnet build src/HighSchoolStory.Content/HighSchoolStory.Content.csproj` and `dotnet list src/HighSchoolStory.Content/HighSchoolStory.Content.csproj reference`.
+
 ### Completion Notes List
 
 - Added `global.json` pinned to .NET SDK 10.0.301 with `latestPatch` roll-forward. Verified active SDK selection, valid JSON, UTF-8 without BOM, and a final CRLF.
@@ -287,6 +295,7 @@ GPT-5 Codex (coached development workflow)
 - Added repository-wide `.NET` build-output ignores for `**/bin/` and `**/obj/`, keeping generated project artifacts out of source control.
 - Completed `T2.S2` (v1): added the minimal `HighSchoolStory.Ports` `net10.0` project with its only project reference to Domain. `dotnet build src/HighSchoolStory.Ports/HighSchoolStory.Ports.csproj` completed with zero warnings and errors, and `dotnet list src/HighSchoolStory.Ports/HighSchoolStory.Ports.csproj reference` confirmed the single Domain reference.
 - Completed `T2.S3` (v1): added the minimal `HighSchoolStory.Application` `net10.0` project with its only project references to Domain and Ports and its versionless R3 package reference. Build completed with zero warnings and errors; project inspection confirmed the two references and R3 `1.3.1` resolved from central package management.
+- Completed `T2.S4` (v1): added the minimal `HighSchoolStory.Content` `net10.0` project with its only project references to Domain and Ports. `dotnet build src/HighSchoolStory.Content/HighSchoolStory.Content.csproj --no-restore` completed with zero warnings and errors, and `dotnet list src/HighSchoolStory.Content/HighSchoolStory.Content.csproj reference` confirmed the two required references.
 
 ### File List
 
@@ -296,6 +305,7 @@ GPT-5 Codex (coached development workflow)
 - src/HighSchoolStory.Domain/HighSchoolStory.Domain.csproj
 - src/HighSchoolStory.Ports/HighSchoolStory.Ports.csproj
 - src/HighSchoolStory.Application/HighSchoolStory.Application.csproj
+- src/HighSchoolStory.Content/HighSchoolStory.Content.csproj
 - .gitignore
 
 ### Change Log
@@ -308,3 +318,4 @@ GPT-5 Codex (coached development workflow)
 - 2026-07-11: Ignored generated .NET build outputs.
 - 2026-07-11: Created and verified the clean Ports project boundary subtask (`T2.S2`, v1).
 - 2026-07-11: Created and verified the clean Application project boundary subtask (`T2.S3`, v1).
+- 2026-07-11: Created and verified the clean Content project boundary subtask (`T2.S4`, v1).
