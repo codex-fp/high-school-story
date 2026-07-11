@@ -31,9 +31,9 @@ so that feature stories can consume validated content and Application commands w
   - [x] Create `src/HighSchoolStory.Ports/HighSchoolStory.Ports.csproj` referencing Domain only.
   - [x] Create `src/HighSchoolStory.Application/HighSchoolStory.Application.csproj` referencing Domain and Ports, with R3 available only at the Application boundary.
   - [x] Create `src/HighSchoolStory.Content/HighSchoolStory.Content.csproj` referencing Domain and Ports only.
-  - [ ] Create `src/HighSchoolStory.Godot/` as a source folder compiled by the root Godot host, not as a separate clean `.csproj`.
+  - [x] Create `src/HighSchoolStory.Godot/` as a source folder compiled by the root Godot host, not as a separate clean `.csproj`.
 - [ ] Wire the Godot host as composition root (AC: 1, 4)
-  - [ ] Add explicit `ProjectReference` entries from `High School Story.csproj` to Application, Ports, and Content.
+  - [x] Add explicit `ProjectReference` entries from `High School Story.csproj` to Application, Ports, and Content.
   - [ ] Do not add a direct root host reference to Domain unless the implementation lead approves a concrete need.
   - [x] Add explicit `Compile Remove` entries so the root Godot project does not directly compile `src/HighSchoolStory.Domain/**`, `src/HighSchoolStory.Application/**`, `src/HighSchoolStory.Ports/**`, `src/HighSchoolStory.Content/**`, `tools/**`, or `tests/**`.
   - [ ] Keep Godot host code under `src/HighSchoolStory.Godot/` and root Godot resources under Godot-friendly folders such as `scenes/` and `assets/`.
@@ -305,6 +305,14 @@ GPT-5 Codex (coached development workflow)
 - **Files / components:** `High School Story.csproj`
 - **Validation:** Inspect the resulting exclusion entries and run `dotnet build "High School Story.csproj"`.
 
+#### T3.S1 - Add explicit `ProjectReference` entries from `High School Story.csproj` to Application, Ports, and Content (v1)
+
+- **Status:** Approved
+- **Approach:** Add one root-host `ItemGroup` with `ProjectReference` entries to Application, Ports, and Content, using paths relative to `High School Story.csproj`.
+- **Scope:** `High School Story.csproj` project references only; do not reference Domain directly, alter compile exclusions, add packages, or add host/gameplay code.
+- **Files / components:** `High School Story.csproj`
+- **Validation:** `dotnet build "High School Story.csproj"` and `dotnet list "High School Story.csproj" reference`.
+
 ### Completion Notes List
 
 - Added `global.json` pinned to .NET SDK 10.0.301 with `latestPatch` roll-forward. Verified active SDK selection, valid JSON, UTF-8 without BOM, and a final CRLF.
@@ -317,6 +325,8 @@ GPT-5 Codex (coached development workflow)
 - Completed `T2.S3` (v1): added the minimal `HighSchoolStory.Application` `net10.0` project with its only project references to Domain and Ports and its versionless R3 package reference. Build completed with zero warnings and errors; project inspection confirmed the two references and R3 `1.3.1` resolved from central package management.
 - Completed `T2.S4` (v1): added the minimal `HighSchoolStory.Content` `net10.0` project with its only project references to Domain and Ports. `dotnet build src/HighSchoolStory.Content/HighSchoolStory.Content.csproj --no-restore` completed with zero warnings and errors, and `dotnet list src/HighSchoolStory.Content/HighSchoolStory.Content.csproj reference` confirmed the two required references.
 - Completed `T3.S3` (v1) under the approved execution-order exception: added root-host compile exclusions for clean library, tool, and test source paths plus `.godot/**`. `dotnet build "High School Story.csproj" --no-restore` completed with zero warnings and errors, preventing duplicate assembly attributes from generated clean-project and Godot temporary files.
+- Completed `T2.S5` (v1): added the versioned `src/HighSchoolStory.Godot/` host-source directory with a `.gitkeep` anchor and no standalone `.csproj` or artificial source type. After the approved `T3.S3` dependency was applied, `dotnet build "High School Story.csproj" --no-restore` completed with zero warnings and errors.
+- Completed `T3.S1` (v1): added root-host project references to Application, Ports, and Content only. `dotnet build "High School Story.csproj" --no-restore` completed with zero warnings and errors, and `dotnet list "High School Story.csproj" reference` confirmed exactly those three direct references.
 
 ### File List
 
@@ -328,6 +338,7 @@ GPT-5 Codex (coached development workflow)
 - src/HighSchoolStory.Application/HighSchoolStory.Application.csproj
 - src/HighSchoolStory.Content/HighSchoolStory.Content.csproj
 - High School Story.csproj
+- src/HighSchoolStory.Godot/.gitkeep
 - .gitignore
 
 ### Change Log
@@ -342,3 +353,5 @@ GPT-5 Codex (coached development workflow)
 - 2026-07-11: Created and verified the clean Application project boundary subtask (`T2.S3`, v1).
 - 2026-07-11: Created and verified the clean Content project boundary subtask (`T2.S4`, v1).
 - 2026-07-11: Added and verified root-host compile exclusions (`T3.S3`, v1) under the approved execution-order exception.
+- 2026-07-11: Created and verified the Godot host source directory subtask (`T2.S5`, v1).
+- 2026-07-11: Added and verified root-host project references to Application, Ports, and Content (`T3.S1`, v1).

@@ -15,4 +15,10 @@
     <Compile Remove="tests\**\*.cs" />
     <Compile Remove=".godot\**\*.cs" />
   </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="src\HighSchoolStory.Application\HighSchoolStory.Application.csproj" />
+    <ProjectReference Include="src\HighSchoolStory.Ports\HighSchoolStory.Ports.csproj" />
+    <ProjectReference Include="src\HighSchoolStory.Content\HighSchoolStory.Content.csproj" />
+  </ItemGroup>
 </Project>
