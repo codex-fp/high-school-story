@@ -80,13 +80,21 @@ Then provide this structured task overview:
 - State one recommendation: whole task, per subtask, or custom groups.
 - Explain the recommendation from task size, coupling between subtasks, shared files or tests, distinct AC or risk boundaries, and expected validation cost.
 - For custom groups, list the concrete suggested groups using subtask keys and say which subtask should remain separate.
+
+## Planning Choice
+
+**Recommended:** <1, 2, or 3> - <one-line rationale>
+
+Choose a planning scope:
+
+1. Plan the whole task in one batch.
+2. Plan and implement each subtask separately.
+3. Create custom subtask groups.
 ```
 
-Ask which planning scope the user wants for that task:
+Use the environment's question tool with these three answers when it is available. Otherwise render the numbered Planning Choice menu in `{communication_language}` and wait for an explicit `1`, `2`, or `3`. Treat unambiguous natural-language selection as a fallback only; if the response is unclear, show the same menu again rather than inferring a scope.
 
-- **Whole task:** create one plan for all remaining subtasks, then implement and validate them as one approved batch.
-- **Per subtask:** create, approve, implement, validate, and complete one subtask before planning the next.
-- **Custom groups:** let the user choose one or more remaining subtasks for the current group; create a separate plan and implementation batch for each later group.
+1 creates one plan for all remaining subtasks, then implements and validates them as one approved batch. 2 creates, approves, implements, validates, and completes one subtask before planning the next. 3 lets the user choose one or more remaining subtasks for the current group and creates a separate plan and implementation batch for each later group.
 
 When the task has no subtasks, present the recommendation as a single-task plan and do not ask for a planning-scope choice.
 
