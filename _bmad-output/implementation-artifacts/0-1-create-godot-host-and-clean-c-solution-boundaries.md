@@ -25,9 +25,9 @@ so that feature stories can consume validated content and Application commands w
   - [x] Add `global.json` pinned to the local .NET 10 SDK feature band available in this workspace, or a compatible .NET 10 SDK if the implementation lead intentionally chooses another installed version.
   - [x] Add `Directory.Build.props` for shared C# settings that apply to clean projects and tests without breaking Godot's SDK project.
   - [x] Add `Directory.Packages.props` for central package versions, including R3 only where approved.
-  - [ ] Keep root `High School Story.csproj` on `Godot.NET.Sdk/4.7.0`, `net10.0`, and the existing Android `net9.0` fallback.
+  - [x] Keep root `High School Story.csproj` on `Godot.NET.Sdk/4.7.0`, `net10.0`, and the existing Android `net9.0` fallback.
 - [ ] Create clean source project boundaries (AC: 1, 4)
-  - [ ] Create `src/HighSchoolStory.Domain/HighSchoolStory.Domain.csproj` with no project references and no package references beyond the absolute runtime/BCL minimum.
+  - [x] Create `src/HighSchoolStory.Domain/HighSchoolStory.Domain.csproj` with no project references and no package references beyond the absolute runtime/BCL minimum.
   - [ ] Create `src/HighSchoolStory.Ports/HighSchoolStory.Ports.csproj` referencing Domain only.
   - [ ] Create `src/HighSchoolStory.Application/HighSchoolStory.Application.csproj` referencing Domain and Ports, with R3 available only at the Application boundary.
   - [ ] Create `src/HighSchoolStory.Content/HighSchoolStory.Content.csproj` referencing Domain and Ports only.
@@ -243,20 +243,30 @@ GPT-5 Codex (coached development workflow)
 
 ### Debug Log References
 
+### Approved Implementation Plan
+
+- Establish solution and SDK baseline / Keep root `High School Story.csproj` on Godot SDK and target frameworks: preserve `Godot.NET.Sdk/4.7.0`, main `net10.0`, and conditional Android `net9.0` fallback without changing Godot runtime settings or gameplay code. Scope: root host project only, with formatting normalization only if required. Validation: `dotnet build "High School Story.csproj"`.
+- Create clean source project boundaries / Create `HighSchoolStory.Domain`: add a minimal `Microsoft.NET.Sdk` project at `src/HighSchoolStory.Domain/HighSchoolStory.Domain.csproj` targeting `net10.0`, with no project or package references and no example source types. Scope: Domain project file only. Validation: `dotnet build src/HighSchoolStory.Domain/HighSchoolStory.Domain.csproj` and XML inspection confirming no reference items.
+
 ### Completion Notes List
 
 - Added `global.json` pinned to .NET SDK 10.0.301 with `latestPatch` roll-forward. Verified active SDK selection, valid JSON, UTF-8 without BOM, and a final CRLF.
 - Added shared nullable, implicit-usings, and language-version settings for clean projects and tests while excluding the Godot host. Verified `dotnet build "High School Story.csproj"` with zero warnings and errors.
 - Added central package management with R3 pinned at 1.3.1. Verified XML configuration, `dotnet restore "High School Story.sln"`, and `dotnet build "High School Story.sln" --no-restore` with zero warnings and errors.
+- Verified the existing Godot host retains `Godot.NET.Sdk/4.7.0`, main `net10.0`, and conditional Android `net9.0` fallback. `dotnet build "High School Story.csproj"` completed with zero warnings and errors; no host-project change was required.
+- Added the minimal `HighSchoolStory.Domain` `net10.0` project without project or package references. `dotnet build src/HighSchoolStory.Domain/HighSchoolStory.Domain.csproj` completed with zero warnings and errors.
 
 ### File List
 
 - global.json
 - Directory.Build.props
 - Directory.Packages.props
+- src/HighSchoolStory.Domain/HighSchoolStory.Domain.csproj
 
 ### Change Log
 
 - 2026-07-10: Completed the SDK baseline pinning subtask.
 - 2026-07-10: Completed the shared C# build settings subtask.
 - 2026-07-10: Completed the central package version management subtask.
+- 2026-07-11: Verified the root Godot host SDK and target-framework baseline subtask.
+- 2026-07-11: Created and verified the clean Domain project boundary subtask.
