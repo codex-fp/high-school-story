@@ -52,7 +52,7 @@ Do not alter the story, acceptance criteria, Dev Notes, task wording, or any oth
 
 ## Coached Task Loop
 
-Work on the lowest incomplete unit: an unchecked subtask when a task has subtasks, otherwise the unchecked task. Do not continue to the next unit unless the user explicitly asks to do so.
+Work on the lowest incomplete unit: an unchecked subtask when a task has subtasks, otherwise the unchecked task. After a unit is validly marked complete, immediately select the next incomplete unit in story order and begin its Design And Planning Checkpoint. Do not skip units or begin implementation for the next unit before its own micro-plan is approved.
 
 ### Design And Planning Checkpoint
 
@@ -116,7 +116,7 @@ A task or subtask may be marked complete only when all of these are true:
 - No unresolved defect, scope drift, or blocking question remains.
 - The File List, Dev Agent Record, and Change Log accurately describe the completed work when they changed.
 
-When the user agrees to mark work as complete, present the evidence briefly. If it is insufficient, explain the missing gate and preserve the current state. Never check a box based on an implementation claim alone.
+When the user agrees to mark work as complete, present the evidence briefly. If it is insufficient, explain the missing gate and preserve the current state. Never check a box based on an implementation claim alone. After updating the checkbox and permitted tracking fields, immediately move to the next incomplete unit in story order and start its Design And Planning Checkpoint. When no incomplete unit remains, proceed to the Story Completion And Review Gate instead.
 
 ## Story Completion And Review Gate
 
