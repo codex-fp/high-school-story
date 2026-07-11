@@ -37,11 +37,11 @@ so that feature stories can consume validated content and Application commands w
   - [x] Do not add a direct root host reference to Domain unless the implementation lead approves a concrete need.
   - [x] Add explicit `Compile Remove` entries so the root Godot project does not directly compile `src/HighSchoolStory.Domain/**`, `src/HighSchoolStory.Application/**`, `src/HighSchoolStory.Ports/**`, `src/HighSchoolStory.Content/**`, `tools/**`, or `tests/**`.
   - [x] Keep Godot host code under `src/HighSchoolStory.Godot/` and root Godot resources under Godot-friendly folders such as `scenes/` and `assets/`.
-- [ ] Create tool entry points (AC: 3, 4)
+- [x] Create tool entry points (AC: 3, 4)
   - [x] Create `tools/HighSchoolStory.ContentValidator/HighSchoolStory.ContentValidator.csproj` referencing Content, Domain, and Ports.
-  - [ ] Create `tools/HighSchoolStory.ScenarioRunner/HighSchoolStory.ScenarioRunner.csproj` referencing Application, Content, Domain, and Ports.
-  - [ ] Implement minimal `--help` and `--version` behavior for both tools.
-  - [ ] Make missing content/fixture paths return typed, readable failure output and non-zero exit codes; do not throw unhandled exceptions for expected missing inputs.
+  - [x] Create `tools/HighSchoolStory.ScenarioRunner/HighSchoolStory.ScenarioRunner.csproj` referencing Application, Content, Domain, and Ports.
+  - [x] Implement minimal `--help` and `--version` behavior for both tools.
+  - [x] Make missing content/fixture paths return typed, readable failure output and non-zero exit codes; do not throw unhandled exceptions for expected missing inputs.
 - [ ] Create test projects and first guardrail tests (AC: 2, 3)
   - [ ] Create test projects under `tests/`: Domain, Application, Content, SaveMigration, Scenario, Architecture, and GodotSmoke.
   - [ ] Keep default `dotnet test` fast and non-flaky; Godot smoke must be separable by project and must not require launching Godot in the default gate.
@@ -337,6 +337,15 @@ GPT-5 Codex (coached development workflow)
 - **Files / components:** `tools/HighSchoolStory.ContentValidator/HighSchoolStory.ContentValidator.csproj`
 - **Validation:** `dotnet build tools/HighSchoolStory.ContentValidator/HighSchoolStory.ContentValidator.csproj` and `dotnet list tools/HighSchoolStory.ContentValidator/HighSchoolStory.ContentValidator.csproj reference`.
 
+#### T4 - Create ScenarioRunner and minimal CLI entry-point behavior (v1)
+
+- **Status:** Approved
+- **Included units:** T4.S2 - Create `tools/HighSchoolStory.ScenarioRunner/HighSchoolStory.ScenarioRunner.csproj`; T4.S3 - Implement minimal `--help` and `--version` behavior for both tools; T4.S4 - Make missing content/fixture paths return typed, readable failure output and non-zero exit codes.
+- **Approach:** Create ScenarioRunner as a minimal executable referencing Application, Content, Domain, and Ports; make ContentValidator executable; give both independent entry points the same small help, version, and missing-path contract without introducing a premature shared CLI abstraction or any validation/simulation behavior.
+- **Scope:** Tool project files, minimal CLI entry points, and solution membership only. No JSON parsing, content validation, scenario simulation, Godot dependency, or gameplay code.
+- **Files / components:** `tools/HighSchoolStory.ContentValidator/HighSchoolStory.ContentValidator.csproj`, `tools/HighSchoolStory.ContentValidator/Program.cs`, `tools/HighSchoolStory.ScenarioRunner/HighSchoolStory.ScenarioRunner.csproj`, `tools/HighSchoolStory.ScenarioRunner/Program.cs`, `High School Story.sln`.
+- **Validation:** `dotnet build "High School Story.sln"`; execute `--help` and `--version` for both tools; execute both tools using absent paths and confirm readable stderr plus exit code `2`; inspect ScenarioRunner project references.
+
 ### Completion Notes List
 
 - Added `global.json` pinned to .NET SDK 10.0.301 with `latestPatch` roll-forward. Verified active SDK selection, valid JSON, UTF-8 without BOM, and a final CRLF.
@@ -354,6 +363,7 @@ GPT-5 Codex (coached development workflow)
 - Completed `T3.S2` (v1): no direct root-host Domain reference was added because no concrete host need was identified. `dotnet list "High School Story.csproj" reference` confirmed direct references to Application, Ports, and Content only.
 - Completed `T3.S4` (v1): verified the versioned `src/HighSchoolStory.Godot/` host-source directory exists, with no tracked C# source files or misplaced root Godot resources in this scaffold. No placeholder code or resource directories were added.
 - Completed `T4.S1` (v1): added the minimal `HighSchoolStory.ContentValidator` `net10.0` project with direct references to Content, Domain, and Ports. `dotnet build tools/HighSchoolStory.ContentValidator/HighSchoolStory.ContentValidator.csproj --no-restore` completed with zero warnings and errors, and `dotnet list tools/HighSchoolStory.ContentValidator/HighSchoolStory.ContentValidator.csproj reference` confirmed exactly those three references.
+- Completed `T4.S2`, `T4.S3`, and `T4.S4` under `T4` (v1): added the `HighSchoolStory.ScenarioRunner` executable with direct Application, Content, Domain, and Ports references; made ContentValidator executable; and implemented minimal help, version, and missing-path contracts. `dotnet build "High School Story.sln"` completed with zero warnings and errors. Both tools returned `0` for `--help` and `--version`, and `2` plus a readable stderr message for absent paths. ScenarioRunner reference inspection confirmed the required four references and no Godot dependency.
 
 ### File List
 
@@ -368,6 +378,10 @@ GPT-5 Codex (coached development workflow)
 - src/HighSchoolStory.Godot/.gitkeep
 - .gitignore
 - tools/HighSchoolStory.ContentValidator/HighSchoolStory.ContentValidator.csproj
+- tools/HighSchoolStory.ContentValidator/Program.cs
+- tools/HighSchoolStory.ScenarioRunner/HighSchoolStory.ScenarioRunner.csproj
+- tools/HighSchoolStory.ScenarioRunner/Program.cs
+- High School Story.sln
 
 ### Change Log
 
@@ -386,3 +400,4 @@ GPT-5 Codex (coached development workflow)
 - 2026-07-11: Verified the root host has no direct Domain reference (`T3.S2`, v1).
 - 2026-07-11: Verified the Godot host source and resource placement convention (`T3.S4`, v1).
 - 2026-07-12: Created and verified the ContentValidator project boundary (`T4.S1`, v1).
+- 2026-07-12: Created and verified ScenarioRunner plus the minimal CLI help, version, and missing-input behavior for both tools (`T4`, v1).
