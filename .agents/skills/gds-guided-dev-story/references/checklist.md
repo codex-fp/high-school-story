@@ -32,6 +32,7 @@ validation-rules:
 - [ ] Each Approved Implementation Plan uses a `Tn`, `Tn.Sn`, or `Tn.Gn` key, scope text, and version.
 - [ ] Each group plan lists every included subtask explicitly.
 - [ ] Each Approved Implementation Plan records the chosen approach, approved scope, files or components, and validation plan.
+- [ ] For code-bearing work, the user reviewed key implementation snippets or a clearly labeled proposed diff before approving the plan.
 - [ ] Each completed unit has a reviewed diff.
 - [ ] Each completed unit has passing targeted tests or agreed observable validation.
 - [ ] Known validation gaps, failures, and follow-up work are resolved or explicitly accepted by the user.
