@@ -5,4 +5,14 @@
     <EnableDynamicLoading>true</EnableDynamicLoading>
     <RootNamespace>HighSchoolStory</RootNamespace>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="src\HighSchoolStory.Domain\**\*.cs" />
+    <Compile Remove="src\HighSchoolStory.Application\**\*.cs" />
+    <Compile Remove="src\HighSchoolStory.Ports\**\*.cs" />
+    <Compile Remove="src\HighSchoolStory.Content\**\*.cs" />
+    <Compile Remove="tools\**\*.cs" />
+    <Compile Remove="tests\**\*.cs" />
+    <Compile Remove=".godot\**\*.cs" />
+  </ItemGroup>
 </Project>

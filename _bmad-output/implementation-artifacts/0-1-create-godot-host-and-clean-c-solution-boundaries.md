@@ -35,7 +35,7 @@ so that feature stories can consume validated content and Application commands w
 - [ ] Wire the Godot host as composition root (AC: 1, 4)
   - [ ] Add explicit `ProjectReference` entries from `High School Story.csproj` to Application, Ports, and Content.
   - [ ] Do not add a direct root host reference to Domain unless the implementation lead approves a concrete need.
-  - [ ] Add explicit `Compile Remove` entries so the root Godot project does not directly compile `src/HighSchoolStory.Domain/**`, `src/HighSchoolStory.Application/**`, `src/HighSchoolStory.Ports/**`, `src/HighSchoolStory.Content/**`, `tools/**`, or `tests/**`.
+  - [x] Add explicit `Compile Remove` entries so the root Godot project does not directly compile `src/HighSchoolStory.Domain/**`, `src/HighSchoolStory.Application/**`, `src/HighSchoolStory.Ports/**`, `src/HighSchoolStory.Content/**`, `tools/**`, or `tests/**`.
   - [ ] Keep Godot host code under `src/HighSchoolStory.Godot/` and root Godot resources under Godot-friendly folders such as `scenes/` and `assets/`.
 - [ ] Create tool entry points (AC: 3, 4)
   - [ ] Create `tools/HighSchoolStory.ContentValidator/HighSchoolStory.ContentValidator.csproj` referencing Content, Domain, and Ports.
@@ -243,6 +243,10 @@ GPT-5 Codex (coached development workflow)
 
 ### Debug Log References
 
+### Approved Execution-Order Exceptions
+
+- **2026-07-11:** Sprint Change Proposal `sprint-change-proposal-2026-07-11.md` approved. Execute `T3.S3` before completing `T2.S5`, because the root-host build validation for `T2.S5` is blocked until clean-project source directories are excluded from root compilation. Preserve all task wording, acceptance criteria, and sprint-status values; return to `T2.S5` after `T3.S3` validates.
+
 ### Approved Implementation Plan
 
 #### T1.S4 - Keep root `High School Story.csproj` on `Godot.NET.Sdk/4.7.0`, `net10.0`, and the existing Android `net9.0` fallback (v1)
@@ -285,6 +289,22 @@ GPT-5 Codex (coached development workflow)
 - **Files / components:** `src/HighSchoolStory.Content/HighSchoolStory.Content.csproj`
 - **Validation:** `dotnet build src/HighSchoolStory.Content/HighSchoolStory.Content.csproj` and `dotnet list src/HighSchoolStory.Content/HighSchoolStory.Content.csproj reference`.
 
+#### T2.S5 - Create `src/HighSchoolStory.Godot/` as a source folder compiled by the root Godot host, not as a separate clean `.csproj` (v1)
+
+- **Status:** Approved
+- **Approach:** Add `src/HighSchoolStory.Godot/` with a `.gitkeep` version-control anchor and no artificial C# marker type or `.csproj`. The root Godot project's default compile glob will include future host C# files in this directory.
+- **Scope:** Create the versioned host-source directory only; do not add project references, compile exclusions, gameplay code, or Godot runtime configuration.
+- **Files / components:** `src/HighSchoolStory.Godot/.gitkeep`
+- **Validation:** Confirm the source-directory structure and run `dotnet build "High School Story.csproj"`.
+
+#### T3.S3 - Add explicit `Compile Remove` entries so the root Godot project does not directly compile `src/HighSchoolStory.Domain/**`, `src/HighSchoolStory.Application/**`, `src/HighSchoolStory.Ports/**`, `src/HighSchoolStory.Content/**`, `tools/**`, or `tests/**` (v1)
+
+- **Status:** Approved
+- **Approach:** Add a single explicit `ItemGroup` to the root Godot project with `Compile Remove` entries for the six required clean-source, tool, and test paths, plus `.godot/**` to prevent the host from compiling Godot-generated temporary C# files that currently cause duplicate assembly attributes.
+- **Scope:** `High School Story.csproj` compile exclusions only; do not add `ProjectReference` entries, gameplay code, packages, or runtime-configuration changes.
+- **Files / components:** `High School Story.csproj`
+- **Validation:** Inspect the resulting exclusion entries and run `dotnet build "High School Story.csproj"`.
+
 ### Completion Notes List
 
 - Added `global.json` pinned to .NET SDK 10.0.301 with `latestPatch` roll-forward. Verified active SDK selection, valid JSON, UTF-8 without BOM, and a final CRLF.
@@ -296,6 +316,7 @@ GPT-5 Codex (coached development workflow)
 - Completed `T2.S2` (v1): added the minimal `HighSchoolStory.Ports` `net10.0` project with its only project reference to Domain. `dotnet build src/HighSchoolStory.Ports/HighSchoolStory.Ports.csproj` completed with zero warnings and errors, and `dotnet list src/HighSchoolStory.Ports/HighSchoolStory.Ports.csproj reference` confirmed the single Domain reference.
 - Completed `T2.S3` (v1): added the minimal `HighSchoolStory.Application` `net10.0` project with its only project references to Domain and Ports and its versionless R3 package reference. Build completed with zero warnings and errors; project inspection confirmed the two references and R3 `1.3.1` resolved from central package management.
 - Completed `T2.S4` (v1): added the minimal `HighSchoolStory.Content` `net10.0` project with its only project references to Domain and Ports. `dotnet build src/HighSchoolStory.Content/HighSchoolStory.Content.csproj --no-restore` completed with zero warnings and errors, and `dotnet list src/HighSchoolStory.Content/HighSchoolStory.Content.csproj reference` confirmed the two required references.
+- Completed `T3.S3` (v1) under the approved execution-order exception: added root-host compile exclusions for clean library, tool, and test source paths plus `.godot/**`. `dotnet build "High School Story.csproj" --no-restore` completed with zero warnings and errors, preventing duplicate assembly attributes from generated clean-project and Godot temporary files.
 
 ### File List
 
@@ -306,6 +327,7 @@ GPT-5 Codex (coached development workflow)
 - src/HighSchoolStory.Ports/HighSchoolStory.Ports.csproj
 - src/HighSchoolStory.Application/HighSchoolStory.Application.csproj
 - src/HighSchoolStory.Content/HighSchoolStory.Content.csproj
+- High School Story.csproj
 - .gitignore
 
 ### Change Log
@@ -319,3 +341,4 @@ GPT-5 Codex (coached development workflow)
 - 2026-07-11: Created and verified the clean Ports project boundary subtask (`T2.S2`, v1).
 - 2026-07-11: Created and verified the clean Application project boundary subtask (`T2.S3`, v1).
 - 2026-07-11: Created and verified the clean Content project boundary subtask (`T2.S4`, v1).
+- 2026-07-11: Added and verified root-host compile exclusions (`T3.S3`, v1) under the approved execution-order exception.
