@@ -38,7 +38,7 @@ so that feature stories can consume validated content and Application commands w
   - [x] Add explicit `Compile Remove` entries so the root Godot project does not directly compile `src/HighSchoolStory.Domain/**`, `src/HighSchoolStory.Application/**`, `src/HighSchoolStory.Ports/**`, `src/HighSchoolStory.Content/**`, `tools/**`, or `tests/**`.
   - [x] Keep Godot host code under `src/HighSchoolStory.Godot/` and root Godot resources under Godot-friendly folders such as `scenes/` and `assets/`.
 - [ ] Create tool entry points (AC: 3, 4)
-  - [ ] Create `tools/HighSchoolStory.ContentValidator/HighSchoolStory.ContentValidator.csproj` referencing Content, Domain, and Ports.
+  - [x] Create `tools/HighSchoolStory.ContentValidator/HighSchoolStory.ContentValidator.csproj` referencing Content, Domain, and Ports.
   - [ ] Create `tools/HighSchoolStory.ScenarioRunner/HighSchoolStory.ScenarioRunner.csproj` referencing Application, Content, Domain, and Ports.
   - [ ] Implement minimal `--help` and `--version` behavior for both tools.
   - [ ] Make missing content/fixture paths return typed, readable failure output and non-zero exit codes; do not throw unhandled exceptions for expected missing inputs.
@@ -329,6 +329,14 @@ GPT-5 Codex (coached development workflow)
 - **Files / components:** `src/HighSchoolStory.Godot/` (inspection only); Story 0.1 Dev Agent Record.
 - **Validation:** Enumerate tracked C# files and inspect root Godot resource folders; confirm the host-source directory exists and no misplaced source/resource files are present.
 
+#### T4.S1 - Create `tools/HighSchoolStory.ContentValidator/HighSchoolStory.ContentValidator.csproj` referencing Content, Domain, and Ports (v1)
+
+- **Status:** Approved
+- **Approach:** Add a minimal `Microsoft.NET.Sdk` `net10.0` project with `ProjectReference` entries to Content, Domain, and Ports. Keep it a library temporarily so this project-only unit can build without a placeholder `Program.cs`; the following CLI-behavior unit will add the executable entry point.
+- **Scope:** ContentValidator project file only; do not add a `Program.cs`, parsing, validation behavior, packages, or solution entries.
+- **Files / components:** `tools/HighSchoolStory.ContentValidator/HighSchoolStory.ContentValidator.csproj`
+- **Validation:** `dotnet build tools/HighSchoolStory.ContentValidator/HighSchoolStory.ContentValidator.csproj` and `dotnet list tools/HighSchoolStory.ContentValidator/HighSchoolStory.ContentValidator.csproj reference`.
+
 ### Completion Notes List
 
 - Added `global.json` pinned to .NET SDK 10.0.301 with `latestPatch` roll-forward. Verified active SDK selection, valid JSON, UTF-8 without BOM, and a final CRLF.
@@ -345,6 +353,7 @@ GPT-5 Codex (coached development workflow)
 - Completed `T3.S1` (v1): added root-host project references to Application, Ports, and Content only. `dotnet build "High School Story.csproj" --no-restore` completed with zero warnings and errors, and `dotnet list "High School Story.csproj" reference` confirmed exactly those three direct references.
 - Completed `T3.S2` (v1): no direct root-host Domain reference was added because no concrete host need was identified. `dotnet list "High School Story.csproj" reference` confirmed direct references to Application, Ports, and Content only.
 - Completed `T3.S4` (v1): verified the versioned `src/HighSchoolStory.Godot/` host-source directory exists, with no tracked C# source files or misplaced root Godot resources in this scaffold. No placeholder code or resource directories were added.
+- Completed `T4.S1` (v1): added the minimal `HighSchoolStory.ContentValidator` `net10.0` project with direct references to Content, Domain, and Ports. `dotnet build tools/HighSchoolStory.ContentValidator/HighSchoolStory.ContentValidator.csproj --no-restore` completed with zero warnings and errors, and `dotnet list tools/HighSchoolStory.ContentValidator/HighSchoolStory.ContentValidator.csproj reference` confirmed exactly those three references.
 
 ### File List
 
@@ -358,6 +367,7 @@ GPT-5 Codex (coached development workflow)
 - High School Story.csproj
 - src/HighSchoolStory.Godot/.gitkeep
 - .gitignore
+- tools/HighSchoolStory.ContentValidator/HighSchoolStory.ContentValidator.csproj
 
 ### Change Log
 
@@ -375,3 +385,4 @@ GPT-5 Codex (coached development workflow)
 - 2026-07-11: Added and verified root-host project references to Application, Ports, and Content (`T3.S1`, v1).
 - 2026-07-11: Verified the root host has no direct Domain reference (`T3.S2`, v1).
 - 2026-07-11: Verified the Godot host source and resource placement convention (`T3.S4`, v1).
+- 2026-07-12: Created and verified the ContentValidator project boundary (`T4.S1`, v1).
