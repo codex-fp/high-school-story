@@ -22,12 +22,15 @@ validation-rules:
 
 - [ ] Story, Acceptance Criteria, Tasks/Subtasks, Dev Notes, project-context, and sprint status were loaded.
 - [ ] Every task or subtask was linked to the applicable acceptance criteria.
+- [ ] Each completed unit has an active, keyed Approved Implementation Plan in Dev Agent Record.
 - [ ] Each completed increment stayed within its approved story scope.
 - [ ] Architecture, dependencies, and implementation patterns follow Dev Notes and project-context.
 
 ## Per-Unit Evidence
 
 - [ ] Each task or subtask had a checkpoint before implementation.
+- [ ] Each Approved Implementation Plan uses a `Tn` or `Tn.Sn` key, exact unit text, and version.
+- [ ] Each Approved Implementation Plan records the chosen approach, approved scope, files or components, and validation plan.
 - [ ] Each completed unit has a reviewed diff.
 - [ ] Each completed unit has passing targeted tests or agreed observable validation.
 - [ ] Known validation gaps, failures, and follow-up work are resolved or explicitly accepted by the user.
