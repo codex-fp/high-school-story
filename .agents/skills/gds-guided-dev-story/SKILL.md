@@ -110,6 +110,10 @@ Before implementation, jointly turn the selected task, subtask, or custom group 
 - a red-phase or validation plan, including the narrowest useful test command;
 - risks, assumptions, and any implementation decision that needs the user's answer.
 
+For code-bearing changes, also show an `Implementation Preview` before asking for approval. Include concise snippets for the components that carry the design: public or internal signatures, important control flow, domain rules, integration boundaries, or test arrangement. Show only code that helps the user evaluate the plan; omit boilerplate and do not write files yet.
+
+When an existing target file can be read and the intended edit is bounded, include a small unified `Proposed Diff` as well. Label it `Proposed - not applied`; it is a preview, not output from `git diff`. Do not fabricate a broad or uncertain diff. When the final shape depends on unresolved details or new files, show focused snippets and named insertion points instead.
+
 When real alternatives exist, propose two or three approaches with their meaningful trade-offs and a recommendation. When the solution is obvious, state the recommended approach. Ask only questions needed to resolve technical choices. Then pause and ask an equivalent closed question in `{communication_language}`, for example: "Czy akceptujesz ten design i plan implementacji?"
 
 If the user does not approve, clarify or revise the proposed design and plan, then ask again. Do not edit implementation files. If the user approves, record the plan and immediately implement it as an agent patch.
@@ -126,6 +130,7 @@ Write each entry as a level-four heading containing the key, scope description, 
 - **Approach:** ...
 - **Scope:** ...
 - **Files / components:** ...
+- **Preview references:** <files and symbols shown in the implementation preview>
 - **Validation:** ...
 ```
 
