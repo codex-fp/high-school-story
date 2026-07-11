@@ -1,9 +1,9 @@
 # DO NOT EDIT -- overwritten on every update.
 #
-# Workflow customization surface for gds-coached-dev-story. Mirrors the
+# Workflow customization surface for gds-guided-dev-story. Mirrors the
 # agent customization shape under the [workflow] namespace.
-# Team overrides:     {project-root}/_bmad/custom/gds-coached-dev-story.toml
-# Personal overrides: {project-root}/_bmad/custom/gds-coached-dev-story.user.toml
+# Team overrides:     {project-root}/_bmad/custom/gds-guided-dev-story.toml
+# Personal overrides: {project-root}/_bmad/custom/gds-guided-dev-story.user.toml
 
 [workflow]
 
