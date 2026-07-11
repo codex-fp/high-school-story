@@ -28,7 +28,7 @@ so that feature stories can consume validated content and Application commands w
   - [x] Keep root `High School Story.csproj` on `Godot.NET.Sdk/4.7.0`, `net10.0`, and the existing Android `net9.0` fallback.
 - [ ] Create clean source project boundaries (AC: 1, 4)
   - [x] Create `src/HighSchoolStory.Domain/HighSchoolStory.Domain.csproj` with no project references and no package references beyond the absolute runtime/BCL minimum.
-  - [ ] Create `src/HighSchoolStory.Ports/HighSchoolStory.Ports.csproj` referencing Domain only.
+  - [x] Create `src/HighSchoolStory.Ports/HighSchoolStory.Ports.csproj` referencing Domain only.
   - [ ] Create `src/HighSchoolStory.Application/HighSchoolStory.Application.csproj` referencing Domain and Ports, with R3 available only at the Application boundary.
   - [ ] Create `src/HighSchoolStory.Content/HighSchoolStory.Content.csproj` referencing Domain and Ports only.
   - [ ] Create `src/HighSchoolStory.Godot/` as a source folder compiled by the root Godot host, not as a separate clean `.csproj`.
@@ -245,8 +245,29 @@ GPT-5 Codex (coached development workflow)
 
 ### Approved Implementation Plan
 
-- Establish solution and SDK baseline / Keep root `High School Story.csproj` on Godot SDK and target frameworks: preserve `Godot.NET.Sdk/4.7.0`, main `net10.0`, and conditional Android `net9.0` fallback without changing Godot runtime settings or gameplay code. Scope: root host project only, with formatting normalization only if required. Validation: `dotnet build "High School Story.csproj"`.
-- Create clean source project boundaries / Create `HighSchoolStory.Domain`: add a minimal `Microsoft.NET.Sdk` project at `src/HighSchoolStory.Domain/HighSchoolStory.Domain.csproj` targeting `net10.0`, with no project or package references and no example source types. Scope: Domain project file only. Validation: `dotnet build src/HighSchoolStory.Domain/HighSchoolStory.Domain.csproj` and XML inspection confirming no reference items.
+#### T1.S4 - Keep root `High School Story.csproj` on `Godot.NET.Sdk/4.7.0`, `net10.0`, and the existing Android `net9.0` fallback (v1)
+
+- **Status:** Approved
+- **Approach:** Preserve `Godot.NET.Sdk/4.7.0`, the main `net10.0` target, and the conditional Android `net9.0` fallback without changing Godot runtime settings or gameplay code.
+- **Scope:** Root host project only, with formatting normalization only if required.
+- **Files / components:** `High School Story.csproj`
+- **Validation:** `dotnet build "High School Story.csproj"`.
+
+#### T2.S1 - Create `src/HighSchoolStory.Domain/HighSchoolStory.Domain.csproj` with no project references and no package references beyond the absolute runtime/BCL minimum (v1)
+
+- **Status:** Approved
+- **Approach:** Add a minimal `Microsoft.NET.Sdk` project targeting `net10.0`, with no project or package references and no example source types.
+- **Scope:** Domain project file only.
+- **Files / components:** `src/HighSchoolStory.Domain/HighSchoolStory.Domain.csproj`
+- **Validation:** `dotnet build src/HighSchoolStory.Domain/HighSchoolStory.Domain.csproj` and XML inspection confirming no reference items.
+
+#### T2.S2 - Create `src/HighSchoolStory.Ports/HighSchoolStory.Ports.csproj` referencing Domain only (v1)
+
+- **Status:** Approved
+- **Approach:** Add a minimal `Microsoft.NET.Sdk` project targeting `net10.0`, with one `ProjectReference` to `HighSchoolStory.Domain` and no package references or example port contracts.
+- **Scope:** Ports project file only; do not yet add it to the solution or create application-facing abstractions.
+- **Files / components:** `src/HighSchoolStory.Ports/HighSchoolStory.Ports.csproj`
+- **Validation:** `dotnet build src/HighSchoolStory.Ports/HighSchoolStory.Ports.csproj` and `dotnet list src/HighSchoolStory.Ports/HighSchoolStory.Ports.csproj reference`.
 
 ### Completion Notes List
 
@@ -256,6 +277,7 @@ GPT-5 Codex (coached development workflow)
 - Verified the existing Godot host retains `Godot.NET.Sdk/4.7.0`, main `net10.0`, and conditional Android `net9.0` fallback. `dotnet build "High School Story.csproj"` completed with zero warnings and errors; no host-project change was required.
 - Added the minimal `HighSchoolStory.Domain` `net10.0` project without project or package references. `dotnet build src/HighSchoolStory.Domain/HighSchoolStory.Domain.csproj` completed with zero warnings and errors.
 - Added repository-wide `.NET` build-output ignores for `**/bin/` and `**/obj/`, keeping generated project artifacts out of source control.
+- Completed `T2.S2` (v1): added the minimal `HighSchoolStory.Ports` `net10.0` project with its only project reference to Domain. `dotnet build src/HighSchoolStory.Ports/HighSchoolStory.Ports.csproj` completed with zero warnings and errors, and `dotnet list src/HighSchoolStory.Ports/HighSchoolStory.Ports.csproj reference` confirmed the single Domain reference.
 
 ### File List
 
@@ -263,6 +285,7 @@ GPT-5 Codex (coached development workflow)
 - Directory.Build.props
 - Directory.Packages.props
 - src/HighSchoolStory.Domain/HighSchoolStory.Domain.csproj
+- src/HighSchoolStory.Ports/HighSchoolStory.Ports.csproj
 - .gitignore
 
 ### Change Log
@@ -273,3 +296,4 @@ GPT-5 Codex (coached development workflow)
 - 2026-07-11: Verified the root Godot host SDK and target-framework baseline subtask.
 - 2026-07-11: Created and verified the clean Domain project boundary subtask.
 - 2026-07-11: Ignored generated .NET build outputs.
+- 2026-07-11: Created and verified the clean Ports project boundary subtask (`T2.S2`, v1).
