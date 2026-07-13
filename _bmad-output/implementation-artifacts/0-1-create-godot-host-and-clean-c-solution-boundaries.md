@@ -1,6 +1,7 @@
 ---
-baseline_commit: c369717
+baseline_commit: c369717c2f07169f7c448d0e3563129e4e1fc01a
 branch_name: story/0-1/create-godot-host-and-clean-c-solution-boundaries
+pull_request_url: https://github.com/codex-fp/high-school-story/pull/2
 ---
 
 # Story 0.1: Create Godot Host and Clean C# Solution Boundaries
