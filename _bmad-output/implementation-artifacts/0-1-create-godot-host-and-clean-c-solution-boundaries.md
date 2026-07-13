@@ -44,8 +44,8 @@ so that feature stories can consume validated content and Application commands w
   - [x] Implement minimal `--help` and `--version` behavior for both tools.
   - [x] Make missing content/fixture paths return typed, readable failure output and non-zero exit codes; do not throw unhandled exceptions for expected missing inputs.
 - [ ] Create test projects and first guardrail tests (AC: 2, 3)
-  - [ ] Create test projects under `tests/`: Domain, Application, Content, SaveMigration, Scenario, Architecture, and GodotSmoke.
-  - [ ] Keep default `dotnet test` fast and non-flaky; Godot smoke must be separable by project and must not require launching Godot in the default gate.
+  - [x] Create test projects under `tests/`: Domain, Application, Content, SaveMigration, Scenario, Architecture, and GodotSmoke.
+  - [x] Keep default `dotnet test` fast and non-flaky; Godot smoke must be separable by project and must not require launching Godot in the default gate.
   - [ ] Add ArchitectureTests for forbidden references: Domain has no Godot/R3/Ports/JSON/logging; Application has no Godot; Content has no Application/Godot.
   - [ ] Add ArchitectureTests proving the root Godot host does not compile loose source files from clean library, tool, or test directories.
   - [ ] Add tool tests or process-level checks for `--help`, `--version`, and missing input behavior.
@@ -347,6 +347,15 @@ GPT-5 Codex (coached development workflow)
 - **Files / components:** `tools/HighSchoolStory.ContentValidator/HighSchoolStory.ContentValidator.csproj`, `tools/HighSchoolStory.ContentValidator/Program.cs`, `tools/HighSchoolStory.ScenarioRunner/HighSchoolStory.ScenarioRunner.csproj`, `tools/HighSchoolStory.ScenarioRunner/Program.cs`, `High School Story.sln`.
 - **Validation:** `dotnet build "High School Story.sln"`; execute `--help` and `--version` for both tools; execute both tools using absent paths and confirm readable stderr plus exit code `2`; inspect ScenarioRunner project references.
 
+#### T5.G1 - Create test-project structure and fast default test gate (v1)
+
+- **Status:** Approved
+- **Included units:** T5.S1 - Create test projects under `tests/`: Domain, Application, Content, SaveMigration, Scenario, Architecture, and GodotSmoke; T5.S2 - Keep default `dotnet test` fast and non-flaky, with GodotSmoke separable by project and not requiring a Godot launch in the default gate.
+- **Approach:** Create seven `net10.0` xUnit/VSTest test projects with centrally managed package versions, minimal discoverability tests, and only the project references required by each test boundary. Add all projects to the solution. GodotSmoke is a separate test project but contains no engine-launching test in this scaffold, so the default gate remains fast.
+- **Scope:** Test-project files, minimal discoverability tests, central test-package versions, and solution membership only. Do not add architecture enforcement or CLI behavior tests yet.
+- **Files / components:** `Directory.Packages.props`, seven `tests/*/*.csproj` files, seven minimal test source files, `High School Story.sln`.
+- **Validation:** restore and build the solution; run `dotnet test` and `dotnet test tests/HighSchoolStory.GodotSmoke.Tests`; inspect test-project references and confirm no test launches Godot.
+
 ### Completion Notes List
 
 - Added `global.json` pinned to .NET SDK 10.0.301 with `latestPatch` roll-forward. Verified active SDK selection, valid JSON, UTF-8 without BOM, and a final CRLF.
@@ -365,6 +374,7 @@ GPT-5 Codex (coached development workflow)
 - Completed `T3.S4` (v1): verified the versioned `src/HighSchoolStory.Godot/` host-source directory exists, with no tracked C# source files or misplaced root Godot resources in this scaffold. No placeholder code or resource directories were added.
 - Completed `T4.S1` (v1): added the minimal `HighSchoolStory.ContentValidator` `net10.0` project with direct references to Content, Domain, and Ports. `dotnet build tools/HighSchoolStory.ContentValidator/HighSchoolStory.ContentValidator.csproj --no-restore` completed with zero warnings and errors, and `dotnet list tools/HighSchoolStory.ContentValidator/HighSchoolStory.ContentValidator.csproj reference` confirmed exactly those three references.
 - Completed `T4.S2`, `T4.S3`, and `T4.S4` under `T4` (v1): added the `HighSchoolStory.ScenarioRunner` executable with direct Application, Content, Domain, and Ports references; made ContentValidator executable; and implemented minimal help, version, and missing-path contracts. `dotnet build "High School Story.sln"` completed with zero warnings and errors. Both tools returned `0` for `--help` and `--version`, and `2` plus a readable stderr message for absent paths. ScenarioRunner reference inspection confirmed the required four references and no Godot dependency.
+- Completed `T5.S1` and `T5.S2` under `T5.G1` (v1): added all seven `net10.0` xUnit/VSTest projects with centrally managed package versions and discoverability tests. The solution restore and no-restore build completed with zero warnings and errors; the default `dotnet test --no-restore` passed 7/7 tests; the separate GodotSmoke project test passed 1/1 without launching Godot.
 
 ### File List
 
@@ -383,6 +393,20 @@ GPT-5 Codex (coached development workflow)
 - tools/HighSchoolStory.ScenarioRunner/HighSchoolStory.ScenarioRunner.csproj
 - tools/HighSchoolStory.ScenarioRunner/Program.cs
 - High School Story.sln
+- tests/HighSchoolStory.Domain.Tests/HighSchoolStory.Domain.Tests.csproj
+- tests/HighSchoolStory.Domain.Tests/TestProjectTests.cs
+- tests/HighSchoolStory.Application.Tests/HighSchoolStory.Application.Tests.csproj
+- tests/HighSchoolStory.Application.Tests/TestProjectTests.cs
+- tests/HighSchoolStory.Content.Tests/HighSchoolStory.Content.Tests.csproj
+- tests/HighSchoolStory.Content.Tests/TestProjectTests.cs
+- tests/HighSchoolStory.SaveMigration.Tests/HighSchoolStory.SaveMigration.Tests.csproj
+- tests/HighSchoolStory.SaveMigration.Tests/TestProjectTests.cs
+- tests/HighSchoolStory.Scenario.Tests/HighSchoolStory.Scenario.Tests.csproj
+- tests/HighSchoolStory.Scenario.Tests/TestProjectTests.cs
+- tests/HighSchoolStory.Architecture.Tests/HighSchoolStory.Architecture.Tests.csproj
+- tests/HighSchoolStory.Architecture.Tests/TestProjectTests.cs
+- tests/HighSchoolStory.GodotSmoke.Tests/HighSchoolStory.GodotSmoke.Tests.csproj
+- tests/HighSchoolStory.GodotSmoke.Tests/TestProjectTests.cs
 
 ### Change Log
 
@@ -402,3 +426,4 @@ GPT-5 Codex (coached development workflow)
 - 2026-07-11: Verified the Godot host source and resource placement convention (`T3.S4`, v1).
 - 2026-07-12: Created and verified the ContentValidator project boundary (`T4.S1`, v1).
 - 2026-07-12: Created and verified ScenarioRunner plus the minimal CLI help, version, and missing-input behavior for both tools (`T4`, v1).
+- 2026-07-12: Created and verified the seven-project test scaffold and fast default test gate (`T5.G1`, v1).
