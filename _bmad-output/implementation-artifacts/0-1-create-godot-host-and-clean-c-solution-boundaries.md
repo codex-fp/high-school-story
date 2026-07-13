@@ -5,7 +5,7 @@ branch_name: story/0-1/create-godot-host-and-clean-c-solution-boundaries
 
 # Story 0.1: Create Godot Host and Clean C# Solution Boundaries
 
-Status: review
+Status: done
 
 ## Story
 
@@ -53,6 +53,11 @@ so that feature stories can consume validated content and Application commands w
   - [x] Document the supported commands in a repo-local implementation note or README section without duplicating broad planning docs.
   - [x] Verify `dotnet restore "High School Story.sln"`, `dotnet build "High School Story.sln"`, and `dotnet test`.
   - [x] Verify `dotnet run --project tools/HighSchoolStory.ContentValidator -- --help` and `dotnet run --project tools/HighSchoolStory.ScenarioRunner -- --help`.
+
+### Review Findings
+
+- [x] [Review][Patch] Enforce Application's raw-JSON boundary [tests/HighSchoolStory.Architecture.Tests/ArchitectureBoundaryTests.cs:37] — the ArchitectureTests prohibit only Godot dependencies for Application, so an Application command handler can add `System.Text.Json` (or another raw-JSON dependency) without failing AC 2's boundary guard.
+- [x] [Review][Patch] Verify Godot host's effective compile inputs [tests/HighSchoolStory.Architecture.Tests/ArchitectureBoundaryTests.cs:57] — the test asserts that `Compile Remove` declarations exist but does not evaluate the final `Compile` item set; a later include or import can re-add clean-library, tool, or test sources while the guard still passes.
 
 ## Dev Notes
 
