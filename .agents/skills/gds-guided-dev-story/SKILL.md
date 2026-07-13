@@ -39,9 +39,15 @@ Read the full story before taking action, including its frontmatter, Story, Acce
 
 Treat the story file and sprint status as the workflow's durable state. Preserve any existing `baseline_commit`; otherwise capture the current commit before the first approved implementation action. On first active work, set the story and matching sprint entry to `in-progress`.
 
+### Required Story Git Lifecycle
+
+Before the first implementation action, read the repository's story development workflow. Require a clean, up-to-date `main` checkout, create the prescribed story branch, and record its name in `branch_name` frontmatter. Preserve or capture `baseline_commit` before creating that branch.
+
+Commit the `in-progress` tracking update with the required story commit format, push the branch, create a draft pull request, then record its URL in `pull_request_url` frontmatter and push that tracking commit. If the GitHub CLI is unavailable, unauthenticated, or cannot create the pull request, HALT and give the user the exact manual action; never continue story implementation directly on `main`.
+
 Only edit these story-file areas:
 
-- YAML frontmatter: `baseline_commit`
+- YAML frontmatter: `baseline_commit`, `branch_name`, `pull_request_url`
 - Tasks/Subtasks checkboxes
 - Dev Agent Record
 - File List
@@ -173,6 +179,8 @@ A task or subtask may be marked complete only when all of these are true:
 
 When the user agrees to mark work as complete, present the evidence briefly. If it is insufficient, explain the missing gate and preserve the current state. Never check a box based on an implementation claim alone. Update every included subtask only after the batch evidence passes.
 
+After recording a completed approved plan batch, stage only its approved implementation files and required story tracking records, commit them using the repository's story commit format, and push the current story branch. A dirty worktree containing unrelated files is a HALT.
+
 After marking a subtask complete, immediately inspect its containing top-level task. If every direct subtask is marked complete, run a task-closure verification before moving on:
 
 - confirm no task-level deliverable remains outside the completed subtasks;
@@ -186,5 +194,7 @@ If that verification passes, mark the containing task complete in the same workf
 When all tasks are complete, run `references/checklist.md`. Confirm all acceptance criteria, required tests, project-context rules, tracking records, and relevant regression checks pass. Ask for explicit approval before finalizing the story; do not auto-finalize after the final unit.
 
 With approval, update the story Status and matching sprint-status entry to `review`, preserve the full sprint file's structure, and give a concise handoff that recommends `gds-code-review` as the external review gate.
+
+Before this handoff, run `_bmad/scripts/validate_story_git.py` from `baseline_commit` to `HEAD` with the story's numeric ID and repository-relative file path. Push the branch and mark its draft pull request ready for review. HALT if validation, push, or the pull-request transition fails.
 
 HALT rather than force progress when the story is missing or ambiguous, its baseline is unsafe to establish, changes exceed the current approved unit, tests expose a defect outside scope, or a story requirement needs to change. State the specific blocker and offer the smallest appropriate next choice.

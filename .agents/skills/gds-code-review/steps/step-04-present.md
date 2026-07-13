@@ -104,6 +104,12 @@ If `{sprint_status}` file exists:
 
 If `{sprint_status}` file does not exist, note that story status was updated in the story file only.
 
+#### Commit and merge a completed story pull request
+
+When `{new_status}` is `done` and the story frontmatter contains `pull_request_url`, commit the story and sprint tracking updates with the repository's required story commit format, push the story branch, and ask the user for explicit confirmation to merge. With confirmation, run `gh pr merge <pull_request_url> --rebase --delete-branch`, then update the local `main` from `origin/main`. If the confirmation, commit, push, or merge fails, leave the pull request and branch intact and report the precise blocking command or error.
+
+If `{new_status}` is not `done`, commit and push any changed story tracking records using the required story commit format, but do not offer a merge.
+
 #### Completion summary
 
 > **Review Complete!**
