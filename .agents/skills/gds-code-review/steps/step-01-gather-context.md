@@ -21,7 +21,7 @@ story_key: '' # set at runtime when discovered from sprint status
    Did the user pass a PR, commit SHA, branch, spec file, or diff source this message?
    - PR reference → resolve to branch/commit via `gh pr view`. If resolution fails, ask for a SHA or branch.
    - Commit or branch → use directly.
-   - Spec file → set `{spec_file}` to the provided path. Check its frontmatter for `baseline_commit`. If found, use as diff baseline. If not found, continue the cascade (a spec alone does not identify a diff source).
+   - Spec file → set `{spec_file}` to the provided path. Check its frontmatter in this order: `pull_request_url`, `branch_name`, then `baseline_commit`. Use the PR when present; otherwise use the recorded branch against `main`; use the baseline only as the final fallback. If none are present, continue the cascade (a spec alone does not identify a diff source).
    - Also scan the argument for diff-mode keywords that narrow the scope:
      - "staged" / "staged changes" → Staged changes only
      - "uncommitted" / "working tree" / "all changes" → Uncommitted changes (staged + unstaged)
@@ -35,7 +35,7 @@ story_key: '' # set at runtime when discovered from sprint status
 
    **Tier 3 — Sprint tracking.**
    Look for a sprint status file (`*sprint-status*`) in `{implementation_artifacts}` or `{planning_artifacts}`. If found, scan for stories with status `review`:
-   - **Exactly one `review` story:** Set `{story_key}` to the story's key (e.g., `1-2-user-auth`). Suggest it: "I found story <story-id> in `review` status. Would you like to review its changes? [Y] Yes / [N] No, let me choose". If confirmed, use the story context to determine the diff source (branch name derived from story slug, or uncommitted changes). If declined, clear `{story_key}` and fall through.
+   - **Exactly one `review` story:** Set `{story_key}` to the story's key (e.g., `1-2-user-auth`). Suggest it: "I found story <story-id> in `review` status. Would you like to review its changes? [Y] Yes / [N] No, let me choose". If confirmed, load its story file and use `pull_request_url`, then `branch_name`, then `baseline_commit` to determine the diff source. If declined, clear `{story_key}` and fall through.
    - **Multiple `review` stories:** Present them as numbered options alongside a manual choice option. Wait for user selection. If a story is selected, set `{story_key}` and use its context to determine the diff source. If manual choice is selected, clear `{story_key}` and fall through.
    - **None:** Fall through.
 
@@ -55,6 +55,7 @@ story_key: '' # set at runtime when discovered from sprint status
    - **Provided diff or file list** (user pastes or provides a path)
 
 3. Construct `{diff_output}` from the chosen source.
+   - For a **pull request**: resolve it with `gh pr view <url-or-number>`, then run `gh pr diff <url-or-number>`. If it cannot be resolved or its diff is empty, HALT and ask the user for a valid pull request or another target.
    - For **staged changes only**: run `git diff --cached`.
    - For **uncommitted changes** (staged + unstaged): run `git diff HEAD`.
    - For **branch diff**: verify the base branch exists before running `git diff`. If it does not exist, HALT and ask the user for a valid branch.
