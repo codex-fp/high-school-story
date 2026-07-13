@@ -25,7 +25,7 @@ so that feature stories can consume validated content and Application commands w
 - [ ] Establish solution and SDK baseline (AC: 1)
   - [x] Add `global.json` pinned to the local .NET 10 SDK feature band available in this workspace, or a compatible .NET 10 SDK if the implementation lead intentionally chooses another installed version.
   - [x] Add `Directory.Build.props` for shared C# settings that apply to clean projects and tests without breaking Godot's SDK project.
-  - [ ] Add `Directory.Packages.props` for central package versions, including R3 only where approved.
+  - [x] Add `Directory.Packages.props` for central package versions, including R3 only where approved.
   - [ ] Keep root `High School Story.csproj` on `Godot.NET.Sdk/4.7.0`, `net10.0`, and the existing Android `net9.0` fallback.
 - [ ] Create clean source project boundaries (AC: 1, 4)
   - [ ] Create `src/HighSchoolStory.Domain/HighSchoolStory.Domain.csproj` with no project references and no package references beyond the absolute runtime/BCL minimum.
@@ -248,13 +248,16 @@ GPT-5 Codex (coached development workflow)
 
 - Added `global.json` pinned to .NET SDK 10.0.301 with `latestPatch` roll-forward. Verified active SDK selection, valid JSON, UTF-8 without BOM, and a final CRLF.
 - Added shared nullable, implicit-usings, and language-version settings for clean projects and tests while excluding the Godot host. Verified `dotnet build "High School Story.csproj"` with zero warnings and errors.
+- Added central package management with R3 pinned at 1.3.1. Verified XML configuration, `dotnet restore "High School Story.sln"`, and `dotnet build "High School Story.sln" --no-restore` with zero warnings and errors.
 
 ### File List
 
 - global.json
 - Directory.Build.props
+- Directory.Packages.props
 
 ### Change Log
 
 - 2026-07-10: Completed the SDK baseline pinning subtask.
 - 2026-07-10: Completed the shared C# build settings subtask.
+- 2026-07-10: Completed the central package version management subtask.
