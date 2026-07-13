@@ -43,7 +43,7 @@ story_location: _bmad-output/implementation-artifacts
 
 development_status:
   epic-0: in-progress
-  0-1-create-godot-host-and-clean-c-solution-boundaries: ready-for-dev
+  0-1-create-godot-host-and-clean-c-solution-boundaries: in-progress
   epic-0-retrospective: optional
   epic-1: backlog
   1-1-validated-first-school-day-schedule-fixture: backlog
