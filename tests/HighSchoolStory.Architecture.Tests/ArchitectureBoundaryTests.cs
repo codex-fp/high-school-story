@@ -1,4 +1,6 @@
+using System.Diagnostics;
 using System.Reflection;
+using System.Text.Json;
 using System.Xml.Linq;
 using ArchUnitNET.Domain;
 using ArchUnitNET.Fluent;
@@ -35,7 +37,9 @@ public sealed class ArchitectureBoundaryTests
     public void ApplicationAndContentMustNotDependOnForbiddenBoundaries()
     {
         IArchRule applicationRule = Types().That().ResideInAssembly("HighSchoolStory.Application")
-            .Should().NotDependOnAny(Types().That().ResideInNamespaceMatching("Godot.*"))
+            .Should().NotDependOnAny(
+                Types().That().ResideInNamespaceMatching("Godot.*")
+                    .Or().ResideInNamespaceMatching("System.Text.Json.*"))
             .WithoutRequiringPositiveResults();
         applicationRule.Check(Architecture);
 
@@ -51,7 +55,7 @@ public sealed class ArchitectureBoundaryTests
     public void ProjectFilesMustDeclareRequiredBoundaryRules()
     {
         AssertProjectHasNoForbiddenReferences("src/HighSchoolStory.Domain/HighSchoolStory.Domain.csproj", "Godot", "R3", "Ports", "Json", "Logging");
-        AssertProjectHasNoForbiddenReferences("src/HighSchoolStory.Application/HighSchoolStory.Application.csproj", "Godot");
+        AssertProjectHasNoForbiddenReferences("src/HighSchoolStory.Application/HighSchoolStory.Application.csproj", "Godot", "Json");
         AssertProjectHasNoForbiddenReferences("src/HighSchoolStory.Content/HighSchoolStory.Content.csproj", "Godot", "HighSchoolStory.Application");
 
         var host = LoadProject("High School Story.csproj");
@@ -63,6 +67,43 @@ public sealed class ArchitectureBoundaryTests
         foreach (var required in new[] { "src\\HighSchoolStory.Domain", "src\\HighSchoolStory.Application", "src\\HighSchoolStory.Ports", "src\\HighSchoolStory.Content", "tools\\", "tests\\" })
         {
             Assert.Contains(exclusions, exclusion => exclusion.StartsWith(required, StringComparison.Ordinal));
+        }
+    }
+
+    [Fact]
+    public async Task RootGodotHostMustNotCompileCleanLibraryToolOrTestSources()
+    {
+        var root = FindRepositoryRoot();
+        var startInfo = new ProcessStartInfo("dotnet")
+        {
+            WorkingDirectory = root,
+            RedirectStandardOutput = true,
+            RedirectStandardError = true,
+            UseShellExecute = false,
+        };
+        startInfo.ArgumentList.Add("msbuild");
+        startInfo.ArgumentList.Add("High School Story.csproj");
+        startInfo.ArgumentList.Add("-getItem:Compile");
+        startInfo.ArgumentList.Add("-nologo");
+
+        using var process = Process.Start(startInfo);
+        Assert.NotNull(process);
+
+        var cancellationToken = TestContext.Current.CancellationToken;
+        var standardOutput = process.StandardOutput.ReadToEndAsync(cancellationToken);
+        var standardError = process.StandardError.ReadToEndAsync(cancellationToken);
+        await process.WaitForExitAsync(cancellationToken);
+
+        Assert.True(process.ExitCode == 0, $"MSBuild item evaluation failed: {await standardError}");
+
+        using var document = JsonDocument.Parse(await standardOutput);
+        var compileItems = document.RootElement.GetProperty("Items").GetProperty("Compile");
+        var forbiddenDirectories = new[] { "src/HighSchoolStory.Domain/", "src/HighSchoolStory.Application/", "src/HighSchoolStory.Ports/", "src/HighSchoolStory.Content/", "tools/", "tests/" };
+
+        foreach (var item in compileItems.EnumerateArray())
+        {
+            var path = item.GetProperty("Identity").GetString()?.Replace('\\', '/') ?? string.Empty;
+            Assert.DoesNotContain(forbiddenDirectories, directory => path.StartsWith(directory, StringComparison.OrdinalIgnoreCase));
         }
     }
 
