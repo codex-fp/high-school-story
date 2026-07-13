@@ -5,7 +5,7 @@ branch_name: story/0-1/create-godot-host-and-clean-c-solution-boundaries
 
 # Story 0.1: Create Godot Host and Clean C# Solution Boundaries
 
-Status: in-progress
+Status: review
 
 ## Story
 
@@ -22,18 +22,18 @@ so that feature stories can consume validated content and Application commands w
 
 ## Tasks / Subtasks
 
-- [ ] Establish solution and SDK baseline (AC: 1)
+- [x] Establish solution and SDK baseline (AC: 1)
   - [x] Add `global.json` pinned to the local .NET 10 SDK feature band available in this workspace, or a compatible .NET 10 SDK if the implementation lead intentionally chooses another installed version.
   - [x] Add `Directory.Build.props` for shared C# settings that apply to clean projects and tests without breaking Godot's SDK project.
   - [x] Add `Directory.Packages.props` for central package versions, including R3 only where approved.
   - [x] Keep root `High School Story.csproj` on `Godot.NET.Sdk/4.7.0`, `net10.0`, and the existing Android `net9.0` fallback.
-- [ ] Create clean source project boundaries (AC: 1, 4)
+- [x] Create clean source project boundaries (AC: 1, 4)
   - [x] Create `src/HighSchoolStory.Domain/HighSchoolStory.Domain.csproj` with no project references and no package references beyond the absolute runtime/BCL minimum.
   - [x] Create `src/HighSchoolStory.Ports/HighSchoolStory.Ports.csproj` referencing Domain only.
   - [x] Create `src/HighSchoolStory.Application/HighSchoolStory.Application.csproj` referencing Domain and Ports, with R3 available only at the Application boundary.
   - [x] Create `src/HighSchoolStory.Content/HighSchoolStory.Content.csproj` referencing Domain and Ports only.
   - [x] Create `src/HighSchoolStory.Godot/` as a source folder compiled by the root Godot host, not as a separate clean `.csproj`.
-- [ ] Wire the Godot host as composition root (AC: 1, 4)
+- [x] Wire the Godot host as composition root (AC: 1, 4)
   - [x] Add explicit `ProjectReference` entries from `High School Story.csproj` to Application, Ports, and Content.
   - [x] Do not add a direct root host reference to Domain unless the implementation lead approves a concrete need.
   - [x] Add explicit `Compile Remove` entries so the root Godot project does not directly compile `src/HighSchoolStory.Domain/**`, `src/HighSchoolStory.Application/**`, `src/HighSchoolStory.Ports/**`, `src/HighSchoolStory.Content/**`, `tools/**`, or `tests/**`.
@@ -43,16 +43,16 @@ so that feature stories can consume validated content and Application commands w
   - [x] Create `tools/HighSchoolStory.ScenarioRunner/HighSchoolStory.ScenarioRunner.csproj` referencing Application, Content, Domain, and Ports.
   - [x] Implement minimal `--help` and `--version` behavior for both tools.
   - [x] Make missing content/fixture paths return typed, readable failure output and non-zero exit codes; do not throw unhandled exceptions for expected missing inputs.
-- [ ] Create test projects and first guardrail tests (AC: 2, 3)
+- [x] Create test projects and first guardrail tests (AC: 2, 3)
   - [x] Create test projects under `tests/`: Domain, Application, Content, SaveMigration, Scenario, Architecture, and GodotSmoke.
   - [x] Keep default `dotnet test` fast and non-flaky; Godot smoke must be separable by project and must not require launching Godot in the default gate.
   - [x] Add ArchitectureTests for forbidden references: Domain has no Godot/R3/Ports/JSON/logging; Application has no Godot; Content has no Application/Godot.
   - [x] Add ArchitectureTests proving the root Godot host does not compile loose source files from clean library, tool, or test directories.
-  - [ ] Add tool tests or process-level checks for `--help`, `--version`, and missing input behavior.
-- [ ] Document command paths and verification (AC: 1, 2, 3)
-  - [ ] Document the supported commands in a repo-local implementation note or README section without duplicating broad planning docs.
-  - [ ] Verify `dotnet restore "High School Story.sln"`, `dotnet build "High School Story.sln"`, and `dotnet test`.
-  - [ ] Verify `dotnet run --project tools/HighSchoolStory.ContentValidator -- --help` and `dotnet run --project tools/HighSchoolStory.ScenarioRunner -- --help`.
+  - [x] Add tool tests or process-level checks for `--help`, `--version`, and missing input behavior.
+- [x] Document command paths and verification (AC: 1, 2, 3)
+  - [x] Document the supported commands in a repo-local implementation note or README section without duplicating broad planning docs.
+  - [x] Verify `dotnet restore "High School Story.sln"`, `dotnet build "High School Story.sln"`, and `dotnet test`.
+  - [x] Verify `dotnet run --project tools/HighSchoolStory.ContentValidator -- --help` and `dotnet run --project tools/HighSchoolStory.ScenarioRunner -- --help`.
 
 ## Dev Notes
 
@@ -365,6 +365,26 @@ GPT-5 Codex (coached development workflow)
 - **Files / components:** `Directory.Packages.props`, `tests/HighSchoolStory.Architecture.Tests/HighSchoolStory.Architecture.Tests.csproj`, `tests/HighSchoolStory.Architecture.Tests/ArchitectureBoundaryTests.cs`.
 - **Validation:** `dotnet test tests/HighSchoolStory.Architecture.Tests --no-restore` and `dotnet test --no-restore` in Debug configuration.
 
+#### T5.S5 - Add tool process-level CLI contract checks (v1)
+
+- **Status:** Approved
+- **Decisions:** D1 - Run both compiled tools as separate `dotnet run --no-build` processes from Scenario.Tests.
+- **Approach:** Add both tool projects as build dependencies of Scenario.Tests and use parameterized process-level tests to verify `--help`, `--version`, and a distinct nonexistent path for each tool. Assert deterministic exit codes and the relevant stdout or stderr contract fragment.
+- **Scope:** `HighSchoolStory.Scenario.Tests` project configuration and test source only. Do not alter CLI behavior, tool implementation, content validation, or scenario simulation.
+- **Files / components:** `tests/HighSchoolStory.Scenario.Tests/HighSchoolStory.Scenario.Tests.csproj`, `tests/HighSchoolStory.Scenario.Tests/TestProjectTests.cs`.
+- **Preview references:** `ToolCliContractTests.Tool_exposes_expected_cli_contract`, `RunToolAsync`.
+- **Validation:** `dotnet test tests/HighSchoolStory.Scenario.Tests` followed by `dotnet test`.
+
+#### T6 - Document supported commands and verify the foundation (v1)
+
+- **Status:** Approved
+- **Included units:** T6.S1 - Document the supported commands in a repo-local implementation note or README section; T6.S2 - Verify `dotnet restore "High School Story.sln"`, `dotnet build "High School Story.sln"`, and `dotnet test`; T6.S3 - Verify both tool `--help` commands.
+- **Decisions:** D1 - Use `README.md` as the concise entry point, `docs/implementation.md` as the detailed command reference, and `AGENTS.md` as an operational summary that links to the guide without duplicating it.
+- **Approach:** Document the default confidence gate, tool usage/discovery commands, expected missing-input behavior, and separate Godot smoke gate. Add agent-specific instructions for selecting narrow validation and the pre-handoff gate, then execute the supported commands exactly.
+- **Scope:** `README.md`, `docs/implementation.md`, `AGENTS.md`, and the Story 0.1 tracking record only. Do not change build, tool, test, or Godot behavior.
+- **Files / components:** `README.md`, `docs/implementation.md`, `AGENTS.md`.
+- **Validation:** `dotnet restore "High School Story.sln"`; `dotnet build "High School Story.sln"`; `dotnet test`; `dotnet run --project tools/HighSchoolStory.ContentValidator -- --help`; `dotnet run --project tools/HighSchoolStory.ScenarioRunner -- --help`.
+
 ### Completion Notes List
 
 - Added `global.json` pinned to .NET SDK 10.0.301 with `latestPatch` roll-forward. Verified active SDK selection, valid JSON, UTF-8 without BOM, and a final CRLF.
@@ -385,6 +405,14 @@ GPT-5 Codex (coached development workflow)
 - Completed `T4.S2`, `T4.S3`, and `T4.S4` under `T4` (v1): added the `HighSchoolStory.ScenarioRunner` executable with direct Application, Content, Domain, and Ports references; made ContentValidator executable; and implemented minimal help, version, and missing-path contracts. `dotnet build "High School Story.sln"` completed with zero warnings and errors. Both tools returned `0` for `--help` and `--version`, and `2` plus a readable stderr message for absent paths. ScenarioRunner reference inspection confirmed the required four references and no Godot dependency.
 - Completed `T5.S1` and `T5.S2` under `T5.G1` (v1): added all seven `net10.0` xUnit/VSTest projects with centrally managed package versions and discoverability tests. The solution restore and no-restore build completed with zero warnings and errors; the default `dotnet test --no-restore` passed 7/7 tests; the separate GodotSmoke project test passed 1/1 without launching Godot.
 - Completed `T5.S3` and `T5.S4` under `T5.G2` (v1): added ArchUnitNET xUnit v3 rules for compiled Domain, Application, and Content dependencies plus XML/MSBuild inspection for project references and root-host compile exclusions. Architecture tests passed 3/3 and the full default test gate passed 9/9.
+- Completed `T5.S5` (v1): added six process-level Scenario.Tests cases that build and invoke both CLI tools for `--help`, `--version`, and a nonexistent path. The focused test project passed 6/6; the default `dotnet test --no-restore` gate passed 14/14.
+- Task Closure `T5`: all five test/guardrail subtasks are complete. The approved `T5.G1`, `T5.G2`, and `T5.S5` plans collectively cover the fast test-project scaffold, separable Godot smoke, architecture boundaries, root-host compilation exclusions, and CLI contracts. Focused and full default test gates passed with no unresolved scope or validation gap.
+- Task Closure `T1`: the shared SDK baseline, clean-project settings, central package management, and preserved Godot host configuration collectively satisfy AC 1; individual build and restore checks completed without warnings or errors.
+- Task Closure `T2`: the Domain, Ports, Application, Content, and Godot host-source boundaries were created and validated through project-reference inspection and targeted builds, satisfying AC 1 and AC 4.
+- Task Closure `T3`: root-host project references, the intentional absence of a direct Domain reference, source compilation exclusions, and Godot resource placement were verified by host builds and reference inspection, satisfying AC 1 and AC 4.
+- Task Closure `T4`: both tools have the required clean references and typed CLI contracts; solution build, reference inspection, and help/version/missing-path behavior satisfy AC 3 and AC 4.
+- Completed `T6` (v1): added the concise README command entry point, detailed implementation guide, and linked agent instructions. Restore, solution build, the full default test gate (14/14), and both tool `--help` commands passed.
+- Task Closure `T6`: all documentation and verification subtasks are complete. The README, implementation guide, and AGENTS instructions provide the supported command paths without duplicating planning artifacts; AC 1, AC 2, and AC 3 are covered by the final restore/build/test and CLI verification.
 
 ### File List
 
@@ -417,6 +445,9 @@ GPT-5 Codex (coached development workflow)
 - tests/HighSchoolStory.Architecture.Tests/ArchitectureBoundaryTests.cs
 - tests/HighSchoolStory.GodotSmoke.Tests/HighSchoolStory.GodotSmoke.Tests.csproj
 - tests/HighSchoolStory.GodotSmoke.Tests/TestProjectTests.cs
+- README.md
+- docs/implementation.md
+- AGENTS.md
 
 ### Change Log
 
@@ -438,3 +469,5 @@ GPT-5 Codex (coached development workflow)
 - 2026-07-12: Created and verified ScenarioRunner plus the minimal CLI help, version, and missing-input behavior for both tools (`T4`, v1).
 - 2026-07-12: Created and verified the seven-project test scaffold and fast default test gate (`T5.G1`, v1).
 - 2026-07-12: Added and verified ArchUnitNET and MSBuild architecture guardrails (`T5.G2`, v1).
+- 2026-07-13: Added and verified process-level CLI contract tests for both tools; closed `T5`.
+- 2026-07-13: Added command and agent documentation, completed final verification, and moved Story 0.1 to review.
