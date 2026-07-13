@@ -256,6 +256,7 @@ GPT-5 Codex (coached development workflow)
 - Added central package management with R3 pinned at 1.3.1. Verified XML configuration, `dotnet restore "High School Story.sln"`, and `dotnet build "High School Story.sln" --no-restore` with zero warnings and errors.
 - Verified the existing Godot host retains `Godot.NET.Sdk/4.7.0`, main `net10.0`, and conditional Android `net9.0` fallback. `dotnet build "High School Story.csproj"` completed with zero warnings and errors; no host-project change was required.
 - Added the minimal `HighSchoolStory.Domain` `net10.0` project without project or package references. `dotnet build src/HighSchoolStory.Domain/HighSchoolStory.Domain.csproj` completed with zero warnings and errors.
+- Added repository-wide `.NET` build-output ignores for `**/bin/` and `**/obj/`, keeping generated project artifacts out of source control.
 
 ### File List
 
@@ -263,6 +264,7 @@ GPT-5 Codex (coached development workflow)
 - Directory.Build.props
 - Directory.Packages.props
 - src/HighSchoolStory.Domain/HighSchoolStory.Domain.csproj
+- .gitignore
 
 ### Change Log
 
@@ -271,3 +273,4 @@ GPT-5 Codex (coached development workflow)
 - 2026-07-10: Completed the central package version management subtask.
 - 2026-07-11: Verified the root Godot host SDK and target-framework baseline subtask.
 - 2026-07-11: Created and verified the clean Domain project boundary subtask.
+- 2026-07-11: Ignored generated .NET build outputs.
