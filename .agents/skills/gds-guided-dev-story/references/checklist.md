@@ -38,6 +38,8 @@ validation-rules:
 - [ ] Each completed unit has passing targeted tests or agreed observable validation.
 - [ ] Known validation gaps, failures, and follow-up work are resolved or explicitly accepted by the user.
 - [ ] Every task and subtask is marked complete only after its evidence was reviewed.
+- [ ] After the final subtask of a task, task closure verified that subtask evidence collectively covers the task's AC and Dev Notes, with no task-level deliverable or unresolved blocker remaining.
+- [ ] Each parent task closed from completed subtasks has a `Task Closure` note in Dev Agent Record naming the aggregated evidence.
 
 ## Story Quality
 

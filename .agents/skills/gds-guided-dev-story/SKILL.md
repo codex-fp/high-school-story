@@ -171,7 +171,15 @@ A task or subtask may be marked complete only when all of these are true:
 - No unresolved defect, scope drift, or blocking question remains.
 - The File List, Dev Agent Record, and Change Log accurately describe the completed work when they changed.
 
-When the user agrees to mark work as complete, present the evidence briefly. If it is insufficient, explain the missing gate and preserve the current state. Never check a box based on an implementation claim alone. Update every included subtask only after the batch evidence passes; mark its top-level task only when all of its subtasks are complete. Then select the next incomplete work in story order. When no incomplete unit remains, proceed to the Story Completion And Review Gate instead.
+When the user agrees to mark work as complete, present the evidence briefly. If it is insufficient, explain the missing gate and preserve the current state. Never check a box based on an implementation claim alone. Update every included subtask only after the batch evidence passes.
+
+After marking a subtask complete, immediately inspect its containing top-level task. If every direct subtask is marked complete, run a task-closure verification before moving on:
+
+- confirm no task-level deliverable remains outside the completed subtasks;
+- confirm the completed subtask plans, reviewed diffs, and validation evidence collectively cover the task's linked acceptance criteria and Dev Notes;
+- confirm no unresolved defect, scope drift, validation gap, or blocking question belongs to the task.
+
+If that verification passes, mark the containing task complete in the same workflow turn and append a concise `Task Closure` note to Dev Agent Record that names the task key and the evidence aggregated from its subtasks. Do not ask for a redundant second implementation approval for a parent task that has no independent work. If any task-closure condition fails, leave the parent task unchecked, state the missing condition, and do not advance to the next top-level task until it is resolved. A task without subtasks follows the normal unit-completion gate. Then select the next incomplete work in story order. When no incomplete unit remains, proceed to the Story Completion And Review Gate instead.
 
 ## Story Completion And Review Gate
 
