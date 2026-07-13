@@ -37,7 +37,7 @@ so that feature stories can consume validated content and Application commands w
   - [x] Add explicit `ProjectReference` entries from `High School Story.csproj` to Application, Ports, and Content.
   - [x] Do not add a direct root host reference to Domain unless the implementation lead approves a concrete need.
   - [x] Add explicit `Compile Remove` entries so the root Godot project does not directly compile `src/HighSchoolStory.Domain/**`, `src/HighSchoolStory.Application/**`, `src/HighSchoolStory.Ports/**`, `src/HighSchoolStory.Content/**`, `tools/**`, or `tests/**`.
-  - [ ] Keep Godot host code under `src/HighSchoolStory.Godot/` and root Godot resources under Godot-friendly folders such as `scenes/` and `assets/`.
+  - [x] Keep Godot host code under `src/HighSchoolStory.Godot/` and root Godot resources under Godot-friendly folders such as `scenes/` and `assets/`.
 - [ ] Create tool entry points (AC: 3, 4)
   - [ ] Create `tools/HighSchoolStory.ContentValidator/HighSchoolStory.ContentValidator.csproj` referencing Content, Domain, and Ports.
   - [ ] Create `tools/HighSchoolStory.ScenarioRunner/HighSchoolStory.ScenarioRunner.csproj` referencing Application, Content, Domain, and Ports.
@@ -322,6 +322,14 @@ GPT-5 Codex (coached development workflow)
 - **Files / components:** `High School Story.csproj` (inspection only); Story 0.1 Dev Agent Record.
 - **Validation:** `dotnet list "High School Story.csproj" reference` must list Application, Ports, and Content only, with no direct Domain reference.
 
+#### T3.S4 - Keep Godot host code under `src/HighSchoolStory.Godot/` and root Godot resources under Godot-friendly folders such as `scenes/` and `assets/` (v1)
+
+- **Status:** Approved
+- **Approach:** Preserve the existing versioned host-source directory and add no source or resource files because this scaffold has no host implementation yet. Verify that no loose tracked C# source exists outside the declared boundaries and that no resource placement violates the root-level Godot convention.
+- **Scope:** Inspection and Story 0.1 tracking only; do not add placeholder host code, scenes, assets, or directories solely for this verification.
+- **Files / components:** `src/HighSchoolStory.Godot/` (inspection only); Story 0.1 Dev Agent Record.
+- **Validation:** Enumerate tracked C# files and inspect root Godot resource folders; confirm the host-source directory exists and no misplaced source/resource files are present.
+
 ### Completion Notes List
 
 - Added `global.json` pinned to .NET SDK 10.0.301 with `latestPatch` roll-forward. Verified active SDK selection, valid JSON, UTF-8 without BOM, and a final CRLF.
@@ -337,6 +345,7 @@ GPT-5 Codex (coached development workflow)
 - Completed `T2.S5` (v1): added the versioned `src/HighSchoolStory.Godot/` host-source directory with a `.gitkeep` anchor and no standalone `.csproj` or artificial source type. After the approved `T3.S3` dependency was applied, `dotnet build "High School Story.csproj" --no-restore` completed with zero warnings and errors.
 - Completed `T3.S1` (v1): added root-host project references to Application, Ports, and Content only. `dotnet build "High School Story.csproj" --no-restore` completed with zero warnings and errors, and `dotnet list "High School Story.csproj" reference` confirmed exactly those three direct references.
 - Completed `T3.S2` (v1): no direct root-host Domain reference was added because no concrete host need was identified. `dotnet list "High School Story.csproj" reference` confirmed direct references to Application, Ports, and Content only.
+- Completed `T3.S4` (v1): verified the versioned `src/HighSchoolStory.Godot/` host-source directory exists, with no tracked C# source files or misplaced root Godot resources in this scaffold. No placeholder code or resource directories were added.
 
 ### File List
 
@@ -366,3 +375,4 @@ GPT-5 Codex (coached development workflow)
 - 2026-07-11: Created and verified the Godot host source directory subtask (`T2.S5`, v1).
 - 2026-07-11: Added and verified root-host project references to Application, Ports, and Content (`T3.S1`, v1).
 - 2026-07-11: Verified the root host has no direct Domain reference (`T3.S2`, v1).
+- 2026-07-11: Verified the Godot host source and resource placement convention (`T3.S4`, v1).
