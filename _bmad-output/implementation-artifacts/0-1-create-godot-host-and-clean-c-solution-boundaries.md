@@ -1,6 +1,11 @@
+---
+baseline_commit: c369717
+branch_name: story/0-1/create-godot-host-and-clean-c-solution-boundaries
+---
+
 # Story 0.1: Create Godot Host and Clean C# Solution Boundaries
 
-Status: ready-for-dev
+Status: in-progress
 
 ## Story
 
@@ -18,7 +23,7 @@ so that feature stories can consume validated content and Application commands w
 ## Tasks / Subtasks
 
 - [ ] Establish solution and SDK baseline (AC: 1)
-  - [ ] Add `global.json` pinned to the local .NET 10 SDK feature band available in this workspace, or a compatible .NET 10 SDK if the implementation lead intentionally chooses another installed version.
+  - [x] Add `global.json` pinned to the local .NET 10 SDK feature band available in this workspace, or a compatible .NET 10 SDK if the implementation lead intentionally chooses another installed version.
   - [ ] Add `Directory.Build.props` for shared C# settings that apply to clean projects and tests without breaking Godot's SDK project.
   - [ ] Add `Directory.Packages.props` for central package versions, including R3 only where approved.
   - [ ] Keep root `High School Story.csproj` on `Godot.NET.Sdk/4.7.0`, `net10.0`, and the existing Android `net9.0` fallback.
@@ -235,11 +240,18 @@ godot --headless --path . --quit-after 1
 
 ### Agent Model Used
 
-TBD by dev-story agent.
+GPT-5 Codex (coached development workflow)
 
 ### Debug Log References
 
 ### Completion Notes List
 
+- Added `global.json` pinned to .NET SDK 10.0.301 with `latestPatch` roll-forward. Verified active SDK selection, valid JSON, UTF-8 without BOM, and a final CRLF.
+
 ### File List
 
+- global.json
+
+### Change Log
+
+- 2026-07-10: Completed the SDK baseline pinning subtask.
