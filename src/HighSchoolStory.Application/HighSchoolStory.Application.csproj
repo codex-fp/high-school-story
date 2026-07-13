@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\HighSchoolStory.Domain\HighSchoolStory.Domain.csproj" />
+    <ProjectReference Include="..\HighSchoolStory.Ports\HighSchoolStory.Ports.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="R3" />
+  </ItemGroup>
+</Project>
