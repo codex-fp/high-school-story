@@ -52,13 +52,43 @@ Do not alter the story, acceptance criteria, Dev Notes, task wording, or any oth
 
 ## Guided Task Loop
 
-Work task by task, starting with the first top-level task that contains incomplete work. If it has no subtasks, treat the task itself as the only planning unit. If it has subtasks, first describe the design of the whole task, its linked AC and Dev Notes, and the ordered list of its remaining subtasks.
+Work task by task, starting with the first top-level task that contains incomplete work. If it has no subtasks, treat the task itself as the only planning unit. If it has subtasks, begin with its first incomplete subtask while presenting the whole task.
+
+Every message that opens a new task or subtask must begin with a level-one heading in `{communication_language}` showing the current task and subtask key when applicable, followed by story progress. Count progress by leaf work units: each subtask counts once; a task without subtasks counts once; do not double-count a parent task and its subtasks. Use this shape:
+
+```md
+# Task T1 / Subtask T1.S2 - <current subtask text>
+
+**Story progress:** 3/12 work units complete (25%); 9 remaining.
+```
+
+Then provide this structured task overview:
+
+```md
+## Task Design
+
+- Task goal, linked AC, relevant Dev Notes, architecture constraints, and key design relationships.
+
+## Subtasks
+
+- [x] `T1.S1` - <completed subtask text>
+- [ ] `T1.S2` - <current subtask text>
+- [ ] `T1.S3` - <remaining subtask text>
+
+## Planning Recommendation
+
+- State one recommendation: whole task, per subtask, or custom groups.
+- Explain the recommendation from task size, coupling between subtasks, shared files or tests, distinct AC or risk boundaries, and expected validation cost.
+- For custom groups, list the concrete suggested groups using subtask keys and say which subtask should remain separate.
+```
 
 Ask which planning scope the user wants for that task:
 
 - **Whole task:** create one plan for all remaining subtasks, then implement and validate them as one approved batch.
 - **Per subtask:** create, approve, implement, validate, and complete one subtask before planning the next.
 - **Custom groups:** let the user choose one or more remaining subtasks for the current group; create a separate plan and implementation batch for each later group.
+
+When the task has no subtasks, present the recommendation as a single-task plan and do not ask for a planning-scope choice.
 
 Execute included subtasks in their story order even when a custom group was selected non-contiguously. Do not include work outside the selected planning scope. After a plan batch is validly completed, select the next incomplete task or remaining subtask in story order. If the current task still has unplanned work, return to its planning-scope choice; otherwise move to the next incomplete task.
 
