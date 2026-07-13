@@ -7,5 +7,9 @@
     <PackageReference Include="Microsoft.NET.Test.Sdk" />
     <PackageReference Include="xunit.v3" />
     <PackageReference Include="xunit.runner.visualstudio" PrivateAssets="all" />
+    <PackageReference Include="TngTech.ArchUnitNET.xUnitV3" />
+    <ProjectReference Include="..\..\src\HighSchoolStory.Application\HighSchoolStory.Application.csproj" />
+    <ProjectReference Include="..\..\src\HighSchoolStory.Content\HighSchoolStory.Content.csproj" />
+    <ProjectReference Include="..\..\src\HighSchoolStory.Domain\HighSchoolStory.Domain.csproj" />
   </ItemGroup>
 </Project>
