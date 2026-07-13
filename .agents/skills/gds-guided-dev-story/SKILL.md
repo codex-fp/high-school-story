@@ -102,7 +102,20 @@ Execute included subtasks in their story order even when a custom group was sele
 
 ### Design And Planning Checkpoint
 
-Before implementation, jointly turn the selected task, subtask, or custom group into an approved plan. Present:
+Before drafting an implementation plan, run a Decision Discovery pass for the selected task, subtask, or custom group. Separate what is already fixed by the story, Dev Notes, project-context, or existing code from open implementation choices.
+
+An open decision is a choice that materially changes component boundaries, public or internal contracts, ownership, control flow, persistence or error behavior, dependencies, test strategy, or the future shape of the code. Do not manufacture choices for details already constrained or obvious from local conventions.
+
+For each material open decision, present a `Decision to Make` with:
+
+- the decision and why it matters for this scope;
+- two or three viable options with concrete consequences;
+- a recommendation and its trade-off;
+- an explicit question that lets the user select an option or state a different preference.
+
+Use the environment's question tool when it is available; otherwise show a numbered menu for each decision. Start with the one to three decisions that block the rest of the design, group dependent choices, and resolve later decisions only after their prerequisites are chosen. Do not show a finished plan, code preview, or plan-approval question until all material open decisions are resolved.
+
+When no material decision remains, say so explicitly and name the constraints or conventions that determined the approach. Then build the plan from the user's selected decisions. Present:
 
 - the selected scope and its task or subtask goals;
 - linked acceptance criteria and relevant Dev Notes;
@@ -114,7 +127,7 @@ For code-bearing changes, also show an `Implementation Preview` before asking fo
 
 When an existing target file can be read and the intended edit is bounded, include a small unified `Proposed Diff` as well. Label it `Proposed - not applied`; it is a preview, not output from `git diff`. Do not fabricate a broad or uncertain diff. When the final shape depends on unresolved details or new files, show focused snippets and named insertion points instead.
 
-When real alternatives exist, propose two or three approaches with their meaningful trade-offs and a recommendation. When the solution is obvious, state the recommended approach. Ask only questions needed to resolve technical choices. Then pause and ask an equivalent closed question in `{communication_language}`, for example: "Czy akceptujesz ten design i plan implementacji?"
+Include a short `Decisions Chosen` summary in the plan. Then pause and ask an equivalent closed question in `{communication_language}`, for example: "Czy akceptujesz ten design i plan implementacji?"
 
 If the user does not approve, clarify or revise the proposed design and plan, then ask again. Do not edit implementation files. If the user approves, record the plan and immediately implement it as an agent patch.
 
@@ -127,6 +140,7 @@ Write each entry as a level-four heading containing the key, scope description, 
 
 - **Status:** Approved
 - **Included units:** T1.S1 - Create Domain; T1.S3 - Create Application
+- **Decisions:** D1 - <chosen option>; D2 - <chosen option>
 - **Approach:** ...
 - **Scope:** ...
 - **Files / components:** ...
