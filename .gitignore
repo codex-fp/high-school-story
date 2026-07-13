@@ -5,6 +5,10 @@
 .obsidian/workspace.json
 .obsidian/workspace-mobile.json
 
+# .NET build outputs
+**/bin/
+**/obj/
+
 # Python cache
 __pycache__/
 *.py[cod]
