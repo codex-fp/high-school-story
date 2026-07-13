@@ -46,8 +46,8 @@ so that feature stories can consume validated content and Application commands w
 - [ ] Create test projects and first guardrail tests (AC: 2, 3)
   - [x] Create test projects under `tests/`: Domain, Application, Content, SaveMigration, Scenario, Architecture, and GodotSmoke.
   - [x] Keep default `dotnet test` fast and non-flaky; Godot smoke must be separable by project and must not require launching Godot in the default gate.
-  - [ ] Add ArchitectureTests for forbidden references: Domain has no Godot/R3/Ports/JSON/logging; Application has no Godot; Content has no Application/Godot.
-  - [ ] Add ArchitectureTests proving the root Godot host does not compile loose source files from clean library, tool, or test directories.
+  - [x] Add ArchitectureTests for forbidden references: Domain has no Godot/R3/Ports/JSON/logging; Application has no Godot; Content has no Application/Godot.
+  - [x] Add ArchitectureTests proving the root Godot host does not compile loose source files from clean library, tool, or test directories.
   - [ ] Add tool tests or process-level checks for `--help`, `--version`, and missing input behavior.
 - [ ] Document command paths and verification (AC: 1, 2, 3)
   - [ ] Document the supported commands in a repo-local implementation note or README section without duplicating broad planning docs.
@@ -356,6 +356,15 @@ GPT-5 Codex (coached development workflow)
 - **Files / components:** `Directory.Packages.props`, seven `tests/*/*.csproj` files, seven minimal test source files, `High School Story.sln`.
 - **Validation:** restore and build the solution; run `dotnet test` and `dotnet test tests/HighSchoolStory.GodotSmoke.Tests`; inspect test-project references and confirm no test launches Godot.
 
+#### T5.G2 - Enforce architecture boundaries with ArchUnitNET and MSBuild inspection (v1)
+
+- **Status:** Approved
+- **Included units:** T5.S3 - Add ArchitectureTests for forbidden references: Domain has no Godot/R3/Ports/JSON/logging; Application has no Godot; Content has no Application/Godot; T5.S4 - Add ArchitectureTests proving the root Godot host does not compile loose source files from clean library, tool, or test directories.
+- **Approach:** Use ArchUnitNET's xUnit v3 integration for compiled type/member dependency rules and concise XML inspection for project/package reference and root-host `Compile Remove` rules that binary analysis cannot observe.
+- **Scope:** Architecture test package configuration, production-project references from Architecture.Tests for assembly inspection, and architecture test sources only. No production code, Godot behavior, or CLI behavior tests.
+- **Files / components:** `Directory.Packages.props`, `tests/HighSchoolStory.Architecture.Tests/HighSchoolStory.Architecture.Tests.csproj`, `tests/HighSchoolStory.Architecture.Tests/ArchitectureBoundaryTests.cs`.
+- **Validation:** `dotnet test tests/HighSchoolStory.Architecture.Tests --no-restore` and `dotnet test --no-restore` in Debug configuration.
+
 ### Completion Notes List
 
 - Added `global.json` pinned to .NET SDK 10.0.301 with `latestPatch` roll-forward. Verified active SDK selection, valid JSON, UTF-8 without BOM, and a final CRLF.
@@ -375,6 +384,7 @@ GPT-5 Codex (coached development workflow)
 - Completed `T4.S1` (v1): added the minimal `HighSchoolStory.ContentValidator` `net10.0` project with direct references to Content, Domain, and Ports. `dotnet build tools/HighSchoolStory.ContentValidator/HighSchoolStory.ContentValidator.csproj --no-restore` completed with zero warnings and errors, and `dotnet list tools/HighSchoolStory.ContentValidator/HighSchoolStory.ContentValidator.csproj reference` confirmed exactly those three references.
 - Completed `T4.S2`, `T4.S3`, and `T4.S4` under `T4` (v1): added the `HighSchoolStory.ScenarioRunner` executable with direct Application, Content, Domain, and Ports references; made ContentValidator executable; and implemented minimal help, version, and missing-path contracts. `dotnet build "High School Story.sln"` completed with zero warnings and errors. Both tools returned `0` for `--help` and `--version`, and `2` plus a readable stderr message for absent paths. ScenarioRunner reference inspection confirmed the required four references and no Godot dependency.
 - Completed `T5.S1` and `T5.S2` under `T5.G1` (v1): added all seven `net10.0` xUnit/VSTest projects with centrally managed package versions and discoverability tests. The solution restore and no-restore build completed with zero warnings and errors; the default `dotnet test --no-restore` passed 7/7 tests; the separate GodotSmoke project test passed 1/1 without launching Godot.
+- Completed `T5.S3` and `T5.S4` under `T5.G2` (v1): added ArchUnitNET xUnit v3 rules for compiled Domain, Application, and Content dependencies plus XML/MSBuild inspection for project references and root-host compile exclusions. Architecture tests passed 3/3 and the full default test gate passed 9/9.
 
 ### File List
 
@@ -404,7 +414,7 @@ GPT-5 Codex (coached development workflow)
 - tests/HighSchoolStory.Scenario.Tests/HighSchoolStory.Scenario.Tests.csproj
 - tests/HighSchoolStory.Scenario.Tests/TestProjectTests.cs
 - tests/HighSchoolStory.Architecture.Tests/HighSchoolStory.Architecture.Tests.csproj
-- tests/HighSchoolStory.Architecture.Tests/TestProjectTests.cs
+- tests/HighSchoolStory.Architecture.Tests/ArchitectureBoundaryTests.cs
 - tests/HighSchoolStory.GodotSmoke.Tests/HighSchoolStory.GodotSmoke.Tests.csproj
 - tests/HighSchoolStory.GodotSmoke.Tests/TestProjectTests.cs
 
@@ -427,3 +437,4 @@ GPT-5 Codex (coached development workflow)
 - 2026-07-12: Created and verified the ContentValidator project boundary (`T4.S1`, v1).
 - 2026-07-12: Created and verified ScenarioRunner plus the minimal CLI help, version, and missing-input behavior for both tools (`T4`, v1).
 - 2026-07-12: Created and verified the seven-project test scaffold and fast default test gate (`T5.G1`, v1).
+- 2026-07-12: Added and verified ArchUnitNET and MSBuild architecture guardrails (`T5.G2`, v1).
