@@ -11,5 +11,7 @@
     <ProjectReference Include="..\..\src\HighSchoolStory.Content\HighSchoolStory.Content.csproj" />
     <ProjectReference Include="..\..\src\HighSchoolStory.Domain\HighSchoolStory.Domain.csproj" />
     <ProjectReference Include="..\..\src\HighSchoolStory.Ports\HighSchoolStory.Ports.csproj" />
+    <ProjectReference Include="..\..\tools\HighSchoolStory.ContentValidator\HighSchoolStory.ContentValidator.csproj" />
+    <ProjectReference Include="..\..\tools\HighSchoolStory.ScenarioRunner\HighSchoolStory.ScenarioRunner.csproj" />
   </ItemGroup>
 </Project>
